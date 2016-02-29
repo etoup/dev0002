@@ -1,0 +1,165 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link href="__CSS__/index.css" rel="stylesheet" />
+    <link href="__CSS__/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="__CSS__/jquery-ui.css">
+</block>
+</head> 
+<body>
+<block name="header"><include file='Public/header' /></block>
+<block name="nav"><include file='Public/nav' /></block>
+<block name="uctop">
+    <div class="alert alert-warning" role="alert">
+        <span class="glyphicon glyphicon-list" aria-hidden="true"></span> {$seo.title}
+
+    </div>
+    <ol class="breadcrumb">
+        <li><a href="{$crumbs.url}">{$crumbs.title}</a></li>
+        <li class="active">{$seo.title}</li>
+    </ol>
+</block>
+<block name="main">
+    <div class="flowq">
+        <div class="row mt30">
+
+            <div class="col-md-3">
+                <div class="flow">
+                    <span>1</span>申请配资
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="flow flow-hove">
+                    <span>2</span>确认信息并支付
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="flow">
+                    <span>3</span>配资中
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="flow">
+                    <span>4</span>完成
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <if condition="$tip">
+                <div class="alert alert-danger alert-dismissible fade in" role="alert" >
+                    <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign"></span>
+                    <strong>您需要支付：{$paymoney}，可用资金：{$balance}，充值金额：{$diff_format}</strong> <a href="{:U('Uc/Recharge/index',['amount'=>$diff])}" class="btn btn-default ml30" role="button">充值</a>
+                </div>
+                <else/>
+                <div class="alert alert-success alert-dismissible fade in" role="alert" >
+                    <button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <span aria-hidden="true" class="glyphicon glyphicon-thumbs-up"></span>
+                    <strong>您需要支付：{$paymoney}，可用资金：{$balance}</strong>
+                </div>
+            </if>
+            <div class="panel panel-default">
+                <div class="panel-heading">确认信息</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <dl class="mydl">
+                                <dt>自有资金</dt>
+                                <dd><span class="own_funds">{$needs.own_funds|default='-'}</span>万</dd>
+                            </dl>
+                        </div>
+
+                        <div class="col-md-4">
+                            <dl class="mydl">
+                                <dt>配资比例</dt>
+                                <dd><span class="scale">{$needs.scale|default='-'}</span>倍</dd>
+                            </dl>
+                        </div>
+
+                        <div class="col-md-4">
+                            <dl class="mydl">
+                                <dt>配资资金</dt>
+                                <dd><span class="with_funds">{$needs.with_funds|default='-'}</span>万</dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <dl class="mydl">
+                                <dt>总操盘资金</dt>
+                                <dd><span class="all_funds">{$needs.all_funds|default='-'}</span>万</dd>
+                            </dl>
+                        </div>
+
+                        <div class="col-md-4">
+                            <dl class="mydl">
+                                <dt>预警线</dt>
+                                <dd><span class="warning_funds">{$needs.warning_line|default='-'}</span>万</dd>
+                            </dl>
+                        </div>
+
+                        <div class="col-md-4">
+                            <dl class="mydl">
+                                <dt>平仓线</dt>
+                                <dd><span class="open_funds">{$needs.open_line|default='-'}</span>万</dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <dl class="mydl">
+                                <dt>配资期限</dt>
+                                <dd><span class="time_limit">{$needs.time_limit|default='-'}</span>个月</dd>
+                            </dl>
+                        </div>
+
+                        <div class="col-md-4">
+                            <dl class="mydl">
+                                <dt>月利率</dt>
+                                <dd><span class="interest_rate">{$needs.interest_rate|default='-'}</span>%</dd>
+                            </dl>
+                        </div>
+
+                        <div class="col-md-4">
+                            <dl class="mydl">
+                                <dt>支付方式</dt>
+                                <dd>
+                                    <if condition="$needs['pay_type']">
+                                        <span class="interest_funds">支付意向金：{$needs.intention}</span>
+                                        <else/>
+                                        <span class="interest_funds">支付本息：{$needs.principal_interest}</span>
+                                    </if>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <a href="{:U('index')}" class="btn btn-default" role="button">返回修改需求</a>
+                    <if condition="$tip">
+                        <a href="{:U('index')}" class="btn btn-default disabled" role="button">确认提交</a>
+                        <else/>
+                        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal fade" id="saveNeeds" style="display: none;">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div>
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#saveNeeds" data-remote="{:U('saveneeds')}">确认提交</button>
+                    </if>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="foot"><include file='Public/foot' /></block>
+<block name="foot_js">
+
+</block>
+</body>
+</html>

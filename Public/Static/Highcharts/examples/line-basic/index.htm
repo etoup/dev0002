@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highcharts Example</title>
+
+		<script type="text/javascript" src="../../js/jquery.min.js"></script>
+		<style type="text/css">
+${demo.css}
+		</style>
+		<script type="text/javascript">
+$(function () {
+    $('#container').highcharts({
+        title: {
+            text: '股票账户操盘情况',
+            x: -20 //center
+        },
+        subtitle: {
+            text: '来源: 六合资本风控部',
+            x: -20
+        },
+        xAxis: {
+            gridLineWidth:1,
+            categories: ['12月01日', '12.02', '12.03', '12.04', '12.05', '12.06','12.09', '12.10', '12.11', '12.12', '12.13', '12.14']
+        },
+        yAxis: {
+            title: {
+                text: '操盘额度值 (万)'
+            },
+            gridLineDashStyle:'Dash',
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }],
+            plotBands: [{ // Light breeze
+                  from: 0,
+                  to: 20,
+                  color: 'rgba(68, 170, 213, 0.1)',
+                  label: {
+                      //text: '本金区域',
+                      style: {
+                          color: '#ff9900'
+                      }
+                  }
+              }, { // Gentle breeze
+                  from: 21.6,
+                  to: 22.4,
+                  color: 'rgba(216, 33, 13, 0.1)',
+                  label: {
+                      text: '预警区域',
+                      style: {
+                          color: '#ff3300'
+                      }
+                  }
+              }]
+        },
+        tooltip: {
+            valueSuffix: '万'
+        },
+        series: [{
+            name: '总资产',
+            color:'#ff9900',
+            data: [30, 28.9, 32.5, 26.5, 28.2, 31.5, 35.2, 26.5, 23.3, 18.3, 23.9, 29.6]
+        },{
+            name: '持仓市值',
+            data: [25, 21.2, 25.7, 28.5, 9, 9, 27.0, 26.6, 24.2, 20.3, 26.6, 24.8]
+        },{
+            name: '安全线',
+            lineWidth: 0.5,
+            color:'#ff3300',
+            data: [21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,21]
+        }]
+    });
+});
+		</script>
+	</head>
+	<body>
+<script src="../../js/highcharts.js"></script>
+<script src="../../js/modules/exporting.js"></script>
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+	</body>
+</html>

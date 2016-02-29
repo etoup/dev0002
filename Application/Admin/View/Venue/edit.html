@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body style="width:300px;" class="body_none">
+<!--添加用户-->
+    <form class="J_ajaxForm" data-role="list" action="__SELF__" method="post" >
+    <input type='hidden' name='id' value="{$info.id}">
+    <div class="pop_cont pop_table" style="height:auto;">
+        <table width="100%">
+            <col class="th" />
+            <col />
+            <tr>
+                <th>场馆名称</th>
+                <td><input name="name" type="text" value="{$info.name}" class="input length_3"></td>
+            </tr>
+        </table>
+    </div>
+    <div class="pop_bottom">
+        <button type="button" class="btn fr" id="J_dialog_close">取消</button>
+        <button type="submit" class="btn btn_submit mr10 fr J_ajax_submit_btn">提交</button>
+    </div>
+    
+</form>
+<include file='Public/foot_min' />
+</body>
+</html>

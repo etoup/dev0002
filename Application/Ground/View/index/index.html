@@ -1,0 +1,473 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link rel="stylesheet" href="__STATIC__/AdminLTE/plugins/daterangepicker/daterangepicker-bs3.css" />
+    <link rel="stylesheet" href="__STATIC__/AdminLTE/plugins/timepicker/bootstrap-timepicker.min.css" />
+    <link rel="stylesheet" href="__STATIC__/sweetalert-master/dist/sweetalert.css" />
+    <link rel="stylesheet" href="__STATIC__/Swiper/dist/css/swiper.min.css" />
+    <link rel="stylesheet" href="__CSS__/index.css" />
+    <link rel="stylesheet" href="__CSS__/upimg.css" />
+</block>
+<block name="main-header">
+    <include file='Public/header' />
+</block>
+<block name="main-sidebar">
+    <include file='Public/sidebar' />
+</block>
+<block name="content-header"><include file='Public/top' /></block>
+<block name="content">
+    <div class="row">
+        <div class="col-md-3">
+            <include file='indexleft' />
+        </div>
+        <div class="col-md-9">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="{:U('index')}">订单管理</a></li>
+                    <li><a href="{:U('comment')}">评论管理</a></li>
+                    <li><a href="{:U('reserve')}">预订管理</a></li>
+                    <li><a href="{:U('lock')}">锁定管理</a></li>
+                    <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="active tab-pane" id="activity">
+                        <div class="alert alert-warning alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4><i class="icon fa fa-warning"></i> 提示!</h4>
+                            可以点击下面价格进行现场预定，请注意时间段
+                        </div>
+                        <foreach name="list" item="vo">
+                            <div class="box">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">{$vo.name}</h3> <small><em>{$vo.date_week}</em></small>
+                                    <!-- tools box -->
+                                    <div class="pull-right box-tools">
+                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                    </div><!-- /. tools -->
+                                </div>
+                                <div class="box-body">
+                                    <div class="mailbox-controls with-border text-center" style="margin-bottom: 5px;">
+                                        <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="" data-original-title="待订">
+                                            <i class="fa  fa-circle-o"></i></button>
+                                        <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-container="body" title="" data-original-title="已订">
+                                            <i class="fa fa-circle"></i></button>
+                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" data-container="body" title="" data-original-title="选中">
+                                            <i class="fa fa-check"></i></button>
+                                        <!--<button type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-container="body" title="删除">-->
+                                            <!--<i class="fa fa-close"></i></button>-->
+                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-container="body" title="锁定">
+                                            <i class="fa fa-lock"></i></button>
+                                    </div>
+                                    <div class="table_main">
+                                        <div class="table_body">
+                                            <div class="table_body_left">
+                                                <foreach name="vo['nodes']" item="vv">
+                                                    <div class="table_body_li">{$vv.start}-{$vv.end}</div>
+                                                </foreach>
+                                            </div>
+                                            <div class="table_body_right">
+                                                <foreach name="vo['blocks']" item="v">
+                                                    <foreach name="v['prices']" item="p">
+                                                        <if condition="$p['has_order']">
+                                                            <div class="modal fade" id="modal_{$p.order_id}" tabindex="-1" role="dialog">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+
+                                                                    </div><!-- /.modal-content -->
+                                                                </div><!-- /.modal-dialog -->
+                                                            </div><!-- /.modal -->
+                                                        </if>
+                                                    </foreach>
+                                                </foreach>
+                                                <!-- Swiper -->
+                                                <div class="swiper-container swiper-container-{$vo['id']}">
+
+                                                    <div class="swiper-wrapper">
+                                                        <foreach name="vo['blocks']" item="v">
+                                                            <div class="swiper-slide">
+                                                                <div class="right_li">
+                                                                    <div class="right_li_title">{$v.name}</div>
+                                                                    <foreach name="v['prices']" item="p">
+                                                                        <if condition="$p['has_order']">
+                                                                            <a class="right_li_price suc" data-toggle="modal" href="{:U('ordersview',['id'=>$p['order_id']])}" data-target="#modal_{$p.order_id}">{$p.price}元</a>
+                                                                            <else/>
+                                                                            <switch name="p.status">
+                                                                                <case value="1">
+                                                                                    <div class="right_li_price" id="price-{$p.id}">{$p.price}元</div>
+                                                                                    <input type="checkbox" name="check" value="{$p.id}" style="display: none;" />
+                                                                                </case>
+                                                                                <default />
+                                                                                    <div class="right_li_price lock">{$p.price}元</div>
+                                                                            </switch>
+
+                                                                        </if>
+                                                                    </foreach>
+                                                                </div>
+                                                            </div>
+                                                        </foreach>
+                                                    </div>
+                                                    <if condition="count($vo['blocks']) gt 5">
+                                                        <!-- Add Pagination -->
+                                                        <div class="swiper-pagination swiper-pagination-{$vo['id']}" style="bottom: 5px;"></div>
+                                                    </if>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box-footer">
+                                    <div class="pull-right">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-default swiper-button-prev-{$vo['id']}" data-toggle="tooltip" data-container="body" title="prev"><i class="fa fa-chevron-left"></i></button>
+                                            <button type="button" class="btn btn-default swiper-button-next-{$vo['id']}" data-toggle="tooltip" data-container="body" title="next"><i class="fa fa-chevron-right"></i></button>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-info reserve"><i class="fa fa-check"></i> 现场预定</button>
+                                </div><!-- /.box-footer -->
+                            </div>
+                        </foreach>
+
+                    </div><!-- /.tab-pane -->
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</block>
+<block name="main-footer">
+    <include file='Public/footer' />
+</block>
+<block name="foot">
+    <include file='Public/foot' />
+    <!-- Swiper JS -->
+    <script src="__STATIC__/Swiper/dist/js/swiper.min.js"></script>
+    <script src="__STATIC__/sweetalert-master/dist/sweetalert.min.js"></script>
+    <!-- date-range-picker -->
+    <script src="__STATIC__/AdminLTE/plugins/daterangepicker/moment.min.js"></script>
+    <script src="__STATIC__/AdminLTE/plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="__STATIC__/AdminLTE/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+    <script src="__STATIC__/select/js/jquery.cxselect.min.js"></script>
+    <script src="__STATIC__/jquery.validate.min.js"></script>
+    <script src="__STATIC__/jquery.form.js"></script>
+    <script src="__JS__/cropbox.js"></script>
+
+    <script src="__JS__/win.js"></script>
+
+    <script type="text/javascript">
+        $(window).load(function() {
+            var options =
+            {
+                thumbBox: '.thumbBox',
+                spinner: '.spinner',
+                imgSrc: '__IMG__/avatar.jpg'
+            };
+            var cropper = $('.imageBox').cropbox(options);
+            $('#upload-file').on('change', function(){
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    options.imgSrc = e.target.result;
+                    cropper = $('.imageBox').cropbox(options);
+                };
+                reader.readAsDataURL(this.files[0]);
+                this.files = [];
+            });
+            $('#btnCrop').on('click', function(){
+                var img = cropper.getDataURL();
+                //console.log(cropper.getDataURL());
+                $('#img').text(img);
+                $('.cropped').html('');
+                $('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:64px;margin-top:4px;border-radius:64px;box-shadow:0px 0px 12px #7E7E7E;" ><p>64px*64px</p>');
+                $('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:128px;margin-top:4px;border-radius:128px;box-shadow:0px 0px 12px #7E7E7E;"><p>128px*128px</p>');
+                $('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:180px;margin-top:4px;border-radius:180px;box-shadow:0px 0px 12px #7E7E7E;"><p>180px*180px</p>');
+            });
+            $('#btnZoomIn').on('click', function(){
+                cropper.zoomIn();
+            });
+            $('#btnZoomOut').on('click', function(){
+                cropper.zoomOut();
+            });
+
+            $('#button').on('click', function () {
+                var $btn = $(this).button('loading');
+                var options = {
+                    url:   '{:U("uploadimg")}',
+                    beforeSubmit :showRequest,
+                    success: showResponse,
+                    timeout: 3000
+                };
+                $('#form').ajaxForm(options);
+            });
+            function showRequest(formData, jqForm, options){
+                var formElement = formData[1];
+                var text = formElement.value;
+//                console.log(text);
+
+                if(text==''){
+                    $('#alertTxt').text('请选择或者上传场馆图片');
+                    $('#button').button('reset');
+                    return false;
+                }
+                return true;
+            }
+            function showResponse(data){
+                $('#button').button('reset');
+                console.log(data);
+                if(data.status) {
+                    $('.myimg').attr('src',data.path+'?'+data.time);
+                    $('#myModal_{:UID}').modal('hide');
+                }else{
+                    $('#alertTxt').text(data.message);
+                }
+            }
+        });
+    </script>
+
+    <script>
+        //根据屏幕尺寸控制
+        var pageSize = getPageSize();
+        var p = 5;
+        $('.right_li_price').on('click',function() {
+            var hasD = $(this).hasClass('del');
+            var hasL = $(this).hasClass('lock');
+            var hasS = $(this).hasClass('suc');
+            var hasC = $(this).hasClass('check');
+
+            if(!hasS && !hasD && !hasL){
+                if(hasC){
+                    $(this).removeClass('check').next('input').removeAttr('checked');
+                }else{
+                    $(this).addClass('check').next('input').attr('checked','true');
+                }
+            }
+        });
+        $('.reserve').on('click',function() {
+            var vals = checkedValues();
+            if(vals.length==0){
+                swal({title: "错误",   text: "请选择要操作的项目", type: "error",  timer: 3000,   showConfirmButton: false });
+            }else{
+                var id = vals,url = "{:U('reserves')}",tag = "#price";
+                reserves(id,url,tag);
+            }
+        });
+
+        $('.ocAjax').on('click',function() {
+            var id = $(this).attr("data-id"),status = $(this).attr("data-status"),url = $(this).attr("data-url"),tag = $(this).attr("data-tag");
+            ocData(id,status,url,tag);
+        });
+
+        //Date range picker
+        $('#reservation').daterangepicker({
+            startDate: '{$startDate}',
+            endDate: '{$endDate}',
+            format:'YYYY/MM/DD',
+            locale:{
+                applyLabel:'确定',
+                cancelLabel:'关闭',
+                fromLabel: '从',
+                toLabel: '至'
+            }
+        });
+
+        $('#element').cxSelect({
+            selects: ['items', 'block'],
+            jsonName: 'name',
+            jsonValue: 'value'
+        });
+
+        $(".timepicker").timepicker({
+            showInputs: false,
+            showMeridian:false
+        });
+
+        $('#submit_reserve').on('click', function () {
+            var $btn = $(this).button('loading');
+
+            $("#form_reserve").validate({
+                errorPlacement:function(error,element) {
+                    error.appendTo(element.parents('.form-group').children('label'));
+                },
+                rules: {
+                    items: "required",
+                    block   : "required",
+                    ordersdate:"required",
+                    weeks     :"required",
+                    start     : "required",
+                    end     : "required",
+                    paytypes: "required",
+                    paystatus   : "required",
+                    mobile   : "required",
+                    money     : "required"
+                },
+                messages: {
+                    items   : "请选择项目",
+                    block   : "请选择场地",
+                    ordersdate:"请选择日期",
+                    weeks     :"请选择星期",
+                    start   : "请填写开始时间",
+                    end     : "请填写结束时间",
+                    paytypes: "请选择支付方式",
+                    paystatus   : "请选择支付状态",
+                    mobile   : "请填写预定的手机号码",
+                    money     : "请填写金额"
+                },
+                showErrors:function(errorMap,errorList) {
+                    $("#summary_reserve").html('<i class="fa fa-fw fa-info-circle"></i> '+this.numberOfInvalids()+'个选项没有填写完整');
+                    this.defaultShowErrors();
+                    if(this.numberOfInvalids() > 0){
+                        $btn.button('reset');
+                    }
+                }
+            });
+        });
+
+        function checkedValues(){
+            var chk_value =[];
+            $('input[name="check"]:checked').each(function(){
+                chk_value.push($(this).val());
+            });
+            return chk_value;
+        }
+
+        function reserves(id,url,tag) {
+            swal({
+                title: "提示",
+                text: "请填写预定人手机号码",
+                type: "input",
+                animation: "slide-from-top",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                inputPlaceholder: "填写手机号码",
+                confirmButtonText: "提交",
+                confirmButtonColor: "#ec6c62",
+                cancelButtonText:"取消"
+            }, function(inputValue) {
+                if (inputValue === false) return false;
+                if (inputValue === "") {
+                    swal.showInputError("请填写预定人手机号码");
+                    return false;
+                }
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data:{id:id,mobile:inputValue}
+                })
+                    .done(function(data) {
+                        if(data.status){
+                            swal({
+                                title: "提示",
+                                text:data.msg,
+                                type: "success"
+                            },
+                            function(){
+                                var ids = checkedValues();
+                                for(var i =0;i<ids.length;i++){
+                                    $(tag+'-'+ids[i]).addClass('suc');
+                                }
+                            });
+                        }else{
+                            swal("提示", data.msg, "error");
+                        }
+                    })
+                    .error(function(data) {
+                        swal("错误", "服务器连接失败", "error");
+                    });
+            });
+        }
+
+        function ocData(id,status,url,tag) {
+            var text = '';
+            switch (status){
+                case '-1':
+                    text='关闭后将无法预订，您确定要关闭吗？';
+                    break;
+                case '1':
+                    text='开启后将可以预订，您确定要开启吗？';
+                    break;
+            }
+            swal({
+                title: "提示",
+                text: text,
+                type: "warning",
+                //animation: "slide-from-top",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                confirmButtonText: "确定",
+                confirmButtonColor: "#ec6c62",
+                cancelButtonText:"取消"
+            }, function() {
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data:{id:id,status:status}
+                })
+                    .done(function(data) {
+                        if(data.status){
+                            swal({
+                                title: "提示",
+                                text:data.msg,
+                                type: "success"
+                            },
+                            function(){
+                                switch (status){
+                                    case '-1':
+                                        $(tag+'-'+id).attr('data-status','1').children('a').text('开启');
+                                        break;
+                                    case '1':
+                                        $(tag+'-'+id).attr('data-status','-1').children('a').text('关闭');
+                                        break;
+                                }
+
+                            });
+                        }else{
+                            swal("提示", data.msg, "error");
+                        }
+                    })
+                    .error(function(data) {
+                        swal("错误", "服务器连接失败", "error");
+                    });
+            });
+        }
+    </script>
+
+    <foreach name="list" item="vo">
+        <!-- Initialize Swiper -->
+        <script>
+            //alert(pageSize.windowWidth);
+            if(pageSize.windowWidth < 700){
+                $('.table_main').css({width: '525px'});
+                $('.table_body_right').css({width: '420px'});
+                p = 4;
+            }
+            else if(pageSize.windowWidth > 700 && pageSize.windowWidth<1024){
+                //alert(2);
+            }
+            else if(pageSize.windowWidth > 1024 && pageSize.windowWidth<1280){
+                //alert(2);
+            }
+            else if(pageSize.windowWidth > 1280 && pageSize.windowWidth<1440){
+                //alert(3);
+            }
+            else if(pageSize.windowWidth > 1440 && pageSize.windowWidth<1600){
+                //alert(4);
+            }
+            else if(pageSize.windowWidth > 1600 && pageSize.windowWidth<1920){
+                $('.table_main').css({width: '1155px'});
+                $('.table_body_right').css({width: '1050px'});
+                p = 10;
+            }
+            else if(pageSize.windowWidth > 1920){
+                $('.table_main').css({width: '1155px'});
+                $('.table_body_right').css({width: '1050px'});
+                p = 10;
+            }
+            var n = "{$vo['id']}";
+            var swiper = new Swiper('.swiper-container-'+n, {
+                pagination: '.swiper-pagination-'+n,
+                slidesPerView: p,
+                paginationClickable: true,
+                nextButton: '.swiper-button-next-'+n,
+                prevButton: '.swiper-button-prev-'+n
+            });
+        </script>
+    </foreach>
+</block>

@@ -1,0 +1,176 @@
+{
+	state:'success', //失败为'fail'
+	data:{
+		//一些待处理的数据对象
+		username:'sss',
+		age:28
+	},
+	referer:'', //跳转地址
+	refresh:false, //是否刷新
+	__error:'', //
+	message:'操作成功' //返回的提示文案
+}
+
+<div class="demo_code_cont">
+	<div class="mb10">
+		<a class="btn mr10" href="javascript:;">默认</a>
+		<a class="btn btn_success mr10" href="javascript:;">确认/添加(btn_success)</a>
+		<a class="btn btn_error mr10" href="javascript:;">错误/醒目(btn_error)</a>
+	</div>
+	<div>
+		<a class="btn btn_submit mr10" href="javascript:;">提交(btn_submit)</a><a class="btn btn_success" href="javascript:;"><span class="add"></span>添加</a>
+	</div>
+</div>
+
+<div class="demo_code_cont">
+	<div class="mb10">
+		<a class="btn btn_big mr10" href="javascript:;">默认</a>
+		<a class="btn btn_success btn_big mr10" href="javascript:;">确认/添加</a>
+		<a class="btn btn_error btn_big mr10" href="javascript:;">错误/醒目</a>
+	</div>
+	<div>
+		<a class="btn btn_submit btn_big mr10" href="javascript:;">提交</a>
+		<a class="btn btn_success btn_big" href="javascript:;"><span class="add"></span>添加</a>
+	</div>
+</div>
+
+更改提示信息
+data-msg="确定通过审核？"
+
+购物车使用方法
+$cart = CartTool::getCart();
+$car_goods_list = $cart->all();//获取商品列表
+ 
+$goods_num = $cart->getNum();//商品个数
+ 
+$goods_sum_price =$cart->getPrice();//总价格
+ 
+$cart->addItem($goods_id,$goods_list['goods_name'],$goods_list['shop_price'],$goods_list['brand'],$goods_list['goods_thumb'],$num);//增加一件商品到购物车
+ 
+$cart->clear();//清空购物车
+
+{:hook('J_China_City', array('province'=>1, 'city'=>2, 'district'=>3, 'community'=>4))}
+
+
+
+滑动条是一种简单的设置一定范围内参数的插件。
+官方示例地址：http://jqueryui.com/demos/slider/
+
+
+·参数（参数名 : 参数类型 : 默认名称）
+animate : Boolean : false
+设置是否在拖动滑块时执行动画效果。
+初始：$(‘.selector’).slider({ animate: true });
+获取：var animate = $(‘.selector’).slider(‘option’, ‘animate’);
+设置：$(‘.selector’).slider(‘option’, ‘animate’, true);
+
+max : Number : 100
+设置滑动条的最大值。
+初始：$(‘.selector’).slider({ max: 7 });
+获取：var max = $(‘.selector’).slider(‘option’, ‘max’);
+设置：$(‘.selector’).slider(‘option’, ‘max’, 7);
+
+min : Number : 0
+设置滑动条的最小值。
+初始：$(‘.selector’).slider({ min: -7 });
+获取：var min = $(‘.selector’).slider(‘option’, ‘min’);
+设置：$(‘.selector’).slider(‘option’, ‘min’, -7);
+
+orientation : String : ‘auto’
+通常不需要设置此选项，程序会自动识别，如果未正确识别，则可以设置为：’horizontal’ 或 ‘vertical’。
+初始：$(‘.selector’).slider({ orientation: ‘vertical’ });
+获取：var orientation = $(‘.selector’).slider(‘option’, ‘orientation’);
+设置：$(‘.selector’).slider(‘option’, ‘orientation’, ‘vertical’);
+
+range : Boolean, String : false
+如果设置为true，滑动条会自动创建两个滑块，一个最大、一个最小，用于设置一个范围内值。
+初始：$(‘.selector’).slider({ range: ‘min’ });
+获取：var range = $(‘.selector’).slider(‘option’, ‘range’);
+设置：$(‘.selector’).slider(‘option’, ‘range’, ‘min’);
+
+step : Number : 1
+在最大值和最小值中间设置滑块步进大小，此值必须能被(max-min)平分。
+初始：$(‘.selector’).slider({ step: 5 });
+获取：var step = $(‘.selector’).slider(‘option’, ‘step’);
+设置：$(‘.selector’).slider(‘option’, ‘step’, 5);
+
+value : Number : 0
+设置初始时滑块的值，如果有多个滑块，则设置第一个滑块。
+初始：$(‘.selector’).slider({ value: 37 });
+获取：var value = $(‘.selector’).slider(‘option’, ‘value’);
+设置：$(‘.selector’).slider(‘option’, ‘value’, 37);
+
+values : Array : null
+此属性用于设置滑块的初始值，并且只当range设置为true时有效。（至少两个滑块值）
+初始：$(‘.selector’).slider({ values: [1,5,9] });
+获取：var values = $(‘.selector’).slider(‘option’, ‘values’);
+设置：$(‘.selector’).slider(‘option’, ‘values’, [1,5,9]);
+
+
+·事件
+start : slidestart
+当滑块开始滑动时，触发此事件。
+初始：$(‘.selector’).slider({ start: function(event, ui) { … } });
+绑定：$(‘.selector’).bind(‘slidestart’, function(event, ui) { … });
+
+slide : slide
+当滑块滑动时，触发此事件。使用ui.value获取当前值，或$(..).slider(‘value’, index)获取其它滑块的值。
+初始：$(‘.selector’).slider({ slide: function(event, ui) { … } });
+绑定：$(‘.selector’).bind(‘slide’, function(event, ui) { … });
+
+change : slidechange
+当滑块滑动且值发生改变时，触发此事件。事件带两个参数event and ui，使用event.orginalEvent来判断是键盘或鼠标或其它触发，用ui.value获取当前值，用$(this).slider(‘values’, index)获取其它滑块的值。
+初始：$(‘.selector’).slider({ change: function(event, ui) { … } });
+绑定：$(‘.selector’).bind(‘slidechange’, function(event, ui) { … });
+
+stop : slidestop
+当滑块停止滑动时，触发此事件。
+初始：$(‘.selector’).slider({ stop: function(event, ui) { … } });
+绑定：$(‘.selector’).bind(‘slidestop’, function(event, ui) { … });
+
+
+·属性
+destroy
+销毁当前滑动条对象。
+用法：.slider( ‘destroy’ )
+
+disable
+禁用当前滑动条。
+用法：.slider( ‘disable’ )
+
+enable
+启用当前滑动条。
+用法：.slider( ‘enable’ )
+
+option
+获取或设置当前滑动条的参数。
+用法：.slider( ‘option’ , optionName , [value] )
+
+value
+获取或设置当前滑动条的值。
+用法：.slider( ‘value’ , [value] )
+
+values
+获取或设置当前滑动条的所有滑块的值。
+用法：.slider( ‘values’ , index , [value] )
+
+自由转载，转载请注明： 转载自WEB开发笔记 www.chhua.com
+
+本文链接地址: jqueryUI slider插件详解 http://www.chhua.com/web-note3921
+相关笔记
+
+    jQuery UI 修改模板的方法
+    jGestures: jQuery的手势事件插件
+    jquery的json插件jquery-json
+    jQuery easy pie chart 插件使用（基于HTML5）
+    40个有创意的jQuery图片和内容滑动及弹出插件收藏
+
+更多 0
+jQuery, jQuery教程 jQuery UI, jQuery插件
+评论
+发表评论 反向链接
+
+还没有人发表评论。
+发表评论
+评论
+订阅评论

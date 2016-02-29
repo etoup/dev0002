@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+    <include file='Public/head' />
+</head>
+<body class="J_scroll_fixed">
+<div class="wrap jj">
+    <div class="nav">
+        <div class="return"><a href="{:U('index')}">返回上一级</a></div>
+    </div>
+    <!--====================标的信息开始====================-->
+    <form class="J_ajaxForm" action="__SELF__" method="post">
+        <input type="hidden" value="{$info['id']}" name="id"/>
+        <div class="h_a">详细信息</div>
+        <div class="table_full">
+            <table width="100%">
+                <col class="th" />
+                <col/>
+                <thead>
+                <tr>
+                    <th>单号</th>
+                    <td>{$info['orders']}</td>
+                </tr>
+                </thead>
+                <tr>
+                    <th>用户名</th>
+                    <td>{$info['username']}</td>
+                </tr>
+
+                <tr>
+                    <th>真实姓名</th>
+                    <td>{$info['realname']}</td>
+                </tr>
+                <tr>
+                    <th>手机号码</th>
+                    <td>{$info['mobile']}</td>
+                </tr>
+                <tr>
+                    <th>投资金额</th>
+                    <td>{:money($info['with_funds'],'%s万元')}</td>
+                </tr>
+                <tr>
+                    <th>投资期限</th>
+                    <td>{$info['time_limit']}个月</td>
+                </tr>
+                <tr>
+                    <th>年化</th>
+                    <td>{$info['profit']}%</td>
+                </tr>
+                <tr>
+                    <th>利息总和</th>
+                    <td>{:money($info['total_revenue'])}</td>
+                </tr>
+                <tr>
+                    <th>投资时间</th>
+                    <td>{$info['created_time']|time_format}</td>
+                </tr>
+
+            </table>
+        </div>
+        <div class="btn_wrap">
+            <div class="btn_wrap_pd">
+                <button type="submit" class="btn btn_submit J_ajax_submit_btn">提交</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+<include file='Public/foot' />
+</body>
+</html>

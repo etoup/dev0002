@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+    <include file='Public/head' />
+</head>
+<body style="width:300px;" class="body_none">
+<!--添加用户-->
+<form class="J_ajaxForm" data-role="list" action="__SELF__" method="post" >
+    <input type='hidden' name='type' value="do">
+    <div class="pop_cont pop_table" style="height:auto;">
+        <table width="100%">
+            <col class="th" />
+            <col />
+            <thead>
+            <tr>
+                <th>项目名称</th>
+                <td><input name="name" type="text" class="input length_3"></td>
+            </tr>
+            </thead>
+            <tr>
+                <th>项目图标</th>
+                <td><input name="icon" type="text" class="input length_3"></td>
+            </tr>
+            <tr>
+                <th>项目标识</th>
+                <td>
+                    <input name="initial" type="text" maxlength="8" class="input length_3">
+                    <div class="fun_tips">必须大写字母，长度2-8字母</div>
+                </td>
+            </tr>
+            <tr>
+                <th>图标背景颜色</th>
+                <td><input name="bgcolor" type="text" class="input length_3"></td>
+            </tr>
+            <tr>
+                <th>预定控制</th>
+                <td>
+                    <input name="days" value="28" type="text" class="input length_3">
+                    <div class="fun_tips">批量预定最短天数控制（天）</div>
+                </td>
+            </tr>
+            <tr>
+                <th>撤单控制</th>
+                <td>
+                    <input name="hours" value="24" type="text" class="input length_3">
+                    <div class="fun_tips">撤单最小小时控制（小时）</div>
+                </td>
+            </tr>
+            <tr>
+                <th>排序</th>
+                <td>
+                    <input name="sort" type="text" class="input length_3">
+                    <div class="fun_tips">数值越小越靠前</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="pop_bottom">
+        <button type="button" class="btn fr" id="J_dialog_close">取消</button>
+        <button type="submit" class="btn btn_submit mr10 fr J_ajax_submit_btn">提交</button>
+    </div>
+
+</form>
+<include file='Public/foot_min' />
+</body>
+</html>

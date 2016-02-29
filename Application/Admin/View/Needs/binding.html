@@ -1,0 +1,185 @@
+<!doctype html>
+<html>
+<head>
+    <include file='Public/head' />
+    <style type="text/css">
+        .info li{
+            width: 200px;
+            float: left;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body style="width:480px;" class="body_none">
+    <form class="J_ajaxForm" data-role="list" action="__SELF__" method="post" >
+    <input type='hidden' name='type' value="do">
+    <div class="pop_cont pop_table" style="height:auto;">
+        <table width="100%">
+            <col class="th" />
+            <col />
+            <thead>
+            <tr>
+                <td colspan="2">
+                    <if condition="$info['num']">
+                        <ul class="info cc">
+                            <li><label>用户名：</label>{$info.username}</li>
+                            <li><label>真实姓名：</label>{$info.realname}</li>
+                            <li><label>手机号码：</label>{$info.mobile}</li>
+                            <li><label>客户经理：</label>{$info.custom_service|default='<span style="color: #ff3300;font-weight: bold;">没有绑定</span>'}</li>
+                            <li><label>自有资金：</label><b>{$info.own_funds}</b> 万</li>
+                            <li><label>配资资金：</label><b>{$info.with_funds}</b> 万</li>
+                            <li><label>操盘手数：</label><b>{$info.num}</b> 手</li>
+                            <li><label>申请时间：</label><b>{$vo.created_time|time_format}</b></li>
+                        </ul>
+                        <else/>
+                        <ul class="info cc">
+                            <li><label>用户名：</label>{$info.username}</li>
+                            <li><label>真实姓名：</label>{$info.realname}</li>
+                            <li><label>手机号码：</label>{$info.mobile}</li>
+                            <li><label>客户经理：</label>{$info.custom_service|default='<span style="color: #ff3300;font-weight: bold;">没有绑定</span>'}</li>
+                            <li><label>自有资金：</label><b>{$info.own_funds}</b> 万</li>
+                            <li><label>配资资金：</label><b>{$info.with_funds}</b> 万</li>
+                        </ul>
+                    </if>
+
+                </td>
+            </tr>
+            </thead>
+            <tr>
+                <th>券商</th>
+                <td>
+                    <input type="text" name="broker" value="{$info.broker|default=''}" class="input length_5">
+                    <div class="cc gray">账户券商</div>
+                </td>
+            </tr>
+
+            <tr>
+                <th>账户</th>
+                <td>
+                    <input type="text" name="account" value="{$info.account|default=''}" class="input length_5">
+                    <div class="cc gray">账户</div>
+                </td>
+            </tr>
+            <tr>
+                <th>密码</th>
+                <td>
+                    <input type="password" name="password" value="" class="input length_5">
+                    <div class="cc gray">账户密码</div>
+                </td>
+            </tr>
+            <tr>
+                <th>确认密码</th>
+                <td>
+                    <input type="password" name="repassword" value="" class="input length_5">
+                    <div class="cc gray">确认账户密码</div>
+                </td>
+            </tr>
+            <if condition="$info['num']">
+                <tr>
+                    <th>出资人</th>
+                    <td>
+                        <input type="text" name="promoter" value="{$info.promoter|default='陈亚杰'}" class="input length_5">
+                        <div class="cc gray">出资人</div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>软件下载地址</th>
+                    <td>
+                        <select name="downurl" class="select_2 mr10">
+                            <option value="">请选择</option>
+                            <foreach name="downList" item="v">
+                                <if condition="$key eq '众期'">
+                                    <option value="{$v}" selected>{$key}</option>
+                                    <else/>
+                                    <option value="{$v}">{$key}</option>
+                                </if>
+
+                            </foreach>
+                        </select>
+                        <div class="cc gray">账户交易软件下载地址</div>
+                    </td>
+                </tr>
+                <else/>
+                <tr>
+                    <th>出资人</th>
+                    <td>
+                        <input type="text" name="promoter" value="{$info.promoter|default=''}" class="input length_5">
+                        <div class="cc gray">出资人</div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>软件下载地址</th>
+                    <td>
+                        <select name="downurl" class="select_2 mr10">
+                            <option value="">请选择</option>
+                            <foreach name="downList" item="v">
+                                <option value="{$v}">{$key}</option>
+                            </foreach>
+                        </select>
+                        <div class="cc gray">账户交易软件下载地址</div>
+                    </td>
+                </tr>
+            </if>
+
+
+            <tr>
+                <th>软件标识</th>
+                <td>
+                    <input type="file" id="upload_picture">
+                    <input type="hidden" name="icon" id="icon" value="{$info['icon']|default=''}"/>
+                    <div class="upload-img-box">
+                        <notempty name="info['icon']">
+                            <div class="upload-pre-item"><img src="{$info.icon|get_cover='path'}"/></div>
+                        </notempty>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="pop_bottom">
+        <input type="hidden" name="id" value="{$info.id}" />
+        <button type="button" class="btn fr" id="J_dialog_close">取消</button>
+        <button type="submit" class="btn btn_submit mr10 fr J_ajax_submit_btn">确认绑定</button>
+    </div>
+    
+</form>
+    <include file='Public/foot_min' />
+    <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <script type="text/javascript">
+        //上传图片
+        /* 初始化上传插件 */
+        $("#upload_picture").uploadify({
+            "height"          : 30,
+            "swf"             : "__STATIC__/uploadify/uploadify.swf",
+            "fileObjName"     : "download",
+            "buttonText"      : "上传图片",
+            "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+            "width"           : 120,
+            'removeTimeout'   : 1,
+            'fileTypeExts'    : '*.jpg; *.png; *.gif;',
+            "onUploadSuccess" : uploadPicture,
+            'onFallback' : function() {
+                alert('未检测到兼容版本的Flash.');
+            }
+        });
+        function uploadPicture(file, data){
+            var data = $.parseJSON(data);
+            var src = '';
+            if(data.status){
+                $("#icon").val(data.id);
+                //src = data.url || '__ROOT__' + data.path;
+                src = data.url || data.path;
+                $("#icon").parent().find('.upload-img-box').show().html(
+                        '<div class="upload-pre-item"><img src=".' + src + '"/></div>'
+                );
+            } else {
+                updateAlert(data.info);
+                setTimeout(function(){
+                    $('#top-alert').find('button').click();
+                    $(that).removeClass('disabled').prop('disabled',false);
+                },1500);
+            }
+        }
+    </script>
+</body>
+</html>

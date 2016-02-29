@@ -1,0 +1,164 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap J_check_wrap">
+
+
+<!--分类管理: 编辑分类  -->
+<div class="nav">
+    <div class="return"><a href="{:U('index')}">返回上一级</a></div>
+</div>
+<form class="J_ajaxForm" data-role="list" action="__SELF__" enctype="application/x-www-form-urlencoded" method="post">
+<div class="h_a">基础信息</div>
+<div class="table_full">
+    <table width="100%">
+        <colgroup><col class="th">
+        <col width="400">
+        <col>
+        </colgroup>
+        <tbody>            
+            <tr>
+                <th>上级版块</th>
+                <td>
+                    <span class="must_red">*</span>
+	      <select name="parentid" class="select_5">
+		<option value=''>顶级版块</option>
+		<foreach name="parentids" item="fo">
+		<option value='{$fo['id']}' {:is_selected($fo['id'],$info['parentid'])}>{$fo['title']}</option>
+		</foreach>
+	      </select>
+                </td>
+                <td><div class="fun_tips">可以调整版块</div></td>
+            </tr>
+            <tr>
+                <th>版块名称</th>
+                <td>
+                    	<span class="must_red">*</span>
+		<input type="text" name="title" class="input input_hd length_5" value="{$info['title']}">
+                </td>
+                <td><div class="fun_tips">版块名称标题</div></td>
+            </tr>
+            <tr>
+                <th>创建时间</th>
+                <td>
+                    <div class="mb5"><input type="text" name="create_time" class="input length_5 J_datetime" value="{$info['create_time']|time_format}"></div>
+                </td>
+                <td><div class="fun_tips">可以调整创建时间</div></td>
+            </tr>
+            <tr>
+                <th>允许发帖用户组</th>
+                <td>
+                    	<div class="user_group">
+			<foreach name="list" item="v">
+			<dl>
+				<dt><label><input class="J_check_all" data-direction="y" data-checklist="add_J_check_{$key}" name="" type="checkbox" value="">{$v.title}</label></dt>
+				<dd>
+	                                                       <foreach name="v['val']" item="vo" key="k">
+	                                                       <label><input class="J_check" data-yid="add_J_check_{$key}" type="checkbox" name="allow_user_group[]" value="{$vo['gid']}" {$isChecked}><span>{$vo['name']}</span></label>
+                                                                    </foreach>
+				</dd>
+			</dl>
+			</foreach>
+		</div>
+                </td>
+                <td><div class="fun_tips">选择允许发布帖子的用户组</div></td>
+            </tr>
+            
+            <tr>
+                <th>图标</th>
+                <td>
+                    <input type="file" id="upload_picture">
+			              <input type="hidden" name="icon" id="icon" value="{$info['icon']|default=''}"/>
+			              <div class="upload-img-box">
+			                    <notempty name="info['icon']">
+			                        <div class="upload-pre-item"><img src="__ROOT__{$info.icon|get_cover='path'}"/></div>
+			                    </notempty>
+			              </div>
+                </td>
+                <td><div class="fun_tips">上传图标，50*50px</div></td>
+            </tr>
+            <tr>
+                <th>帖子数量</th>
+                <td>
+                    <input type="text" name="post_count" class="input length_5" value="{$info['post_count']}">
+                </td>
+                <td><div class="fun_tips">调整帖子数量</div></td>
+            </tr>
+            <tr>
+                <th>顺序</th>
+                <td>
+                    <input type="text" name="sort" class="input length_5" value="{$info['sort']}">
+                </td>
+                <td><div class="fun_tips">数字越小越靠前</div></td>
+            </tr>
+            <tr>
+                <th>是否启用</th>
+                <td>
+                            <ul class="three_list cc">
+                                            <if condition="$info['status']">
+                                            <div class="yesno"></div>
+                                            <else/>
+                                            <div class="yesno notoyes"></div>
+                                            </if>
+                                            <input type="hidden" name="status" value="{$info['status']}">
+                                            <span class="cc gray">双击关闭开启</span>
+	              </ul>
+                </td>
+                <td><div class="fun_tips">选择启用，否则禁用</div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="btn_wrap">
+    <div class="btn_wrap_pd">
+        <input type="hidden" name="id" value="{$info.id}" />
+        <button type="submit" class="btn btn_submit J_ajax_submit_btn">提交</button>
+    </div>
+</div>
+</form>
+
+</div>
+<include file='Public/foot' />
+
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript">
+//上传图片
+/* 初始化上传插件 */
+$("#upload_picture").uploadify({
+    "height"          : 30,
+    "swf"             : "__STATIC__/uploadify/uploadify.swf",
+    "fileObjName"     : "download",
+    "buttonText"      : "上传图片",
+    "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+    "width"           : 120,
+    'removeTimeout'   : 1,
+    'fileTypeExts'    : '*.jpg; *.png; *.gif;',
+    "onUploadSuccess" : uploadPicture,
+    'onFallback' : function() {
+        alert('未检测到兼容版本的Flash.');
+    }
+});
+function uploadPicture(file, data){
+    var data = $.parseJSON(data);
+    var src = '';
+    if(data.status){
+        $("#icon").val(data.id);
+        //src = data.url || '__ROOT__' + data.path;
+        src = data.url || data.path;
+        $("#icon").parent().find('.upload-img-box').html(
+            '<div class="upload-pre-item"><img src=".' + src + '"/></div>'
+        );
+    } else {
+        updateAlert(data.info);
+        setTimeout(function(){
+            $('#top-alert').find('button').click();
+            $(that).removeClass('disabled').prop('disabled',false);
+        },1500);
+    }
+}
+</script>
+</body>
+</html>

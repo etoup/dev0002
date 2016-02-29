@@ -1,0 +1,531 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap">
+    <div class="nav">
+        <ul class="cc">
+            <li class="current"><a href="{:U('category')}">栏目管理</a></li>
+            <li><a href="{:U('examine')}">待审核</a></li>
+            <li><a href="{:U('draftbox')}">草稿箱</a></li>
+            <li><a href="{:U('recycle')}">回收站</a></li>
+        </ul>
+    </div>
+    <div class="h_a">提示信息</div>
+    <div class="mb10 prompt_text">
+        <ul>
+            <li>栏目管理：对后台所有操作栏目进行管理</li>
+            <li>操作列表：新增、删除、编辑、查询、排序、隐藏</li>
+            <li>统一管理待审、草稿、回收的文章</li>
+        </ul>
+    </div>
+    <div class="h_a">搜索</div>
+    <div class="table_full">
+        <form id="J_forum_search_form" method="post" action="{:U('searchCategory')}">
+            <table width="100%">
+                <tr>
+                    <td>
+                        <div class="fl">
+                            <div id="J_search_suggestion" class="forum_search_pop" style="display:none;margin-top:25px;"></div>
+                        </div>
+                        <input id="J_search_input" class="input length_3 mr10" name="keyword" autoComplete="off" type="text"><button id="J_forum_search" class="btn" type="submit">搜索</button></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <form class="J_ajaxForm" data-role="list" action="{:U('dorunCategory')}" method="post">
+    <div class="mb10">
+        <a href="#" id="J_start_all" class="mr5">全部展开</a><span class="mr5 gray">|</span><a id="J_away_all" href="">全部收起</a>
+    </div>
+    <div class="table_list">
+        <table width="100%" id="J_table_list" style="table-layout:fixed;">
+            <colgroup>
+                <col width="30">
+                <col width="300">
+                <col width="60">
+                <col width="200">
+                <col width="140">
+                <col width="150">
+                <col>
+            </colgroup>
+            <thead>
+                <tr>
+                    <td></td>
+                    <td><span class="mr5">[顺序]</span>栏目名称（双击栏目名称可编辑栏目名称）</td>
+                    <td class="tar">ID</td>
+                    <td>栏目描述</td>
+                    <td>栏目标识（英文字母）</td>
+                    <td>选择文档模型（点选）</td>
+                    <td style="text-align:center;">审核?</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+            <foreach name="catedb" item="cate">
+            <tbody>
+            <tr id="J_forum_tr_{$cate['id']}">
+                <td><span data-id="{$cate['id']}" class="J_start_icon {$list[$cate['id']]?'away_icon':'zero_icon'}" title="点击展开、收起"></span></td>
+                <td><input type="text" class="input mr5" name="sort[{$cate['id']}]" value="{$cate['sort']}" style="width:20px;"><span class="mr10 J_forum_names" data-id="{$cate['id']}">{$cate['title']}</span><a style="display:none" data-id="{$cate['id']}" data-type="forum_child" data-forumlevel="2" data-html="tbody" href="{:U('addCategory',array('pid'=>$cate['id']))}" class="link_add J_addChild">添加二级分类</a></td>
+                <td class="tar">{$cate['id']}</td>
+                <td><input type="text" class="input length_3" name="description[{$cate['id']}]" value="{$cate['description']}"></td>
+                <td><input type="text" class="input length_2" name="name[{$cate['id']}]" value="{$cate['name']}"></td>
+                <td>
+                    <foreach name="model" item="vo">
+                    <if condition="in_array($vo['id'],$cate['modelArr'])">
+                    <a href="javascript:;" class="chkbx chkbx_hover" data="{$vo.id}">{$vo.title}</a>
+                    <else/>
+                    <a href="javascript:;" class="chkbx" data="{$vo.id}">{$vo.title}</a>
+                    </if>
+                    </foreach>
+                    <input type="hidden" name="model[{$cate['id']}]" value="{$cate['model']}" />
+                </td>
+                <td style="text-align:center;">
+                    <if condition="$cate['check']">
+                    <input type="checkbox" checked="" value="1" name="check[{$cate['id']}]">
+                    <else/>
+                    <input type="checkbox" value="1" name="check[{$cate['id']}]">
+                    </if>
+                </td>
+                <td><a href="{:U('editCategory',array('id'=>$cate['id']))}" title="编辑分类" class="mr10">编辑</a><a href="{:U('delCategory',array('id'=>$cate['id']))}" class="mr5 J_ajax_del" data-pdata="{'id': '<?php echo $cate[id] ?>'}">删除</a></td>
+            </tr>
+            </tbody>
+
+            <notempty name="list[$cate['id']]">
+            <tbody id="J_table_list_{$cate['id']}">
+            <foreach name="list[$cate['id']]" item="forum">
+            <tr id="J_forum_tr_{$forum['id']}">
+                <td></td>
+                <td>
+                <if condition="$forum['mold'] eq 'sub'">
+                <span class="plus_icon plus_none_icon"></span>
+                </if>
+                <span class="plus_icon <if condition="$forum['isEnd']">plus_end_icon</if>"></span><input type="text" class="input mr5" name="sort[{$forum['id']}]" value="{$forum['sort']}" style="width:20px;"><span class="mr10 J_forum_names" data-id="{$forum['id']}">{$forum['title']}</span>
+                <switch name="forum.mold">
+                <case value="forum">
+                    <a style="display:none" data-id="{$forum['id']}" data-type="forum_child" data-forumlevel="3" data-html="tr" href="{:U('addCategory',array('pid'=>$forum['id']))}" class="link_add J_addChild">添加三级分类</a>
+                </case>
+                </switch>
+                </td>
+                <td class="tar">{$forum['id']}</td>
+                <td><input type="text" class="input length_3" name="description[{$forum['id']}]" value="{$forum['description']}"></td>
+                <td><input type="text" class="input length_2" name="name[{$forum['id']}]" value="{$forum['name']}"></td>
+                <td>
+                    <foreach name="model" item="vo">
+                    <if condition="in_array($vo['id'],$forum['modelArr'])">
+                    <a href="javascript:;" class="chkbx chkbx_hover" data="{$vo.id}">{$vo.title}</a>                  
+                    <else/>
+                    <a href="javascript:;" class="chkbx" data="{$vo.id}">{$vo.title}</a>
+                    </if>
+                    </foreach>
+                    <input type="hidden" name="model[{$forum['id']}]" value="{$forum.model}" />
+                </td>
+                <td style="text-align:center;">
+                    <if condition="$forum['check']">
+                    <input type="checkbox" checked="" value="1" name="check[{$forum['id']}]">
+                    <else/>
+                    <input type="checkbox" value="1" name="check[{$forum['id']}]">
+                    </if>
+                </td>
+                <td><a href="{:U('editCategory',array('id'=>$forum['id']))}" title="编辑分类" class="mr10">编辑</a><a href="{:U('delCategory',array('id'=>$forum['id']))}" class="mr5 J_ajax_del" data-pdata="{'id': '<?php echo $forum[id] ?>'}">删除</a></td>
+            </tr>
+            </foreach>
+            </tbody>
+            </notempty>
+            </foreach>
+
+        </table>
+        <table width="100%">
+            <tr><td colspan="5" style="padding-left:38px;"><a id="J_add_root" data-type="forum_root" data-html="tbody" href="" class="link_add">添加新分类</a></td></tr>
+        </table>
+    </div>
+    <div class="btn_wrap">
+        <div class="btn_wrap_pd">
+            <button type="submit" class="btn btn_submit J_ajax_submit_btn">提交</button>
+        </div>
+    </div>
+    </form>
+    
+</div>
+<include file='Public/foot' />
+<script>
+/*
+root_tr_html 为“添加新分类”html；
+child_tr_html 为“添加四级版块”html；
+删除未保存子版块时不调用forumTree_table.js的公共方法，因为设置子版的关联删除，所以单独写在本页面，"J_new_forum_del"类调用。
+*/
+
+
+$(function () {
+    var table_list = $('#J_table_list');
+    
+    if (table_list.length) {
+        var child_id = 1;
+        //添加根导航&添加新分类&添加新积分，均为一级内容
+        //var temp_id = 1;
+        var lv=0;
+        $('#J_add_root').on('click', function (e) {   
+            e.preventDefault();
+            child_id++; //添加一个临时id关联
+            var $this = $(this), $tbody;
+            lv++;
+            var root_tr_html = '<tr>\
+                        <td><span class="zero_icon mr10"></span></td>\
+                        <td>\
+                            <input type="text" style="width:20px;" value="" name="new_sort['+lv+'][]" class="input mr5">\
+                            <input name="new_title['+lv+'][]" type="text" class="input mr5" value="">\
+                            <input type="hidden" value="NEW_ID_" name="tempid['+lv+'][]">\
+                        </td>\
+                        <td></td>\
+                        <td><input name="new_description['+lv+'][]" type="text" class="input mr5 length_3" value=""></td>\
+                        <td><input name="new_name['+lv+'][]" type="text" class="input mr5 length_2" value=""></td>\
+                        <td>\
+                            <foreach name="model" item="vo">
+                            <a href="javascript:;" class="chkbx" data="{$vo.id}">{$vo.title}</a>\
+                            </foreach>
+                            <input type="hidden" name="new_model['+lv+'][]" class="input mr5 length_2" />\
+                        </td>\
+                        <td style="text-align:center;"><input name="new_check['+lv+'][]" type="checkbox" value="1"></td>\
+                        <td><a class="mr5 J_newRow_del" href="#">[删除]</a></td>\
+                    </tr>';
+            //转换&输出最终的html段
+            if ($this.data('type') === 'credit_root') {
+                //积分设置，依赖已有的最新积分的key值，由credit_run.htm页面声明
+                last_credit_key = last_credit_key + 1;
+                $tbody = $('<tbody>' + root_tr_html.replace(/root_/g, 'root_' + child_id).replace(/credit_key_/g, last_credit_key) + '</tbody>');
+            } else {
+                //其他
+                $tbody = $('<tbody>' + root_tr_html.replace(/root_/g, 'root_' + child_id).replace(/NEW_ID_/g, child_id) + '</tbody>');
+            }
+            
+            //完成添加
+            table_list.append($tbody);
+            $tbody.find('input.input').first().focus();
+            
+        });
+        
+        
+        
+        //新添加的行可直接删除
+        table_list.on('click', 'a.J_newRow_del', function (e) {
+            e.preventDefault();
+            var tr = $(this).parents('tr'),
+                tbody = $(this).parents('tbody');
+
+            if(tr.next().length && !tr.prev().length) {
+                //删除一级内容
+                tbody.remove();
+            }else{
+                if(tbody.children().length === 1) {
+                    tbody.remove();
+                }else{
+                    $(this).parents('tr').remove();
+                }
+            }
+        });
+        
+        
+        //树形菜单展开收缩
+        var start_icon = $('.J_start_icon');
+        start_icon.toggle(function (e) {
+            var data_id = $(this).attr('data-id');
+            $('#J_table_list_' + data_id).hide(100);
+            $(this).removeClass('away_icon').addClass('start_icon');
+        }, function () {
+            var data_id = $(this).attr('data-id');
+            $('#J_table_list_' + data_id).show(100);
+            $(this).removeClass('start_icon').addClass('away_icon');
+            
+        });
+        
+        
+        //展开全部
+        $('#J_start_all').on('click', function (e) {
+            e.preventDefault();
+            var start_icons = $('.J_start_icon.start_icon');
+            if (start_icons.length) {
+                start_icons.removeClass('start_icon').addClass('away_icon');
+                $('tbody[id^="J_table_list"]').show();
+            }
+        });
+        
+        
+        //收起全部
+        $('#J_away_all').on('click', function (e) {
+            e.preventDefault();
+            var away_icons = $('.J_start_icon.away_icon')
+            if (away_icons.length) {
+                away_icons.removeClass('away_icon').addClass('start_icon');
+                $('tbody[id^="J_table_list"]').hide();
+            }
+        });
+        
+        //鼠标移上去显示添加导航按钮
+        $('#J_table_list').on('mouseover', 'tr', function (e) {
+            $(this).find('a.J_addChild').show();
+        }).on('mouseout', 'tr', function (e) {
+            $(this).find('a.J_addChild').hide();
+        });
+        
+    }
+    
+});
+
+$(function(){
+
+    //版块_新添加的行可直接删除
+    $('#J_table_list').on('click', 'a.J_new_forum_del', function (e) {
+        e.preventDefault();
+        var $this = $(this), tr = $this.parents('tr');
+        
+        //跟当前行比较"del-level"的值，含子版不删除
+        if(tr.data('del_level') < tr.next().data('del_level')) {
+            Wind.use('dialog', function(){
+                Wind.dialog.alert('该版块含有子分类，请先删除所有子分类，再进行此操作！', function(){
+                    $this.focus();
+                });
+            });
+        }else{
+            tr.remove();
+        }
+        
+    });
+    
+
+    //双击编辑版块名称
+    var org_val;
+    $('#J_table_list').on('dblclick', '.J_forum_names', function() {
+        var $this = $(this), $input = $('<input type="text" value="'+ $this.text() +'" data-id="'+  $this.data('id') +'" class="input mr5 J_forum_names_input" name="name">');
+        org_val = $this.text(); //原始版块名
+        $input.insertAfter($this).focus();
+        $this.remove();
+    });
+    
+    //版块名称input失焦ajax提交
+    $('#J_table_list').on('blur', '.J_forum_names_input', function() {
+        var $this = $(this),
+            restore = function() { //版块取消编辑状态
+                $this.hide().after('<span class="mr10 J_forum_names" data-id="'+ $this.data('id') +'">'+ $this.val() +'</span>');
+                $this.remove();
+            };
+            
+        //判断版块名是否修改过
+        if($this.val() !== org_val) {
+            $.post("{:U('editTitle')}", {id: $this.data('id'), title: $this.val()}, function(data){
+                if(data.state === 'success') {
+                    restore();
+                }
+            });
+        }else{
+            restore();
+        }
+        
+    });
+
+    
+    
+/*
+    搜索建议：输入>=2个字符开始提交查询，支持上下键选择；点击下拉的匹配项进入版块编辑，点击搜索按钮则高亮匹配的tr行
+*/
+    
+    var search_input = $('#J_search_input'),            //搜索栏
+        suggestion_list = $('#J_search_suggestion'),    //搜索匹配列表
+        input_val;                                      //搜索值，用于比较是否有更改
+    
+    //搜索框聚焦
+    search_input.focus(function(){
+        var $this = $(this);
+        
+        //搜索框粘帖
+        this.onpaste = function(){
+        
+            //清楚重复的延时操作
+            if(search_input.ptimer) {
+                clearTimeout(search_input.ptimer);
+            }
+            
+            //粘帖半秒后提交查询
+            search_input.ptimer = setTimeout(function(){
+                search_suggestion($('#J_search_input').val());
+            }, 500)
+
+        }
+        
+        //通过浏览器（ff8.0）“后退”到本页面时，可能搜索内容为空，但是有隐藏的匹配项
+        if(!$this.val()) {
+            return false;
+        }
+        
+        //已经匹配搜索，搜索框重新聚焦时显示匹配，避免重复ajax
+        if(suggestion_list.children().length) {
+            suggestion_list.fadeIn('fast');
+        }
+        
+    });
+    
+    
+    
+    //搜索输入
+    search_input.keyup(function(e){
+        var $this = $(this);
+        
+        //键盘上下选择搜索建议
+        if(suggestion_list.children().length & (e.keyCode === 38 || e.keyCode === 40)) {
+        
+            var li_current = suggestion_list.find('li.current'); //当前选中项，上下键未修改状态
+            /*var f_or_l = (e.keyCode === 40 ? 'first' : 'last'),
+                p_or_n = (e.keyCode === 40 ? $.next : 'prev');*/
+            //
+            if(e.keyCode === 38) {
+                //键盘_向上
+                
+                if(!li_current.length) {
+                    //没有有选中项时
+                    suggestion_list.find('li:last').addClass('current');
+                }else{
+                    //有选中项时
+                    li_current.removeClass('current').prev().addClass('current');
+                }
+                
+                
+                
+            }else if(e.keyCode === 40) {
+                //键盘_向下
+                
+                if(!li_current.length) {
+                    //没有有选中项时
+                    suggestion_list.find('li:first').addClass('current');
+                }else{
+                    //有选中项时
+                    li_current.removeClass('current').next().addClass('current');
+                }
+                
+            }
+            
+            if(suggestion_list.find('li.current').length) {
+                    search_input.val(suggestion_list.find('li.current').text());
+            }else{
+                search_input.val(input_val);
+            }
+                
+            return false;
+            
+            
+        }
+        
+        
+        if($this.val() === input_val) {
+            return false; //搜索值未改变则不做查询
+        }
+        
+        //停止输入半秒后开始查询
+        if(search_input.timer) {
+            clearTimeout(search_input.timer);
+        }
+        search_input.timer = setTimeout(function(){
+            search_suggestion($this.val());
+        }, 500);
+        
+    });
+    
+    
+    //点击搜索建议列表，进入版块编辑
+    search_input.keypress(function(e) {
+    
+        //可点击条件：有匹配搜索列表&列表里有被选中的项&按回车(enter)键
+        if(suggestion_list.children() && suggestion_list.find('li.current').length && e.keyCode === 13) {
+            e.preventDefault();
+            search_input.blur(); //ff(8.0)从编辑页返回时，搜索栏会聚焦
+            window.location.href = suggestion_list.find('li.current > a').attr('href'); //进入版块编辑
+        }
+        
+    });
+    
+    //搜索框失焦，隐藏匹配列表
+    search_input.blur(function() {
+        suggestion_list.fadeOut('fast');
+    });
+    
+    //搜索查询显示函数
+    function search_suggestion(search_data) {
+        input_val = search_data; //把搜索值赋给input_val，用于比较搜索值
+        var search_text = $.trim(search_data.replace(/[^\x00-\xff]/g, "**")); //搜索内容首尾去空格，且每1个汉字转由两个*符号替代
+        
+        if(search_text.length >= 2) {
+            //搜索内容大于2个字符，提交查询
+            
+            $.post('{:U('searchCategory')}', {'keyword':search_data}, function(data) {          
+                if(data.state === 'success') {
+                    var push_html = [];
+                    $.each(data.data, function(i, o){
+                        push_html.push('<li><a href="{:U('editCategory','',false)}/id/'+ o.id +'" class="J_dialog" title="编辑分类">'+ o.title +'</a></li>');
+                    });console.log(push_html);
+                    suggestion_list.html($('<ul/>').append(push_html.join(''))).fadeIn('fast');
+                }else{
+                    suggestion_list.fadeOut('fast', function(){
+                        $(this).empty();
+                    });
+                }
+                
+            }, 'json');
+            
+        }else{
+            //搜索内容大于2个字符，隐藏并清空下拉匹配
+            suggestion_list.fadeOut('fast', function(){
+                $(this).empty();
+            });
+        }
+    }
+    
+    
+    //点击“搜索”按钮，高亮匹配的tr行
+    Wind.use('ajaxForm',function() {
+    
+        $('#J_forum_search_form').ajaxForm({
+            dataType    : 'json',
+            success : function(data) {
+                if(data.state === 'success') {
+                    //取消已有的高亮
+                    $('#J_table_list tr.high_light').removeClass('high_light');
+                    
+                    //循环匹配的高亮
+                    $.each(data.data, function(i, o) {
+                        $('#J_forum_tr_' + o.id).addClass('high_light');
+                    });
+
+                    //定位第一个
+                    $(document).scrollTop($('tr.high_light:first').offset().top);
+                    
+                }
+            }
+        });
+        
+    });
+    
+    
+    //搜索匹配列表hover状态背景色
+    suggestion_list.on('mouseenter', 'li', function(){
+        $(this).addClass('current');
+    }).on('mouseleave', 'li', function(){
+        $(this).removeClass('current');
+    });
+    
+    $('.chkbx').live('click', function() {
+      if($(this).hasClass('chkbx_hover')){       
+        $(this).removeClass('chkbx_hover').next('input').val('');
+      }else{
+        var d = $(this).attr('data');
+        $(this).addClass('chkbx_hover').next('input').val(d);
+      }
+      var chk_value =[];    
+      $(this).parent().find('.chkbx_hover').each(function(){  
+        if($(this).attr('data')){
+            chk_value.push($(this).attr('data'));  
+        }  
+      });
+      $(this).siblings('input').val(chk_value);
+    });
+});
+</script>
+</body>
+</html>

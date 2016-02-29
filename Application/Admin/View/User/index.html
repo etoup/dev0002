@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap J_check_wrap">
+    <div class="nav">
+        <ul class="cc">
+            <li class="current"><a href="{:U('index')}">用户管理</a></li>
+        </ul>
+    </div>
+    <div class="h_a">提示信息</div>
+    <div class="mb10 prompt_text">
+        <ul>
+            <li>用户名和电子邮箱支持模糊搜索。用户名或电子邮箱输入“a” 则检索出所有以a开头的用户名或电子邮箱。</li>
+            <li>可以对用户的基本信息、积分信息、用户组，以及用户产生的内容进行管理。</li>
+        </ul>
+    </div>
+    <div class="mb10"><a href="{:U('add')}" class="btn J_dialog" title="添加用户" role="button"><span class="add"></span>添加用户</a></div>
+    <div class="h_a">搜索</div>
+    <div class="search_type cc mb10">
+        <form action="__SELF__" method="post">
+        <input type="hidden" name="p" value="{$p|default=1}">
+        <input type="hidden" name="soso" value="1">
+        <label>用户组：</label>
+        <select name="gid" size="5" class="mr10" multiple>
+            <option value="0">普通组</option>
+            <foreach name="groups" item="item">
+                <if condition="$gid eq $item['gid']">
+                <option value="{$item['gid']}" selected="">{$item['name']}</option>
+                <else/>
+                <option value="{$item['gid']}">{$item['name']}</option>
+                </if>
+            </foreach>
+        </select>
+        <label>关键字包含：</label><input name="username" type="text" class="input length_2 mr10" value="{$username|default=''}" placeholder="用户名或真实姓名">
+        <label>UID：</label><input name="uid" type="number" class="input length_1 mr10" value="{$uid|default=''}">
+        <label>电子邮箱：</label><input name="email" type="text" class="input mr10" value="{$email|default=''}">
+        <label>注册时间：</label><input type="text" name="time_start" value="{$time_start|default=''}" class="input length_2 mr5 J_date"><span class="mr5">至</span><input type="text" name="time_end" value="{$time_end|default=''}" class="input length_2 mr10 J_date">
+        <button type="submit" class="btn mr5">搜索</button>
+        <notempty name="soso">
+        <if condition="$soso">
+        <button type="reset" class="btn btn_error" onclick="window.location.href='{:U('index')}'">撤销检索</button>
+        </if>
+        </notempty>
+        </form>
+    </div>
+    <div id="top-alert" class="alert alert-error" style="display: none;">
+        <button class="close fixed" style="margin-top: 4px;">×</button>
+        <div class="alert-content">这是内容</div>
+    </div>
+    <notempty name="_list">
+    <form method="post" action="#" id="J_tag_form" class="J_ajaxForm">
+    <div class="table_list">
+        <table width="100%">
+            <colgroup>
+            <col width="65">
+            </colgroup>
+            <thead>
+                <tr>
+                    <td>
+                        <label>
+                            <input class="J_check_all" data-checklist="J_check_x" data-direction="x" type="checkbox">全选</label>
+                    </td>
+                    <td>UID</td>
+                    <td>用户名</td>
+                    <td>真实姓名</td>
+                    <td>余额</td>
+                    <td>登录次数</td>
+                    <td>最后登录时间</td>
+                    <td>最后登录IP</td>
+                    <td>状态</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+        <volist name="_list" id="vo">
+            <tr>
+                <td>
+                    <input class="J_check" name="uid[]" value="{$vo['uid']}" data-name="{$vo.nickname|op_t }" data-tid="{$vo['uid']}" data-xid="J_check_x" data-yid="J_check_y" type="checkbox">
+                </td>
+                <td>{$vo.uid}</td>
+                <td><a href="{:U('Admin/User/edit',array('uid'=>$vo['uid']))}" >{$vo.nickname|op_t}</a></td>
+                <td>{$vo.realname}</td>
+                <td>{$vo.balance|default=0}</td>
+                <td>{$vo.login}</td>
+                <td><span>{$vo.last_login_time|time_format}</span></td>
+                <td><a href="http://ip138.com/ips138.asp?ip={$vo['last_login_ip']|long2ip}">{$vo['last_login_ip']|long2ip}</a></td>
+                <td>{$vo.status_text}</td>
+                <td>
+                    <a href="{:U('User/edit?uid='.$vo['uid'])}" class="mr10">编辑</a>
+                    <eq name="vo.status" value="1">
+                    <a href="{:U('disable',array('uid'=>$vo['uid']))}"
+                        class="J_set_def mr10">禁用</a>
+                    <else/>
+                    <a href="{:U('enable',array('uid'=>$vo['uid']))}"
+                        class="J_set_def mr10">启用</a>
+                    </eq>
+                    <a href="{:U('group',array('uid'=>$vo['uid'],'username'=>$vo['nickname']))}" title="用户授权" class="J_dialog mr10">授权</a>
+                    <a href="{:U('del',array('uid'=>$vo['uid']))}"
+                        class="mr10 J_ajax_del">删除</a>
+                </td>
+            </tr>
+        </volist>
+        </table>
+    </div>
+    <div class="page">
+        {$_page}
+    </div>
+    <div class="btn_wrap">
+        <div class="btn_wrap_pd" id="J_sub_wrap">
+            <label class="mr10">
+                <input class="J_check_all" data-checklist="J_check_y" data-direction="y" type="checkbox">全选</label>
+            <button class="btn J_ajax_submit_btn" data-subcheck="true" data-action="{:U('disable')}" type="submit">禁用</button>
+            <button class="btn J_ajax_submit_btn" data-subcheck="true" data-action="{:U('enable')}" type="submit">启用</button>
+            <button class="btn J_ajax_submit_btn" data-subcheck="true" data-action="#" type="submit" style="width:140px;">设为版主</button>
+            <button class="btn J_ajax_submit_btn btn_error" data-subcheck="true" data-msg="确定要删除吗？" data-action="{:U('del')}" type="submit">删除</button>
+        </div>
+    </div>
+    </form>
+    <else/>
+    <div class="not_content_mini"><i></i>啊哦，没有符合条件的用户！</div>
+    </notempty>
+</div>
+<include file='Public/foot' />
+
+</body>
+</html>

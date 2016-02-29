@@ -1,0 +1,86 @@
+/*
+===================
+@explain: 用户中心
+@author: etoupcom@126.com
+$Id: index.css 24448 2013-01-30 09:31:12Z yanchixia $
+===================
+*/
+
+/*
+===================
+公共部分
+===================
+*/
+body{
+    background:#69d3ff;
+    font-family: "\5fae\8f6f\96c5\9ed1", "Microsoft YaHei";
+}
+
+.wrap{
+    overflow: hidden;
+    background:url("../images/loginbg.png") no-repeat center bottom;
+    min-height: 800px;
+}
+#uc{
+    width: 380px;
+    margin: 0 auto;
+}
+/*
+===================
+主体
+===================
+*/
+#form_container{
+    margin: 100px auto;
+    background: #ffffff;
+    box-shadow:0 0 10px rgba(0, 0, 0, 0.3);
+    height: 100%;
+}
+#form_container h1{
+    border-bottom: 2px solid #ddd;
+    margin: 0;
+    text-align: center;
+    padding: 20px 0;
+}
+#form_main{
+    padding: 30px 20px 40px;
+}
+
+#btnSendVoiceCode{
+    display: none;
+}
+/*
+===================
+主体底部
+===================
+*/
+
+.center-block {
+    background-color: #ddd;
+    bottom: 0;
+    box-sizing: border-box;
+    height: 36px;
+    left: 0;
+    margin: 0;
+    padding: 9px 0;
+    position: fixed;
+    right: 0;
+    text-align: center;
+    color: #888888;
+}
+
+#tip{
+    display: none;
+}
+
+.form-control{
+    border-radius: 2px;
+}
+.btn{
+    border-radius: 2px;
+}
+.ucbtn{
+    border-radius: 2px;
+    padding: 8px 15px;
+    font-weight: bold;
+}

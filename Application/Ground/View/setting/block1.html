@@ -1,0 +1,395 @@
+<extend name="Public/base" />
+<block name="head">
+    <include file='Public/head' />
+    <link rel="stylesheet" href="__STATIC__/icon/iconfont.css" />
+    <link rel="stylesheet" href="__STATIC__/sweetalert-master/dist/sweetalert.css" />
+    <link rel="stylesheet" href="__STATIC__/Swiper/dist/css/swiper.min.css">
+    <link rel="stylesheet" href="__CSS__/index.css">
+</block>
+<block name="head_css"></block>
+<block name="main-header"><include file='Public/header' /></block>
+<block name="main-sidebar">
+    <include file='Public/sidebar' />
+</block>
+<block name="content-header"><include file='Public/top' /></block>
+<block name="content">
+    <div class="row">
+        <div class="col-md-3">
+            <a href="{:U('Setting/items')}" class="btn btn-primary btn-block margin-bottom">新增项目</a>
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">项目列表</h3>
+                    <div class="box-tools">
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body no-padding">
+                    <ul class="nav nav-pills nav-stacked">
+                        <foreach name="venue_items" item="vo">
+                            <if condition="$items_id eq $vo['items_id']"><li class="active"><else/><li></if><a href="{:U('block',['items_id'=>$vo['items_id']])}"><i class="icon iconfont">{$vo['icon']}</i> {$vo.name} <span class="label label-warning pull-right">65</span></a></li>
+                        </foreach>
+                    </ul>
+                </div><!-- /.box-body -->
+            </div><!-- /. box -->
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">批量处理</h3>
+                    <div class="box-tools">
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body no-padding">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><a href="#"><i class="fa fa-circle-o text-red"></i> 批量预订</a></li>
+                        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> 批量锁定</a></li>
+                        <li><a href="#"><i class="fa fa-circle-o text-light-blue"></i> 其他设置</a></li>
+                    </ul>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div><!-- /.col -->
+        <div class="col-md-9">
+            <if condition="$items_id">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">场地列表</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <!--<div class="alert alert-warning alert-dismissable">-->
+                            <!--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>-->
+                            <!--<h4><i class="icon fa fa-warning"></i> 提示</h4>-->
+                            <!--请设置不同场地不同时间段的价格-->
+                        <!--</div>-->
+                        <div class="alert alert-info alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <h4><i class="icon fa fa-info"></i> 提示</h4>
+                            根据您的实际运营情况，设置不同场地不同时间段的价格。注意：可以多选哟！
+                        </div>
+
+                        <foreach name="list" item="vo">
+                            <div class="box" id="blockdel-{$vo.id}">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">{$vo.name}</h3>
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                    </div>
+                                </div><!-- /.box-header -->
+                                <div class="box-body">
+                                    <div class="mailbox-read-info">
+                                        <h5>备注：{$vo.remark|default='没有内容'} <span class="mailbox-read-time pull-right">{$vo.created_time}</span></h5>
+                                    </div>
+                                    <div class="mailbox-controls with-border text-center" style="margin-bottom: 5px;">
+                                        <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="" data-original-title="正常">
+                                            <i class="fa  fa-circle-o"></i></button>
+                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-container="body" title="删除">
+                                            <i class="fa fa-close"></i></button>
+                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-container="body" title="锁定">
+                                            <i class="fa fa-lock"></i></button>
+                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" data-container="body" title="" data-original-title="选中">
+                                            <i class="fa fa-check"></i></button>
+                                    </div>
+                                    <div class="table_main" style="width: 840px;">
+                                        <div class="table_body">
+                                            <div class="table_body_left">
+                                                <foreach name="time_node" item="vv">
+                                                    <div class="table_body_li">{$vv.start}-{$vv.end}</div>
+                                                </foreach>
+                                            </div>
+                                            <div class="table_body_right" style="width: 735px;">
+                                                <!-- Swiper -->
+                                                <div class="swiper-container swiper-container-{$vo['id']}">
+                                                    <div class="swiper-wrapper">
+                                                        <foreach name="vo['weeks']" item="v">
+                                                            <div class="swiper-slide">
+                                                                <div class="right_li">
+                                                                    <div class="right_li_title">{$v.week}</div>
+                                                                    <foreach name="v['nodes']" item="vn">
+                                                                        <switch name="vn.status">
+                                                                            <case value="-1">
+                                                                                <div class="right_li_price del" id="price-{$vn.id}">{$vn.price}元</div>
+                                                                            </case>
+                                                                            <case value="1">
+                                                                                <div class="right_li_price" id="price-{$vn.id}">{$vn.price}元</div>
+                                                                                <input type="checkbox" name="check" value="{$vn.id}" style="display: none;" />
+                                                                            </case>
+                                                                            <default />
+                                                                                <div class="right_li_price lock" id="price-{$vn.id}">{$vn.price}元</div>
+                                                                                <input type="checkbox" name="check" value="{$vn.id}" style="display: none;" />
+                                                                        </switch>
+
+                                                                    </foreach>
+                                                                </div>
+                                                            </div>
+                                                        </foreach>
+                                                    </div>
+                                                    <if condition="count($vo['weeks']) gt 10">
+                                                        <!-- Add Pagination -->
+                                                        <div class="swiper-pagination swiper-pagination-{$vo['id']}" style="bottom: 5px;"></div>
+                                                    </if>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box-footer">
+                                    <div class="pull-right">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-default swiper-button-prev-{$vo['id']}" data-toggle="tooltip" data-container="body" title="prev"><i class="fa fa-chevron-left"></i></button>
+                                            <button type="button" class="btn btn-default swiper-button-next-{$vo['id']}" data-toggle="tooltip" data-container="body" title="next"><i class="fa fa-chevron-right"></i></button>
+                                        </div>
+                                    </div>
+
+                                    <div class="btn-group">
+                                        <button class="btn btn-default delete" data-id="{$vo.id}" data-url="{:U('blockdel')}" data-tag="#blockdel"><i class="fa fa-trash-o"></i> 删除场地</button>
+                                        <a class="btn btn-default" data-toggle="modal" href="{:U('blockedit',['id'=>$vo['id']])}" data-target="#modal_{$vo.id}"><i class="fa fa-edit"></i> 编辑场地</a>
+                                    </div>
+                                    <button class="btn btn-default deleteArray" data-toggle="tooltip" data-container="body" title="删除选中项"><i class="fa fa-close"></i></button>
+                                    <button class="btn btn-default" data-id="{$vo.id}" data-url="{:U('blockdel')}" data-tag="#blockdel" data-toggle="tooltip" data-container="body" title="锁定选中项"><i class="fa fa-lock"></i></button>
+                                    <button class="btn btn-default" data-id="{$vo.id}" data-url="{:U('blockdel')}" data-tag="#blockdel" data-toggle="tooltip" data-container="body" title="解锁选中项"><i class="fa fa-unlock"></i></button>
+                                    <button class="btn btn-default editArray" data-toggle="tooltip" data-container="body" title="修改选中项"><i class="fa fa-pencil"></i></button>
+                                    <div class="btn-group">
+                                        <a class="btn btn-default" data-toggle="modal" href="{:U('tempeditprice',['id'=>$vo['id']])}" data-target="#modal_price_{$vo.id}"><i class="fa fa-bars"></i> 批量修改价格</a>
+                                    </div>
+                                    <div class="modal fade" id="modal_{$vo.id}" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog modal-sm">
+                                            <div class="modal-content">
+
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div><!-- /.modal -->
+                                    <div class="modal fade" id="modal_price_{$vo.id}" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog modal-sm">
+                                            <div class="modal-content">
+
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div><!-- /.modal -->
+                                </div><!-- /.box-footer -->
+
+                            </div>
+                        </foreach>
+                        <div class="page">
+                            {$_page}
+                        </div>
+                    </div>
+                </div>
+                <else/>
+                <div class="alert alert-warning alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h4><i class="icon fa fa-warning"></i> 提示</h4>
+                    请选择左边的项目列表后进入对应项目的场地列表
+                </div>
+            </if>
+        </div>
+    </div>
+</block>
+<block name="main-footer"><include file='Public/footer' /></block>
+<block name="foot">
+    <include file='Public/foot' />
+    <!-- Swiper JS -->
+    <script src="__STATIC__/Swiper/dist/js/swiper.min.js"></script>
+    <foreach name="list" item="vo">
+        <!-- Initialize Swiper -->
+        <script>
+            var n = "{$vo['id']}";
+            var swiper = new Swiper('.swiper-container-'+n, {
+                pagination: '.swiper-pagination-'+n,
+                slidesPerView: 7,
+                paginationClickable: true,
+                nextButton: '.swiper-button-next-'+n,
+                prevButton: '.swiper-button-prev-'+n
+            });
+        </script>
+    </foreach>
+    <!-- jQuery 2.1.4 -->
+    <script src="__STATIC__/sweetalert-master/dist/sweetalert.min.js"></script>
+    <script>
+        $('.delete').on('click',function() {
+            var id = $(this).attr("data-id"),url = $(this).attr("data-url"),tag = $(this).attr("data-tag");
+            deleteData(id,url,tag);
+        });
+
+        $('.deleteArray').on('click',function() {
+            var vals = checkedValues();
+            if(vals.length==0){
+                swal({   title: "错误",   text: "请选择要操作的项目", type: "error",  timer: 3000,   showConfirmButton: false });
+            }else{
+                var id = vals,url = "{:U('tempDelArr')}",tag = "#price";
+                deleteDataArr(id,url,tag);
+            }
+        });
+
+        $('.editArray').on('click',function() {
+            var vals = checkedValues();
+            if(vals.length==0){
+                swal({   title: "错误",   text: "请选择要操作的项目", type: "error",  timer: 3000,   showConfirmButton: false });
+            }else{
+                var id = vals,url = "{:U('tempEditArr')}",tag = "#price";
+                editDataArr(id,url,tag);
+            }
+        });
+
+        $('.right_li_price').on('click',function() {
+            var hasC = $(this).hasClass('check');
+            var hasD = $(this).hasClass('del');
+            var hasL = $(this).hasClass('lock');
+            if(!hasD && !hasL){
+                if(hasC){
+                    $(this).removeClass('check').next('input').removeAttr('checked');
+                }else{
+                    $(this).addClass('check').next('input').attr('checked','true');
+                }
+            }
+
+        });
+
+        function deleteData(id,url,tag) {
+            swal({
+                title: "提示",
+                text: "您确定要删除吗？",
+                type: "warning",
+                //animation: "slide-from-top",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                confirmButtonText: "确定删除",
+                confirmButtonColor: "#ec6c62",
+                cancelButtonText:"取消"
+            }, function() {
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data:{id:id}
+                })
+                    .done(function(data) {
+                        if(data.status){
+                            swal({
+                                title: "提示",
+                                text:data.msg,
+                                type: "success"
+                            },
+                            function(){
+                                $(tag+'-'+id).remove();
+                            });
+                        }else{
+                            swal("提示", data.msg, "error");
+                        }
+                    })
+                    .error(function(data) {
+                        swal("错误", "服务器连接失败", "error");
+                    });
+            });
+        }
+
+        function deleteDataArr(id,url,tag) {
+            swal({
+                title: "提示",
+                text: "您确定要删除选中项吗？",
+                type: "warning",
+                //animation: "slide-from-top",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                confirmButtonText: "确定删除",
+                confirmButtonColor: "#ec6c62",
+                cancelButtonText:"取消"
+            }, function() {
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data:{id:id}
+                })
+                    .done(function(data) {
+                        if(data.status){
+                            swal({
+                                    title: "提示",
+                                    text:data.msg,
+                                    type: "success"
+                                },
+                                function(){
+                                    var ids = checkedValues();
+                                    for(var i =0;i<ids.length;i++){
+//                                        alert(ids[i]);
+                                        $(tag+'-'+ids[i]).addClass('del');
+                                    }
+                                });
+                        }else{
+                            swal("提示", data.msg, "error");
+                        }
+                    })
+                    .error(function(data) {
+                        swal("错误", "服务器连接失败", "error");
+                    });
+            });
+        }
+
+        function editDataArr(id,url,tag) {
+
+            swal({
+                title: "提示",
+                text: "请填写修改后的价格",
+                type: "input",
+                animation: "slide-from-top",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                inputPlaceholder: "填写价格",
+                confirmButtonText: "提交",
+                confirmButtonColor: "#ec6c62",
+                cancelButtonText:"取消"
+            }, function(inputValue) {
+                if (inputValue === false) return false;
+                if (inputValue === "") {
+                    swal.showInputError("请填写修改后的价格");
+                    return false;
+                }
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data:{id:id,price:inputValue}
+                })
+                        .done(function(data) {
+                            if(data.status){
+                                swal({
+                                            title: "提示",
+                                            text:data.msg,
+                                            type: "success"
+                                        },
+                                        function(){
+                                            var ids = checkedValues();
+                                            for(var i =0;i<ids.length;i++){
+//                                        alert(ids[i]);
+                                                $(tag+'-'+ids[i]).text(formatCurrency(inputValue)+'元').removeClass('check');
+                                            }
+                                        });
+                            }else{
+                                swal("提示", data.msg, "error");
+                            }
+                        })
+                        .error(function(data) {
+                            swal("错误", "服务器连接失败", "error");
+                        });
+            });
+        }
+
+        function checkedValues(){
+            var chk_value =[];
+            $('input[name="check"]:checked').each(function(){
+                chk_value.push($(this).val());
+            });
+            return chk_value;
+        }
+
+        function formatCurrency(num) {
+            num = num.toString().replace(/\$|\,/g,'');
+            if(isNaN(num))
+                num = "0";
+            sign = (num == (num = Math.abs(num)));
+            num = Math.floor(num*100+0.50000000001);
+            cents = num%100;
+            num = Math.floor(num/100).toString();
+            if(cents<10)
+                cents = "0" + cents;
+            for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)
+                num = num.substring(0,num.length-(4*i+3))+','+
+                num.substring(num.length-(4*i+3));
+            return (((sign)?'':'-') + num + '.' + cents);
+        }
+    </script>
+</block>

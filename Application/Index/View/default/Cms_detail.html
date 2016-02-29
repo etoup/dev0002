@@ -1,0 +1,54 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link href="__CSS__/index.css?v={:v()}" rel="stylesheet" />
+</block>
+</head>
+<body>
+<div class="wrap">
+<block name="header">
+    <include file='Public/header' />
+    <div class="topmain">
+        <div class="container">
+            <div class="pull-left">
+                <a href="{:U('index')}">最新资讯</a>
+                <a href="{:U('notice')}">公告</a>
+            </div>
+            <div class="pull-right">
+                <a href="{:ROOT}"><span aria-hidden="true" class="glyphicon glyphicon-share-alt"></span> 返回首页</a>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="main">
+    <div class="container mt30">
+        <ol class="breadcrumb mt10">
+            <foreach name="crumbs" item="v">
+                <li><a href="{$v.url}">{$v.title}</a></li>
+            </foreach>
+            <li class="active">{$seo.title}</li>
+        </ol>
+        <h3 class="mt50">
+            <p class="text-center">{$info.title}</p>
+        </h3>
+        <blockquote>
+            <p>{$info.description|msubstr=0,60}</p>
+            <footer><cite title="Source Title">{$info.create_time|time_format}</cite></footer>
+        </blockquote>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>
+                    {$info.content}
+                </p>
+            </div>
+        </div>
+
+    </div>
+</block>
+</div>
+<block name="foot">
+    <include file='Public/foot' />
+</block>
+<block name="foot_js"></block>
+</body>
+</html>

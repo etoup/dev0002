@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap">
+    <div class="nav">
+            <ul class="cc">
+                <li class="current">
+                    <a href="{:U('index')}">线上支付</a>
+                </li>
+                <li>
+                    <a href="{:U('offline')}">线下转账</a>
+                </li>
+            </ul>
+    </div> 
+    <div class="h_a">功能说明</div>
+    <div class="prompt_text">环迅支付接口相关参数设置。</div>
+    <div class="mb10"><a class="btn btn_success J_dialog" href="{:U('open')}" title="开启支付接口" role="button"><span class="add"></span>开启支付接口</a></div>
+   
+    <form method="post" class="J_ajaxForm" action="__SELF__" data-role="list">
+        <notempty name="data">
+        <foreach name="data" item="v">
+        <div class="h_a">{$key}支付设置</div>
+        <div class="table_full">
+            <table width="100%">
+                <col class="th" />
+                <col width="400" />
+                <col />
+                <foreach name="v" item="vo" key="k">
+                <tr>
+                    <th>{$vo.title}</th>
+                    <td><input name="{$key}[{$k}]" type="text" value="{$vo.val|default=''}" class="input length_5 mr5"></td>
+                    <td><div class="fun_tips">{$key} {$vo.title}</div></td>
+                </tr>
+                </foreach>
+            </table>
+        </div>
+        </foreach>
+        </notempty>
+        <div class="btn_wrap">
+            <div class="btn_wrap_pd">
+                <button class="btn btn_submit mr10 J_ajax_submit_btn" type="submit">提交</button>
+            </div>
+        </div>
+    </form>
+<!-- end -->  
+</div>
+<include file='Public/foot' />
+</body>
+</html>

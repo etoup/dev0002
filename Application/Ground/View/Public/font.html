@@ -1,0 +1,10 @@
+<div class="color_pick_dom J_font_config">
+	<div class="case" style="{$css}"><p>字体预览</p><p>ABCD</p></div>
+	<ul>
+		<li><label><input name="fontBold" class="J_bold" data-class="b" type="checkbox" value="1" {:is_checked($style['fontBold'],1)}>粗体</label></li>
+		<li><label><input name="fontItalic" class="J_italic" data-class="i" type="checkbox" value="1" {:is_checked($style['fontItalic'],1)}>斜体</label></li>
+		<li class="none"><label><input name="fontUnderline" data-class="u" type="checkbox" class="J_underline" value="1" {:is_checked($style['fontUnderline'],1)}>下划线</label></li>
+	</ul>
+	<span class="color_pick"><em style="background:{$style['fontColor']};" class="J_bg"></em></span>
+	<input name="fontColor" type="hidden" class="J_hidden_color" value="{$style['fontColor']}">
+</div>

@@ -1,0 +1,105 @@
+<extend name="Public/baseweixin" />
+<block name="head"><include file='Public/headweixin' /></block>
+<block name="head_css">
+    <link href="__CSS__/dashboard.css" rel="stylesheet">
+</block>
+</head> 
+<body>
+<block name="header"><include file='Public/headerweixin' /></block>
+
+<block name="uctop"></block>
+
+<block name="main">
+    <div class="wewixinmain" style="margin: 50px 0;">
+        <ul class="nav nav-tabs">
+            <li role="presentation"><a href="{:U('index',['mobile'=>'weixin'])}">在线充值</a></li>
+            <!--<li role="presentation" class="active"><a href="{:U('bank',['mobile'=>'weixin'])}">银行转账</a></li>-->
+            <li role="presentation"><a href="{:U('log',['mobile'=>'weixin'])}">充值记录</a></li>
+        </ul>
+        <div class="alert alert-danger alert-dismissible fade in mt30" id="tip" role="alert" style="margin-top: 30px; display: none;">
+            <button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <strong></strong>
+        </div>
+        <div class="row" style="margin-top: 30px;">
+            <div class="col-md-12">
+                <form id="form" method="post" role="form">
+                    <ul class="list-group">
+                        <li class="list-group-item"><label>银行账户：</label>4200 1165 0280 5300 4234</li>
+                        <li class="list-group-item"><label>账户名称：</label>武汉六合资本资产管理股份有限公司</li>
+                        <li class="list-group-item"><label>开户行：</label>中国建设银行股份有限公司武汉中北路支行</li>
+                    </ul>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="tel" name="amount" value="{$amount|default=''}" class="form-control" id="amount" placeholder="填写转账金额">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="text" name="serialNumber" class="form-control" id="serialNumber" placeholder="填写银行流水号">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                        <div class="btn-group" role="group">
+                            <button type="submit" id="submit" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">
+                                提交审核
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</block>
+
+<block name="foot"><include file='Public/ufootweixin' /></block>
+<block name="foot_js">
+    <script type="text/javascript" src="__STATIC__/jquery.form.js"></script>
+    <script>
+        $('#submit').on('click', function () {
+            var $btn = $(this).button('loading');
+            var options = {
+                url: "{:U('bank',['mobile'=>'weixin'])}",
+                beforeSubmit :showRequest,
+                success: showResponse,
+                timeout: 3000
+            };
+            $('#form').ajaxForm(options);
+        });
+        function showRequest(formData, jqForm, options){
+            var queryString = $.param(formData);
+            var formElement = jqForm[0];
+            var amount = formElement.amount.value;
+            var serialNumber = formElement.serialNumber.value;
+
+            if(amount==''){
+                $('#tip').show().children('strong').text('转账金额不能为空');
+                $("input[name='amount']").focus();
+                $('#submit').button('reset');
+                return false;
+            }
+            if(serialNumber==''){
+                $('#tip').show().children('strong').text('银行流水号不能为空');
+                $("input[name='serialNumber']").focus();
+                $('#submit').button('reset');
+                return false;
+            }
+            return true;
+        };
+        function showResponse(data){
+            if(data.state === 'success') {
+                window.location.href = decodeURIComponent(data.referer);
+            }else{
+                $('#tip').show().children('strong').text(data.message);
+                $('#submit').button('reset');
+            }
+        };
+    </script>
+</block>
+</body>
+</html>

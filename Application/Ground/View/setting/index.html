@@ -1,0 +1,472 @@
+<extend name="Public/base" />
+<block name="head">
+    <include file='Public/head' />
+</block>
+<block name="head_css">
+    <link rel="stylesheet" href="__STATIC__/sweetalert-master/dist/sweetalert.css" />
+    <link rel="stylesheet" href="__CSS__/index.css">
+</block>
+<block name="main-header"><include file='Public/header' /></block>
+<block name="main-sidebar">
+    <include file='Public/sidebar' />
+</block>
+<block name="content-header"><include file='Public/top' /></block>
+<block name="content">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- About Me Box -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">关于我们</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <strong><i class="fa fa-book margin-r-5"></i>  简介</strong>
+                    <p class="text-muted">
+                        {$venue.summary|default='没有设置简介'}
+                    </p>
+
+                    <hr>
+
+                    <strong><i class="fa fa-map-marker margin-r-5"></i> 定位</strong>
+                    <p class="text-muted">
+                        {$venue.address|default='没有设置地址'}
+                    </p>
+
+                    <hr>
+
+                    <strong><i class="fa fa-phone margin-r-5"></i> 电话</strong>
+                    <p class="text-muted">
+                        {$venue.tel|default='没有设置电话'}
+                    </p>
+
+                    <hr>
+
+                    <strong><i class="fa fa-pencil margin-r-5"></i> 服务</strong>
+                    <p>
+                        <foreach name="my_services" item="vo" >
+                            <if condition="$vo['s']">
+                                <em class="label label-success" style="margin-right: 5px; display: inline-block;">{$vo.val}</em>
+                            </if>
+                        </foreach>
+                    </p>
+
+                    <hr>
+
+                    <strong><i class="fa fa-leaf margin-r-5"></i> 场地材质</strong>
+                    <p class="text-muted">
+                        {$venue['material']|default='没有设置场地材质'}
+                    </p>
+
+                    <hr>
+
+                    <strong><i class="fa fa-moon-o margin-r-5"></i> 灯光效果</strong>
+                    <p class="text-muted">
+                        {$venue['light']|default='没有设置灯光效果'}
+                    </p>
+
+                    <hr>
+                </div><!-- /.box-body -->
+
+            </div><!-- /.box -->
+
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">场馆相册</h3>
+                </div><!-- /.box-header -->
+                <if condition="$albums">
+                    <div class="box-body" id="imgdel-body">
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <foreach name="albums" item="vo">
+                                    <if condition="$key eq 0">
+                                        <li data-target="#carousel-example-generic" data-slide-to="{$key}" class="active"></li>
+                                        <else/>
+                                        <li data-target="#carousel-example-generic" data-slide-to="{$key}" class=""></li>
+                                    </if>
+                                </foreach>
+                            </ol>
+                            <div class="carousel-inner">
+                                <foreach name="albums" item="vo">
+                                    <if condition="$key eq 0">
+                                        <div class="item active">
+                                            <img src="{$vo.path}">
+                                            <div class="carousel-caption">
+                                                {$vo.create_time|time_format}
+                                            </div>
+                                        </div>
+                                        <else/>
+                                        <div class="item">
+                                            <img src="{$vo.path}">
+                                            <div class="carousel-caption">
+                                                {$vo.create_time|time_format}
+                                            </div>
+                                        </div>
+                                    </if>
+                                </foreach>
+                            </div>
+                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                <span class="fa fa-angle-left"></span>
+                            </a>
+                            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                                <span class="fa fa-angle-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                </if>
+
+                <div class="box-footer">
+                    <if condition="$albums">
+                        <button type="button" class="btn btn-default delete" id="imgdel" data-id="{$vo.id}" data-url="{:U('imgdel')}" data-tag="#imgdel"><i class="fa fa-hdd-o"></i> 清空相册</button>
+                    </if>
+                    <button type="button" class="btn btn-primary pull-right" data-toggle="modal" href="{:U('uploadimg')}" data-target="#modal"><i class="fa fa-upload"></i> 上传图片</button>
+                    <div class="modal fade" id="modal" tabindex="-1" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="box box-primary">
+                <form id="form" role="form" action="__SELF__" method="post">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">基础设置</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label>定位</label>
+                            <div id="l-map" style="width: 100%;height: 300px;overflow: hidden;margin:0;"></div>
+                        </div>
+                        <!--<if condition="$venue['address']">-->
+                        <div class="form-group">
+                            <label>地址</label>
+                            <input type="text" name="address" id="address" class="form-control" value="{$venue.address}" placeholder="填写地址">
+                        </div>
+                        <!--<else />-->
+                        <div class="form-group">
+                            <label>地址</label>
+                            <input type="text" name="address" id="suggestId" class="form-control" value="{$venue.address}" placeholder="填写地址">
+                            <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+                        </div>
+                        <!--</if>-->
+                        <div class="form-group">
+                            <label>城市</label>
+                            <input type="text" name="city" id="city" class="form-control" value="{$venue.city}" placeholder="填写城市">
+                        </div>
+                        <div class="form-group">
+                            <label>区县</label>
+                            <input type="text" name="district" id="district" class="form-control" value="{$venue.district}" placeholder="填写区县">
+                        </div>
+                        <div class="form-group">
+                            <label>经度</label>
+                            <input type="text" name="lng" id="lng" class="form-control" value="{$venue.lng}" placeholder="填写经度">
+                        </div>
+                        <div class="form-group">
+                            <label>纬度</label>
+                            <input type="text" name="lat" id="lat" class="form-control" value="{$venue.lat}" placeholder="填写纬度">
+                        </div>
+
+                        <div class="form-group">
+                            <label>简介</label>
+                            <input type="text" name="summary" class="form-control" value="{$venue.summary}" placeholder="填写简介">
+                        </div>
+                        <div class="form-group">
+                            <label>电话</label>
+                            <input type="text" name="tel" class="form-control" value="{$venue.tel}" placeholder="填写电话号码">
+                        </div>
+                        <div class="form-group">
+                            <label>公交</label>
+                            <input type="text" name="bus" class="form-control" value="{$venue.bus}" placeholder="填写公交信息">
+                        </div>
+                        <div class="form-group">
+                            <label>商圈</label>
+                            <input type="text" name="circle" class="form-control" value="{$venue.circle}" placeholder="填写所在商圈">
+                        </div>
+                        <!--<if condition="!$my_services">-->
+                        <div class="form-group">
+                            <label>服务</label>
+                            <select class="form-control select2" name="services[]" multiple="multiple" data-placeholder="选择服务项目" style="width: 100%;">
+                                <foreach name="all_services" item="vo">
+                                    <option value="{$vo}">{$vo}</option>
+                                </foreach>
+                            </select>
+                        </div>
+                        <!--<else/>-->
+                        <div class="form-group">
+                            <label>服务</label>
+                            <select class="form-control select2" name="services[]" multiple="multiple" data-placeholder="选择服务项目" style="width: 100%;">
+                                <foreach name="my_services" item="vo">
+                                    <option value="{$vo.val}" {$vo.s}>{$vo.val}</option>
+                                </foreach>
+                            </select>
+                        </div>
+                        <!--</if>-->
+                        <div class="form-group">
+                            <label>场地材质</label>
+                            <select class="form-control select2" name="material" style="width: 100%;">
+                                <option value="">请选择场地材质</option>
+                                <foreach name="material" item="vo">
+                                    <if condition="$venue['material'] eq $vo">
+                                        <option value="{$key}" selected="selected">{$vo}</option>
+                                        <else/>
+                                        <option value="{$key}">{$vo}</option>
+                                    </if>
+                                </foreach>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>灯光效果</label>
+                            <select class="form-control select2" name="light" style="width: 100%;">
+                                <option value="">请选择灯光效果</option>
+                                <foreach name="light" item="vo">
+                                    <if condition="$venue['light'] eq $vo">
+                                        <option value="{$key}" selected="selected">{$vo}</option>
+                                        <else/>
+                                        <option value="{$key}">{$vo}</option>
+                                    </if>
+                                </foreach>
+                            </select>
+                        </div>
+
+                        <!-- input states -->
+                        <!--<div class="form-group has-success">-->
+                            <!--<label class="control-label" for="inputSuccess"><i class="fa fa-check"></i> Input with success</label>-->
+                            <!--<input type="text" class="form-control" id="inputSuccess" placeholder="Enter ...">-->
+                        <!--</div>-->
+                        <!--<div class="form-group has-warning">-->
+                            <!--<label class="control-label" for="inputWarning"><i class="fa fa-bell-o"></i> Input with warning</label>-->
+                            <!--<input type="text" class="form-control" id="inputWarning" placeholder="Enter ...">-->
+                        <!--</div>-->
+                        <!--<div class="form-group has-error">-->
+                            <!--<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> Input with error</label>-->
+                            <!--<input type="text" class="form-control" id="inputError" placeholder="Enter ...">-->
+                        <!--</div>-->
+
+
+                    </div>
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-default">重置</button>
+                        <button type="submit" class="btn btn-primary pull-right">提交设置</button>
+                    </div><!-- /.box-footer -->
+                    <style>
+                        #form label.error{
+                            color: #dd4b39;
+                        }
+                    </style>
+                </form>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="main-footer"><include file='Public/footer' /></block>
+<block name="foot">
+    <include file='Public/foot' />
+    <script src="__STATIC__/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=bprghKO5NHFIW7Qd6Zs6hTjD"></script>
+    <script src="__STATIC__/sweetalert-master/dist/sweetalert.min.js"></script>
+    <if condition="!$venue['address']">
+    <script type="text/javascript">
+        function G(id) {
+            return document.getElementById(id);
+        }
+
+        var map = new BMap.Map("l-map");
+        function myFunCity(result){
+            var cityName = result.name;
+            map.centerAndZoom(cityName,12);      // 初始化地图,设置城市和地图级别。
+            //alert("当前定位城市:"+cityName);
+            $('#city').val(cityName);
+        }
+        var myCity = new BMap.LocalCity();
+        myCity.get(myFunCity);
+
+        var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
+                {"input" : "suggestId"
+                    ,"location" : map
+                });
+
+        ac.addEventListener("onhighlight", function(e) {  //鼠标放在下拉列表上的事件
+            var str = "";
+            var _value = e.fromitem.value;
+            var value = "";
+            if (e.fromitem.index > -1) {
+                value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+            }
+            str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+
+            value = "";
+            if (e.toitem.index > -1) {
+                _value = e.toitem.value;
+                value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+            }
+            str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+            G("searchResultPanel").innerHTML = str;
+        });
+
+        var myValue;
+        ac.addEventListener("onconfirm", function(e) {    //鼠标点击下拉列表后的事件
+            var _value = e.item.value;
+            myValue = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+            G("searchResultPanel").innerHTML ="onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+            $('#city').val(_value.city);
+            $('#district').val(_value.district);
+            setPlace();
+        });
+
+        function setPlace(){
+            map.clearOverlays();    //清除地图上所有覆盖物
+            function myFun(){
+                var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
+
+                map.centerAndZoom(pp, 18);
+                var mark = new BMap.Marker(pp);
+                mark.enableDragging();
+                map.addOverlay(mark);    //添加标注
+
+                $('#lng').val(pp.lng);
+                $('#lat').val(pp.lat);
+            }
+
+            var local = new BMap.LocalSearch(map, { //智能搜索
+                onSearchComplete: myFun
+            });
+
+            local.search(myValue);
+        }
+
+//        var map = new BMap.Map("allmap");
+//        var point = new BMap.Point(116.331398,39.897445);
+//        map.centerAndZoom(point,15);
+//        map.enableScrollWheelZoom();    //启用滚轮放大缩小
+//
+//        function myFun(result){
+//            var cityName = result.name;
+//            map.setCenter(cityName);
+//            //alert("当前定位城市:"+cityName);
+//            $('#city').val(cityName);
+//        }
+//        var myCity = new BMap.LocalCity();
+//        myCity.get(myFun);
+//
+//        function showInfo(e){
+//            //alert(e.point.lng + ", " + e.point.lat);
+//            var pt = new BMap.Point(e.point.lng, e.point.lat);
+//            var marker = new BMap.Marker(pt);//创建标注
+//            map.addOverlay(marker);
+//            map.panTo(pt);
+//        }
+//        map.addEventListener("click", showInfo);
+
+//        var pt = new BMap.Point(116.417, 39.909);
+//        var myIcon = new BMap.Icon("http://developer.baidu.com/map/jsdemo/img/fox.gif", new BMap.Size(300,157));
+//        var marker2 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
+//        map.addOverlay(marker2);
+
+        $("#form").validate({
+            rules: {
+                address: "required",
+                city: "required",
+                district: "required",
+                lng: "required",
+                lat: "required",
+                summary: "required",
+                tel: "required",
+                bus: "required"
+            },
+            messages: {
+                address: "请填写地址",
+                city: "请填写城市",
+                district: "请填写区县",
+                lng: "请填写经度",
+                lat: "请填写纬度",
+                summary: "请填写简介",
+                tel: "请填写电话",
+                bus: "请填写公交"
+            }
+        });
+    </script>
+    <else/>
+    <script type="text/javascript">
+        var map = new BMap.Map("l-map");
+        var point = new BMap.Point(116.331398,39.897445);
+        map.centerAndZoom(point,15);
+        map.clearOverlays();
+        var new_point = new BMap.Point($('#lng').val(),$('#lat').val());
+        var marker = new BMap.Marker(new_point);  // 创建标注
+        map.addOverlay(marker);              // 将标注添加到地图中
+        map.panTo(new_point);
+
+        $("#form").validate({
+            rules: {
+                address: "required",
+                city: "required",
+                district: "required",
+                lng: "required",
+                lat: "required",
+                summary: "required",
+                tel: "required",
+                bus: "required"
+            },
+            messages: {
+                address: "请填写地址",
+                city: "请填写城市",
+                district: "请填写区县",
+                lng: "请填写经度",
+                lat: "请填写纬度",
+                summary: "请填写简介",
+                tel: "请填写电话",
+                bus: "请填写公交"
+            }
+        });
+    </script>
+    </if>
+    <script>
+        $('.delete').on('click',function() {
+            var id = $(this).attr("data-id"),url = $(this).attr("data-url"),tag = $(this).attr("data-tag");
+            deleteData(id,url,tag);
+        });
+
+        function deleteData(id,url,tag) {
+            swal({
+                title: "提示",
+                text: "您确定要清空相册吗？",
+                type: "warning",
+                //animation: "slide-from-top",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                confirmButtonText: "确定清空",
+                confirmButtonColor: "#ec6c62",
+                cancelButtonText:"取消"
+            }, function() {
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data:{id:id}
+                })
+                    .done(function(data) {
+                        if(data.status){
+                            swal({
+                                title: "提示",
+                                text:data.msg,
+                                type: "success"
+                            },
+                            function(){
+                                $(tag+'-body').remove();
+                                $(tag).remove();
+                            });
+                        }else{
+                            swal("提示", data.msg, "error");
+                        }
+                    })
+                    .error(function(data) {
+                        swal("错误", "服务器连接失败", "error");
+                    });
+            });
+        }
+    </script>
+</block>

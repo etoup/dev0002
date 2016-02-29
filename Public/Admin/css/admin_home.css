@@ -1,0 +1,169 @@
+/**
+ * 描    述: oneThink后台主体样式
+ * 作用范围：后台独有
+ */
+
+/* 后台首页
+------------------------------------------------- */
+.index-body {
+    padding-left: 0;
+    background-color: #f6f6f6;
+}
+.index-main {
+    margin: 0 20px;
+    padding-top: 60px;
+}
+/* 首页数据 */
+.top-columns {
+    margin: 0 0 5px;
+}
+.show-num-mod {
+    display: inline-block;
+    height: 70px;
+    *display: inline;
+    *zoom: 1;
+    margin: 0 20px 15px 0;
+    border: 1px solid #cdcdcd;
+    background-color: #fff;
+}
+.show-num-mod dt,
+.show-num-mod dd {
+    float:left;
+    padding: 5px;
+}
+.show-num-mod dt {
+    width: 65px;
+    height: 56px;
+    line-height: 56px;
+    text-align: center;
+}
+.show-num-mod dd {
+    width: 100px;
+    height: 60px;
+    border-left: 1px solid #cdcdcd;
+    text-align: center;
+}
+.show-num-mod dd strong {
+    margin-bottom: 5px;
+    height: 30px;
+    line-height: 30px;
+}
+.show-num-mod dd span {
+    font-size: 12px;
+    letter-spacing: .15em;
+}
+.show-num-mod dd strong {
+    display: block;
+    font-size: 20px;
+    overflow: hidden
+}
+.count-icon {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    vertical-align: middle;
+    background: url(../images/count_icon.png) no-repeat;
+}
+.user-count-icon {
+    background-position: 0 0;
+}
+.user-action-icon {
+    background-position: 0 -50px;
+}
+.doc-count-icon {
+    background-position: 0 -100px;
+}
+.doc-modal-icon {
+    background-position: 0 -150px;
+}
+.category-count-icon {
+    background-position: 0 -200px;
+}
+
+/* 首页插件模块 */
+.columns-mod {
+    border: 1px solid #cdcdcd;
+    margin: 20px auto;
+}
+.columns-mod .hd {
+    margin-bottom: 1px;
+    padding: 0 10px 0 15px;
+    height: 35px;
+    line-height: 35px;
+    border-bottom: 1px solid #cdcdcd;
+    background-color: #eee;
+}
+.columns-mod .hd h5 {
+    float: left;
+    font-size: 14px;
+}
+.columns-mod .hd a {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    color: #656565;
+    text-align: center;
+    border: 1px solid transparent;
+    *margin-top: 7px;
+}
+.columns-mod .hd a:hover {
+    color: #656565;
+    text-decoration: none;
+    border-color: #ccc;
+}
+.mod-down,
+.mod-up {
+    display: inline-block;
+    margin-top: 8px;
+    width: 10px;
+    height: 5px;
+    vertical-align: top;
+    background: url(../images/bg_icon.png) no-repeat;
+}
+.mod-down {
+    background-position: -50px -25px;
+}
+.mod-up {
+    background-position: -75px -25px;
+}
+.reload {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: url(../images/bg_icon.png) no-repeat -175px 0;
+    *margin-top: 3px;
+    *cursor: pointer;
+}
+.columns-mod .hd .title-opt {
+    float: right;
+}
+.columns-mod .bd {
+    height: 300px;
+    overflow-y: auto;
+    background-color: #fafafa;
+    *overflow-x:hidden;
+}
+
+/* 系统信息列表 */
+.sys-info {
+    padding: 15px;
+    *padding-right: 30px;
+}
+.sys-info table {
+    width: 100%;
+}
+.sys-info th,
+.sys-info td {
+    padding: 8px 0;
+    height: 20px;
+    line-height: 20px;
+    border-bottom: 1px solid #e9e9e9;
+}
+.sys-info th {
+    font-weight: normal;
+    width: 30%;
+    text-align: left;
+}
+
+

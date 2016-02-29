@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body style="width:450px;" class="body_none">
+    <form class="J_ajaxForm" data-role="list" action="__SELF__" method="post" >
+    <input type='hidden' name='type' value="do">
+    <div class="pop_cont pop_table" style="height:auto;">
+        <table width="100%">
+            <col class="th" />
+            <col />
+            <thead>
+            <tr>
+                <td colspan="2">
+                    <ul class="info">
+                        <li><label>用户名：</label>{$info.username}</li>
+                        <li><label>真实姓名：</label>{$info.realname}</li>
+                        <li><label>手机号码：</label>{$info.mobile}</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <if condition="$info['num']">
+                        <ul class="info">
+                            <li><label>需求单号：</label><b>{$info.orders}</b></li>
+                            <li><label>配资资金：</label><b>{$info.with_funds}</b> 万</li>
+                            <li><label>操盘手数：</label><b>{$info.num}</b> 手</li>
+                            <li><label>开始时间：</label><b>{$info.begin_trading|time_format}</b></li>
+                        </ul>
+                        <else/>
+                        <ul class="info">
+                            <li><label>需求单号：</label><b>{$info.orders}</b></li>
+                            <li><label>配资资金：</label><b>{$info.with_funds}</b> 万</li>
+                            <li><label>配资期限：</label><b>{$info.time_limit}</b> 个月</li>
+                            <li><label>到期时间：</label><b>{$info.end_trading|time_format}</b>前</li>
+                            <li><label>资金来源：</label><b><if condition="$info['make_bids']">投标资金<else/>自有资金</if></b></li>
+                        </ul>
+                    </if>
+
+                </td>
+            </tr>
+            <tr>
+                <th>股票账户余额</th>
+                <td>
+                    <input type="text" name="benchmark" value="{:money($info['balance'])}" disabled class="input length_3">
+                </td>
+            </tr>
+            <tr>
+                <th>是否产生罚金</th>
+                <td>
+                    <ul class="three_list cc">
+                        <div class="yesno"></div>
+                        <input type="hidden" value="1" name="fine">
+                        <span class="cc gray">双击关闭开启</span>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th>是否通过审核</th>
+                <td>
+                    <ul class="three_list cc">
+                        <div class="yesno"></div>
+                        <input type="hidden" value="1" name="pass">
+                        <span class="cc gray">双击关闭开启</span>
+                    </ul>
+                </td>
+            </tr>
+            </thead>
+            <tr>
+                <th>备注</th>
+                <td>
+                    <span class="must_red">*</span>
+                    <input type="text" name="remark" value="{$info.remark|default=''}" class="input length_5">
+                    <div class="cc gray">添加审核备注信息</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="pop_bottom">
+        <input type="hidden" name="id" value="{$info.id}" />
+        <button type="button" class="btn fr" id="J_dialog_close">取消</button>
+        <button type="submit" class="btn btn_submit mr10 fr J_ajax_submit_btn">确认</button>
+    </div>
+    
+</form>
+    <include file='Public/foot_min' />
+<script>
+    $(function(){
+        $("input[name=make_bids]").click(function(){
+            if($("input[name=make_bids]:checked").attr('data-list')=='list'){
+                $('tr.list').find('input').removeAttr('disabled');
+            }else{
+                $('tr.list').find('input').attr('disabled','disabled');
+            }
+        });
+    });
+</script>
+</body>
+</html>

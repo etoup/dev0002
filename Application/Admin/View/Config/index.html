@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap">
+    <div class="nav">
+        <ul class="cc">
+            <li class="current"><a href="{:U('index')}">配置项管理</a></li>
+            <li><a href="{:U('group')}">基础配置</a></li>
+        </ul>
+    </div>
+    <div class="h_a">提示信息</div>
+    <div class="mb10 prompt_text">
+        <ul>
+            <li>配置项管理：新增、删除相关系统配置项</li>
+        </ul>
+    </div>
+    <div class="mb10"><a class="btn" href="{:U('add')}" title="添加配置项" role="button"><span class="add"></span>添加配置项</a></div>
+    <div class="h_a">搜索</div>
+    <div class="search_type cc mb10">
+        <form action="__SELF__" method="post">
+        <input type="hidden" name="p" value="{$p|default=1}">
+        <input type="hidden" name="soso" value="1">
+        <label>分组类型：</label>
+        <select name="gids" size="5" class="mr10" multiple>
+            <foreach name="gids" item="item">
+                <if condition="$key eq $groupList">
+                <option value="{$key}" selected="">{$item}</option>
+                <else/>
+                <option value="{$key}">{$item}</option>
+                </if>
+            </foreach>
+        </select>
+        <label>关键字包含：</label><input name="name" type="text" class="input length_2 mr10" value="{$name|default=''}">
+        <button type="submit" class="btn">搜索</button>
+        <notempty name="soso">
+        <if condition="$soso">
+        <button type="reset" class="btn btn_error" onclick="window.location.href='{:U('index')}'">撤销检索</button>
+        </if>
+        </notempty>
+        </form>
+    </div>
+    <div id="top-alert" class="alert alert-error" style="display: none;">
+        <button class="close fixed" style="margin-top: 4px;">×</button>
+        <div class="alert-content">这是内容</div>
+    </div>
+    <notempty name="list">
+    <div class="table_list">
+        <table width="100%">
+            <thead>
+                <tr>
+                    <td width="60">ID</td>
+                    <td>名称</td>
+                    <td>标题</td>
+                    <td>分组</td>
+                    <td>类型</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+        <volist name="list" id="config">
+            <tr>
+                <td>{$config.id}</td>
+                <td><a href="{:U('edit?id='.$config['id'])}">{$config.name}</a></td>
+                <td>{$config.title}</td>
+                <td>{$config.group|get_config_group}</td>
+                <td>{$config.type|get_config_type}</td>
+                <td>
+                    <a class="mr10" title="编辑" href="{:U('edit',array('id'=>$config['id']))}">编辑</a>
+					<a class="mr10 J_ajax_del" title="删除" href="{:U('del',array('id'=>$config['id']))}">删除</a>
+                </td>
+            </tr>
+        </volist>
+        </table>
+    </div>
+    <div class="page">
+        {$_page}
+    </div>
+    <else/>
+    <div class="not_content_mini"><i></i>啊哦，没有符合条件的内容！</div>
+    </notempty>  
+</div>
+<include file='Public/foot' />
+
+</body>
+</html>

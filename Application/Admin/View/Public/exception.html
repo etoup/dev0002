@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+<style type="text/css">
+#error_tips {
+    background: none repeat scroll 0 0 #fff;
+    border: 1px solid #d4d4d4;
+    box-shadow: 0 1px 5px #ccc;
+    margin: 50px auto;
+    width: 800px;
+}
+
+#error_tips h2 {
+    color: #666;
+    font: bold 14px/40px Arial;
+    height: 40px;
+    padding: 0 20px;
+    background: linear-gradient(#ffffff, #ffffff 25%, #f4f4f4) no-repeat scroll 0 0 #f9f9f9;
+    border-bottom: 1px solid #dfdfdf;
+}
+.error_cont {
+    line-height: 1.8;
+    padding: 20px 50px 30px;
+}
+.btn {
+    background: #e6e6e6;
+    border: 1px solid #c4c4c4;
+    border-radius: 2px;
+    color: #333;
+    cursor: pointer;
+    display: inline-block;
+    font-family: inherit;
+    font-size: 100%;
+    line-height: normal;
+    margin: 0;
+    overflow: visible;
+    padding: 4px 10px;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    vertical-align: middle;
+    white-space: nowrap;
+}
+.error_return{
+    float: right;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+    <div id="error_tips">
+        <h2><?php echo strip_tags($e['message']);?><div class="error_return"><a href="javascript:window.history.go(-1);" class="btn">返回</a></div></h2>
+        <div class="error_cont">
+            <?php if(isset($e['file'])) {?>
+            <ul>
+                <li>错误位置</li>
+                <li>FILE: <?php echo $e['file'] ;?> &#12288;LINE: <?php echo $e['line'];?></li>
+            </ul>
+            <?php }?>
+            <?php if(isset($e['trace'])) {?>
+            <ul>
+                <li>TRACE</li>
+                <li><?php echo nl2br($e['trace']);?></li>
+            </ul>
+            <?php }?>
+        </div>
+    </div>
+</div>
+<include file='Public/foot' />
+</body>
+</html>

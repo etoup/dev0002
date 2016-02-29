@@ -1,0 +1,75 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link href="__CSS__/icon/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="__CSS__/style.css" rel="stylesheet" type="text/css">
+    <link href="__CSS__/index.css" rel="stylesheet" type="text/css">
+</block>
+</head> 
+ <body>
+  <block name="header">
+      <include file='Public/header' />
+  </block>
+  <block name="main">
+      <section>
+          <div class="container pad60">
+              <div class="more">
+                  <div class="list">
+                      <label>运动项目：</label>
+                      <select class="form-control" name="items_id" style="width: 200px; height: 40px;">
+                          <option value="0">请选择项目</option>
+                          <foreach name="items" item="vo">
+                              <option value="{$vo.id}">{$vo.name}</option>
+                          </foreach>
+                      </select>
+                  </div>
+                  <div class="list">
+                      <label>运动日期：</label>
+                      <select class="form-control" name="by_date" style="width: 200px; height: 40px;">
+                          <option value="0">请选择日期</option>
+                          <foreach name="date_week" item="vo">
+                              <option value="{$vo.week}">{$vo.date} {$vo.week}</option>
+                          </foreach>
+                      </select>
+                  </div>
+                  <div class="list">
+                      <label>运动时间：</label>
+                      <select class="form-control" name="by_time" style="width: 200px; height: 40px;">
+                          <option value="0">请选择时间</option>
+                          <foreach name="times" item="vo">
+                              <option value="{$vo}">{$vo}</option>
+                          </foreach>
+                      </select>
+                  </div>
+                  <div class="list">
+                      <label>场馆名称：</label>
+                      <input class="form-control" name="venue_name" type="text" placeholder="场馆名称" style="width: 200px; height: 40px;">
+                  </div>
+                  <div class="list">
+                      <label>&nbsp</label>
+                      <button type="button" class="btn btn-primary" style="width: 200px; height: 40px;">快速查询</button>
+                  </div>
+              </div>
+
+              <div class="title">
+                  <h2>热门运动</h2>
+              </div>
+              <div class="content">
+                  <foreach name="items" item="vo">
+                      <a href="#"><i class="icon iconfont">{$vo.icon}</i></a>
+                  </foreach>
+              </div>
+              <p class="tip">还等什么，一起来运动吧！</p>
+              <p class="tip"><a class="btn btn-primary btn-lg" href="list.html" role="button">全部项目></a></p>
+          </div>
+          <div id="allmap" style="display: none;"></div>
+      </section>
+  </block>
+  <block name="foot">
+      <include file='Public/foot' />
+  </block>
+  <block name="foot_js">
+
+  </block>
+ </body>
+</html>

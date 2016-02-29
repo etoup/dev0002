@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap">
+	<div class="nav">
+        <ul class="cc">
+              <foreach name="types" item="v">
+              <if condition="$key eq $navType">
+              	<li class="current"><a href="{:U('index',array('type'=>$key))}">{$v}</a></li>
+              <else/>
+              	<li><a href="{:U('index',array('type'=>$key))}">{$v}</a></li>
+              </if>
+        	</foreach>
+        </ul>
+    </div>
+    <if condition="!$navType">
+    <div class="h_a">功能说明</div>
+	<div class="prompt_text">
+		<ul>
+			<li>“设为首页” 可以把当前页设为网站默认首页。</li>
+		</ul>
+	</div>
+	</if>
+	<form method="post" class="J_ajaxForm" action="{:U('dorun')}" data-role="list">
+	<div class="table_list">
+		<table width="100%" id="J_table_list" style="table-layout:fixed;">
+			<colgroup>
+				<col width="30">
+				<col width="380">
+				<col width="260">
+				<col width="68">
+				<col>
+			</colgroup>
+			<thead>
+				<tr>
+					<td></td>
+					<td><span class="mr15">[顺序]</span>导航名称</td>
+					<td>链接地址</td>
+					<td>
+					<if condition="!$navType">
+					设为首页
+					</if>
+					</td>
+					<td class="tac">启用</td>
+					<td>操作</td>
+				</tr>
+			</thead>
+			<volist name="list" id="value">
+			<tbody>
+			
+			<tr>
+				<td>
+				    <if condition="count($value['child'])">
+					<span class="J_start_icon away_icon" data-id="{$value['id']}"></span>
+					<else/>
+					<span class="zero_icon" data-id="{$value['id']}"></span>
+					</if>
+				</td>
+				<td>
+					<input name="data[{$value['id']}][id]" type="hidden" value="{$value['id']}" >
+					<input name="data[{$value['id']}][orderid]" type="text" class="input length_0 mr10" value="{$value['orderid']}">
+					<input name="data[{$value['id']}][name]" type="text" class="input length_3 mr5" value="{$value['name']}">
+
+					<a style="display:none" href="{:U('add',array('parentid'=>$value['id'],'type'=>$navType))}" class="link_add J_addChild add_nav" data-id="{$value['id']}" data-html="tbody" data-type="nav_2">添加二级导航</a>
+				</td>
+				<td><input name="data[{$value['id']}][link]" type="text" class="input length_4" value="{$value['link']}"></td>
+				<td>
+					<if condition="!$navType">
+					<input type="radio" name="home"  value="{$value['id']}">
+					</if>
+				</td>
+				<td class="tac"><input name="data[{$value['id']}][isshow]" type="checkbox" value="1" {:is_checked($value['isshow'],1)}></td>
+				<td>
+					<a href="{:U('edit',array('id'=>$value['id'],'type'=>$value['type']))}" class="mr10 J_dialog" title="导航编辑">编辑</a>
+					<a href="{:U('del',array('id'=>$value['id']))}" class="mr10 J_ajax_del">删除</a>
+				</td>
+			</tr>
+			</tbody>
+			<php>$count = count($value['child']);</php>
+			<if condition="$count">
+				<tbody id="J_table_list_{$value['id']}">
+				    <volist name="value['child']" id="childValue">
+				    <php>$endicon=($key==$count-1)?'  plus_end_icon':'';</php>
+					<tr>
+						<td>&nbsp;</td>
+						<td><span class="plus_icon{$endicon} mr10"></span><input name="data[{$childValue['id']}][id]" type="hidden" value="{$childValue['id']}" ><input name="data[{$childValue['id']}][orderid]" type="text" class="input length_0 mr10" value="{$childValue['orderid']}" style="width:20px;"><input name="data[{$childValue['id']}][name]" type="text" class="input length_3 mr5" value="{$childValue['name']}">
+						</td>
+						<td>
+							<input name="data[{$childValue['id']}][link]" type="text" class="input length_4" value="{$childValue['link']}">
+						</td>
+						<td></td>
+						<td class="tac"><input name="data[{$childValue['id']}][isshow]" type="checkbox" value="1" {:is_checked($childValue['isshow'],1)}></td>
+						<td>
+							<a href="{:U('edit',array('id'=>$childValue['id'],'type'=>$childValue['type']))}" class="mr10 J_dialog" title="导航编辑">编辑</a>
+							<a href="{:U('del',array('id'=>$childValue['id']))}" class="mr10 J_ajax_del">删除</a>
+						</td>
+					</tr>
+					</volist>
+				</tbody>
+			</if>
+			</volist>
+		</table>
+		<table width="100%">
+			<tr class="ct"><td colspan="5" style="padding-left:38px;"><a data-type="nav_1" data-html="tbody" href="" id="J_add_root" class="link_add">添加导航</a></td></tr>
+		</table>
+	</div>
+	<div class="btn_wrap">
+		<div class="btn_wrap_pd">
+			<button class="btn btn_submit mr10 J_ajax_submit_btn" type="submit">提交</button>
+			<input name="navtype" type="hidden" value="{$navType}" >
+		</div>
+	</div>	
+	</form>
+</div>
+<include file='Public/foot' />
+<script>
+/*
+root_tr_html 为“添加导航”html
+child_tr_html 为“添加二级导航”html
+*/
+var root_tr_html = '<tr>\
+                            <td><span class="zero_icon mr10"></span></td>\
+                                        <td>\
+                                            <input name="newdata[root_][orderid]" type="text" value="" class="input length_0 mr10">\
+                                            <input name="newdata[root_][name]" type="text" class="input length_3 mr5" value="">\
+                                            <if condition="!$navType">
+											<a style="display: none; " href="#" class="link_add J_addChild add_nav" data-html="tbody" data-id="temp_root_" data-type="nav_2">添加二级导航</a>\
+											</if>
+                                            <input type="hidden" name="newdata[root_][tempid]" value="temp_root_"/>\
+                                        </td>\
+                                        <td>\
+                                            <input name="newdata[root_][link]" type="text" class="input length_4" value="">\
+                                        </td>\
+																				<td>\
+                                        <if condition="!$navType">
+										<input type="radio" name="home" value="home_root_" ></td>\
+										</if>
+                                        <td class="tac"><input name="newdata[root_][isshow]" type="checkbox" value="1" checked="checked"></td>\
+                                        <td>\
+                                            <a href="" class="mr5 J_newRow_del">[删除]</a>\
+                                        </td>\
+                                    </tr>',
+	child_tr_html = '<tr>\
+						<td></td>\
+						<td><span class="plus_icon"></span>\
+							<input name="newdata[child_][orderid]" type="text" value="" class="input length_0 mr10">\
+                                            <input name="newdata[child_][name]" type="text" class="input length_3 mr5" value="">\
+                                        </td>\
+                                        <td>\
+                                            <input name="newdata[child_][link]" type="text" class="input length_4" value="">\
+                                        </td>\
+																				<td></td>\
+                                        <td class="tac"><input name="newdata[child_][isshow]" type="checkbox" value="1" checked="checked"></td>\
+                                        <td>\
+                                            <a href="" class="mr5 J_newRow_del">[删除]</a>\
+                                            <input type="hidden" name="newdata[child_][parentid]" value="id_"/>\
+                                        </td>\
+                                    </tr>';
+
+Wind.js(GV.JS_ROOT+ 'pages/admin/common/forumTree_table.js?v=' +GV.JS_VERSION);
+</script>
+</body>
+</html>

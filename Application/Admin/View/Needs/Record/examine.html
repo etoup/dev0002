@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body style="width:400px;" class="body_none">
+    <form class="J_ajaxForm" data-role="list" action="__SELF__" method="post" >
+    <input type='hidden' name='type' value="do">
+    <div class="pop_cont pop_table" style="height:auto;">
+        <table width="100%">
+            <col class="th" />
+            <col />
+            <thead>
+            <tr>
+                <th>用户名</th>
+                <td><input type="text" value="{$info.username}" class="input length_5" disabled></td>
+            </tr>
+            <tr>
+                <th>金额</th>
+                <td><input type="text" value="{$info.amount}" class="input length_5" disabled></td>
+            </tr>
+            <tr>
+                <th>流水号</th>
+                <td><input type="text" value="{$info.info.serialNumber}" class="input length_5" disabled></td>
+            </tr>
+            <tr>
+                <th>时间</th>
+                <td><input type="text" value="{$info.created_time|time_format}" class="input length_5" disabled></td>
+            </tr>
+            </thead>
+            <tr>
+                <th>备注</th>
+                <td>
+                    <span class="must_red">*</span><textarea class="length_5" name="remark"></textarea>
+                    <div class="cc gray">添加审核备注信息</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="pop_bottom">
+        <input type="hidden" name="id" value="{$info.id}" />
+        <button type="button" class="btn fr" id="J_dialog_close">取消</button>
+        <button type="submit" class="btn btn_submit mr10 fr J_ajax_submit_btn">确认通过</button>
+    </div>
+    
+</form>
+    <include file='Public/foot_min' />
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap">
+
+	<div class="nav">
+		<ul class="cc">
+			<li><a href="{:U('index')}">行为管理</a></li>
+            <li class="current"><a href="{:U('log')}">日志管理</a></li>
+		</ul>
+	</div>
+	<div class="h_a">功能说明</div>
+	<div class="prompt_text">
+		<ol>
+			<li>为了保证后台的安全性，系统只允许后台管理员删除日志</li>
+			<li>清除日志将清理今天之前的日志</li>
+		</ol>
+	</div>
+	<div class="h_a">搜索</div>
+	<div class="table_full">
+		<form id="J_forum_search_form" method="post" action="__SELF__">
+		              <input type="hidden" name="p" value="{$p|default=1}">
+		              <input type="hidden" name="soso" value="1">
+			<table width="100%">
+				<tr>
+					<td>
+						<label>关键字：</label><input id="J_search_input" class="input length_3 mr10" name="keyword" autoComplete="off" type="text" value="{$keyword}"><button id="J_forum_search" class="btn" type="submit">搜索</button>
+						<if condition="$soso">
+				        <button type="reset" class="btn btn_error" onclick="window.location.href='__ACTION__'">撤销检索</button>
+				        </if>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<notempty name="_list">
+	<div class="table_list">
+		<table width="100%">
+			<thead>
+				<tr>
+					<td width="80">编号</td>
+					<td width="120">行为名称</td>
+					<td width="100">执行者</td>
+					<td>备注</td>					
+					<td width="150">执行时间</td>
+					<td width="80">IP</td>
+				</tr>
+			</thead>
+			<volist name="_list" id="vo">
+			<tr>
+				<td>{$vo.id}</td>
+				<td>{:get_action($vo['action_id'],'title')}</td>
+				<td>{:get_nickname($vo['user_id'])}</td>
+				<td>{$vo.remark}</td>
+				<td><span>{$vo.create_time|time_format="Y-m-d H:i:s"}</span></td>
+				<td>{$vo.action_ip|long2ip}</td>
+			</tr>
+			</volist>			
+		</table>
+	</div>
+	<div class="page">
+        {$_page}
+    </div>
+	<else/>
+	<div class="not_content_mini"><i></i>啊哦，没有符合条件的内容！</div>
+	</notempty>
+	<if condition="IS_ROOT">
+	<div class="btn_wrap">
+		<div class="btn_wrap_pd">
+			<a class="btn btn_error" id="J_clear" href="{:U('clear')}">清除多余日志</a>
+		</div>
+	</div>
+	</if>
+<include file='Public/foot' />
+</div>
+<script>
+Wind.use('ajaxForm', 'dialog', function(){
+	var clear = $('#J_clear');
+	clear.on('click', function(e){
+		e.preventDefault();
+
+		Wind.dialog({
+			type : 'confirm',
+			isMask	: false,
+			message : '确认清理今天之前日志？',
+			follow	: clear,
+			onOk	: function() {
+				clear.parent().find('span').remove();
+
+				$.post(clear.attr('href'), {
+					step : '2'
+				}, function(data){
+					if(data.state == 'success') {
+						$( '<span class="tips_success">' + data.message + '</span>' ).appendTo(clear.parent()).fadeIn('slow').delay( 1000 ).fadeOut(function(){
+							reloadPage(window);
+						});
+					}else if(data.state == 'fail'){
+						$( '<span class="tips_error">' + data.message + '</span>' ).appendTo(clear.parent()).fadeIn( 'fast' );
+					}
+				}, 'json');
+			}
+		});
+	});
+});
+</script>
+</body>
+</html>

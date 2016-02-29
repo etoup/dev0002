@@ -1,0 +1,70 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link href="__CSS__/index.css?v={:v()}" rel="stylesheet" />
+</block>
+</head>
+<body>
+<div class="wrap">
+<block name="header">
+    <include file='Public/header' />
+    <div class="topmain">
+        <div class="container">
+            <div class="pull-left">
+                <a href="{:U('index')}" class="hover">最新资讯</a>
+                <a href="{:U('notice')}">公告</a>
+            </div>
+            <div class="pull-right">
+                <a href="{:ROOT}"><span aria-hidden="true" class="glyphicon glyphicon-share-alt"></span> 返回首页</a>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="main">
+    <div class="container mt30">
+        <ol class="breadcrumb mt10">
+            <foreach name="crumbs" item="v">
+                <li><a href="{$v.url}">{$v.title}</a></li>
+            </foreach>
+            <li class="active">{$seo.title}</li>
+        </ol>
+        <foreach name="list" item="vo">
+            <div style="border-bottom: 1px solid #e0e0e1; padding: 30px 0;">
+                <div class="row">
+                    <div class="col-md-4">
+                        <if condition="$vo['isold']">
+                            <a href="{:U('detail',['id'=>$vo['id']])}"><img title="{$vo.title}" alt="{$vo.title}" src="/{$vo.url}" style="width: 100%; height: 130px; overflow: hidden;"></a>
+                            <else/>
+                            <a href="{:U('detail',['id'=>$vo['id']])}"><img title="{$vo.title}" alt="{$vo.title}" src="{$vo.cover_id|get_cover='path'}" style="width: 100%; height: 130px; overflow: hidden;"></a>
+                        </if>
+
+                    </div>
+                    <div class="col-md-8">
+                        <h4><a href="{:U('detail',['id'=>$vo['id']])}">{$vo.title}</a></h4>
+                        <p style="color: #ababab;">
+                            {$vo.description|msubstr=0,100}
+                        </p>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="date">{$vo.create_time|time_format}</div>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="{:U('detail',['id'=>$vo['id']])}">详情</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </foreach>
+        <div class="page">
+            {$_page}
+        </div>
+    </div>
+</block>
+</div>
+<block name="foot">
+    <include file='Public/foot' />
+</block>
+<block name="foot_js"></block>
+</body>
+</html>

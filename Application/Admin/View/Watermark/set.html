@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap">
+    <include file='Public/navtab' /> 
+    <div class="h_a">水印策略</div>
+    <form method="post" class="J_ajaxForm" action="{@url:/config/watermark/doset}" data-role="list">
+    <div class="table_full mb10">
+        <table class="J_check_wrap" width="100%">
+            <colgroup>
+            <col class="th">
+            <col width="400">
+            <col>
+            </colgroup>
+            <tr>
+                <th>文章图片水印</th>
+                <td>
+                    <ul class="switch_list cc">
+                        <li><label><input type="radio" name="art" value="1" {:is_checked(C('WATERMARKEXTART'),1)}><span>开启</span></label></li>
+                        <li><label><input type="radio" name="art" value="0" {:is_checked(C('WATERMARKEXTART'),0)}><span>关闭</span></label></li>
+                    </ul>
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+    </div>
+    <div class="btn_wrap">
+        <div class="btn_wrap_pd">
+            <button class="btn btn_submit mr10 J_ajax_submit_btn" type="submit">提交</button>
+        </div>
+    </div>
+    </form>
+<!-- end -->  
+</div>
+<include file='Public/foot' />
+
+</body>
+</html>

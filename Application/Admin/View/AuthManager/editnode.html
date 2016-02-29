@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body style="width:420px;" class="body_none">
+<!--添加用户-->
+    <form class="J_ajaxForm" data-role="list" action="__ACTION__" method="post" >
+    <input type='hidden' name='id' value="{$info['id']}">
+    <div class="pop_cont pop_table" style="height:auto;">
+        <table width="100%">
+            <col class="th" />
+            <col />
+            <thead>
+            <tr>
+                <th>节点名称</th>
+                <td><span class="must_red">*</span><input name="title" type="text" value="{$info['title']}" class="input length_5"></td>
+            </tr>
+            </thead>
+            <tr>
+                <th>URL</th>
+                <td><span class="must_red">*</span><input name="url" type="text" value="{$info['url']}" class="input length_5"></td>
+            </tr>
+            <tr>
+                <th>分组</th>
+                <td><span class="must_red">*</span><input name="group" type="text" value="{$info['group']}" class="input length_5"></td>
+            </tr>
+            <tr>
+                <th>备注</th>
+                <td><input name="tip" type="text" value="{$info['tip']}" class="input length_5"></td>
+            </tr>
+            <tr>
+                <th>隐藏</th>
+                <td>
+                    <if condition="$info['hide']">
+                    <div class="yesno"></div>
+                    <else/>
+                    <div class="yesno notoyes"></div>
+                    </if>
+                    <input type="hidden" name="hide" value="{$info['hide']}">
+                    <span class="cc gray">双击关闭开启</span>
+                </td>
+            </tr>
+            <tr>
+                <th>开发者模式</th>
+                <td>
+                    <if condition="$info['is_dev']">
+                    <div class="yesno"></div>
+                    <else/>
+                    <div class="yesno notoyes"></div>
+                    </if>
+                    <input type="hidden" name="is_dev" value="{$info['is_dev']}">
+                    <span class="cc gray">双击关闭开启</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="pop_bottom">
+        <button type="button" class="btn fr" id="J_dialog_close">取消</button>
+        <button type="submit" class="btn btn_submit mr10 fr J_ajax_submit_btn">提交</button>
+    </div>
+    
+</form>
+<include file='Public/foot_min' />
+</body>
+</html>

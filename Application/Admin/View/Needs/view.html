@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+<head>
+    <include file='Public/head' />
+</head>
+<body class="J_scroll_fixed">
+<div class="wrap jj">
+    <div class="nav">
+        <div class="return"><a href="javascript:history.go(-1);">返回上一级</a></div>
+    </div>
+    <!--====================标的信息开始====================-->
+    <form class="J_ajaxForm" action="__SELF__" method="post">
+        <input type="hidden" value="{$info['id']}" name="id"/>
+        <div class="h_a">详细信息</div>
+        <div class="table_full">
+            <if condition="$info['num']">
+                <table width="100%">
+                    <col class="th" />
+                    <col/>
+                    <thead>
+                    <tr>
+                        <th>单号</th>
+                        <td>{$info['orders']}</td>
+                    </tr>
+                    </thead>
+                    <tr>
+                        <th>用户名</th>
+                        <td>{$info['username']}</td>
+                    </tr>
+
+                    <tr>
+                        <th>真实姓名</th>
+                        <td>{$info['realname']}</td>
+                    </tr>
+                    <tr>
+                        <th>手机号码</th>
+                        <td>{$info['mobile']}</td>
+                    </tr>
+                    <tr>
+                        <th>自有金额</th>
+                        <td>{:money($info['own_funds'],'%s万元')}</td>
+                    </tr>
+                    <tr>
+                        <th>配资金额</th>
+                        <td>{:money($info['with_funds'],'%s万元')}</td>
+                    </tr>
+                    <tr>
+                        <th>操盘手数</th>
+                        <td>{$info['num']}手</td>
+                    </tr>
+                    <if condition="$info['begin_trading']">
+                        <tr>
+                            <th>交易开始时间</th>
+                            <td>{$info['begin_trading']|time_format}</td>
+                        </tr>
+                    </if>
+                    <if condition="$info['end_trading']">
+                        <tr>
+                            <th>交易截止时间</th>
+                            <td>{$info['end_trading']|time_format}</td>
+                        </tr>
+                    </if>
+                    <tr>
+                        <th>状态</th>
+                        <td>{:peiziStuArr($info['status'])}</td>
+                    </tr>
+                    <tr>
+                        <th>申请时间</th>
+                        <td>{$info['created_time']|time_format}</td>
+                    </tr>
+                    <tr>
+                        <th>券商</th>
+                        <td>{$account['broker']}</td>
+                    </tr>
+                    <tr>
+                        <th>股票账户</th>
+                        <td>{$account['account']}</td>
+                    </tr>
+                    <tr>
+                        <th>出资人</th>
+                        <td>{$account['promoter']}</td>
+                    </tr>
+                </table>
+
+                <else/>
+                <table width="100%">
+                    <col class="th" />
+                    <col/>
+                    <thead>
+                    <tr>
+                        <th>单号</th>
+                        <td>{$info['orders']}</td>
+                    </tr>
+                    </thead>
+                    <tr>
+                        <th>用户名</th>
+                        <td>{$info['username']}</td>
+                    </tr>
+
+                    <tr>
+                        <th>真实姓名</th>
+                        <td>{$info['realname']}</td>
+                    </tr>
+                    <tr>
+                        <th>手机号码</th>
+                        <td>{$info['mobile']}</td>
+                    </tr>
+                    <tr>
+                        <th>自有金额</th>
+                        <td>{:money($info['own_funds'],'%s万元')}</td>
+                    </tr>
+                    <tr>
+                        <th>配资金额</th>
+                        <td>{:money($info['with_funds'],'%s万元')}</td>
+                    </tr>
+                    <tr>
+                        <th>配资比例</th>
+                        <td>1：{$info['scale']}</td>
+                    </tr>
+                    <tr>
+                        <th>配资期限</th>
+                        <td>{$info['time_limit']}个月</td>
+                    </tr>
+                    <tr>
+                        <th>月利率</th>
+                        <td>{$info['interest_rate']}%</td>
+                    </tr>
+                    <if condition="$info['begin_trading']">
+                        <tr>
+                            <th>交易开始时间</th>
+                            <td>{$info['begin_trading']|time_format}</td>
+                        </tr>
+                    </if>
+                    <if condition="$info['end_trading']">
+                        <tr>
+                            <th>交易截止时间</th>
+                            <td>{$info['end_trading']|time_format}</td>
+                        </tr>
+                    </if>
+                    <tr>
+                        <th>状态</th>
+                        <td>{:peiziStuArr($info['status'])}</td>
+                    </tr>
+                    <tr>
+                        <th>申请时间</th>
+                        <td>{$info['created_time']|time_format}</td>
+                    </tr>
+                    <tr>
+                        <th>券商</th>
+                        <td>{$account['broker']}</td>
+                    </tr>
+                    <tr>
+                        <th>股票账户</th>
+                        <td>{$account['account']}</td>
+                    </tr>
+                    <tr>
+                        <th>出资人</th>
+                        <td>{$account['promoter']}</td>
+                    </tr>
+                </table>
+            </if>
+
+        </div>
+    </form>
+
+</div>
+<include file='Public/foot' />
+</body>
+</html>

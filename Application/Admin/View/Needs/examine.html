@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body style="width:400px;" class="body_none">
+    <form class="J_ajaxForm" data-role="list" action="__SELF__" method="post" >
+    <input type='hidden' name='type' value="do">
+    <div class="pop_cont pop_table" style="height:auto;">
+        <table width="100%">
+            <col class="th" />
+            <col />
+            <thead>
+            <tr>
+                <td colspan="2">
+                    <ul class="info">
+                        <li><label>用户名：</label>{$info.username}</li>
+                        <li><label>真实姓名：</label>{$info.realname}</li>
+                        <li><label>手机号码：</label>{$info.mobile}</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <ul class="info">
+                        <li><label>自有资金：</label><b>{$info.own_funds}</b> 万</li>
+                        <li><label>配资比例：</label><b>{$info.scale}</b> 倍</li>
+                        <li><label>配资资金：</label><b>{$info.with_funds}</b> 万</li>
+                        <li><label>配资期限：</label><b>{$info.time_limit}</b> 个月</li>
+                        <li><label>到款方式：</label><b>{:pay_type($info['pay_type'])}</b></li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th>资金来源</th>
+                <td>
+                    <ul class="switch_list cc J_radio_change">
+                        <li><label><input type="radio" checked value="0" name="make_bids"><span>自有资金</span></label></li>
+                        <li><label><input type="radio" value="1" name="make_bids" data-list="list"><span>招标资金</span></label></li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th>月利率</th>
+                <td>
+                    <input type="text" name="interest_rate" value="{$info.interest_rate}" class="input length_1"> %
+                </td>
+            </tr>
+            <tr>
+                <th>基准利率</th>
+                <td>
+                    <input type="text" name="benchmark" value="{$info.benchmark|default=C('BENCHMARK')}" class="input length_1"> %
+                    <div class="cc gray">不要超过{$info.interest_rate} %，该数值和业务提成有关</div>
+                </td>
+            </tr>
+            <tr class="list">
+                <th>年化收益</th>
+                <td>
+                    <input type="text" name="profit" value="{$info.profit|default=C('PROFIT')}" class="input length_1" disabled> %
+                    <div class="cc gray">该数值和投资人收益有关，招标资金时有效</div>
+                </td>
+            </tr>
+            <tr class="list">
+                <th>投标周期</th>
+                <td>
+                    <input type="text" name="deadline" value="{$info.deadline|default=C('DEADLINE')}" class="input length_1" disabled> 天
+                    <div class="cc gray">该值控制投标的时间，单位：天</div>
+                </td>
+            </tr>
+            </thead>
+            <tr>
+                <th>备注</th>
+                <td>
+                    <span class="must_red">*</span>
+                    <input type="text" name="remark" value="{$info.remark|default=''}" class="input length_5">
+                    <div class="cc gray">添加审核备注信息</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="pop_bottom">
+        <input type="hidden" name="id" value="{$info.id}" />
+        <button type="button" class="btn fr" id="J_dialog_close">取消</button>
+        <button type="submit" class="btn btn_submit mr10 fr J_ajax_submit_btn">确认</button>
+    </div>
+    
+</form>
+    <include file='Public/foot_min' />
+<script>
+    $(function(){
+        $("input[name=make_bids]").click(function(){
+            if($("input[name=make_bids]:checked").attr('data-list')=='list'){
+                $('tr.list').find('input').removeAttr('disabled');
+            }else{
+                $('tr.list').find('input').attr('disabled','disabled');
+            }
+        });
+    });
+</script>
+</body>
+</html>

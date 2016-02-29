@@ -1,0 +1,18 @@
+<form id="form" action="{:U('tempedit')}" method="post" role="form">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">{$title}</h4>
+    </div>
+
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="price">价格：<small>{$info.price}元</small></label>
+            <input type="text" name="price" class="form-control" id="price" placeholder="填写调整后的价格">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="hidden" name="id" value="{$info.id}" />
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+        <button type="submit" class="btn btn-primary">确认提交</button>
+    </div>
+</form>

@@ -1,0 +1,289 @@
+<extend name="Public/baseweixin" />
+<block name="head"><include file='Public/headweixin' /></block>
+<block name="head_css">
+    <link href="__CSS__/indexweixin.css" rel="stylesheet" />
+    <link href="__CSS__/dashboard.css" rel="stylesheet">
+</block>
+</head> 
+<body>
+<block name="header"><include file='Public/headerweixin' /></block>
+<block name="uctop">
+</block>
+<block name="main">
+    <div class="wewixinmain" style="margin: 50px 0;">
+    <if condition="$_list">
+    <foreach name="_list" item="v">
+    <div class="panel panel-default mt30">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-4">
+                <strong>单号：{$v.orders}</strong>
+            </div>
+            <div class="col-md-4">
+                <strong>创建时间：{$v.created_time|time_format}</strong>
+            </div>
+            <div class="col-md-4">
+                <strong>状态：{:peiziStuArr($v['status'])}</strong>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- List group -->
+            <ul class="list-group">
+                <li class="list-group-item"><strong>本金：{:money($v['own_funds'],'',10000)}</strong></li>
+                <li class="list-group-item"><strong>配资资金：{:money($v['with_funds'],'',10000)}</strong></li>
+                <li class="list-group-item"><strong>总操盘资金：{:money($v['own_funds']+$v['with_funds'],'',10000)}</strong></li>
+                <li class="list-group-item"><strong>配资期限：{$v.time_limit}个月</strong></li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <!-- List group -->
+            <ul class="list-group">
+                <li class="list-group-item"><strong>月利率：{$v.interest_rate}%</strong></li>
+                <if condition="$v['make_bids']">
+                    <switch name="v.status">
+                        <case value="8">
+                            <li class="list-group-item"><strong>到期时间：{:prevDate($v['end_trading'])}</strong></li>
+                        </case>
+                        <default />
+                        <li class="list-group-item"><strong>开始时间：{$v.created_time|time_format}</strong></li>
+                    </switch>
+                    <else/>
+                    <switch name="v.status">
+                        <case value="8">
+                            <li class="list-group-item"><strong>到期时间：{:prevDate($v['end_trading'])}</strong></li>
+                        </case>
+                        <default />
+                        <li class="list-group-item"><strong>开始时间：{$v.created_time|time_format}</strong></li>
+                    </switch>
+                </if>
+
+                <li class="list-group-item"><strong>状态：{:peiziStuArr($v['status'])}</strong></li>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <strong>处理进度：</strong>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="progress" style="margin-bottom: 0">
+                                <switch name="v.status">
+                                    <case value="0">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                            0%
+                                        </div>
+                                    </case>
+                                    <case value="1">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                                            50%
+                                        </div>
+                                    </case>
+                                    <case value="2">
+                                        <case value="0">
+                                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                                                50%
+                                            </div>
+                                        </case>
+                                    </case>
+                                    <case value="3">
+                                        <switch name="v.pay_type">
+                                            <case value="0">
+                                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                                    80%
+                                                </div>
+                                            </case>
+                                            <case value="1">
+                                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                                    80%
+                                                </div>
+                                            </case>
+                                        </switch>
+                                    </case>
+                                    <case value="8">
+                                        <case value="0">
+                                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                                100%
+                                            </div>
+                                        </case>
+                                    </case>
+                                    <default />
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                        0%
+                                    </div>
+                                </switch>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <if condition="count($v['delay_info'])">
+        <foreach name="v['delay_info']" item="f">
+            <switch name="f['status']">
+                <case value="-1"><p class="bg-danger" style="padding: 10px;">【{$f.created_time|time_format}】您提交的{$f['delay_time']}个月延期申请，审核未通过；原因：{$f['remark']}</p></case>
+                <case value="1"><p class="bg-info" style="padding: 10px;">【{$f.created_time|time_format}】您提交的{$f['delay_time']}个月延期申请，审核通过</p></case>
+                <default /><p class="bg-warning" style="padding: 10px;">【{$f.created_time|time_format}】您提交了{$f['delay_time']}个月延期申请，等待管理员审核</p>
+            </switch>
+        </foreach>
+    </if>
+    <if condition="count($v['early_info'])">
+        <foreach name="v['early_info']" item="f">
+            <switch name="f['status']">
+                <case value="-1"><p class="bg-danger" style="padding: 10px;">【{$f.created_time|time_format}】您提交的提前结束申请，审核未通过；原因：{$f['remark']}</p></case>
+                <case value="1"><p class="bg-info" style="padding: 10px;">【{$f.created_time|time_format}】您提交的提前结束申请，审核通过</p></case>
+                <default /><p class="bg-warning" style="padding: 10px;">【{$f.created_time|time_format}】您提交了提前结束申请，等待管理员审核</p>
+            </switch>
+        </foreach>
+    </if>
+    <switch name="v.status">
+        <case value="-2">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="btn-group">
+                        <a href="{:U('pact',['orders'=>$v['orders']])}" class="btn btn-default btn-sm" role="button">合同协议</a>
+                    </div>
+                </div>
+            </div>
+        </case>
+        <case value="0">
+            <if condition="$v['pay_type']">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal fade" id="modalCancel{$v['id']}" style="display: none;">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalCancel{$v['id']}" data-remote="{:U('cancel',['id'=>$v['id']])}">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </if>
+        </case>
+        <case value="1">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="btn-group">
+                        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal fade" id="modalBx{$v['id']}" style="display: none;">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div>
+                        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal fade" id="modalCancel{$v['id']}" style="display: none;">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div>
+                        <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalBx{$v['id']}" data-remote="{:U('paybx',['mobile'=>'weixin','id'=>$v['id']])}">支付本息</button>
+                        <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalCancel{$v['id']}" data-remote="{:U('cancel',['id'=>$v['id']])}">取消</button>
+                    </div>
+                </div>
+            </div>
+        </case>
+        <case value="8">
+            <div class="row">
+                <div class="col-md-6">
+                    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal fade" id="modalLx{$v['id']}" style="display: none;">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div>
+                    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal fade" id="modalBzj{$v['id']}" style="display: none;">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div>
+                    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal fade" id="modalShrank{$v['id']}" style="display: none;">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div>
+                    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal fade" id="modalDelay{$v['id']}" style="display: none;">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div>
+                    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal fade" id="modalEarly{$v['id']}" style="display: none;">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div>
+                    <div class="btn-group" style="margin-bottom: 10px;">
+                        <if condition="$v['lxCount']">
+                            <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalLx{$v['id']}" data-remote="{:U('paylx',['mobile'=>'weixin','id'=>$v['id']])}">支付利息</button>
+                        </if>
+                        <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalBzj{$v['id']}" data-remote="{:U('paybzj',['mobile'=>'weixin','id'=>$v['id']])}">支付保证金</button>
+                        <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalShrank{$v['id']}" data-remote="{:U('shrank',['mobile'=>'weixin','id'=>$v['id']])}">账户出金</button>
+                    </div>
+                    <div class="btn-group" style="margin-bottom: 10px;">
+                        <if condition="!$v['make_bids']">
+                            <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalDelay{$v['id']}" data-remote="{:U('delay',['mobile'=>'weixin','id'=>$v['id']])}">申请延期</button>
+                        </if>
+
+                        <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalEarly{$v['id']}" data-remote="{:U('early',['mobile'=>'weixin','id'=>$v['id']])}">结束</button>
+
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal fade" id="modalChart{$v['id']}" style="display: none;">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div>
+                    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal fade" id="modalInformation{$v['id']}" style="display: none;">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalChart{$v['id']}" data-remote="{:U('chart',['mobile'=>'weixin','id'=>$v['id']])}">查看图表</button>
+                        <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalInformation{$v['id']}" data-remote="{:U('information',['id'=>$v['id']])}">账户信息</button>
+                        <a href="{:U('pact',['orders'=>$v['orders']])}" class="btn btn-default btn-sm" role="button">合同协议</a>
+                    </div>
+                </div>
+            </div>
+        </case>
+        <default />
+
+    </switch>
+    </div>
+    </div>
+    </foreach>
+    <div class="page">
+        {$_page}
+    </div>
+    <else/>
+    <div class="paizi nolist mt50">
+        <a href="{:U('Index/Peizi/index',['mobile'=>'weixin'])}">我要配资</a>
+    </div>
+    </if>
+    </div>
+</block>
+<block name="foot"><include file='Public/ufootweixin' /></block>
+<block name="foot_js"></block>
+</body>
+</html>

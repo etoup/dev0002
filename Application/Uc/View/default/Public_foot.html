@@ -1,0 +1,63 @@
+<div class="center-block">
+    版权所有 © 六合资本 鄂ICP备14003509号-1
+</div>
+<a id="scrollUp" href="#top" class="footBtn"><span aria-hidden="true" class="glyphicon glyphicon-plane"></span></a>
+<a id="open" href="#" class="footBtn"><span aria-hidden="true" class="glyphicon glyphicon-headphones"></span></a>
+<div id="custom">
+    <if condition="$uc['custom_service']">
+        <div class="panel panel-default">
+            <div class="panel-heading"><span aria-hidden="true" class="glyphicon glyphicon-thumbs-up"></span> 客户经理</div>
+            <div class="panel-body">
+                <a tabindex="0" id="mycustom" data-toggle="popover" data-trigger="focus" title="客户经理:{$uc.custom_service}"
+                   data-content='
+               <div class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            <img alt="75x75" class="media-object" style="width: 75px; height: 75px;" src="__IMG__/common/userimg.jpg" data-holder-rendered="true">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h5 class="media-heading"><label>电话:</label>{$custom["mobile"]|default="400-873-8666"}</h5>
+                        <h5 class="media-heading"><label>QQ:</label><a target="_blank" href="http://crm2.qq.com/page/portalpage/wpa.php?uin=4008738666&amp;f=1&amp;ty=1&amp;aty=0&amp;a=&amp;from=6" class="qq">4008738666</a></h5>
+                    </div>
+                </div>
+        '>{$uc.custom_service}</a>
+            </div>
+        </div>
+    </if>
+    <div class="panel panel-default">
+        <div class="panel-heading"><span aria-hidden="true" class="glyphicon glyphicon-earphone"></span> 服务电话</div>
+        <div class="panel-body">
+            400-873-8666
+        </div>
+    </div>
+</div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="__STATIC__/jquery-1.11.1.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="__STATIC__/bootstrap/js/bootstrap.min.js"></script>
+<script>
+    $(window).scroll(function() {
+        if ($(window).scrollTop() > 10) {
+            $(".footBtn").fadeIn(1000);
+        }
+        else {
+            $(".footBtn").fadeOut(1000);
+            $('#custom').slideUp();
+        }
+
+    });
+    $("#scrollUp").click(function(){
+        $('body,html').animate({scrollTop:0},1000);
+        return false;
+    });
+    $('#mycustom').popover({
+        'placement':'bottom',
+        'html':true
+    });
+    $('#open').click(function(){
+        $('#custom').toggle();
+        return false;
+    });
+    $('#btnSendCode').attr('disabled',false);
+</script>

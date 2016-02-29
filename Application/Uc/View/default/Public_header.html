@@ -1,0 +1,56 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{:U('Index/Index/index')}"><img src="__IMG__/logo.png" title="六合资本" alt="六合资本"/></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <foreach name="unav" item="v">
+                    <if condition="$v['id'] eq $navs['parentid']">
+                        <li class="dropdown active">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon {$v['tags']} mr5" aria-hidden="true"></span> {$v.name} <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <foreach name="v['_']" item="val">
+                                    <li><a href="{:U($val['link'])}">{$val['name']}</a></li>
+                                </foreach>
+                                <li class="divider"></li>
+                                <li><a href="#">{$v.name}</a></li>
+                            </ul>
+                        </li>
+                        <else/>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon {$v['tags']} mr5" aria-hidden="true"></span> {$v.name} <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <foreach name="v['_']" item="val">
+                                    <li><a href="{:U($val['link'])}">{$val['name']}</a></li>
+                                </foreach>
+                                <li class="divider"></li>
+                                <li><a href="#">{$v.name}</a></li>
+                            </ul>
+                        </li>
+                    </if>
+
+                </foreach>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right" id="navbar-right">
+                <li><a href="{:U('Index/Index/index')}" target="_blank"><i class="glyphicon glyphicon-home"></i> 平台首页</a></li>
+                <if condition="is_login()">
+                    <li><a href="{:U('Uc/Index/index')}"><i class="glyphicon glyphicon-user"></i> {:USERNAME}</a></li>
+                    <li><a href="{:U('Uc/Uc/logout')}"><i class="glyphicon glyphicon-off"></i> 安全退出</a></li>
+                    <else/>
+                    <li><a href="{:U('Uc/Uc/login')}"><i class="glyphicon glyphicon-user"></i> 登录</a></li>
+                    <li><a href="{:U('Uc/Uc/register')}"><i class="glyphicon glyphicon-edit"></i> 注册</a></li>
+                </if>
+            </ul>
+
+            
+        </div>
+    </div>
+</nav>

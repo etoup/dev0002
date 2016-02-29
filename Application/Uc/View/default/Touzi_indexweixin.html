@@ -1,0 +1,225 @@
+<extend name="Public/baseweixin" />
+<block name="head"><include file='Public/headweixin' /></block>
+<block name="head_css">
+    <link href="__CSS__/indexweixin.css" rel="stylesheet" />
+    <link href="__CSS__/dashboard.css" rel="stylesheet">
+</block>
+</head>
+<body>
+<block name="header"><include file='Public/headerweixin' /></block>
+
+<block name="uctop">
+</block>
+
+<block name="main">
+<div class="wewixinmain" style="margin: 50px 0;">
+    <div class="alert alert-danger alert-dismissible fade in mt30" id="tip" role="alert" >
+        <button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+        <strong></strong>
+    </div>
+    <if condition="$_list">
+        <foreach name="_list" item="v">
+            <div class="panel panel-default mt30">
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <strong>单号：{$v.orders}</strong>
+                        </div>
+                        <div class="col-md-4">
+                            <strong>投资时间：{$v.created_time|time_format}</strong>
+                        </div>
+                        <div class="col-md-4">
+                            <strong>状态：{:peiziStuArr($v['status'])}</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- List group -->
+                            <ul class="list-group">
+                                <li class="list-group-item"><strong>投资金额：{:money($v['money'])}</strong></li>
+                                <li class="list-group-item"><strong>总投标金额：{:money($v['with_funds'],'',10000)}</strong></li>
+                                <li class="list-group-item"><strong>保证金：{:money($v['own_funds'],'',10000)}</strong></li>
+                                <li class="list-group-item"><strong>年化收益：{$v.profit}%</strong></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <!-- List group -->
+                            <ul class="list-group">
+                                <li class="list-group-item"><strong>投资期限：{$v.time_limit}个月</strong></li>
+                                <if condition="$v['make_bids']">
+                                    <switch name="v.status">
+                                        <case value="8">
+                                            <li class="list-group-item"><strong>到期时间：{:prevDate($v['end_trading'])}</strong></li>
+                                        </case>
+                                        <default />
+                                        <li class="list-group-item"><strong>开始时间：{$v.created_time|time_format}</strong></li>
+                                    </switch>
+                                    <else/>
+                                    <switch name="v.status">
+                                        <case value="8">
+                                            <li class="list-group-item"><strong>到期时间：{:prevDate($v['end_trading'])}</strong></li>
+                                        </case>
+                                        <default />
+                                        <li class="list-group-item"><strong>开始时间：{$v.created_time|time_format}</strong></li>
+                                    </switch>
+                                </if>
+
+                                <li class="list-group-item">
+                                    <switch name="v.types">
+                                        <case value="1">
+                                            <strong>抵押类型：市值{:money($v['own_funds']+$v['with_funds'],'%s万元')}期货抵押</strong>
+                                        </case>
+                                        <default />
+                                            <strong>抵押类型：市值{:money($v['own_funds']+$v['with_funds'],'%s万元')}股票抵押</strong>
+                                    </switch>
+                                </li>
+                                <li class="list-group-item">
+                                    <switch name="v.status">
+                                        <case value="8">
+                                            <strong>总收益：{:money($v['total_revenue'])}</strong>
+                                        </case>
+                                        <case value="-2">
+                                            <strong>结束时间：{$v.operate_time|time_format}</strong>
+                                        </case>
+                                        <case value="0">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <strong>处理进度：</strong>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="progress" style="margin-bottom: 0">
+                                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                                            0%
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </case>
+                                        <case value="1">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <strong>处理进度：</strong>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="progress" style="margin-bottom: 0">
+                                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                                                            50%
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </case>
+                                        <case value="2">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <strong>处理进度：</strong>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="progress" style="margin-bottom: 0">
+                                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                                                            50%
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </case>
+                                        <case value="3">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <strong>处理进度：</strong>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="progress" style="margin-bottom: 0">
+                                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                                            80%
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </case>
+                                        <default />
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <strong>处理进度：</strong>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="progress" style="margin-bottom: 0">
+                                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                                            0%
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </switch>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal fade" id="modalChart{$v['id']}" style="display: none;">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div>
+                            <div class="btn-group" style="margin-bottom: 10px;">
+                                <a href="{:U('Index/Touzi/details',['mobile'=>'weixin','id'=>$v['bid']])}" class="btn btn-default" role="button">查看详情</a>
+                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalChart{$v['id']}" data-remote="{:U('chart',['mobile'=>'weixin','id'=>$v['nid']])}">查看借款方账户信息</button>
+                            </div>
+                        </div>
+                        <switch name="v.status">
+                            <case value="8">
+                                <div class="col-md-6">
+                                    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal fade" id="modalCollections{$v['id']}" style="display: none;">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalCollections{$v['id']}" data-remote="{:U('collections',['orders'=>$v['orders']])}">回款信息</button>
+                                        <a href="{:U('pact',['orders'=>$v['orders']])}" class="btn btn-default" role="button">合同协议</a>
+                                    </div>
+                                </div>
+                            </case>
+                            <case value="2">
+                                <div class="col-md-6">
+                                    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal fade" id="modalAdditional{$v['id']}" style="display: none;">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalAdditional{$v['id']}" data-remote="{:U('additional',['id'=>$v['bid']])}">追加投资</button>
+                                    </div>
+                                </div>
+                            </case>
+                        </switch>
+                    </div>
+                </div>
+            </div>
+        </foreach>
+        <div class="page">
+            {$_page}
+        </div>
+        <else/>
+        <div class="paizi nolist mt50">
+            <a href="{:U('Index/Touzi/index',['mobile'=>'weixin'])}">我要投资</a>
+        </div>
+    </if>
+</div>
+</block>
+
+<block name="foot"><include file='Public/ufootweixin' /></block>
+<block name="foot_js"></block>
+</body>
+</html>

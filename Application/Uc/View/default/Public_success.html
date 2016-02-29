@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/headmin' />
+<if condition="$jumpUrl">
+<meta http-equiv="refresh" content="<?php echo($waitSecond); ?>; url={$jumpUrl}">
+</if>
+</head>
+<body>
+<div class="wrap">
+    <div id="error_tips">
+        <h2>信息提示</h2>
+        <div class="error_cont">
+            <ul>
+                <li><?php echo($message); ?></li>
+            </ul>
+            <if condition="$jumpUrl">
+            <div class="error_return"><a id="href" href="{$jumpUrl}" class="btn"><b id="wait" class="wait"><?php echo($waitSecond); ?></b> 返回</a></div>
+            <else/>
+            <div class="error_return"><a href="javascript:window.history.go(-1);" class="btn">返回</a></div>
+            </if>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+(function(){
+var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+var interval = setInterval(function(){
+    var time = --wait.innerHTML;
+    if(time <= 0) {
+        location.href = href;
+        clearInterval(interval);
+    };
+}, 1000);
+})();
+</script>
+</body>
+</html>
+

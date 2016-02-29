@@ -1,0 +1,48 @@
+<?php if (!defined('THINK_PATH')) exit();?><link href="/Public/Static/sweetalert-master/dist/sweetalert.css" rel="stylesheet"  />
+<link href="/Public/Static/webuploader/webuploader.css" rel="stylesheet" />
+<link href="/Public/Ground/css/uploadimg.css" rel="stylesheet" />
+<link href="/Public/Ground/css/index.css" rel="stylesheet" />
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title"><?php echo ($title); ?></h4>
+</div>
+
+<div class="modal-body">
+    <div class="form-group">
+        <label>新增相册图片：</label>
+
+        <div id="uploader" class="wu-example">
+            <div class="queueList">
+                <div id="dndArea" class="placeholder">
+                    <div id="filePicker" class="webuploader-container"><div class="webuploader-pick">点击选择图片</div><div id="rt_rt_19ioo1qd6irs10a1p5i50b1ejd1" style="position: absolute; top: 0px; left: 448px; width: 168px; height: 44px; overflow: hidden; bottom: auto; right: auto;"><input type="file" name="file" class="webuploader-element-invisible" multiple="multiple" accept="image/*"><label style="opacity: 0; width: 100%; height: 100%; display: block; cursor: pointer; background: rgb(255, 255, 255);"></label></div></div>
+                    <p>试试将图片拖到这里，单次最多可选3张</p>
+                </div>
+                <ul class="filelist"></ul>
+            </div>
+            <div class="statusBar" style="display:none;">
+                <div class="progress" style="display: none;">
+                    <span class="text">0%</span>
+                    <span class="percentage" style="width: 0%;"></span>
+                </div><div class="info">共0张（0B），已上传0张</div>
+                <div class="btns">
+                    <div id="filePicker2" class="webuploader-container"><div class="webuploader-pick">继续添加</div><div id="rt_rt_19ioo1qda1cqufnn1ibrhhcpim6" style="position: absolute; top: 0px; left: 0px; width: 1px; height: 1px; overflow: hidden;"><input type="file" name="file" class="webuploader-element-invisible" multiple="multiple" accept="image/*"><label style="opacity: 0; width: 100%; height: 100%; display: block; cursor: pointer; background: rgb(255, 255, 255);"></label></div></div><div class="uploadBtn state-pedding">开始上传</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" id="modal">关闭</button>
+</div>
+
+<script type="text/javascript">
+    // 添加全局站点信息
+    var BASE_URL="/Public/Static";
+    var POST_URL="<?php echo U('uploadimg');?>";
+    var SERVER="<?php echo U('Ground/File/uploadPictures',array('session_id'=>session_id()));?>";
+</script>
+<script src="/Public/Static/sweetalert-master/dist/sweetalert.min.js"></script>
+<script src="/Public/Static/webuploader/webuploader.js"></script>
+<script src="/Public/Ground/js/uploadimg.js"></script>

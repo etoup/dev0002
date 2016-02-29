@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+    <include file='Public/head' />
+</head>
+<body class="J_scroll_fixed">
+<div class="wrap jj">
+    <div class="nav">
+        <div class="return"><a href="javascript:history.go(-1);">返回上一级</a></div>
+    </div>
+    <!--====================标的信息开始====================-->
+    <div class="h_a">详细信息</div>
+    <div class="table_full">
+        <table width="100%">
+            <col class="th" />
+            <col/>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <td>{$info['id']}</td>
+            </tr>
+            </thead>
+            <tr>
+                <th>用户ID</th>
+                <td>{$info['uid']}</td>
+            </tr>
+
+            <tr>
+                <th>银行ID</th>
+                <td>{$info['bid']}</td>
+            </tr>
+            <tr>
+                <th>用户名</th>
+                <td>{$info['username']}</td>
+            </tr>
+            <tr>
+                <th>真实姓名</th>
+                <td>{$info['realname']}</td>
+            </tr>
+            <tr>
+                <th>手机号码</th>
+                <td>{$info['mobile']}</td>
+            </tr>
+            <tr>
+                <th>银行名称</th>
+                <td>{$info['bank_name']}</td>
+            </tr>
+            <tr>
+                <th>支行名称</th>
+                <td>{$info['full_name']}</td>
+            </tr>
+            <tr>
+                <th>卡号</th>
+                <td>{$info['card_number']}</td>
+            </tr>
+            <tr>
+                <th>记录时间</th>
+                <td>{$info['created_time']|time_format}</td>
+            </tr>
+
+        </table>
+    </div>
+</div>
+<include file='Public/foot' />
+</body>
+</html>

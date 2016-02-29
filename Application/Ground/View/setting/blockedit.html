@@ -1,0 +1,22 @@
+<form id="form" action="{:U('blockedit')}" method="post" role="form">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">{$title}</h4>
+    </div>
+
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="name">场地名称：</small></label>
+            <input type="text" name="name" value="{$info.name}" class="form-control" id="name" placeholder="填写场地名称">
+        </div>
+        <div class="form-group">
+            <label for="remark">场地备注：</small></label>
+            <input type="text" name="remark" value="{$info.remark|default=''}" class="form-control" id="remark" placeholder="填写场地备注">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="hidden" name="id" value="{$info.id}" />
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+        <button type="submit" class="btn btn-primary">确认提交</button>
+    </div>
+</form>

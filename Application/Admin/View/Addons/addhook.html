@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body style="width:400px;" class="body_none">
+<!--添加用户-->
+    <form class="J_ajaxForm" data-role="list" action="{:U('updateHook')}" method="post" >
+    <input type='hidden' name='type' value="do">
+    <div class="pop_cont pop_table" style="height:auto;">
+        <table width="100%">
+            <col class="th" />
+            <col />
+            <thead>
+            <tr>
+                <th>钩子名称</th>
+                <td>
+                	<input name="name" type="text" value="" class="input length_5">
+					<div class="cc gray">需要在程序中先添加钩子，否则无效</div>
+                </td>
+            </tr>
+            </thead>
+            <tr>
+                <th>钩子描述</th>
+                <td>
+                    <span class="must_red">*</span><textarea class="length_5" name="description"></textarea>
+                    <div class="cc gray">钩子的描述信息</div>
+                </td>
+            </tr>
+            <tr>
+                <th>钩子类型</th>
+                <td>
+                    <span class="must_red">*</span>
+                    <select name="type" class="length_2">
+						<volist name=":C('HOOKS_TYPE')" id="vo">
+							<option value="{$key}" <eq name="data.type" value="$key"> selected</eq>>{$vo}</option>
+						</volist>
+					</select>
+                    <div class="cc gray">区分钩子的主要用途</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="pop_bottom">
+        <input type="hidden" name="id" value="{$auth_group.id}" />
+        <button type="button" class="btn fr" id="J_dialog_close">取消</button>
+        <button type="submit" class="btn btn_submit mr10 fr J_ajax_submit_btn">提交</button>
+    </div>
+    
+</form>
+<include file='Public/foot_min' />
+</body>
+</html>

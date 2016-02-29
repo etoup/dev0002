@@ -1,0 +1,241 @@
+<extend name="Public/ubase" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link rel="stylesheet" href="__STATIC__/AdminLTE/dist/css/AdminLTE.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="__STATIC__/AdminLTE/plugins/iCheck/square/blue.css">
+    <link href="__CSS__/register.css" rel="stylesheet" type="text/css">
+</block>
+<block name="main">
+    <header>
+        <div class="container">
+            <nav>
+                <a class="navbar-left" href="index.html">
+                    <img alt="logo" src="__IMG__/logo.png">
+                </a>
+                <span class="toptit">欢迎注册</span>
+    <span class="pull-right">
+       已有账号？<a href="login.html" class="btn btn-primary btn-flat">登录</a>
+    </span>
+            </nav>
+        </div>
+    </header>
+    <section class="container">
+        <div class="nav-tabs-custom">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="active"><a href="#photo" data-toggle="tab"><i class="glyphicon glyphicon-phone"></i>手机注册</a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+
+                <div class="tab-pane active" id="photo">
+                    <div class="row">
+                        <div class="tip" id="tip" style="display: none;">
+                            <div class="alert alert-danger" role="alert">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                <b id="alertTxt">用户名\密码\手机号码\验证码为必填项</b>
+                            </div>
+                        </div>
+                        <form action="__SELF__" method="post" class="form-horizontal col-sm-6" role="form" id="form">
+                            <input type="hidden" name="tags" value="{$tags}">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">用户名</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="username" class="form-control" id="inputUsername" placeholder="用户名">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">手机号</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="mobile" class="form-control" id="inputMobile" placeholder="手机号码">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"></label>
+                                <div class="col-sm-9">
+                                    <button type="button" class="btn btn-default btnSendCode" id="btnSendCode" onclick="sendMessage()">获取验证码</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">短信验证码</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="mobileCode" class="form-control" id="inputMobileCode" placeholder="手机验证码">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">创建密码</label>
+                                <div class="col-sm-9">
+                                    <input type="password" name="password" class="form-control" id="inputPassword" placeholder="密码">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">重复密码</label>
+                                <div class="col-sm-9">
+                                    <input type="password" name="repassword" class="form-control" id="inputRepassword" placeholder="重复密码">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-9 pull-right">
+                                    <div class="checkbox icheck">
+                                        <label>
+                                            <input type="checkbox" name="arg" checked><span class="ml5">您已经阅读并同意接受**的 </span><a href="#">服务协议</a>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-4">
+                                    <button type="submit" id="button" data-loading-text="Loading..." class="btn btn-primary btn-block btn-flat" autocomplete="off">
+                                        <span aria-hidden="true" class="glyphicon glyphicon-saved"></span> 提交注册
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    </section>
+</block>
+<!-- /.login-box -->
+<block name="foot"><include file='Public/ufoot' /></block>
+<block name="foot_js">
+    <script type="text/javascript" src="__STATIC__/jquery.form.js"></script>
+    <!-- iCheck -->
+    <script src="__STATIC__/AdminLTE/plugins/iCheck/icheck.min.js"></script>
+    <script>
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+
+        var InterValObj; //timer变量，控制时间
+        var count = 60; //间隔函数，1秒执行
+        var curCount;//当前剩余秒数
+
+
+        function sendMessage(){
+            var mobile = $("input[name='mobile']").val();
+            if(mobile ==''){
+                $('#tip').show().children().find('b').text('手机号码不能为空');
+                $("input[name='mobile']").focus();
+                return false;
+            }
+            $.post("{:U('sendMobileCode')}", {  'mobile': mobile}, function(data){
+                if(data.state === 'success') {
+                    curCount = count;//设置button效果，开始计时
+                    $(".btnSendCode").attr("disabled", "true");
+                    $(".btnSendCode").html("请" + curCount + "秒后重新获取");
+                    InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                    $('#mobileCode').show();
+                }else if(data.state === 'fail'){
+                    $('#tip').show().children().find('b').text(data.message);
+                    curCount=0;
+                    return false;
+                }
+            }, "json");
+
+        }
+
+        //timer处理函数
+        function SetRemainTime() {
+            if (curCount == 0) {
+                window.clearInterval(InterValObj);//停止计时器
+                $(".btnSendCode").removeAttr("disabled");//启用按钮
+                $(".btnSendCode").html("重新获取验证码");
+            }
+            else {
+                curCount--;
+                $(".btnSendCode").html("请" + curCount + "秒后重新获取");
+            }
+        }
+
+        function sendVoiceMessage(){
+            var mobile = $("input[name='mobile']").val();
+            if(mobile ==''){
+                $('#tip').show().children().find('b').text('手机号码不能为空');
+                $("input[name='mobile']").focus();
+                return false;
+            }
+            $.post("{:U('sendMobileVoiceCode')}", { 'mobile': mobile}, function(data){
+                if(data.state === 'success') {
+                    curCount = count;//设置button效果，开始计时
+                    $(".btnSendCode").attr("disabled", "true");
+                    $(".btnSendCode").html("请" + curCount + "秒后重新获取");
+                    InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                    // 向后台发送处理数据
+                    $('#mobileCode').show();
+                }else if(data.state === 'fail'){
+                    $('#tip').show().children().find('b').text(data.message);
+                    curCount=0;
+                    return false;
+                }
+            }, "json");
+        }
+
+        $('#button').on('click', function () {
+            var options = {
+                url:   '__SELF__',
+                beforeSubmit :showRequest,
+                success: showResponse,
+                timeout: 3000
+            };
+            $('#form').ajaxForm(options);
+        });
+
+
+        function showRequest(formData, jqForm, options){
+            var queryString = $.param(formData);
+            var formElement = jqForm[0];
+            var username = formElement.username.value;
+            var password = formElement.password.value;
+            var repassword = formElement.repassword.value;
+
+            if(username==''){
+                $('#tip').show().children().find('b').text('用户名不能为空');
+                $("input[name='username']").focus();
+                $('#button').button('reset');
+                return false;
+            }
+            if(password==''){
+                $('#tip').show().children().find('b').text('密码不能为空');
+                $("input[name='password']").focus();
+                $('#button').button('reset');
+                return false;
+            }
+            if(repassword==''){
+                $('#tip').show().children().find('b').text('确认密码不能为空');
+                $("input[name='repassword']").focus();
+                $('#button').button('reset');
+                return false;
+            }
+
+
+
+            var mobile = formElement.mobile.value;
+            if(mobile==''){
+                $('#tip').show().children().find('b').text('手机号码不能为空');
+                $("input[name='mobile']").focus();
+                $('#button').button('reset');
+                return false;
+            }
+
+            return true;
+        }
+        function showResponse(data){
+            if(data.state === 'success') {
+                window.location.href = decodeURIComponent(data.referer);
+            }else{
+                $('#tip').show().children().find('b').text(data.message);
+                $('#button').button('reset');
+            }
+        }
+        $('#tips').popover({
+            'placement':'bottom',
+            'trigger':'hover'
+        });
+
+    </script>
+</block>

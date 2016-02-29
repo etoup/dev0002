@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body style="width:400px;" class="body_none">
+<!--添加用户-->
+    <form class="J_ajaxForm" data-role="list" action="{:U('update')}" method="post" >
+    <input type='hidden' name='type' value="do">
+    <div class="pop_cont pop_table" style="height:auto;">
+        <table width="100%">
+            <col class="th" width="80" />
+            <col />
+            <tr>
+                <th>模型标识</th>
+                <td>
+                    <span class="must_red">*</span>
+                    <input name="name" type="text" value="" class="input length_4">
+                    <div class="cc gray">请输入文档模型标识</div>
+                </td>
+            </tr>
+            <tr>
+                <th>模型名称</th>
+                <td>
+                    <span class="must_red">*</span>
+                    <input name="title" type="text" value="" class="input length_4">
+                    <div class="cc gray">请输入模型的名称</div>
+                </td>
+            </tr>
+            <tr>
+                <th>模型类型</th>
+                <td>
+                    <select name="extend" class="length_2">
+						<option value="0">独立模型</option>
+						<option value="1">文档模型</option>
+					</select>
+                    <div class="cc gray">目前支持独立模型和文档模型</div>
+                </td>
+            </tr>
+            <tr>
+                <th>引擎类型</th>
+                <td>
+                    <select name="engine_type" class="length_2">
+						<option value="MyISAM">MyISAM</option>
+						<option value="InnoDB">InnoDB</option>
+                        <option value="MEMORY">MEMORY</option>
+                        <option value="BLACKHOLE">BLACKHOLE</option>
+                        <option value="MRG_MYISAM">MRG_MYISAM</option>
+                        <option value="ARCHIVE">ARCHIVE</option>
+					</select>
+                    <div class="cc gray">请选择引擎类型</div>
+                </td>
+            </tr>
+            <tr>
+                <th>是否需要主键</th>
+                <td>
+                    <select name="need_pk" class="length_1">
+						<option value="1" selected="selected">是</option>
+						<option value="0">否</option>
+					</select>
+                    <div class="cc gray">选“是”则会新建默认的id字段作为主键</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="pop_bottom">
+        <button type="button" class="btn fr" id="J_dialog_close">取消</button>
+        <button type="submit" class="btn btn_submit mr10 fr J_ajax_submit_btn">提交</button>
+    </div>
+    
+</form>
+<include file='Public/foot_min' />
+</body>
+</html>

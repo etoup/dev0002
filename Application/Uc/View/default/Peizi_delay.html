@@ -1,0 +1,42 @@
+<form action="__SELF__" method="post" class="form-horizontal" role="form" id="form">
+    <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+        <h4 id="myModalLabel" class="modal-title">申请延期</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6">
+                <strong>配资到期时间</strong>：{:prevDate($info['end_trading'])}
+            </div>
+            <if condition="$differDays">
+                <div class="col-md-6">
+                    <strong>剩余天数</strong>：{$differDays}
+                </div>
+            </if>
+        </div>
+        <hr>
+        <p class="bg-danger" style="padding: 10px; margin-bottom: 20px;">
+            申请延期将扣除延期服务费，金额为：{:money($delay)}，可用余额：{$balance}
+            <if condition="$recharge"><strong><a href="{:U('Recharge/index',['amount'=>$amount])}">立即充值</a></strong></if>
+        </p>
+        <h5><strong>延期时间（单位：月）</strong></h5>
+        <div class="row">
+            <div class="col-md-4">
+                <input type="number" name="delay_time" class="form-control" placeholder="填写延期时间">
+            </div>
+        </div>
+        <h5><strong>支付密码</strong></h5>
+        <div class="row">
+            <div class="col-md-4">
+                <input type="hidden" name="id" value="{$info.id}">
+                <input type="hidden" name="orders" value="{$info.orders}">
+                <input type="password" name="paypwd" class="form-control" placeholder="填写支付密码">
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+        <button class="btn btn-primary" type="submit">确认提交</button>
+    </div>
+</form>

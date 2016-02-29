@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap">
+    <div class="nav">
+            <ul class="cc">
+                <li>
+                    <a href="{:U('index')}">线上支付</a>
+                </li>
+                <li class="current">
+                    <a href="{:U('offline')}">线下转账</a>
+                </li>
+            </ul>
+    </div> 
+    <div class="h_a">功能说明</div>
+    <div class="prompt_text">线下转账相关参数设置。</div>
+   
+    <form method="post" class="J_ajaxForm" action="__SELF__" data-role="list">
+
+        <div class="h_a">参数设置</div>
+        <div class="table_full">
+            <table width="100%">
+                <col class="th" />
+                <col width="400" />
+                <col />
+
+                <tr>
+                    <th>银行名称</th>
+                    <td><input name="offline[bank_name]" type="text" value="{$list[bank_name]|default=''}" class="input length_5 mr5"></td>
+                    <td><div class="fun_tips">开户银行名称</div></td>
+                </tr>
+                <tr>
+                    <th>开户行</th>
+                    <td><input name="offline[open_bank_name]" type="text" value="{$list[open_bank_name]|default=''}" class="input length_5 mr5"></td>
+                    <td><div class="fun_tips">开户行全称</div></td>
+                </tr>
+                <tr>
+                    <th>户名</th>
+                    <td><input name="offline[name]" type="text" value="{$list[name]|default=''}" class="input length_5 mr5"></td>
+                    <td><div class="fun_tips">开户名全称</div></td>
+                </tr>
+                <tr>
+                    <th>账号</th>
+                    <td><input name="offline[code]" type="text" value="{$list[code]|default=''}" class="input length_5 mr5"></td>
+                    <td><div class="fun_tips"></div></td>
+                </tr>
+
+            </table>
+        </div>
+        <div class="btn_wrap">
+            <div class="btn_wrap_pd">
+                <button class="btn btn_submit mr10 J_ajax_submit_btn" type="submit">提交</button>
+            </div>
+        </div>
+    </form>
+<!-- end -->  
+</div>
+<include file='Public/foot' />
+</body>
+</html>

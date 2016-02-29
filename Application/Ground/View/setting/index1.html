@@ -1,0 +1,241 @@
+<extend name="Public/base" />
+<block name="head">
+    <include file='Public/head' />
+</block>
+<block name="head_css"></block>
+<block name="main-header"><include file='Public/header' /></block>
+<block name="main-sidebar">
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- Sidebar user panel -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="__IMG__/logo.jpg" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>恒大羽毛球馆</p>
+                    <a href="#"><i class="fa fa-circle text-success"></i> 普通场馆</a>
+                </div>
+            </div>
+            <!-- search form -->
+            <form action="#" method="get" class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="搜索...">
+                      <span class="input-group-btn">
+                        <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+                      </span>
+                </div>
+            </form>
+            <!-- /.search form -->
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="sidebar-menu">
+                <li class="header">导航列表</li>
+                <li>
+                    <a href="{:U('Index/index')}">
+                        <i class="fa fa-dashboard"></i> <span>场馆首页</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:U('Orders/index')}">
+                        <i class="fa fa-files-o"></i>
+                        <span>订单管理</span>
+                        <span class="label label-primary pull-right">4</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:U('Balance/index')}">
+                        <i class="fa fa-files-o"></i>
+                        <span>结算管理</span>
+                        <span class="label label-primary pull-right">4</span>
+                    </a>
+                </li>
+                <li class="header">场馆设置</li>
+                <li class="active"><a href="{:U('Setting/index')}"><i class="fa fa-circle-o text-red"></i> <span>基础设置</span></a></li>
+                <li><a href="{:U('Setting/items')}"><i class="fa fa-circle-o text-yellow"></i> <span>项目设置</span></a></li>
+                <li><a href="{:U('Setting/block')}"><i class="fa fa-circle-o text-aqua"></i> <span>场地设置</span></a></li>
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+</block>
+<block name="content-header"><include file='Public/top' /></block>
+<block name="content">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Profile Image -->
+            <div class="box box-primary">
+                <div class="box-body box-profile">
+                    <img class="profile-user-img img-responsive img-circle" src="__IMG__/logo.jpg" alt="User profile picture">
+                    <h3 class="profile-username text-center">恒大羽毛球馆</h3>
+                    <p class="text-muted text-center">项目列表</p>
+
+                    <ul class="list-group list-group-unbordered">
+                        <li class="list-group-item">
+                            <b>羽毛球</b> <a class="pull-right">1,322</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>篮球</b> <a class="pull-right">543</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>网球</b> <a class="pull-right">13,287</a>
+                        </li>
+                    </ul>
+
+                    <a href="#" class="btn btn-primary btn-block"><b>添加项目</b></a>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+            <!-- About Me Box -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">关于我们</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <strong><i class="fa fa-book margin-r-5"></i>  简介</strong>
+                    <p class="text-muted">
+                        新开放羽毛球馆，场地全新。场馆营业时间室外跑道、足球场和篮球场可免费使用。
+                    </p>
+
+                    <hr>
+
+                    <strong><i class="fa fa-map-marker margin-r-5"></i> 定位</strong>
+                    <p class="text-muted">嘉定区和静路1388号（近新源路）</p>
+
+                    <hr>
+
+                    <strong><i class="fa fa-phone margin-r-5"></i> 电话</strong>
+                    <p class="text-muted">021-67720862</p>
+
+                    <hr>
+
+                    <strong><i class="fa fa-pencil margin-r-5"></i> 服务</strong>
+                    <p>
+                        <span class="label label-danger">免费停车场</span>
+                        <span class="label label-success">VIP休息室</span>
+                        <span class="label label-info">运行相关产品</span>
+                        <span class="label label-warning">柜子租赁</span>
+                        <span class="label label-primary">活动区</span>
+                    </p>
+
+                    <hr>
+
+                    <strong><i class="fa fa-camera-retro margin-r-5"></i> 相册</strong>
+                    <p>
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img src="http://placehold.it/900x500/39CCCC/ffffff&text=I+Love+Bootstrap" alt="First slide">
+                                <div class="carousel-caption">
+                                    First Slide
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img src="http://placehold.it/900x500/3c8dbc/ffffff&text=I+Love+Bootstrap" alt="Second slide">
+                                <div class="carousel-caption">
+                                    Second Slide
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img src="http://placehold.it/900x500/f39c12/ffffff&text=I+Love+Bootstrap" alt="Third slide">
+                                <div class="carousel-caption">
+                                    Third Slide
+                                </div>
+                            </div>
+                        </div>
+                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                            <span class="fa fa-angle-left"></span>
+                        </a>
+                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                            <span class="fa fa-angle-right"></span>
+                        </a>
+                    </div>
+                    </p>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div>
+        <div class="col-md-9">
+            <div class="box box-primary">
+                <form role="form" action="__SELF__" method="post">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">基础设置</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label>简介</label>
+                            <input type="text" name="summary" class="form-control" placeholder="填写简介">
+                        </div>
+                        <div class="form-group">
+                            <label>城市</label>
+                            <input type="text" name="city" id="city" class="form-control" placeholder="填写城市">
+                        </div>
+
+                        <div class="form-group">
+                            <label>电话</label>
+                            <input type="text" name="tel" class="form-control" placeholder="填写电话号码">
+                        </div>
+                        <div class="form-group">
+                            <label>公交</label>
+                            <input type="text" name="bus" class="form-control" placeholder="填写公交信息">
+                        </div>
+                        <div class="form-group">
+                            <label>服务</label>
+                            <select class="form-control select2" name="services[]" multiple="multiple" data-placeholder="选择服务项目" style="width: 100%;">
+                                <option value="免费停车场">免费停车场</option>
+                                <option value="VIP休息室">VIP休息室</option>
+                                <option value="柜子租赁">柜子租赁</option>
+                                <option value="活动区">活动区</option>
+                            </select>
+                        </div>
+
+
+                        <!-- input states -->
+                        <!--<div class="form-group has-success">-->
+                            <!--<label class="control-label" for="inputSuccess"><i class="fa fa-check"></i> Input with success</label>-->
+                            <!--<input type="text" class="form-control" id="inputSuccess" placeholder="Enter ...">-->
+                        <!--</div>-->
+                        <!--<div class="form-group has-warning">-->
+                            <!--<label class="control-label" for="inputWarning"><i class="fa fa-bell-o"></i> Input with warning</label>-->
+                            <!--<input type="text" class="form-control" id="inputWarning" placeholder="Enter ...">-->
+                        <!--</div>-->
+                        <!--<div class="form-group has-error">-->
+                            <!--<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> Input with error</label>-->
+                            <!--<input type="text" class="form-control" id="inputError" placeholder="Enter ...">-->
+                        <!--</div>-->
+
+
+                    </div>
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-default">重置</button>
+                        <button type="submit" class="btn btn-primary pull-right">提交设置</button>
+                    </div><!-- /.box-footer -->
+                </form>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="main-footer"><include file='Public/footer' /></block>
+<block name="foot">
+    <include file='Public/foot' />
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=bprghKO5NHFIW7Qd6Zs6hTjD"></script>
+    <script type="text/javascript">
+        // 百度地图API功能
+        var map = new BMap.Map("allmap");
+        var point = new BMap.Point(116.331398,39.897445);
+        map.centerAndZoom(point,12);
+
+        function myFun(result){
+            var cityName = result.name;
+            map.setCenter(cityName);
+            //alert("当前定位城市:"+cityName);
+            $('#city').val(cityName);
+        }
+        var myCity = new BMap.LocalCity();
+        myCity.get(myFun);
+    </script>
+</block>

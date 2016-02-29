@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body style="width:300px;" class="body_none">
+<!--添加用户-->
+    <form class="J_ajaxForm" data-role="list" action="__ACTION__" method="post" >
+    <input type='hidden' name='type' value="do">
+    <div class="pop_cont pop_table" style="height:auto;">
+        <table width="100%">
+            <col class="th" />
+            <col />
+            <thead>
+            <tr>
+                <th>用户名</th>
+                <td><input name="username" type="text" class="input length_3"></td>
+            </tr>
+            </thead>
+            <tr>
+                <th>密码</th>
+                <td><input name="password" type="password" class="input length_3"></td>
+            </tr>
+            <tr>
+                <th>重复密码</th>
+                <td><input name="repassword" type="password" class="input length_3"></td>
+            </tr>
+            <tr>
+                <th>电子邮箱</th>
+                <td><input name="email" type="text" class="input length_3 mr10"><label style="display:none">
+                <input name="sendEmail" type="checkbox" class="checkbox" value="0">电子邮件通知</label></td>
+            </tr>
+            <tfoot>
+                <tr>
+                    <th>用户组</th>
+                    <td><select name="gid" class="select_2">
+                        <option value="0">普通组</option>
+                        <foreach name="groups" item="item">
+                        <option value="{$item['gid']}">{$item['name']}</option>
+                        </foreach>
+                        </select>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div class="pop_bottom">
+        <button type="button" class="btn fr" id="J_dialog_close">取消</button>
+        <button type="submit" class="btn btn_submit mr10 fr J_ajax_submit_btn">提交</button>
+    </div>
+
+</form>
+<include file='Public/foot_min' />
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap J_check_wrap">
+    <div class="nav">
+        <ul class="cc">
+            <li><a href="{:U('index')}">用户认证</a></li>
+            <li class="current"><a href="{:U('customService')}">客户经理</a></li>
+        </ul>
+    </div>
+    <div class="h_a">提示信息</div>
+    <div class="mb10 prompt_text">
+        <ul>
+            <li>用户名和电子邮箱支持模糊搜索。用户名或电子邮箱输入“a” 则检索出所有以a开头的用户名或电子邮箱。</li>
+            <li>可以对用户的基本信息、积分信息、用户组，以及用户产生的内容进行管理。</li>
+        </ul>
+    </div>
+    <div class="mb10"><a class="btn J_dialog" href="{:U('add')}" title="添加客户经理" role="button"><span class="add"></span>添加客户经理</a></div>
+    <div class="h_a">搜索</div>
+    <div class="search_type cc mb10">
+        <form action="__SELF__" method="post">
+        <input type="hidden" name="p" value="{$p|default=1}">
+        <input type="hidden" name="soso" value="1">
+        <label>用户名包含：</label><input name="username" type="text" class="input length_2 mr10" value="{$username|default=''}">
+        <label>手机号码：</label><input name="mobile" type="text" class="input mr10" value="{$mobile|default=''}">
+        <label>电子邮箱：</label><input name="email" type="text" class="input mr10" value="{$email|default=''}">
+        <label>注册时间：</label><input type="text" name="time_start" value="{$time_start|default=''}" class="input length_2 mr5 J_date"><span class="mr5">至</span><input type="text" name="time_end" value="{$time_end|default=''}" class="input length_2 mr10 J_date">
+        <button type="submit" class="btn mr5">搜索</button>
+        <notempty name="soso">
+        <if condition="$soso">
+        <button type="reset" class="btn btn_error" onclick="window.location.href='{:U('customService')}'">撤销检索</button>
+        </if>
+        </notempty>
+        </form>
+    </div>
+    <div id="top-alert" class="alert alert-error" style="display: none;">
+        <button class="close fixed" style="margin-top: 4px;">×</button>
+        <div class="alert-content">这是内容</div>
+    </div>
+    <notempty name="_list">
+    <form method="post" action="#" id="J_tag_form" class="J_ajaxForm">
+    <div class="table_list">
+        <table width="100%">
+            <colgroup>
+            <col width="65">
+            </colgroup>
+            <thead>
+                <tr>
+                    <td>UID</td>
+                    <td>用户名</td>
+                    <td>真实名</td>
+                    <td>手机号码</td>
+                    <td>电子邮箱</td>
+                    <td>QQ</td>
+                    <td>生日</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+        <volist name="_list" id="vo">
+            <tr>
+                <td>{$vo.uid}</td>
+                <td><a href="{:U('Admin/User/edit',array('uid'=>$vo['uid']))}" >{$vo.username|op_t}</a></td>
+                <td>{$vo.realname}</td>
+                <td>{$vo.mobile}</td>
+                <td>{$vo.email}</td>
+                <td>
+                <switch name="vo['pass_realname']">
+                    <case value="0"><div class="not_content_mini_no" title="未通过">否</div></case>
+                    <case value="1"><div class="not_content_mini_yes" title="通过">通过</div></case>
+                    <case value="-1"><div class="not_content_mini_yee" title="待审">待审</div></case>
+                </switch>
+                </td>
+                <td></td>
+                <td>
+                    <a href="{:U('clearGroups?id='.$vo['uid'])}" class="mr10 J_ajax_del" data-msg="确定取消客户经理？">取消</a>
+                </td>
+            </tr>
+        </volist>
+        </table>
+    </div>
+    <div class="page">
+        {$_page}
+    </div>
+    </form>
+    <else/>
+    <div class="not_content_mini"><i></i>啊哦，没有符合条件的用户！</div>
+    </notempty>  
+</div>
+<include file='Public/foot' />
+</body>
+</html>

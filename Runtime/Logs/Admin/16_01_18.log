@@ -1,0 +1,415 @@
+[ 2016-01-18T11:22:33+08:00 ] 127.0.0.1 /admin.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003238s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004032s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002028s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002222s ]
+
+[ 2016-01-18T11:22:33+08:00 ] 127.0.0.1 /admin.php?s=/Public/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000072s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002847s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004099s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000781s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000904s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000095s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000216s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.022000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.022147s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000710s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000820s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000937s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001049s ]
+
+[ 2016-01-18T11:22:33+08:00 ] 127.0.0.1 /admin.php?s=/Public/verify.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000032s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003509s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004233s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001704s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001848s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001613s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002295s ]
+
+[ 2016-01-18T11:22:37+08:00 ] 127.0.0.1 /admin.php?s=/Public/verify.html&random=0.5170699607115239
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000060s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003974s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005412s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001062s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001265s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001384s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001575s ]
+
+[ 2016-01-18T11:22:39+08:00 ] 127.0.0.1 /admin.php?s=/Public/verify.html&random=0.7520115145016462
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000028s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.005714s ]
+INFO: [ app_init ] --END-- [ RunTime:0.006524s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001033s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001164s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000979s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001121s ]
+
+[ 2016-01-18T11:22:41+08:00 ] 127.0.0.1 /admin.php?s=/Public/verify.html&random=0.6824417137540877
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000148s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.007240s ]
+INFO: [ app_init ] --END-- [ RunTime:0.008646s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001055s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001206s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001144s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001310s ]
+
+[ 2016-01-18T11:22:47+08:00 ] 127.0.0.1 /admin.php?s=/Public/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000030s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.005829s ]
+INFO: [ app_init ] --END-- [ RunTime:0.006761s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000979s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001108s ]
+NOTIC: [8] Undefined index: lite C:\wamp\www\play\ThinkPHP\Library\Think\Db.class.php 第 37 行.
+SQL: SHOW COLUMNS FROM `pk_member` [ RunTime:0.0117s ]
+SQL: SELECT `uid`,`nickname`,`sex`,`birthday`,`qq`,`score`,`login`,`reg_ip`,`reg_time`,`last_login_ip`,`last_login_time`,`status`,`regreason`,`groupid`,`memberid`,`mobile`,`notices`,`icon`,`img`,`is_venue` FROM `pk_member` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `pk_action` [ RunTime:0.0101s ]
+SQL: SELECT * FROM `pk_action` WHERE `name` = 'user_login' LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `pk_action_log` [ RunTime:0.0093s ]
+SQL: INSERT INTO `pk_action_log` (`action_id`,`user_id`,`action_ip`,`model`,`record_id`,`create_time`,`remark`) VALUES ('1','1','2130706433','member','1','1453087367','admin在2016-01-18 11:22登录了后台') [ RunTime:0.0008s ]
+SQL: SELECT * FROM `pk_action` WHERE `name` = 'user_login' LIMIT 1   [ RunTime:0.0011s ]
+NOTIC: [8] Undefined offset: 1 C:\wamp\www\play\Application\Common\Common\function.php 第 694 行.
+NOTIC: [2] array_key_exists() expects parameter 2 to be array, null given C:\wamp\www\play\Application\Common\Common\function.php 第 694 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `pk_action_log` WHERE `action_id` = 1 AND `user_id` = 1 AND `create_time` > 1453000967 LIMIT 1   [ RunTime:0.0069s ]
+SQL: SHOW COLUMNS FROM `pk_member` [ RunTime:0.0076s ]
+SQL: UPDATE `pk_member` SET `score`=score+10 WHERE ( uid=1 AND status>-1 ) [ RunTime:0.0007s ]
+SQL: UPDATE `pk_member` SET `login`=`login`+1,`last_login_time`='1453087367',`last_login_ip`='2130706433' WHERE `uid` = 1 [ RunTime:0.0007s ]
+
+[ 2016-01-18T11:22:47+08:00 ] 127.0.0.1 /admin.php?s=/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000031s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003523s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004547s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001518s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001714s ]
+SQL: SHOW COLUMNS FROM `pk_ucenter_member` [ RunTime:0.0076s ]
+SQL: SELECT * FROM `pk_ucenter_member` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `pk_message_notices` [ RunTime:0.0213s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `pk_message_notices` WHERE `to_admin` = 1 AND `is_ignore` = 0 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `pk_menu` [ RunTime:0.0259s ]
+SQL: SELECT `id`,`title`,`alias`,`pid`,`sort`,`url`,`hide`,`tip`,`group`,`is_dev`,`type` FROM `pk_menu` WHERE `pid` = 0 AND `hide` = 0 AND `is_dev` = 0 ORDER BY sort asc  [ RunTime:0.0010s ]
+SQL: SELECT DISTINCT  `group` FROM `pk_menu` WHERE `group` <> '' AND `pid` = 1  [ RunTime:0.0016s ]
+SQL: SELECT `id`,`url` FROM `pk_menu` WHERE `pid` = 1 AND `hide` = 0 AND `is_dev` = 0  [ RunTime:0.0006s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip`,`is_dev` FROM `pk_menu` WHERE `group` = 'Index' AND `pid` = 1 AND `hide` = 0 AND `is_dev` = 0 ORDER BY sort asc  [ RunTime:0.0009s ]
+SQL: SELECT DISTINCT  `group` FROM `pk_menu` WHERE `group` <> '' AND `pid` = 49  [ RunTime:0.0010s ]
+SQL: SELECT `id`,`url` FROM `pk_menu` WHERE `pid` = 49 AND `hide` = 0 AND `is_dev` = 0  [ RunTime:0.0015s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip`,`is_dev` FROM `pk_menu` WHERE `group` = 'Config' AND `pid` = 49 AND `hide` = 0 AND `is_dev` = 0 ORDER BY sort asc  [ RunTime:0.0016s ]
+SQL: SELECT DISTINCT  `group` FROM `pk_menu` WHERE `group` <> '' AND `pid` = 2  [ RunTime:0.0007s ]
+SQL: SELECT `id`,`url` FROM `pk_menu` WHERE `pid` = 2 AND `hide` = 0 AND `is_dev` = 0  [ RunTime:0.0006s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip`,`is_dev` FROM `pk_menu` WHERE `group` = 'User' AND `pid` = 2 AND `hide` = 0 AND `is_dev` = 0 ORDER BY sort asc  [ RunTime:0.0006s ]
+SQL: SELECT DISTINCT  `group` FROM `pk_menu` WHERE `group` <> '' AND `pid` = 72  [ RunTime:0.0007s ]
+SQL: SELECT `id`,`url` FROM `pk_menu` WHERE `pid` = 72 AND `hide` = 0 AND `is_dev` = 0  [ RunTime:0.0006s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip`,`is_dev` FROM `pk_menu` WHERE `group` = 'Business' AND `pid` = 72 AND `hide` = 0 AND `is_dev` = 0 ORDER BY sort asc  [ RunTime:0.0007s ]
+SQL: SELECT DISTINCT  `group` FROM `pk_menu` WHERE `group` <> '' AND `pid` = 195  [ RunTime:0.0007s ]
+SQL: SELECT `id`,`url` FROM `pk_menu` WHERE `pid` = 195 AND `hide` = 0 AND `is_dev` = 0  [ RunTime:0.0005s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip`,`is_dev` FROM `pk_menu` WHERE `group` = 'Funds' AND `pid` = 195 AND `hide` = 0 AND `is_dev` = 0 ORDER BY sort asc  [ RunTime:0.0007s ]
+SQL: SELECT DISTINCT  `group` FROM `pk_menu` WHERE `group` <> '' AND `pid` = 43  [ RunTime:0.0009s ]
+SQL: SELECT `id`,`url` FROM `pk_menu` WHERE `pid` = 43 AND `hide` = 0 AND `is_dev` = 0  [ RunTime:0.0005s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip`,`is_dev` FROM `pk_menu` WHERE `group` = 'Cms' AND `pid` = 43 AND `hide` = 0 AND `is_dev` = 0 ORDER BY sort asc  [ RunTime:0.0006s ]
+SQL: SELECT DISTINCT  `group` FROM `pk_menu` WHERE `group` <> '' AND `pid` = 63  [ RunTime:0.0010s ]
+SQL: SELECT `id`,`url` FROM `pk_menu` WHERE `pid` = 63 AND `hide` = 0 AND `is_dev` = 0  [ RunTime:0.0006s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip`,`is_dev` FROM `pk_menu` WHERE `group` = 'Forum' AND `pid` = 63 AND `hide` = 0 AND `is_dev` = 0 ORDER BY sort asc  [ RunTime:0.0007s ]
+SQL: SELECT DISTINCT  `group` FROM `pk_menu` WHERE `group` <> '' AND `pid` = 46  [ RunTime:0.0007s ]
+SQL: SELECT `id`,`url` FROM `pk_menu` WHERE `pid` = 46 AND `hide` = 0 AND `is_dev` = 0  [ RunTime:0.0005s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip`,`is_dev` FROM `pk_menu` WHERE `group` = 'Addons' AND `pid` = 46 AND `hide` = 0 AND `is_dev` = 0 ORDER BY sort asc  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `pk_custom` [ RunTime:0.0221s ]
+SQL: SELECT `mid` FROM `pk_custom` WHERE `uid` = 1  [ RunTime:0.0009s ]
+SQL: SELECT * FROM `pk_menu` WHERE `id` = 45 LIMIT 1   [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000272s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000401s ]
+NOTIC: [8] Undefined variable: remind C:\wamp\www\play\Runtime\Cache\Admin\b595b808c2ebeeeb0478ffc30bb4e87a.php 第 128 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.058517s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.058649s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.002623s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002874s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001450s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001712s ]
+
+[ 2016-01-18T11:22:48+08:00 ] 127.0.0.1 /admin.php?s=/Home/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003174s ]
+INFO: [ app_init ] --END-- [ RunTime:0.003965s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000776s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000933s ]
+SQL: SHOW COLUMNS FROM `pk_ucenter_member` [ RunTime:0.0072s ]
+SQL: SELECT * FROM `pk_ucenter_member` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `pk_message_notices` [ RunTime:0.0103s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `pk_message_notices` WHERE `to_admin` = 1 AND `is_ignore` = 0 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `pk_menu` [ RunTime:0.0134s ]
+SQL: SELECT `id`,`title`,`alias`,`pid`,`sort`,`url`,`hide`,`tip`,`group`,`is_dev`,`type` FROM `pk_menu` WHERE `pid` = 0 AND `hide` = 0 AND `is_dev` = 0 ORDER BY sort asc  [ RunTime:0.0024s ]
+SQL: SELECT DISTINCT  `group` FROM `pk_menu` WHERE `group` <> '' AND `pid` = 1  [ RunTime:0.0008s ]
+SQL: SELECT `id`,`url` FROM `pk_menu` WHERE `pid` = 1 AND `hide` = 0 AND `is_dev` = 0  [ RunTime:0.0005s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip`,`is_dev` FROM `pk_menu` WHERE `group` = 'Index' AND `pid` = 1 AND `hide` = 0 AND `is_dev` = 0 ORDER BY sort asc  [ RunTime:0.0007s ]
+SQL: SELECT DISTINCT  `group` FROM `pk_menu` WHERE `group` <> '' AND `pid` = 49  [ RunTime:0.0015s ]
+SQL: SELECT `id`,`url` FROM `pk_menu` WHERE `pid` = 49 AND `hide` = 0 AND `is_dev` = 0  [ RunTime:0.0014s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip`,`is_dev` FROM `pk_menu` WHERE `group` = 'Config' AND `pid` = 49 AND `hide` = 0 AND `is_dev` = 0 ORDER BY sort asc  [ RunTime:0.0012s ]
+SQL: SELECT DISTINCT  `group` FROM `pk_menu` WHERE `group` <> '' AND `pid` = 2  [ RunTime:0.0006s ]
+SQL: SELECT `id`,`url` FROM `pk_menu` WHERE `pid` = 2 AND `hide` = 0 AND `is_dev` = 0  [ RunTime:0.0005s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip`,`is_dev` FROM `pk_menu` WHERE `group` = 'User' AND `pid` = 2 AND `hide` = 0 AND `is_dev` = 0 ORDER BY sort asc  [ RunTime:0.0006s ]
+SQL: SELECT DISTINCT  `group` FROM `pk_menu` WHERE `group` <> '' AND `pid` = 72  [ RunTime:0.0006s ]
+SQL: SELECT `id`,`url` FROM `pk_menu` WHERE `pid` = 72 AND `hide` = 0 AND `is_dev` = 0  [ RunTime:0.0007s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip`,`is_dev` FROM `pk_menu` WHERE `group` = 'Business' AND `pid` = 72 AND `hide` = 0 AND `is_dev` = 0 ORDER BY sort asc  [ RunTime:0.0008s ]
+SQL: SELECT DISTINCT  `group` FROM `pk_menu` WHERE `group` <> '' AND `pid` = 195  [ RunTime:0.0006s ]
+SQL: SELECT `id`,`url` FROM `pk_menu` WHERE `pid` = 195 AND `hide` = 0 AND `is_dev` = 0  [ RunTime:0.0005s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip`,`is_dev` FROM `pk_menu` WHERE `group` = 'Funds' AND `pid` = 195 AND `hide` = 0 AND `is_dev` = 0 ORDER BY sort asc  [ RunTime:0.0006s ]
+SQL: SELECT DISTINCT  `group` FROM `pk_menu` WHERE `group` <> '' AND `pid` = 43  [ RunTime:0.0008s ]
+SQL: SELECT `id`,`url` FROM `pk_menu` WHERE `pid` = 43 AND `hide` = 0 AND `is_dev` = 0  [ RunTime:0.0005s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip`,`is_dev` FROM `pk_menu` WHERE `group` = 'Cms' AND `pid` = 43 AND `hide` = 0 AND `is_dev` = 0 ORDER BY sort asc  [ RunTime:0.0009s ]
+SQL: SELECT DISTINCT  `group` FROM `pk_menu` WHERE `group` <> '' AND `pid` = 63  [ RunTime:0.0010s ]
+SQL: SELECT `id`,`url` FROM `pk_menu` WHERE `pid` = 63 AND `hide` = 0 AND `is_dev` = 0  [ RunTime:0.0006s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip`,`is_dev` FROM `pk_menu` WHERE `group` = 'Forum' AND `pid` = 63 AND `hide` = 0 AND `is_dev` = 0 ORDER BY sort asc  [ RunTime:0.0006s ]
+SQL: SELECT DISTINCT  `group` FROM `pk_menu` WHERE `group` <> '' AND `pid` = 46  [ RunTime:0.0006s ]
+SQL: SELECT `id`,`url` FROM `pk_menu` WHERE `pid` = 46 AND `hide` = 0 AND `is_dev` = 0  [ RunTime:0.0004s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip`,`is_dev` FROM `pk_menu` WHERE `group` = 'Addons' AND `pid` = 46 AND `hide` = 0 AND `is_dev` = 0 ORDER BY sort asc  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `pk_custom` [ RunTime:0.0122s ]
+SQL: SELECT `mid` FROM `pk_custom` WHERE `uid` = 1  [ RunTime:0.0007s ]
+SQL: SELECT * FROM `pk_menu` WHERE `id` = 45 LIMIT 1   [ RunTime:0.0011s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000122s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000266s ]
+INFO: [ AdminIndex ] --START--
+SQL: SHOW COLUMNS FROM `pk_addons` [ RunTime:0.0212s ]
+SQL: SELECT `config` FROM `pk_addons` WHERE `name` = 'SiteStat' AND `status` = 1 LIMIT 1   [ RunTime:0.0020s ]
+NOTIC: [2] Illegal offset type C:\wamp\www\play\Addons\SiteStat\SiteStatAddon.class.php 第 40 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `pk_ucenter_member` WHERE `custom_service` = '' LIMIT 1   [ RunTime:0.0015s ]
+SQL: SHOW COLUMNS FROM `pk_action_log` [ RunTime:0.0091s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `pk_action_log` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `pk_document` [ RunTime:0.0197s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `pk_document` LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `pk_category` [ RunTime:0.0228s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `pk_category` LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `pk_model` [ RunTime:0.0207s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `pk_model` LIMIT 1   [ RunTime:0.0008s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000230s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.194615s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.012390s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.012552s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001549s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001782s ]
+INFO: Run Addons\SiteStat\SiteStatAddon [ RunTime:0.141789s ]
+SQL: SELECT `config` FROM `pk_addons` WHERE `name` = 'SystemInfo' AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000091s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.372970s ]
+SQL: select version() as v; [ RunTime:0.0017s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.023792s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.163830s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000161s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.185906s ]
+INFO: Run Addons\SystemInfo\SystemInfoAddon [ RunTime:0.186159s ]
+SQL: SELECT `config` FROM `pk_addons` WHERE `name` = 'DevTeam' AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000081s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.403997s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.010850s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.196462s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000069s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.205572s ]
+INFO: Run Addons\DevTeam\DevTeamAddon [ RunTime:0.019460s ]
+INFO: [ AdminIndex ] --END-- [ RunTime:0.347653s ]
+NOTIC: [8] Undefined variable: remind C:\wamp\www\play\Runtime\Cache\Admin\22e1ae56de7cd2188a6c84240f3a78b7.php 第 59 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011592s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.196462s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000027s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.206278s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000908s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001027s ]
+
+[ 2016-01-18T11:22:52+08:00 ] 127.0.0.1 /admin.php?s=/Config/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000199s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.006362s ]
+INFO: [ app_init ] --END-- [ RunTime:0.007996s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002006s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002380s ]
+SQL: SHOW COLUMNS FROM `pk_ucenter_member` [ RunTime:0.0142s ]
+SQL: SELECT * FROM `pk_ucenter_member` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `pk_message_notices` [ RunTime:0.0076s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `pk_message_notices` WHERE `to_admin` = 1 AND `is_ignore` = 0 LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `pk_menu` [ RunTime:0.0087s ]
+SQL: SELECT `id`,`title`,`alias`,`pid`,`sort`,`url`,`hide`,`tip`,`group`,`is_dev`,`type` FROM `pk_menu` WHERE `pid` = 0 AND `hide` = 0 AND `is_dev` = 0 ORDER BY sort asc  [ RunTime:0.0008s ]
+SQL: SELECT DISTINCT  `group` FROM `pk_menu` WHERE `group` <> '' AND `pid` = 1  [ RunTime:0.0009s ]
+SQL: SELECT `id`,`url` FROM `pk_menu` WHERE `pid` = 1 AND `hide` = 0 AND `is_dev` = 0  [ RunTime:0.0006s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip`,`is_dev` FROM `pk_menu` WHERE `group` = 'Index' AND `pid` = 1 AND `hide` = 0 AND `is_dev` = 0 ORDER BY sort asc  [ RunTime:0.0006s ]
+SQL: SELECT DISTINCT  `group` FROM `pk_menu` WHERE `group` <> '' AND `pid` = 49  [ RunTime:0.0008s ]
+SQL: SELECT `id`,`url` FROM `pk_menu` WHERE `pid` = 49 AND `hide` = 0 AND `is_dev` = 0  [ RunTime:0.0009s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip`,`is_dev` FROM `pk_menu` WHERE `group` = 'Config' AND `pid` = 49 AND `hide` = 0 AND `is_dev` = 0 ORDER BY sort asc  [ RunTime:0.0010s ]
+SQL: SELECT DISTINCT  `group` FROM `pk_menu` WHERE `group` <> '' AND `pid` = 2  [ RunTime:0.0007s ]
+SQL: SELECT `id`,`url` FROM `pk_menu` WHERE `pid` = 2 AND `hide` = 0 AND `is_dev` = 0  [ RunTime:0.0006s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip`,`is_dev` FROM `pk_menu` WHERE `group` = 'User' AND `pid` = 2 AND `hide` = 0 AND `is_dev` = 0 ORDER BY sort asc  [ RunTime:0.0006s ]
+SQL: SELECT DISTINCT  `group` FROM `pk_menu` WHERE `group` <> '' AND `pid` = 72  [ RunTime:0.0006s ]
+SQL: SELECT `id`,`url` FROM `pk_menu` WHERE `pid` = 72 AND `hide` = 0 AND `is_dev` = 0  [ RunTime:0.0006s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip`,`is_dev` FROM `pk_menu` WHERE `group` = 'Business' AND `pid` = 72 AND `hide` = 0 AND `is_dev` = 0 ORDER BY sort asc  [ RunTime:0.0007s ]
+SQL: SELECT DISTINCT  `group` FROM `pk_menu` WHERE `group` <> '' AND `pid` = 195  [ RunTime:0.0006s ]
+SQL: SELECT `id`,`url` FROM `pk_menu` WHERE `pid` = 195 AND `hide` = 0 AND `is_dev` = 0  [ RunTime:0.0007s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip`,`is_dev` FROM `pk_menu` WHERE `group` = 'Funds' AND `pid` = 195 AND `hide` = 0 AND `is_dev` = 0 ORDER BY sort asc  [ RunTime:0.0007s ]
+SQL: SELECT DISTINCT  `group` FROM `pk_menu` WHERE `group` <> '' AND `pid` = 43  [ RunTime:0.0008s ]
+SQL: SELECT `id`,`url` FROM `pk_menu` WHERE `pid` = 43 AND `hide` = 0 AND `is_dev` = 0  [ RunTime:0.0006s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip`,`is_dev` FROM `pk_menu` WHERE `group` = 'Cms' AND `pid` = 43 AND `hide` = 0 AND `is_dev` = 0 ORDER BY sort asc  [ RunTime:0.0014s ]
+SQL: SELECT DISTINCT  `group` FROM `pk_menu` WHERE `group` <> '' AND `pid` = 63  [ RunTime:0.0007s ]
+SQL: SELECT `id`,`url` FROM `pk_menu` WHERE `pid` = 63 AND `hide` = 0 AND `is_dev` = 0  [ RunTime:0.0005s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip`,`is_dev` FROM `pk_menu` WHERE `group` = 'Forum' AND `pid` = 63 AND `hide` = 0 AND `is_dev` = 0 ORDER BY sort asc  [ RunTime:0.0007s ]
+SQL: SELECT DISTINCT  `group` FROM `pk_menu` WHERE `group` <> '' AND `pid` = 46  [ RunTime:0.0007s ]
+SQL: SELECT `id`,`url` FROM `pk_menu` WHERE `pid` = 46 AND `hide` = 0 AND `is_dev` = 0  [ RunTime:0.0004s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip`,`is_dev` FROM `pk_menu` WHERE `group` = 'Addons' AND `pid` = 46 AND `hide` = 0 AND `is_dev` = 0 ORDER BY sort asc  [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `pk_custom` [ RunTime:0.0091s ]
+SQL: SELECT `mid` FROM `pk_custom` WHERE `uid` = 1  [ RunTime:0.0008s ]
+SQL: SELECT * FROM `pk_menu` WHERE `id` = 45 LIMIT 1   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `pk_config` [ RunTime:0.0104s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `pk_config` WHERE `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT `id`,`name`,`type`,`title`,`group`,`extra`,`remark`,`create_time`,`update_time`,`status`,`value`,`sort` FROM `pk_config` WHERE `status` = 1 ORDER BY sort,id LIMIT 0,10   [ RunTime:0.0009s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000380s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000541s ]
+NOTIC: [8] Undefined variable: remind C:\wamp\www\play\Runtime\Cache\Admin\9bb5e7ead1bbec7c3d970a481af28a6e.php 第 118 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.055656s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.055848s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000805s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000912s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000714s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000840s ]
+
+[ 2016-01-18T11:22:54+08:00 ] 127.0.0.1 /admin.php?s=/Config/group.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003263s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004515s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000843s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000976s ]
+SQL: SHOW COLUMNS FROM `pk_ucenter_member` [ RunTime:0.0150s ]
+SQL: SELECT * FROM `pk_ucenter_member` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `pk_config` [ RunTime:0.0117s ]
+SQL: SELECT `type`,`name`,`value` FROM `pk_config` WHERE `status` = 1  [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `pk_message_notices` [ RunTime:0.0097s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `pk_message_notices` WHERE `to_admin` = 1 AND `is_ignore` = 0 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `pk_custom` [ RunTime:0.0077s ]
+SQL: SELECT `mid` FROM `pk_custom` WHERE `uid` = 1  [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `pk_menu` [ RunTime:0.0102s ]
+SQL: SELECT * FROM `pk_menu` WHERE `id` = 45 LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT `id`,`name`,`title`,`extra`,`value`,`remark`,`type` FROM `pk_config` WHERE `status` = 1 AND `group` = 1 ORDER BY sort  [ RunTime:0.0011s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000142s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000268s ]
+NOTIC: [8] Undefined variable: info C:\wamp\www\play\Runtime\Cache\Admin\e915606f4666252950bacf14eab57f78.php 第 81 行.
+NOTIC: [8] Undefined variable: remind C:\wamp\www\play\Runtime\Cache\Admin\e915606f4666252950bacf14eab57f78.php 第 112 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.052123s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.052243s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000700s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000806s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000809s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000918s ]
+
+[ 2016-01-18T11:23:13+08:00 ] 127.0.0.1 /admin.php?s=/Config/save.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002850s ]
+INFO: [ app_init ] --END-- [ RunTime:0.003616s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001273s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001464s ]
+SQL: SHOW COLUMNS FROM `pk_ucenter_member` [ RunTime:0.0111s ]
+SQL: SELECT * FROM `pk_ucenter_member` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `pk_message_notices` [ RunTime:0.0074s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `pk_message_notices` WHERE `to_admin` = 1 AND `is_ignore` = 0 LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `pk_custom` [ RunTime:0.0091s ]
+SQL: SELECT `mid` FROM `pk_custom` WHERE `uid` = 1  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `pk_menu` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `pk_menu` WHERE `id` = 45 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `pk_config` [ RunTime:0.0078s ]
+SQL: UPDATE `pk_config` SET `value`='BOBOOKING-全国专业场馆预定平台' WHERE `name` = 'WEB_SITE_TITLE' [ RunTime:0.0006s ]
+SQL: UPDATE `pk_config` SET `value`='93' WHERE `name` = 'USER_MANAGER' [ RunTime:0.0005s ]
+SQL: UPDATE `pk_config` SET `value`='￥%s' WHERE `name` = 'MONEYUNIT' [ RunTime:0.0005s ]
+SQL: UPDATE `pk_config` SET `value`='http://192.168.0.72' WHERE `name` = 'HTTPHOST' [ RunTime:0.0007s ]
+SQL: UPDATE `pk_config` SET `value`='BOBOOKING' WHERE `name` = 'PLATFORMNAME' [ RunTime:0.0005s ]
+SQL: UPDATE `pk_config` SET `value`='027-87878789' WHERE `name` = 'TEL' [ RunTime:0.0007s ]
+SQL: UPDATE `pk_config` SET `value`='bobooking@126.com' WHERE `name` = 'EMAIL' [ RunTime:0.0005s ]
+SQL: UPDATE `pk_config` SET `value`='上海市浦东新区1898' WHERE `name` = 'ADDR' [ RunTime:0.0004s ]
+SQL: UPDATE `pk_config` SET `value`='BOBOOKING-全国专业场馆预定平台' WHERE `name` = 'WEB_SITE_DESCRIPTION' [ RunTime:0.0006s ]
+SQL: UPDATE `pk_config` SET `value`='1' WHERE `name` = 'WEB_SITE_CLOSE' [ RunTime:0.0005s ]
+SQL: UPDATE `pk_config` SET `value`='BOBOOKING,场馆预定' WHERE `name` = 'WEB_SITE_KEYWORD' [ RunTime:0.0005s ]
+SQL: UPDATE `pk_config` SET `value`='鄂ICP备14003599号-1 ' WHERE `name` = 'WEB_SITE_ICP' [ RunTime:0.0005s ]
+SQL: UPDATE `pk_config` SET `value`='default_color' WHERE `name` = 'COLOR_STYLE' [ RunTime:0.0005s ]
+
+[ 2016-01-18T11:23:14+08:00 ] 127.0.0.1 /admin.php?s=/Config/group.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000037s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.005298s ]
+INFO: [ app_init ] --END-- [ RunTime:0.007085s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000800s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000926s ]
+SQL: SHOW COLUMNS FROM `pk_ucenter_member` [ RunTime:0.0112s ]
+SQL: SELECT * FROM `pk_ucenter_member` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `pk_config` [ RunTime:0.0096s ]
+SQL: SELECT `type`,`name`,`value` FROM `pk_config` WHERE `status` = 1  [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `pk_message_notices` [ RunTime:0.0083s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `pk_message_notices` WHERE `to_admin` = 1 AND `is_ignore` = 0 LIMIT 1   [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `pk_custom` [ RunTime:0.0101s ]
+SQL: SELECT `mid` FROM `pk_custom` WHERE `uid` = 1  [ RunTime:0.0016s ]
+SQL: SHOW COLUMNS FROM `pk_menu` [ RunTime:0.0082s ]
+SQL: SELECT * FROM `pk_menu` WHERE `id` = 45 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `id`,`name`,`title`,`extra`,`value`,`remark`,`type` FROM `pk_config` WHERE `status` = 1 AND `group` = 1 ORDER BY sort  [ RunTime:0.0008s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000145s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000293s ]
+NOTIC: [8] Undefined variable: info C:\wamp\www\play\Runtime\Cache\Admin\e915606f4666252950bacf14eab57f78.php 第 81 行.
+NOTIC: [8] Undefined variable: remind C:\wamp\www\play\Runtime\Cache\Admin\e915606f4666252950bacf14eab57f78.php 第 112 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.023849s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.023976s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000532s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000638s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000764s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000872s ]
+

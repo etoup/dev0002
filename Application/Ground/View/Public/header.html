@@ -1,0 +1,215 @@
+<header class="main-header">
+
+<!-- Logo -->
+<a href="__APP__" class="logo">
+    <!-- mini logo for sidebar mini 50x50 pixels -->
+    <span class="logo-mini">场馆</span>
+    <!-- logo for regular state and mobile devices -->
+    <span class="logo-lg">场馆后台管理</span>
+</a>
+
+<!-- Header Navbar: style can be found in header.less -->
+<nav class="navbar navbar-static-top" role="navigation">
+<!-- Sidebar toggle button-->
+<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+    <span class="sr-only">Toggle navigation</span>
+</a>
+<!-- Navbar Right Menu -->
+<div class="navbar-custom-menu">
+<ul class="nav navbar-nav">
+
+<!-- Notifications: style can be found in dropdown.less -->
+<li class="dropdown notifications-menu">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <i class="fa fa-bell-o"></i>
+        <span class="label label-warning">10</span>
+    </a>
+    <ul class="dropdown-menu">
+        <li class="header">您有10条未读消息</li>
+        <li>
+            <!-- inner menu: contains the actual data -->
+            <ul class="menu">
+                <li>
+                    <a href="#">
+                        <i class="fa fa-users text-aqua"></i> 未读消息标题
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-warning text-yellow"></i> 未读消息标题
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-users text-red"></i> 未读消息标题
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-shopping-cart text-green"></i> 未读消息标题
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-user text-red"></i> 未读消息标题
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="footer"><a href="#">查看全部</a></li>
+    </ul>
+</li>
+<!-- Tasks: style can be found in dropdown.less -->
+<li class="dropdown tasks-menu">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <i class="fa fa-flag-o"></i>
+        <span class="label label-danger">3</span>
+    </a>
+    <ul class="dropdown-menu">
+        <li class="header">简单三步完成场馆设置</li>
+        <li>
+            <!-- inner menu: contains the actual data -->
+            <ul class="menu">
+                <li><!-- Task item -->
+                    <if condition="$setA">
+                        <a href="{:U('Setting/index')}">
+                            <h3>
+                                场馆基础设置
+                                <small class="pull-right">100%</small>
+                            </h3>
+                            <div class="progress xs">
+                                <div class="progress-bar progress-bar-aqua" style="width: 100%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                    <span class="sr-only">100% Complete</span>
+                                </div>
+                            </div>
+                        </a>
+                        <else/>
+                        <a href="{:U('Setting/index')}">
+                            <h3>
+                                场馆基础设置
+                                <small class="pull-right">0%</small>
+                            </h3>
+                            <div class="progress xs">
+                                <div class="progress-bar progress-bar-aqua" style="width: 0" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                    <span class="sr-only">0% Complete</span>
+                                </div>
+                            </div>
+                        </a>
+                    </if>
+
+                </li><!-- end task item -->
+                <li><!-- Task item -->
+                    <if condition="$setB">
+                        <a href="{:U('Setting/items')}">
+                            <h3>
+                                场馆项目设置
+                                <small class="pull-right">100%</small>
+                            </h3>
+                            <div class="progress xs">
+                                <div class="progress-bar progress-bar-green" style="width: 100%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                    <span class="sr-only">100% Complete</span>
+                                </div>
+                            </div>
+                        </a>
+                        <else/>
+                        <a href="{:U('Setting/items')}">
+                            <h3>
+                                场馆项目设置
+                                <small class="pull-right">0%</small>
+                            </h3>
+                            <div class="progress xs">
+                                <div class="progress-bar progress-bar-green" style="width: 0" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                    <span class="sr-only">0% Complete</span>
+                                </div>
+                            </div>
+                        </a>
+                    </if>
+
+                </li><!-- end task item -->
+                <li><!-- Task item -->
+                    <if condition="$setC">
+                        <a href="{:U('Setting/block')}">
+                            <h3>
+                                场馆场地设置
+                                <small class="pull-right">100%</small>
+                            </h3>
+                            <div class="progress xs">
+                                <div class="progress-bar progress-bar-red" style="width: 100%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                    <span class="sr-only">100% Complete</span>
+                                </div>
+                            </div>
+                        </a>
+                        <else/>
+                        <a href="{:U('Setting/block')}">
+                            <h3>
+                                场馆场地设置
+                                <small class="pull-right">0%</small>
+                            </h3>
+                            <div class="progress xs">
+                                <div class="progress-bar progress-bar-red" style="width: 0" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                    <span class="sr-only">0% Complete</span>
+                                </div>
+                            </div>
+                        </a>
+                    </if>
+                </li><!-- end task item -->
+            </ul>
+        </li>
+    </ul>
+</li>
+<li>
+    <a href="{:ROOT}" target="_blank"><i class="fa fa-send-o"></i></a>
+</li>
+<!-- User Account: style can be found in dropdown.less -->
+<li class="dropdown user user-menu">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <if condition="$icon">
+            <img src="{$icon.path}" class="user-image myimg" alt="User Image">
+            <else/>
+            <img src="__IMG__/avatar.jpg" class="user-image myimg" alt="User Image">
+        </if>
+        <span class="hidden-xs">{:USERNAME}</span>
+    </a>
+    <ul class="dropdown-menu">
+        <!-- User image -->
+        <li class="user-header">
+            <if condition="$icon">
+                <img src="{$icon.path}" class="img-circle myimg" alt="User Image">
+                <else/>
+                <img src="__IMG__/avatar.jpg" class="img-circle myimg" alt="User Image">
+            </if>
+            <p>
+                {:NAME}
+                <small>2015-10-10 9:30</small>
+            </p>
+        </li>
+        <!-- Menu Body -->
+        <li class="user-body">
+            <div class="col-xs-4 text-center">
+                <a href="#">账户</a>
+            </div>
+            <div class="col-xs-4 text-center">
+                <a href="#">消息</a>
+            </div>
+            <div class="col-xs-4 text-center">
+                <a href="#">积分</a>
+            </div>
+        </li>
+        <!-- Menu Footer-->
+        <li class="user-footer">
+            <div class="pull-left">
+                <a href="#" class="btn btn-default btn-flat">详情</a>
+            </div>
+            <div class="pull-right">
+                <a href="{:U('Public/logout')}" class="btn btn-default btn-flat">退出登录</a>
+            </div>
+        </li>
+    </ul>
+</li>
+<!-- Control Sidebar Toggle Button -->
+
+</ul>
+</div>
+
+</nav>
+</header>

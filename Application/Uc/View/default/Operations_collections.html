@@ -1,0 +1,119 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link href="__CSS__/index.css" rel="stylesheet" />
+    <link href="__CSS__/dashboard.css" rel="stylesheet">
+    <link href="__STATIC__/bootstrap/css/datepicker.css" rel="stylesheet" />
+</block>
+</head> 
+<body>
+<block name="header"><include file='Public/header' /></block>
+<block name="nav"><include file='Public/nav' /></block>
+<block name="uctop">
+    <div class="alert alert-warning" role="alert">
+        <span class="glyphicon glyphicon-list" aria-hidden="true"></span> {$seo.title}
+
+    </div>
+</block>
+
+<block name="main">
+    <ul class="nav nav-tabs mb30">
+        <li role="presentation"><a href="{:U('index')}">我的收还款</a></li>
+        <li role="presentation" class="active"><a href="{:U('collections')}">收款记录</a></li>
+        <li role="presentation"><a href="{:U('repayment')}">还款记录</a></li>
+    </ul>
+    <div class="alert alert-danger alert-dismissible fade in mt30" id="tip" role="alert" >
+        <button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+        <strong></strong>
+    </div>
+
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-md-9">
+            <form role="form" class="form-inline" action="__SELF__" method="post">
+                <input type="text" name="time_start" data-date-format="yyyy-mm-dd" placeholder="开始时间" class="datepicker form-control" style="width: 90px;">
+                <label>到</label>
+                <input type="text" name="time_end" data-date-format="yyyy-mm-dd" placeholder="结束时间" class="datepicker form-control" style="width: 90px;">
+                <select class="form-control" name="status">
+                    <option value="0">待收</option>
+                    <option value="1">已收</option>
+                    <option value="-1">撤回</option>
+                </select>
+                <div class="form-group">
+                    <input type="text" name="orders" placeholder="单号" id="exampleInputEmail2" class="form-control">
+                </div>
+                <button class="btn btn-default" type="submit">搜索</button>
+                <if condition="$search">
+                    <a href="{:U('collections')}" class="btn btn-default" role="button">撤销检索</a>
+                </if>
+            </form>
+        </div>
+        <div class="col-md-3">
+            <div class="btn-group">
+                <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button" aria-expanded="false">收款时间排序 <span class="caret"></span></button>
+                <ul role="menu" class="dropdown-menu">
+                    <li><a href="{:U('collections',['sort'=>'time_repayment'])}">收款时间升序</a></li>
+                    <li class="divider"></li>
+                    <li><a href="{:U('collections',['sort'=>'time_repayment','desc'=>1])}">收款时间降序</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <if condition="$_list">
+        <div class="row mt30">
+            <div class="col-md-12">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>单号</th>
+                            <th>截止收款时间</th>
+                            <th>金额</th>
+                            <th>状态</th>
+                            <th>备注</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <foreach name="_list" item="v">
+                            <tr>
+                                <td>{$v.orders}</td>
+                                <td>{$v['time_repayment']|time_format='Y-m-d'}</td>
+                                <td>{:money($v['money'])}</td>
+                                <td>
+                                    <switch name="v['status']">
+                                        <case value="0">待收</case>
+                                        <case value="1">已收</case>
+                                        <case value="-1">撤回</case>
+                                    </switch>
+                                </td>
+                                <td>
+                                    <switch name="v.types">
+                                        <case value="0">投资收益</case>
+                                        <case value="1">投资本金</case>
+                                    </switch>
+                                </td>
+                            </tr>
+                        </foreach>
+                    </tbody>
+                </table>
+                <div class="page">
+                    {$_page}
+                </div>
+            </div>
+        </div>
+        <else/>
+        <div class="paizi nolist mt50">
+            <a href="">没有相关记录</a>
+        </div>
+    </if>
+</block>
+
+<block name="foot"><include file='Public/foot' /></block>
+<block name="foot_js">
+    <script src="__STATIC__/bootstrap/js/bootstrap-datepicker.js"></script>
+    <script>
+        $('.datepicker').datepicker();
+    </script>
+</block>
+</body>
+</html>

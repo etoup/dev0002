@@ -1,0 +1,285 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body{
+    color: #6f6f6f;
+    font-size: 14px;
+    font-style: normal !important;
+    background: none;
+    position: relative;
+    height: 100%;
+}
+a ,a:hover{
+  text-decoration: none;
+  outline: none;
+}
+
+ul,ol{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+section {
+  padding-top: 4em;
+}
+.hr {
+    height: 1px;
+    width: 90%;
+    margin: 0 auto;
+    background: #d4d5d5;
+    clear: both;
+    margin-top: 20px;
+}
+
+.container-fluid{
+  padding-right:0;
+  padding-left:0;
+}
+.or{color:#F96900}
+/*
+===================
+main header
+===================
+*/
+.main-header {
+  width:100%;
+}
+.message{
+  height:220px;
+  background: #9cfffc url("../images/banner.png") no-repeat center;
+}
+.lf,.rh{
+  width:50%;
+  text-align: left;
+  color: #6f6f6f;
+  font-size: 16px;
+  font-style: normal;
+  padding: 0 30px;
+}
+.rh{
+  border-left: 1px solid #d4d5d5;
+}
+.c{
+  font-weight: bold;
+}
+/*
+===================
+main stock
+===================
+*/
+.main-content {
+  background:#f6f6f5;
+  overflow: hidden;
+  margin-bottom: -30px;
+}
+
+#stock{
+  padding: 4em 0 20px 0;
+}
+.t1 {
+    text-align: left;
+    color: #838080;
+    font-family: "Times New Roman",Times,serif;
+    font-size: 3.75rem;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 1.18rem;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+}
+.t1::after {
+    border-bottom: 1px solid #71bcce;
+    content: "";
+    display: block;
+    height: 0;
+    margin: 1.25rem 0;
+    text-align: left;
+    width: 6.25rem;
+}
+.t1 span{
+  color:#d4d5d5;
+}
+
+.stock-box{
+    background: white none repeat scroll 0 0;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
+
+}
+/*stock-main*/
+.stock-main{
+  min-height: 430px;
+  padding:50px 25px;
+  font-size: 13px;
+  border-bottom: 1px  dashed #E0E0E0;
+}
+.stock-main .row{
+  margin-top: 10px;
+}
+.stock-main h2{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height:30px;
+  line-height: 30px;
+  font-size: 13px;
+  color:#888;
+    width: 180px;
+  text-align: right;
+}
+.stock-main .amount{
+  width:600px;
+  height:75px;
+  margin-right: -10px;
+  text-align: center;
+}
+.stock-main .amount a{
+  display:block;
+  width: 94px;
+  color:#666;
+  height: 50px;
+  line-height: 46px;
+  border: 2px solid #DDD;
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+
+}
+
+.stock-main .amount a:hover{
+  border: 2px solid #F96900;
+  font-size: 13px;
+  color: #F96900;
+    text-decoration: none;
+}
+.stock-main .amount a.active{
+    border: 2px solid #F96900;
+    font-size: 13px;
+    color: #F96900;
+    text-decoration: none;
+    background: url(../images/common/radio_disabled.png) right bottom no-repeat;
+}
+.stock-main .stop-time{
+  margin-left: 15px;
+  width:510px;
+  height: 30px;
+  line-height: 28px;
+  margin-top: 10px;
+  border: dashed 1px #F96900;
+  color:#f96900;
+}
+.stock-main .amount-msg{
+  height: 30px;
+  line-height: 30px;
+  margin-top: 10px;
+  color:#666;
+}
+.stock-main .pay-freeze{
+  padding-top: 5px;
+}
+
+#subm {
+  text-align: center;
+  margin: 40px 0 ;
+}
+#subm #submit {
+  background: #1ebdff;
+  border-radius: 2px;
+  width: 200px;
+}
+/*caution*/
+.caution{
+  padding: 30px 40px;
+}
+.caution h2{
+  width:auto;
+  font-size: 16px;
+  color:#888;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+.caution h4{
+  font-size: 14px;
+  color:#888;
+  font-weight: bold;
+}
+.caution p{
+  color:#666;
+  font-size: 12px;
+}
+.shadow-left {
+    background: linear-gradient(to right , #333, transparent);
+    left: 0;
+}
+.shadow-right {
+    background: linear-gradient(to left , #333, transparent);
+    right: 0;
+}
+.shadow-left, .shadow-right {
+    display: block;
+    pointer-events: none;
+    position: absolute;
+    top: 0px;
+    width: 30%;
+    height:100%;
+}
+
+/*
+===================
+main stock-footer
+===================
+*/
+#stock-footer{
+  padding:10px 0 50px 0;
+}
+.stock-info{
+  height: 430px;
+  padding:30px 25px;
+  font-size: 13px;
+}
+.nav-tabs li {
+  float: left;
+  margin-bottom: -1px;
+  width:50%;
+}
+#stock-footer .nav>li>a {
+  padding: 10px 15px;
+  text-align: center;
+}
+.tab-pane{
+  padding:10px 0;
+  height:300px;
+  overflow-y: scroll;
+}
+.table{
+  text-align: center;
+}
+
+/*
+===================
+main xz
+===================
+*/
+#xz{
+  min-height: 200px;
+  padding:10px 0 50px 0;
+}
+.xz{
+  min-height: 200px;
+  padding:30px 25px;
+  font-size: 13px;
+}
+.download{position: relative;}
+.download dl{ width: 260px; margin-top: 20px;text-align: center;margin-left: 80px;}
+.download dl dt{ float: left;}
+.download dl dd { overflow: hidden;}
+.download dl span{ width: 130px;height: 60px;display: block;background:url(../images/peizi_png.png) no-repeat;margin: auto;}
+.download dl span.pc_down{ background-position: 20px -38px;}
+.download dl dd a{ display: block;background-color: #60c5ff;text-align: center;width: 200px;height: 35px;line-height: 35px;margin: auto;color: #fff;}
+.download dl span.apple_down{background-position: -104px -35px;}
+.download dl span.android_down{background-position: 30px -110px;}
+.download dl dd a:hover{ background-color: #9bd4f5;}
+.label_p{ position: absolute;width: 135px;height: 105px;right: 0;bottom: -10px;background:url(../images/peizi_png.png) no-repeat; background-position:-64px -94px}

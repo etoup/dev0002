@@ -1,0 +1,59 @@
+
+<div class="topnav">
+    <div class="container">
+        <div class="pull-left">
+            <i><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> 6he-talent@6hezb.com</i>
+            <i><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span> 400-873-8666</i>
+        </div>
+        <ul class="navbar-right">
+            <li class="dropdown" id="fat-menu">
+                <a href="http://6hezb.com" target="_blank"><span class="glyphicon glyphicon-share-alt"></span> 返回旧版</a>
+                <!--<a aria-expanded="false" role="button" aria-haspopup="true" data-toggle="dropdown" class="dropdown-toggle" href="#" id="drop3">-->
+                    <!--<span class="glyphicon glyphicon-cog" aria-hidden="true"></span> 会员中心-->
+                    <!--<span class="caret"></span>-->
+                <!--</a>-->
+                <!--<ul aria-labelledby="drop3" role="menu" class="dropdown-menu">-->
+                    <!--<li role="presentation"><a href="{:U('Uc/Peizi/index')}" tabindex="-1" role="menuitem">我的配资</a></li>-->
+                    <!--<li role="presentation"><a href="{:U('Uc/Touzi/index')}" tabindex="-1" role="menuitem">我的投资</a></li>-->
+                    <!--<li role="presentation"><a href="{:U('Uc/Message/index')}" tabindex="-1" role="menuitem">我的消息</a></li>-->
+                    <!--<li class="divider" role="presentation"></li>-->
+                    <!--<li role="presentation"><a href="{:U('Uc/Index/index')}" tabindex="-1" role="menuitem">会员中心</a></li>-->
+                <!--</ul>-->
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="hearder">
+    <div class="container">
+        <div class="navbar-header">
+            <button data-target=".bs-navbar-collapse" data-toggle="collapse" type="button" class="navbar-toggle collapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" id="navbar-brand" href="__ROOT__"><img src="__IMG__/logo.png"></a></a>
+        </div>
+        <nav class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="nav">
+                <foreach name="tnav" item="vo">
+                    <if condition="$vo['hover']">
+                        <li role="presentation" class="active"><a href="{$vo.url}">{$vo.name}</a></li>
+                        <else/>
+                        <li role="presentation"><a href="{$vo.url}">{$vo.name}</a></li>
+                    </if>
+                </foreach>
+            </ul>
+            <ul class="nav navbar-nav navbar-right mt10">
+                <if condition="is_login()">
+                    <li><a href="{:U('Uc/Index/index')}"><i class="glyphicon glyphicon-user"></i> {:USERNAME}</a></li>
+                    <li><a href="{:U('Uc/Uc/logout')}"><i class="glyphicon glyphicon-off"></i> 安全退出</a></li>
+                    <else/>
+                    <li><a href="{:U('Uc/Uc/login')}"><i class="glyphicon glyphicon-user"></i> 登录</a></li>
+                    <li><a href="{:U('Uc/Uc/register')}"><i class="glyphicon glyphicon-edit"></i> 注册</a></li>
+                </if>
+            </ul>
+        </nav>
+    </div>
+</div>

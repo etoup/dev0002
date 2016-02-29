@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body class="J_scroll_fixed">
+<div class="wrap jj">
+    <div class="nav">
+        <div class="return"><a href="{:U('index')}">返回上一级</a></div>
+        <ul class="cc">
+            <li><a href="{:U('edit',array('uid'=>$info['id']))}">用户信息</a></li>
+            <li class="current"><a href="{:U('editBalance',array('uid'=>$info['id']))}">余额</a></li>
+            <li><a href="{:U('editScore',array('uid'=>$info['id']))}">积分</a></li>
+            <li><a href="{:U('editGroup',array('uid'=>$info['id']))}">用户组</a></li>
+        </ul>
+    </div>
+    <!--====================用户编辑开始====================-->
+<!--积分-->
+<div class="h_a">编辑用户积分</div>
+<form class="J_ajaxForm" data-role="list" action="__SELF__" method="post">
+<div class="table_full">
+    <table width="100%">
+        <col class="th" />
+        <col />
+        <thead>
+        <tr>
+            <th>用户名</th>
+            <td><span class="mr10">{$info.username}</span> (UID：{$info.id})
+            <input type="hidden" name="id" value="{$info.id}">
+            </td>
+        </tr>
+        </thead>
+        <tr>
+            <th>余额</th>
+            <td><input name="balance" type="text" class="input length_5" value="{$info.balance}" disabled></td>
+        </tr>
+        <tr>
+            <th>操作金额</th>
+            <td>
+                <input name="money" type="text" class="input length_5" value="{$info.money}">
+                <div class="cc gray">-100表示扣除100元金额</div>
+            </td>
+        </tr>
+        <tr>
+            <th>备注</th>
+            <td><input name="remark" type="text" class="input length_5" value="{$info.remark}"></td>
+        </tr>
+    </table>
+</div>
+    <div class="btn_wrap">
+         <div class="btn_wrap_pd">
+                <button type="submit" class="btn btn_submit J_ajax_submit_btn">提交</button>
+         </div>
+    </div>
+</form>
+</div>
+<include file='Public/foot' />
+</body>
+</html>

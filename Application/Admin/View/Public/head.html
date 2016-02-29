@@ -1,0 +1,23 @@
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>系统后台</title>
+<link href="__CSS__/admin_style.css" rel="stylesheet" />
+<link href="__CSS__/jquery.jgrowl.css" rel="stylesheet" type="text/css"/>
+<script>
+//全局变量，是Global Variables不是Gay Video喔
+var GV = {
+	JS_ROOT : "__STATIC__/dev/",	//js目录
+	JS_VERSION : "v20140707",	    //js版本号
+	TOKEN : 'd9b0adaaa5b73879',	    //token ajax全局
+	REGION_CONFIG : {},
+	SCHOOL_CONFIG : {},
+	URL : {
+		LOGIN : '{:U("Public/login")}',	//后台登录地址
+		IMAGE_RES: '__STATIC__/image/',	//图片目录
+		REGION : '',	                //地区
+		SCHOOL : ''	                    //学校
+	}
+};
+</script>
+<script src="__STATIC__/dev/wind.js"></script>
+<script src="__STATIC__/dev/jquery.js"></script>

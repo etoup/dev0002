@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap">
+	<div class="nav">
+		<ul class="cc">
+			<li><a href="{:U('sms')}">短信设置</a></li>
+			<li class="current"><a href="__SELF__">短信检测</a></li>
+		</ul>
+	</div>
+	<div class="h_a">短信检测</div>
+	<form class="J_ajaxForm" action="__SELF__" method="post" >
+	<input type="hidden" name="type" value="{$type}">
+	<div class="table_full">		
+		<switch name="type">
+		    	<case value="2">
+			<table width="100%">
+				<col class="th" />
+				<col width="400" />
+				<col />
+				<tr>
+					<th>手机号码</th>
+					<td>
+						<input type="text" class="input length_5" name="to">
+					</td>
+					<td><div class="fun_tips"></div></td>
+				</tr>
+				<tr>
+					<th>验证码</th>
+					<td>
+						<input type="text" class="input length_5" name="code">
+					</td>
+					<td><div class="fun_tips"></div></td>
+				</tr>				
+				<tr>
+					<th>播放次数</th>
+					<td>
+						<input type="text" class="input length_5" name="times" value="3">
+					</td>
+					<td><div class="fun_tips"></div></td>
+				</tr>
+				<tr>
+					<th>主叫号码</th>
+					<td>
+						<input type="text" class="input length_5" name="num" value="4008738666" readonly="">
+					</td>
+					<td><div class="fun_tips"></div></td>
+				</tr>
+				<tr>
+					<th>回调地址</th>
+					<td>
+						<input type="text" class="input length_5" name="url" value="http://127.0.0.1" readonly="">
+					</td>
+					<td><div class="fun_tips"></div></td>
+				</tr>
+			</table>
+		    	</case>
+		    	<default />
+			<table width="100%">
+				<col class="th" />
+				<col width="400" />
+				<col />
+				<tr>
+					<th>手机号码</th>
+					<td>
+						<input type="text" class="input length_5" name="to">
+					</td>
+					<td><div class="fun_tips"></div></td>
+				</tr>
+				<tr>
+					<th>验证码</th>
+					<td>
+						<input type="text" class="input length_5" name="code">
+					</td>
+					<td><div class="fun_tips"></div></td>
+				</tr>
+				<tr>
+					<th>有效期/分钟</th>
+					<td>
+						<input type="text" class="input length_5" name="term" value="5" readonly="">
+					</td>
+					<td><div class="fun_tips"></div></td>
+				</tr>
+				<tr>
+					<th>模板ID</th>
+					<td>
+						<input type="text" class="input length_5" name="tid" value="13641" readonly="">
+					</td>
+					<td><div class="fun_tips"></div></td>
+				</tr>
+			</table>
+		</switch>
+	</div>
+	<div class="btn_wrap">
+		<div class="btn_wrap_pd">
+		<button class="btn btn_submit J_ajax_submit_btn" type="submit">提交</button>
+		</div>
+	</div>
+ </form>
+
+</div>
+<include file='Public/foot' />
+</body>
+</html>

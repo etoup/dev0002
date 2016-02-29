@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body class="J_scroll_fixed">
+<div class="wrap jj">
+    <div class="nav">
+        <div class="return"><a href="javascript:history.go(-1);">返回上一级</a></div>
+    </div>
+<form id="form" action="{:U('build')}" method="post" class="form-horizontal doc-modal-form">
+<div class="h_a">插件快速创建</div>
+<div class="table_full">
+    <table width="100%">
+        <colgroup><col class="th">
+        <col width="400">
+        <col>
+        </colgroup>
+        <tbody>
+        	<tr>
+                <th>标识名</th>
+                <td>
+                    <input type="text" value="Example" class="input length_5" name="info[name]">
+                </td>
+                <td><div class="fun_tips">请输入插件标识</div></td>
+            </tr>
+            <tr>
+                <th>插件名</th>
+                <td>
+                    <input type="text" value="示列" class="input length_5" name="info[title]">
+                </td>
+                <td><div class="fun_tips">请输入插件名</div></td>
+            </tr>
+            <tr>
+                <th>版本</th>
+                <td>
+                    <input type="text" value="0.1" class="input length_5" name="info[version]">
+                </td>
+                <td><div class="fun_tips">请输入插件版本</div></td>
+            </tr>
+            <tr>
+                <th>作者</th>
+                <td>
+                    <input type="text" value="无名" class="input length_5" name="info[author]">
+                </td>
+                <td><div class="fun_tips">请输入插件作者</div></td>
+            </tr>
+            <tr>
+                <th>描述</th>
+                <td>
+                    <textarea name="info[description]" class="length_5">这是一个临时描述</textarea>
+                </td>
+                <td><div class="fun_tips">请输入描述</div></td>
+            </tr>
+            <tr>
+                <th>安装后是否启用</th>
+                <td>
+                    <input type="checkbox" value="1" class="input" name="info[status]" checked>
+                </td>
+                <td><div class="fun_tips"></div></td>
+            </tr>
+            <tr>
+                <th>是否需要配置</th>
+                <td>
+                    <input type="checkbox" value="1" class="input stoh" name="has_config">
+					<p style="margin-top:10px;display:none;">
+					<textarea class="textarea length_5" name="config">
+&lt;?php
+return array(
+	'random'=>array(//配置在表单中的键名 ,这个会是config[random]
+		'title'=>'是否开启随机:',//表单的文字
+		'type'=>'radio',		 //表单的类型：text、textarea、checkbox、radio、select等
+		'options'=>array(		 //select 和radion、checkbox的子选项
+			'1'=>'开启',		 //值=>文字
+			'0'=>'关闭',
+		),
+		'value'=>'1',			 //表单的默认值
+	),
+);
+					</textarea>
+					</p>
+					<p style="margin-top:10px;display:none;"><input type="text" class="input length_5" name="custom_config"></p>
+                </td>
+                <td><div class="fun_tips">注意：自定义模板里的表单name必须为config[name]这种，获取保存后配置的值用$data.config.name</div></td>
+            </tr>
+            <tr>
+                <th>是否需要外部访问</th>
+                <td>
+                    <input type="checkbox" value="1" class="input" name="has_outurl">
+                </td>
+                <td><div class="fun_tips"></div></td>
+            </tr>
+            <tr>
+                <th>是否需要后台列表</th>
+                <td>
+                    <input type="checkbox" value="1" name="has_adminlist" class="input stoh">
+                    <p style="margin-top:10px;display:none;">
+                    <textarea name="admin_list" class="textarea length_5">
+'model'=>'Example',		//要查的表
+			'fields'=>'*',			//要查的字段
+			'map'=>'',				//查询条件, 如果需要可以再插件类的构造方法里动态重置这个属性
+			'order'=>'id desc',		//排序,
+			'listKey'=>array( 		//这里定义的是除了id序号外的表格里字段显示的表头名
+				'字段名'=>'表头显示名'
+			),
+					</textarea>
+                    </p>
+                    <P style="margin-top:10px;display:none;"><input type="text" class="input length_5" name="custom_adminlist"></P>
+                </td>
+                <td>
+                	<div class="fun_tips">勾选，扩展里已装插件后台列表会出现插件名的列表菜单，如系统的附件</div>
+                	<div class="fun_tips">注意：自定义模板里的列表变量为$_list这种,遍历后可以用listkey可以控制表头显示,也可以完全手写，分页变量用$_page</div>
+                </td>
+            </tr>
+            <tr>
+                <th>实现的钩子方法</th>
+                <td>
+                    <select class="select" name="hook[]" size="10" multiple required>
+						<volist name="Hooks" id="vo">
+							<option value="{$vo.name}" title="{$vo.description}">{$vo.name}</option>
+						</volist>
+					</select>
+                </td>
+                <td><div class="fun_tips"></div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="btn_wrap">
+     <div class="btn_wrap_pd">
+            <button type="submit" class="btn btn_submit J_ajax_submit_btn">提交</button>
+            <a role="button" title="代码预览" href="{:U('preview')}" class="btn J_dialog btn_success"><span class="add"></span>预览</a>
+     </div>
+</div>
+</form>
+</div>
+<include file='Public/foot' />
+<script>
+$('.stoh').click(function(){
+	if($(this).attr("checked")){
+		$(this).nextAll('p').show();
+	}else{
+		$(this).nextAll('p').hide();
+	}
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap J_check_wrap">
+    <div class="nav">
+        <ul class="cc">
+            <li class="current"><a href="{:U('index')}">需求管理</a></li>
+            <li><a href="{:U('guzhi')}">股指吧需求管理</a></li>
+            <li><a href="{:U('qihuo')}">期货吧需求管理</a></li>
+            <li><a href="{:U('delay')}">延期管理</a></li>
+            <li><a href="{:U('early')}">结束管理</a></li>
+        </ul>
+    </div>
+    <div class="h_a">提示信息</div>
+    <div class="mb10 prompt_text">
+        <ul>
+            <li>需求管理，对配资需求进行审核。</li>
+        </ul>
+    </div>
+    <div class="h_a">搜索</div>
+    <div class="search_type cc mb10">
+        <form action="__SELF__" method="post">
+            <input type="hidden" name="p" value="{$p|default=1}">
+            <input type="hidden" name="soso" value="1">
+            <div class="ul_wrap">
+                <ul class="cc">
+                    <li>
+                        <label>关键字：</label>
+                        <input name="keyword" type="text" class="input length_2 mr10" value="{$keyword|default=''}" placeholder="用户名或真实姓名">
+                    </li>
+                    <li>
+                        <label>需求单号：</label>
+                        <input name="orders" value="{$orders|default=''}" type="text" class="input length_3" placeholder="支持需求单号模糊搜索">
+                    </li>
+                    <li>
+                        <label>申请时间：</label>
+                        <input type="text" name="time_start" value="{$time_start|default=''}" class="input length_2 mr5 J_date"><span class="mr5">至</span><input type="text" name="time_end" value="{$time_end|default=''}" class="input length_2 J_date">
+                    </li>
+                    <li>
+                        <label>状态：</label>
+                        <select name="status" class="select_2 mr10">
+                            <option value="">请选择</option>
+                            <option value="0">投标中</option>
+                            <option value="1">满标</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label>配资比例：</label>
+                        <input name="scale" type="number" class="input length_1 mr10" value="{$scale|default=''}">
+                    </li>
+                    <li>
+                        <label>配资期限：</label>
+                        <input name="time_limit" type="number" class="input length_1 mr10" value="{$time_limit|default=''}">
+                    </li>
+                </ul>
+            </div>
+            <div class="btn_side">
+                <button class="btn  mr5" type="submit">搜索</button>
+                <notempty name="soso">
+                    <if condition="$soso">
+                        <button type="reset" class="btn btn_error" onclick="window.location.href='{:U('index')}'">撤销检索</button>
+                    </if>
+                </notempty>
+            </div>
+        </form>
+    </div>
+    <div id="top-alert" class="alert alert-error" style="display: none;">
+        <button class="close fixed" style="margin-top: 4px;">×</button>
+        <div class="alert-content">这是内容</div>
+    </div>
+    <notempty name="_list">
+    <form method="post" action="#" id="J_tag_form" class="J_ajaxForm">
+    <div class="table_list">
+        <table width="100%">
+            <colgroup>
+            <col width="65">
+            </colgroup>
+            <thead>
+                <tr>
+                    <td>
+                        <label>
+                            <input class="J_check_all" data-checklist="J_check_x" data-direction="x" type="checkbox">全选</label>
+                    </td>
+                    <td>需求单号</td>
+                    <td>用户名</td>
+                    <td>真实姓名</td>
+                    <td>手机号码</td>
+                    <td>自有资金</td>
+                    <td>配资资金</td>
+                    <td>配资比例</td>
+                    <td>配资期限</td>
+                    <td>到款方式</td>
+                    <td>状态</td>
+                    <td>到期时间</td>
+                    <td>添加时间</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+        <volist name="_list" id="vo">
+            <tr>
+                <td>
+                    <input class="J_check" name="id[]" value="{$vo['id']}" data-name="{$vo.nickname|op_t }" data-tid="{$vo['id']}" data-xid="J_check_x" data-yid="J_check_y" type="checkbox">
+                </td>
+                <td>{$vo.orders}</td>
+                <td><a href="{:U('Admin/User/edit',array('uid'=>$vo['uid']))}" >{$vo.username|op_t}</a></td>
+                <td>{$vo.realname}</td>
+                <td>{$vo.mobile}</td>
+                <td>{:money($vo['own_funds'],'<b>%s</b> 万')}</td>
+                <td>{:money($vo['with_funds'],'<b>%s</b> 万')}</td>
+                <if condition="$vo['num']">
+                    <td><b>无</b></td>
+                    <td><b>按天</b></td>
+                    <else/>
+                    <td>1:<b>{$vo.scale}</b></td>
+                    <td><b>{$vo.time_limit}</b>个月</td>
+                </if>
+
+                <td><b>{:pay_type($vo['pay_type'])}</b></td>
+                <td>{:peiziStuArr($vo['status'])}</td>
+                <td><if condition="$vo['end_trading']"><b>{$vo.end_trading|time_format='Y-m-d'}</b><else/>0000-00-00</if></td>
+                <td>{$vo.created_time|time_format}</td>
+                <td>
+                    <switch name="vo['status']">
+                        <case value="0">
+                            <a href="{:U('examine?id='.$vo['id'])}" title="配资需求审核" class="mr10 J_dialog">审核</a>
+                            <a href="{:U('close?id='.$vo['id'])}" class="mr10 J_ajax_del" data-msg="确定要关闭需求吗？">关闭需求</a>
+                        </case>
+                        <case value="3">
+                            <a href="{:U('binding?id='.$vo['id'])}" title="绑定股票账户" class="mr10 J_dialog">绑定股票账户</a>
+                        </case>
+                        <default/>
+                            <a href="{:U('view?id='.$vo['id'])}" title="查看需求详情" class="mr10">查看详情</a>
+                    </switch>
+                </td>
+            </tr>
+        </volist>
+        </table>
+    </div>
+    <div class="page">
+        {$_page}
+    </div>
+    <div class="btn_wrap">
+        <div class="btn_wrap_pd" id="J_sub_wrap">
+            <label class="mr10"><input class="J_check_all" data-checklist="J_check_y" data-direction="y" type="checkbox">全选</label>
+            <button class="btn J_ajax_submit_btn" data-subcheck="true" data-action="{:U('del')}" type="submit">删除</button>
+        </div>
+    </div>
+    </form>
+    <else/>
+    <div class="not_content_mini"><i></i>啊哦，没有符合条件的信息！</div>
+    </notempty>  
+</div>
+<include file='Public/foot' />
+
+</body>
+</html>

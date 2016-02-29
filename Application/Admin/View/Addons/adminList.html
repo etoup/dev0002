@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap">
+    <div class="nav">
+        <div class="return"><a href="{:U('index')}">返回上一级</a></div>
+    </div>
+    <div class="h_a">{$title}内容列表</div>
+    <notempty name="_list">
+    <div class="table_list">
+        <table width="100%">
+            <thead>
+                <tr>
+                    <td width="30">ID</td>
+                    <volist name="listKey" id="vo">
+                    <td>{$vo}</td>
+                	</volist>
+                </tr>
+            </thead>
+        <volist name="_list" id="lv" key="vo">
+            <tr>
+                <td>{$lv.id}</td>
+                <volist name="listKey" id="lk">
+                <td>{$lv.$key}</td>
+                </volist>
+            </tr>
+        </volist>
+        </table>
+    </div>
+    <div class="page">
+        {$_page}
+    </div>
+    <else/>
+    <div class="not_content_mini"><i></i>啊哦，没有符合条件的内容！</div>
+    </notempty>
+    
+</div>
+<include file='Public/foot' />
+
+</body>
+</html>

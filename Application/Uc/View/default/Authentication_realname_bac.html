@@ -1,0 +1,97 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link href="__CSS__/index.css" rel="stylesheet" />
+    <link href="__CSS__/dashboard.css" rel="stylesheet">
+    <link href="__CSS__/uploadimg.css" rel="stylesheet" />
+</block>
+</head> 
+<body>
+<block name="header"><include file='Public/header' /></block>
+<block name="nav"><include file='Public/nav' /></block>
+<block name="uctop">
+    <div class="alert alert-warning" role="alert">
+        <span class="glyphicon glyphicon-list" aria-hidden="true"></span> {$seo.title}
+
+    </div>
+</block>
+
+<block name="main">
+    <ol class="breadcrumb">
+        <li><a href="{$crumbs.url}">{$crumbs.title}</a></li>
+        <li class="active">{$seo.title}</li>
+    </ol>
+    <switch name="uc['pass_realname']">
+        <case value="-1">
+            <p class="bg-primary h50">实名认证审核中...，请联系客服修改</p>
+        </case>
+        <case value="1">
+            <div class="paizi nolist mt50">
+                <a href="">通过实名认证，请联系客服修改</a>
+            </div>
+        </case>
+        <default />
+            <div class="jumbotron">
+                <div role="alert" class="alert alert-danger"><span aria-hidden="true" class="glyphicon glyphicon-info-sign"></span> 身份证图片大小不要超过2M，否则无法成功上传；可以将照片发给客服帮您处理</div>
+                <div class="tip" id="tip">
+                    <div class="alert alert-danger" role="alert">alert</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <form action="__SELF__" method="post" class="form-horizontal" role="form" id="form">
+                            <div class="form-group">
+                                <label for="inputRealname" class="col-sm-4 control-label">姓名</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="realname" class="form-control" id="inputRealname" placeholder="请填写您的真实姓名">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="cardNumber" class="col-sm-4 control-label">身份证号码</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="card_number" class="form-control" id="cardNumber" placeholder="请填写您的身份证号码">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="cardNumber" class="col-sm-4 control-label">上传身份证正面</label>
+                                <div class="col-sm-6">
+                                    <div class="pull-left">
+                                        <input type="file" id="upload_picture_front">
+                                        <input type="hidden" name="card_front" id="card_front" value=""/>
+                                    </div>
+                                    <div class="upload-img-box pull-left"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="cardNumber" class="col-sm-4 control-label">上传身份证反面</label>
+                                <div class="col-sm-6">
+                                    <div class="pull-left">
+                                        <input type="file" id="upload_picture_back">
+                                        <input type="hidden" name="card_back" id="card_back" value=""/>
+                                    </div>
+                                    <div class="upload-img-box pull-left"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-8">
+                                    <button type="submit" id="button" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">
+                                        提交
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    </switch>
+</block>
+
+<block name="foot"><include file='Public/foot' /></block>
+<block name="foot_js">
+    <script>
+        var BASE_URL="__STATIC__",SERVER="{:U('File/uploadPicturess',array('session_id'=>session_id()))}";
+    </script>
+    <script src="__STATIC__/webuploader/webuploader.js"></script>
+    <script src="__JS__/upload.js"></script>
+</block>
+</body>
+</html>

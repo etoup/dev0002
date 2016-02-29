@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+    <include file='Public/head' />
+</head>
+<body style="width:300px;" class="body_none">
+<!--添加注册优惠码-->
+<form class="J_ajaxForm" data-role="list" action="__ACTION__" method="post" >
+    <input type='hidden' name='id' value="{$info.id}">
+    <div class="pop_cont pop_table" style="height:auto;">
+        <table width="100%">
+            <col class="th" />
+            <col />
+            <thead>
+            <tr>
+                <th>运动项目</th>
+                <td>
+                    <select class="form-control length_2" name="items_id">
+                        <option selected="selected" value="">请选择</option>
+                        <foreach name="items" item="vo" >
+                            <if condition="$info['items_id'] eq $vo['id']">
+                                <option value="{$vo.id}" selected>{$vo.name}</option>
+                                <else/>
+                                <option value="{$vo.id}">{$vo.name}</option>
+                            </if>
+                        </foreach>
+                    </select>
+                </td>
+            </tr>
+            </thead>
+            <tr>
+                <th>抵用金额</th>
+                <td>
+                    <input name="price" type="text" value="{$info.price}" class="input length_3">
+                    <div class="fun_tips">单位（元）</div>
+                </td>
+            </tr>
+            <tr>
+                <th>限制张数</th>
+                <td>
+                    <input name="num" type="text" value="{$info.num}" class="input length_3">
+                    <div class="fun_tips">注册成功后发送的张数</div>
+                </td>
+            </tr>
+            <tr>
+                <th>有效期</th>
+                <td>
+                    <input name="days" type="text"  value="{$info.days}" class="input length_3">
+                    <div class="fun_tips">单位（天）</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="pop_bottom">
+        <button type="button" class="btn fr" id="J_dialog_close">取消</button>
+        <button type="submit" class="btn btn_submit mr10 fr J_ajax_submit_btn">提交</button>
+    </div>
+
+</form>
+<include file='Public/foot_min' />
+</body>
+</html>

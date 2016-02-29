@@ -1,0 +1,25 @@
+<form action="__SELF__" method="post" class="form-horizontal" role="form" id="form">
+    <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+        <h4 id="myModalLabel" class="modal-title">申请延期</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-xs-7">
+                <input type="number" name="delay_time" class="form-control" placeholder="延期时间（月）">
+            </div>
+            <div class="col-xs-5">
+                <input type="hidden" name="id" value="{$info.id}">
+                <input type="hidden" name="orders" value="{$info.orders}">
+                <input type="password" name="paypwd" class="form-control" placeholder="支付密码">
+            </div>
+        </div>
+        <p class="bg-danger" style="padding: 5px; margin-top: 5px; margin-bottom: 5px;">
+            申请延期将扣除延期服务费，金额为：{:money($delay)}，可用余额：{$balance}
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button data-dismiss="modal" class="btn btn-default btn-sm" type="button">取消</button>
+        <button class="btn btn-primary btn-sm" type="submit">确认提交</button>
+    </div>
+</form>

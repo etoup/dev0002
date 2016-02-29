@@ -1,0 +1,220 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap">
+
+
+<!--分类管理: 编辑分类  -->
+<div class="nav">
+    <div class="return"><a href="{:U('category')}">返回上一级</a></div>
+</div>
+<form class="J_ajaxForm" data-role="list" action="__SELF__" enctype="application/x-www-form-urlencoded" method="post">
+<div class="h_a">基础信息</div>
+<div class="table_full">
+    <table width="100%">
+        <colgroup><col class="th">
+        <col width="400">
+        <col>
+        </colgroup>
+        <tbody>
+            <tr>
+                <th>上级分类</th>
+                <td>
+                    <input type="text" value="{$info.title}" class="input length_5" disabled="">
+                </td>
+                <td><div class="fun_tips">显示父级分类，不用填写</div></td>
+            </tr>
+            <tr>
+                <th>分类名称</th>
+                <td>
+                    <input type="text" value="" class="input length_5" name="title">
+                </td>
+                <td><div class="fun_tips">名称不能为空</div></td>
+            </tr>
+            <tr>
+                <th>分类标识</th>
+                <td>
+                    <input type="text" value="" class="input length_5" name="name">
+                </td>
+                <td><div class="fun_tips">英文字母</div></td>
+            </tr>
+            <tr>
+                <th>发布内容</th>
+                <td>
+                    <ul class="three_list cc" id="J_status_type">
+                        <li><label><input type="radio" checked="" value="0" name="allow_publish" data-type="" data-title="s1"><span>不允许</span></label></li>
+                        <li><label><input type="radio" value="1" name="allow_publish" checked="" data-type="J_status_s1,J_status_s2" data-title="s2"><span>仅允许后台</span></label></li>
+                        <li><label><input type="radio" value="2" name="allow_publish" data-type="J_status_s2" data-title="s3"><span>允许前后台</span></label></li>
+                    </ul>
+                </td>
+                <td><div class="fun_tips">是否允许发布内容</div></td>
+            </tr>
+            <tr>
+                <th>是否审核</th>
+                <td>
+                    <ul class="three_list cc">
+                        <li><label><input type="radio" checked="" value="0" name="check"><span>不需要</span></label></li>
+                        <li><label><input type="radio" value="1" name="check"><span>需要</span></label></li>
+                    </ul>
+                </td>
+                <td><div class="fun_tips">在该分类下发布的内容是否需要审核</div></td>
+            </tr>
+            <tr>
+                <th>绑定文档模型</th>
+                <td>
+                    <ul class="single_list cc">
+                        <volist name=":get_document_model()" id="list">
+                        <li><label><input type="checkbox" value="{$list.id}" name="model[]"><span>{$list.title}</span></label></li>
+                        </volist>
+                    </ul>
+                </td>
+                <td><div class="fun_tips">分类支持发布的文档模型</div></td>
+            </tr>
+            <tr>
+                <th>允许文档类型</th>
+                <td>
+                    <ul class="single_list cc">
+                        <volist name=":C('DOCUMENT_MODEL_TYPE')" id="type">
+                        <li><label><input type="checkbox" value="{$key}" name="type[]"><span>{$type}</span></label></li>
+                        </volist>
+                    </ul>
+                </td>
+                <td><div class="fun_tips">允许文档类型</div></td>
+            </tr>
+            <tr>
+                <th>分类图标</th>
+                <td>
+                    <input type="file" id="upload_picture">
+                    <input type="hidden" name="icon" id="icon" value="{$info['icon']|default=''}"/>
+                    <div class="upload-img-box">
+                    <notempty name="info['icon']">
+                        <div class="upload-pre-item"><img src="__ROOT__{$info.icon|get_cover='path'}"/></div>
+                    </notempty>
+                    </div>
+                </td>
+                <td><div class="fun_tips">允许文档类型</div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="h_a">高级信息</div>
+<div class="table_full">
+    <table width="100%">
+        <colgroup><col class="th">
+        <col width="400">
+        <col>
+        </colgroup>
+        <tbody>
+            <tr>
+                <th>可见性</th>
+                <td>
+                    <ul class="three_list cc" id="J_status_type">
+                        <li><label><input type="radio" checked="" value="1" name="display" data-type="" data-title="s1"><span>所有人可见</span></label></li>
+                        <li><label><input type="radio" value="0" name="display" checked="" data-type="J_status_s1,J_status_s2" data-title="s2"><span>不可见</span></label></li>
+                        <li><label><input type="radio" value="2" name="display" data-type="J_status_s2" data-title="s3"><span>管理员可见</span></label></li>
+                    </ul>
+                </td>
+                <td><div class="fun_tips">是否对用户可见，针对前台</div></td>
+            </tr>
+            <tr>
+                <th>回复</th>
+                <td>
+                    <ul class="three_list cc">
+                        <li><label><input type="radio" checked="" value="1" name="reply"><span>允许</span></label></li>
+                        <li><label><input type="radio" value="0" name="reply"><span>不允许</span></label></li>
+                    </ul>
+                </td>
+                <td><div class="fun_tips">是否允许对内容进行回复，需要详情页模板支持回复显示与提交</div></td>
+            </tr>
+            <tr>
+                <th>排序</th>
+                <td>
+                    <input type="text" value="0" class="input length_1" name="sort">
+                </td>
+                <td><div class="fun_tips">仅对当前层级分类有效</div></td>
+            </tr>
+            <tr>
+                <th>列表行数</th>
+                <td>
+                    <input type="text" value="10" class="input length_1" name="list_row">
+                </td>
+                <td><div class="fun_tips">列表行数</div></td>
+            </tr>
+            <tr>
+                <th>网页标题</th>
+                <td>
+                    <input type="text" value="" class="input length_5" name="meta_title">
+                </td>
+                <td><div class="fun_tips">网页标题</div></td>
+            </tr>
+            <tr>
+                <th>关键字</th>
+                <td>
+                    <input type="text" value="" class="input length_5" name="keywords">
+                </td>
+                <td><div class="fun_tips">关键字</div></td>
+            </tr>
+            <tr>
+                <th>描述</th>
+                <td>
+                    <textarea name="description" class="length_5"></textarea>
+                </td>
+                <td><div class="fun_tips">描述</div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="btn_wrap">
+    <div class="btn_wrap_pd">
+        <input type="hidden" name="pid" value="{$info.id}" />
+        <input type="hidden" name="mold" value="{$mold}" />
+        <button type="submit" class="btn btn_submit J_ajax_submit_btn">提交</button>
+    </div>
+</div>
+</form>
+
+</div>
+<include file='Public/foot' />
+
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript">
+//上传图片
+/* 初始化上传插件 */
+$("#upload_picture").uploadify({
+    "height"          : 30,
+    "swf"             : "__STATIC__/uploadify/uploadify.swf",
+    "fileObjName"     : "download",
+    "buttonText"      : "上传图片",
+    "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+    "width"           : 120,
+    'removeTimeout'   : 1,
+    'fileTypeExts'    : '*.jpg; *.png; *.gif;',
+    "onUploadSuccess" : uploadPicture,
+    'onFallback' : function() {
+        alert('未检测到兼容版本的Flash.');
+    }
+});
+function uploadPicture(file, data){
+    var data = $.parseJSON(data);
+    var src = '';
+    if(data.status){
+        $("#icon").val(data.id);
+        //src = data.url || '__ROOT__' + data.path;
+        src = data.url || data.path;
+        $("#icon").parent().find('.upload-img-box').html(
+            '<div class="upload-pre-item"><img src="./' + src + '"/></div>'
+        );
+    } else {
+        updateAlert(data.info);
+        setTimeout(function(){
+            $('#top-alert').find('button').click();
+            $(that).removeClass('disabled').prop('disabled',false);
+        },1500);
+    }
+}
+</script>
+</body>
+</html>

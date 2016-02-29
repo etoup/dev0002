@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap">
+    <div class="nav">
+        <ul class="cc">
+            <li class="current"><a href="{:U('index')}">插件管理</a></li>
+            <li><a href="{:U('hooks')}">hooks管理</a></li>
+        </ul>
+    </div>
+    <div class="h_a">提示信息</div>
+    <div class="mb10 prompt_text">
+        <ul>
+            <li>插件实现功能扩展</li>
+            <li>hooks钩子将插件功能绑定到业务</li>
+        </ul>
+    </div>
+    <div class="mb10"><a class="btn" href="{:U('create')}" title="创建插件" role="button"><span class="add"></span>创建插件</a></div>
+    <div class="h_a">搜索</div>
+    <div class="search_type cc mb10">
+        <form action="__SELF__" method="post">
+        <input type="hidden" name="soso" value="1">
+        <label>关键字包含：</label><input name="keyword" type="text" class="input length_2 mr10" value="{$keyword|default=''}">
+        <button type="submit" class="btn">搜索</button>
+        <notempty name="soso">
+        <if condition="$soso">
+        <button type="reset" class="btn btn_error" onclick="window.location.href='{:U('index')}'">撤销检索</button>
+        </if>
+        </notempty>
+        </form>
+    </div>
+    <notempty name="_list">
+    <div class="table_list">
+        <table width="100%">
+            <thead>
+                <tr>
+                    <td width="30">ID</td>
+                    <td>名称</td>
+                    <td>标识</td>
+                    <td>描述</td>
+                    <td>状态</td>
+                    <td>作者</td>
+                    <td>版本</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+        <volist name="_list" id="vo">
+            <tr>
+                <td>{$vo.id}</td>
+                <td>{$vo.title}</td>
+                <td>{$vo.name}</td>
+                <td>{$vo.description}</td>
+                <td>{$vo.status_text|default="未安装"}</td>
+                <td><a target="_blank" href="{$vo.url|default='http://www.thinkphp.cn/'}">{$vo.author}</a></td>
+				<td>{$vo.version}</td>
+                <td>
+                	<empty name="vo.uninstall">
+						<?php
+							$class	= get_addon_class($vo['name']);
+							if(!class_exists($class)){
+								$has_config = 0;
+							}else{
+								$addon = new $class();
+								$has_config = count($addon->getConfig());
+							}
+						?>
+						<?php if ($has_config): ?>
+							<a class=" mr10" href="{:U('config',array('id'=>$vo['id']))}">设置</a>
+						<?php endif ?>
+						<?php if ($vo['status'] >=0): ?>
+							<eq name="vo.status" value="0">
+								<a class="J_set_def mr10" href="{:U('enable',array('id'=>$vo['id']))}">启用</a>
+							<else />
+								<a class="J_set_def mr10" href="{:U('disable',array('id'=>$vo['id']))}">禁用</a>
+							</eq>
+						<?php endif ?>
+							{// <eq name="vo.author" value="thinkphp">}
+								<a class="mr10 J_ajax_del" href="{:U('uninstall?id='.$vo['id'])}">卸载</a>
+							{// </eq>}
+						<else />
+							<a class="mr10" href="{:U('install?addon_name='.$vo['name'])}">安装</a>
+                        
+					</empty>
+                    <notempty name="vo['has_adminlist']">
+                    <if condition="$vo['has_adminlist']">
+                        <a class="J_set_def mr10" href="{:U('adminList',array('name'=>$vo['name']))}">管理</a>
+                    </if>
+                </notempty>
+                </td>
+            </tr>
+        </volist>
+        </table>
+    </div>
+    <div class="page">
+        {$_page}
+        <div class="pagination"><span class="rows">共 {$num} 条记录</span></div>
+    </div>
+    <else/>
+    <div class="not_content_mini"><i></i>啊哦，没有符合条件的内容！</div>
+    </notempty>
+    
+</div>
+<include file='Public/foot' />
+
+</body>
+</html>

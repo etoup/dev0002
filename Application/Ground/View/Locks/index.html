@@ -1,0 +1,169 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css"></block>
+<block name="main-header">
+    <include file='Public/header' />
+    <link rel="stylesheet" href="__STATIC__/sweetalert-master/dist/sweetalert.css" />
+    <link rel="stylesheet" href="__STATIC__/Swiper/dist/css/swiper.min.css">
+    <link rel="stylesheet" href="__STATIC__/AdminLTE/plugins/daterangepicker/daterangepicker-bs3.css">
+    <link rel="stylesheet" href="__CSS__/index.css">
+</block>
+<block name="main-sidebar">
+    <include file='Public/sidebar' />
+</block>
+<block name="content-header"><include file='Public/top' /></block>
+<block name="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="{:U('index')}">锁定列表</a></li>
+                    <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
+                </ul>
+                <div class="tab-content">
+                <div class="active tab-pane" id="activity">
+                    <div class="alert alert-warning alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h4><i class="icon fa fa-warning"></i> 提示!</h4>
+                        锁定列表展示所有被批量锁定项目
+                    </div>
+
+                    <div class="box box-default">
+                        <form action="__SELF__" method="post">
+                            <input type="hidden" name="p" value="{$p|default=1}">
+                            <input type="hidden" name="soso" value="1">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">搜索</h3>
+                                <div class="box-tools pull-right">
+                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                </div>
+                            </div><!-- /.box-header -->
+                            <div class="box-body">
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>项目和场地</label>
+                                            <div class="row" id="element">
+                                                <div class="col-md-6">
+                                                    <select class="form-control select2 items" name="items" disabled="disabled" data-url="{:U('getItems')}" style="width: 100%;">
+                                                        <option selected="selected">请选择</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <select class="form-control select2 block" name="block" disabled="disabled" data-url="{:U('getBlocks')}" data-json-space="data" style="width: 100%;">
+                                                        <option selected="selected">请选择</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div><!-- /.form-group -->
+
+                                    </div><!-- /.col -->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>订单时间:</label>
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="text" name="ordersdate" value="{$ordersdate|default=''}" class="form-control pull-right" readonly id="reservation">
+                                            </div>
+                                            <!-- /.input group -->
+                                        </div>
+                                    </div>
+                                </div><!-- /.row -->
+                            </div><!-- /.box-body -->
+                            <div class="box-footer">
+                                <button type="reset" class="btn btn-default">重置</button>
+
+                                <if condition="$soso">
+                                    <a class="btn btn-warning pull-right" href="{:U('index')}" style="margin-left: 10px">撤销检索</a>
+                                </if>
+
+                                <button type="submit" class="btn btn-primary pull-right">搜索</button>
+                            </div>
+                        </form>
+
+                    </div><!-- /.box -->
+
+                    <if condition="$list">
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">列表</h3>
+                                <div class="box-tools pull-right">
+                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                </div>
+                            </div><!-- /.box-header -->
+                            <div class="box-body">
+                                <table class="table table-bordered table-striped table-hover">
+                                    <tr>
+                                        <th>运动项目</th>
+                                        <th>场地</th>
+                                        <th>时间</th>
+                                        <th>下单时间</th>
+                                        <th>状态</th>
+                                    </tr>
+                                    <foreach name="list" item="vo">
+                                        <tr>
+                                            <td>{$vo.name}</td>
+                                            <td>{$vo.block_name}</td>
+                                            <td>{$vo.nodes} {$vo.start}-{$vo.end}</td>
+                                            <td>{$vo.created_time|time_format}</td>
+                                            <td>
+                                                <switch name="vo.status">
+                                                    <case value="1">锁定</case>
+                                                    <case value="-1">解锁</case>
+                                                    <default />未知
+                                                </switch>
+                                            </td>
+                                        </tr>
+                                    </foreach>
+                                </table>
+                            </div><!-- /.box-body -->
+                            <div class="box-footer">
+                                <div class="page pull-right">
+                                    {$_page}
+                                </div>
+                            </div>
+                        </div><!-- /.box -->
+                        <else/>
+                        <div class="callout callout-danger">
+                            <h4>哎呦</h4>
+                            <p>没有您要是数据，请重新检索</p>
+                        </div>
+                    </if>
+
+                </div><!-- /.tab-pane -->
+            </div>
+        </div>
+    </div>
+    </div>
+</block>
+<block name="main-footer">
+    <include file='Public/footer' />
+</block>
+<block name="foot">
+    <include file='Public/foot' />
+    <!-- date-range-picker -->
+    <script src="__STATIC__/AdminLTE/plugins/daterangepicker/moment.min.js"></script>
+    <script src="__STATIC__/AdminLTE/plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="__STATIC__/select/js/jquery.cxselect.min.js"></script>
+    <script>
+        //Date range picker
+        $('#reservation').daterangepicker({
+            format:'YYYY/MM/DD',
+            locale:{
+                applyLabel:'确定',
+                cancelLabel:'关闭',
+                fromLabel: '从',
+                toLabel: '至'
+            }
+        });
+
+        $('#element').cxSelect({
+            selects: ['items', 'block'],
+            jsonName: 'name',
+            jsonValue: 'value'
+        });
+    </script>
+</block>

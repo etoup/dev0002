@@ -1,0 +1,149 @@
+<extend name="Public/baseweixin" />
+<block name="head"><include file='Public/headweixin' /></block>
+<block name="head_css">
+    <link href="__CSS__/dashboard.css" rel="stylesheet">
+</block>
+</head> 
+<body>
+<block name="header"><include file='Public/headerweixin' /></block>
+
+<block name="uctop"></block>
+
+<block name="main">
+    <div class="wewixinmain" style="margin: 50px 0;">
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="{:U('index',['mobile'=>'weixin'])}">在线充值</a></li>
+            <!--<li role="presentation"><a href="{:U('bank',['mobile'=>'weixin'])}">银行转账</a></li>-->
+            <li role="presentation"><a href="{:U('log',['mobile'=>'weixin'])}">充值记录</a></li>
+        </ul>
+        <div class="row" style="margin-top: 30px;">
+            <div class="col-md-12">
+
+                <form action="{:U('recharge')}" id="form" method="post" role="form">
+                    <input type="hidden" checked name="onlinetype" value="WAP">
+                    <p>当前余额：<strong style="font-family: Arial; font-size: 18px; color: #ff3300;">{:money($balance)}</strong></p>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="tel" name="amount" value="{$amount|default=''}" class="form-control" id="amount" placeholder="填写充值金额">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <select class="form-control" name="pay_code" id="pay_code">
+                                    <option value="">选择银行</option>
+                                    <option value="ICBC">中国工商银行</option>
+                                    <option value="ABC">中国农业银行</option>
+                                    <option value="CCB">中国建设银行</option>
+                                    <option value="BOC">中国银行</option>
+                                    <option value="BCOM">中国交通银行</option>
+                                    <option value="CIB">兴业银行</option>
+                                    <option value="CITIC">中信银行</option>
+                                    <option value="CEB">中国光大银行</option>
+                                    <option value="PAB">平安银行</option>
+                                    <option value="PSBC">中国邮政储蓄银行</option>
+                                    <option value="SHB">上海银行</option>
+                                    <option value="SPDB">浦东发展银行</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="tel" name="acc_no" class="form-control" id="acc_no" placeholder="填写银行卡号">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="alert alert-info" role="alert">您已经通过实名认证，请确认下面信息</div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="text" name="id_holder" class="form-control" id="id_holder" value="{$id_holder|default=''}" placeholder="填写持卡人姓名">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="text" name="id_card" class="form-control" id="id_card" value="{$id_card|default=''}" placeholder="填写持卡人身份证号码">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="tel" name="mobile" class="form-control" id="mobile" value="{$mobile|default=''}" placeholder="填写银行卡预留手机号">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                        <div class="btn-group" role="group">
+                            <button type="submit" id="button" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">
+                                提交充值
+                            </button>
+                        </div>
+                    </div>
+                    <div class="alert alert-danger" role="alert" style="margin-top: 10px;">警告：禁止信用卡套现、虚假交易等行为，一经确认，将终止该账户的使用！</div>
+
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</block>
+
+<block name="foot"><include file='Public/ufootweixin' /></block>
+<block name="foot_js">
+    <script type="text/javascript" src="__STATIC__/jquery.bankInput.js"></script>
+    <script>
+        $("#acc_no").bankInput();
+        $("#form").submit(function(){
+            var amount = $('#amount').val();
+            var pay_code = $('#pay_code').val();
+            var acc_no = $('#acc_no').val();
+            var id_holder = $('#id_holder').val();
+            var id_card = $('#id_card').val();
+            var mobile = $('#mobile').val();
+            if(!amount){
+                alert('请填写充值金额');
+                return false;
+            }
+            if(isNaN(amount)){
+                alert('充值金额必须是数字');
+                return false;
+            }
+            if(!pay_code){
+                alert('请选择银行');
+                return false;
+            }
+            if(!acc_no){
+                alert('请填写银行卡号');
+                return false;
+            }
+            if(!id_holder){
+                alert('请填写持卡人姓名');
+                return false;
+            }
+            if(!id_card){
+                alert('请填写持卡人身份证号码');
+                return false;
+            }
+            if(!mobile){
+                alert('请填写银行卡预留手机号');
+                return false;
+            }
+            if(isNaN(mobile)){
+                alert('手机号必须是数字');
+                return false;
+            }
+        });
+    </script>
+</block>
+</body>
+</html>

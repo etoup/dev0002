@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap">
+<div class="nav">
+	<ul class="cc">
+		<li><a href="{:U('index')}">角色管理</a></li>
+        <li><a href="{:U('nodeManage')}">权限节点</a></li>
+        <li class="current"><a href="{:U('manage')}">后台管理员</a></li>
+	</ul>
+</div>
+<!--管理员开始-->
+<div class="h_a">提示信息</div>
+<div class="mb10 prompt_text">
+	<ul>
+		<li>管理员拥有后台所有权限，若无特殊情况请勿更改</li>
+		<li>您可以添加新管理员，或删除其它管理员</li>
+	</ul>
+</div>
+<div class="h_a">管理员管理</div>
+<div class="table_full">
+	<table width="100%">
+		<col class="th" />
+		<col />
+		<foreach name="list" item="fo">
+		<tr>
+			<th>{$fo['nickname']}</th>
+			<td>
+			<a class="mr10" href="{:U('User/edit',array('uid'=>$fo['uid']))}" title="编辑">编辑</a>
+			<a class="J_ajax_del" href="{:U('delManage',array('uid'=>$fo['uid']))}">取消管理员</a></td>
+		</tr>
+		</foreach>
+
+		<tr>
+			<th><input name="username" type="text" class="input length_2" id="username"></th>
+			<td>
+				<a href="{:U('addManage')}" class="btn J_set_def" id="J_founder_sub"><span class="add"></span>添加管理员</a>
+			</td>
+		</tr>
+	</table>
+</div>
+<!--管理员结束-->
+
+
+</div>
+<include file='Public/foot' />
+<script>
+Wind.use('global', function(){
+    var timer;
+    $('.J_set_def').on('click', function(e){
+        e.preventDefault();
+        var $this = $(this);
+        var name = $('#username').val();
+        $.post(this.href,{'nickname':name}, function(data){
+            if(data.status == 1) {
+                resultTip({
+                    msg : data.info
+                });
+                clearTimeout(timer);
+                timer = setTimeout(function(){
+                    reloadPage(window);
+                }, 1000);
+            }else{
+                resultTip({
+                    error : true,
+                    msg : data.info
+                });
+            }
+        }, 'json');
+    });
+});
+</script>
+</body>
+</html>

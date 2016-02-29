@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body style="width:400px;" class="body_none">
+<!--添加用户-->
+    <form class="J_ajaxForm" data-role="list" action="{:U('writeGroup')}" method="post" >
+    <input type='hidden' name='type' value="do">
+    <div class="pop_cont pop_table" style="height:auto;">
+        <table width="100%">
+            <col class="th" />
+            <col />
+            <thead>
+            <tr>
+                <th>角色</th>
+                <td><input name="title" type="text" value="{$auth_group.title}" class="input length_5"></td>
+            </tr>
+            </thead>
+            <tr>
+                <th>描述</th>
+                <td>
+                    <span class="must_red">*</span><textarea class="length_5" name="description">{$auth_group.description}</textarea>
+                    <div class="cc gray">添加角色描述</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="pop_bottom">
+        <input type="hidden" name="id" value="{$auth_group.id}" />
+        <button type="button" class="btn fr" id="J_dialog_close">取消</button>
+        <button type="submit" class="btn btn_submit mr10 fr J_ajax_submit_btn">提交</button>
+    </div>
+    
+</form>
+<include file='Public/foot_min' />
+</body>
+</html>

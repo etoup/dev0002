@@ -1,0 +1,210 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap">
+
+
+<!--分类管理: 编辑分类  -->
+<div class="nav">
+    <div class="return"><a href="javascript:history.go(-1);">返回上一级</a></div>
+</div>
+<form class="J_ajaxForm" data-role="list" action="{:U('update')}" method="post">
+<input type="hidden" name="id" value="{$info['id']}"/>
+<input type="hidden" name="model_id" value="{$info['model_id']}"/>
+<div class="h_a">基础信息</div>
+<div class="table_full">
+    <table width="100%">
+        <colgroup><col class="th">
+        <col width="400">
+        <col>
+        </colgroup>
+        <tbody>
+            <tr>
+                <th>字段名称</th>
+                <td>
+                    <input type="text" value="{$info.name}" class="input length_5" name="name">
+                </td>
+                <td><div class="fun_tips">请输入字段名称 英文字母开头，长度不超过30</div></td>
+            </tr>
+            <tr>
+                <th>字段标题</th>
+                <td>
+                    <input type="text" value="{$info.title}" class="input length_5" name="title">
+                </td>
+                <td><div class="fun_tips">请输入字段标题，用于表单显示</div></td>
+            </tr>
+            <tr>
+                <th>字段类型</th>
+                <td>
+                    <select name="type" id="data-type" class="length_2">
+						<option value="">请选择</option>
+						<volist name=":get_attribute_type()" id="type">
+                        <if condition="$info['type'] eq $key">
+						<option value="{$key}" rule="{$type[1]}" selected="">{$type[0]}</option>
+                        <else/>
+                        <option value="{$key}" rule="{$type[1]}">{$type[0]}</option>
+                        </if>
+						</volist>
+					</select>
+                </td>
+                <td><div class="fun_tips">用于表单中的展示方式</div></td>
+            </tr>
+            <tr>
+                <th>字段定义</th>
+                <td>
+                    <input type="text" value="{$info.field}" class="input length_5" id="data-field" name="field">
+                </td>
+                <td><div class="fun_tips">字段属性的sql表示</div></td>
+            </tr>
+            <tr>
+                <th>参数</th>
+                <td>
+                    <textarea name="extra" class="length_5">{$info.extra}</textarea>
+                </td>
+                <td><div class="fun_tips">布尔、枚举、多选字段类型的定义数据</div></td>
+            </tr>
+            <tr>
+                <th>默认值</th>
+                <td>
+                    <input type="text" value="{$info.value}" class="input length_5" name="value">
+                </td>
+                <td><div class="fun_tips">字段的默认值</div></td>
+            </tr>
+            <tr>
+                <th>字段备注</th>
+                <td>
+                    <input type="text" value="{$info.remark}" class="input length_5" name="remark">
+                </td>
+                <td><div class="fun_tips">用于表单中的提示</div></td>
+            </tr>
+            <tr>
+                <th>是否显示</th>
+                <td>
+                    <select name="is_show" class="length_2">
+						<option value="1" {:is_selected($info['is_show'],1)}>始终显示</option>
+						<option value="2" {:is_selected($info['is_show'],2)}>新增显示</option>
+						<option value="3" {:is_selected($info['is_show'],3)}>编辑显示</option>
+						<option value="0" {:is_selected($info['is_show'],0)}>不显示</option>
+					</select>
+                </td>
+                <td><div class="fun_tips">是否显示在表单中</div></td>
+            </tr>
+            <tr>
+                <th>是否必填</th>
+                <td>
+                    <select name="is_must" class="length_1">
+						<option value="0" {:is_selected($info['is_must'],0)}>否</option>
+						<option value="1" {:is_selected($info['is_must'],1)}>是</option>
+					</select>
+                </td>
+                <td><div class="fun_tips">用于自动验证</div></td>
+            </tr>
+            <tr>
+                <th>是否使用标签</th>
+                <td>
+                    <select name="is_html" class="length_1">
+                        <option value="0" {:is_selected($info['is_html'],0)}>否</option>
+                        <option value="1" {:is_selected($info['is_html'],1)}>是</option>
+                    </select>
+                </td>
+                <td><div class="fun_tips">用于标题等使用HTML标签的字段</div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="h_a">高级信息</div>
+<div class="table_full">
+    <table width="100%">
+        <colgroup><col class="th">
+        <col width="400">
+        <col>
+        </colgroup>
+        <tbody>
+            <tr>
+                <th>验证方式</th>
+                <td>
+					<select name="validate_type" class="length_2">
+						<option value="regex" {:is_selected($info['validate_type'],'regex')}>正则验证</option>
+						<option value="function" {:is_selected($info['validate_type'],'function')}>函数验证</option>
+						<option value="unique" {:is_selected($info['validate_type'],'unique')}>唯一验证</option>
+						<option value="length" {:is_selected($info['validate_type'],'length')}>长度验证</option>
+                        <option value="in" {:is_selected($info['validate_type'],'in')}>验证在范围内</option>
+                        <option value="notin" {:is_selected($info['validate_type'],'notin')}>验证不在范围内</option>
+                        <option value="between" {:is_selected($info['validate_type'],'between')}>区间验证</option>
+                        <option value="notbetween" {:is_selected($info['validate_type'],'notbetween')}>不在区间验证</option>
+					</select>
+                </td>
+                <td><div class="fun_tips">验证方式</div></td>
+            </tr>
+            <tr>
+                <th>验证规则</th>
+                <td>
+                    <input type="text" value="{$info.validate_rule}" class="input length_5" name="validate_rule">
+                </td>
+                <td><div class="fun_tips">根据验证方式定义相关验证规则</div></td>
+            </tr>
+            <tr>
+                <th>验证时间</th>
+                <td>
+                    <select name="validate_time" class="length_2">
+	                    <option value="3" {:is_selected($info['validate_time'],3)}>始 终</option>
+						<option value="1" {:is_selected($info['validate_time'],1)}>新 增</option>
+						<option value="2" {:is_selected($info['validate_time'],2)}>编 辑</option>
+					</select>
+                </td>
+                <td><div class="fun_tips">验证时间</div></td>
+            </tr>
+            <tr>
+                <th>自动完成方式</th>
+                <td>
+                    <select name="auto_type" class="length_2">
+						<option value="function" {:is_selected($info['auto_type'],'function')}>函数</option>
+						<option value="field" {:is_selected($info['auto_type'],'field')}>字段</option>
+						<option value="string" {:is_selected($info['auto_type'],'string')}>字符串</option>
+					</select>
+                </td>
+                <td><div class="fun_tips">自动完成方式</div></td>
+            </tr>
+            <tr>
+                <th>自动完成时间</th>
+                <td>
+                    <select name="auto_time" class="length_2">
+						<option value="3" {:is_selected($info['auto_time'],3)}>始 终</option>
+						<option value="1" {:is_selected($info['auto_time'],1)}>新 增</option>
+						<option value="2" {:is_selected($info['auto_time'],2)}>编 辑</option>
+					</select>
+                </td>
+                <td><div class="fun_tips">自动完成时间</div></td>
+            </tr>
+            <tr>
+                <th>自动完成规则</th>
+                <td>
+                    <input type="text" value="{$info.auto_rule}" class="input length_5" name="auto_rule">
+                </td>
+                <td><div class="fun_tips">根据完成方式订阅相关规则</div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="btn_wrap">
+    <div class="btn_wrap_pd">
+        <input type="hidden" name="id" value="{$info.id}" />
+        <button type="submit" class="btn btn_submit J_ajax_submit_btn">提交</button>
+    </div>
+</div>
+</form>
+
+</div>
+<include file='Public/foot' />
+<script type="text/javascript">
+(function (){
+$('#data-type').change(function(){
+    $('#data-field').val($(this).find('option:selected').attr('rule'));
+});
+})();
+</script>
+</body>
+</html>

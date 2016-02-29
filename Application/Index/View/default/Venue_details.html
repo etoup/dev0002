@@ -1,0 +1,394 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link href="__STATIC__/AdminLTE/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css">
+    <link href="__CSS__/icon/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="__CSS__/style.css" rel="stylesheet" type="text/css">
+    <link href="__CSS__/order.css" rel="stylesheet" type="text/css">
+</block>
+</head> 
+ <body>
+  <block name="header">
+      <include file='Public/header_list' />
+  </block>
+  <block name="main">
+      <div class="banner"></div>
+      <section>
+          <div class="container">
+              <div class="orderNav">
+                  <p>体育学院附属中学羽毛球馆
+                  <span class="evaluate">
+                      <i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+                      <i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+                      <i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+                      <i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+                      <i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+                  </span>
+                  </p>
+                  <span><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>上海市杨浦区周家嘴路4220号</span>
+                  <span class="phone"><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>400-921-6990</span>
+              </div>
+          </div>
+      </section>
+
+      <section>
+          <div class="container">
+              <div class="orderCon">
+                  <img src="__IMG__/order.png" alt="" class="ordericon">
+                  <div class="row">
+                      <div class="col-md-7">
+                          <div>
+                              <!-- Nav tabs -->
+                              <ul class="nav nav-tabs" role="tablist">
+                                  <li role="presentation" class="active">
+                                      <a href="#Tuesday" aria-controls="Tuesday" role="tab" data-toggle="tab">星期二<p>9-01</p></a>
+                                  </li>
+                                  <li role="presentation">
+                                      <a href="#Wednesday" aria-controls="Wednesday" role="tab" data-toggle="tab">星期三<p>9-02</p></a>
+                                  </li>
+                                  <li role="presentation">
+                                      <a href="#Thursday" aria-controls="Thursday" role="tab" data-toggle="tab">星期四 <p>9-03</p></a>
+                                  </li>
+                                  <li role="presentation">
+                                      <a href="#Friday" aria-controls="Friday" role="tab" data-toggle="tab">星期五<p>9-04</p></a>
+                                  </li>
+                                  <li role="presentation">
+                                      <a href="#Saturday" aria-controls="Saturday" role="tab" data-toggle="tab">星期六<p>9-05</p></a>
+                                  </li>
+                                  <li role="presentation">
+                                      <a href="#More" aria-controls="More" role="tab" data-toggle="tab">预览更多</a>
+                                  </li>
+                              </ul>
+                              <ul class="explain">
+                                  <li>
+                                      <span class="choice"></span>
+                                      <p>已选场次</p>
+                                  </li>
+                                  <li>
+                                      <span class="blue"></span>
+                                      <p>已占用</p>
+                                  </li>
+                                  <li>
+                                      <span></span>
+                                      <p>已预定</p>
+                                  </li>
+                              </ul>
+                              <!-- Tab panes -->
+                              <div class="tab-content">
+                                  <div role="tabpanel" class="tab-pane active" id="Tuesday">
+                                      <table class="table bordered">
+                                          <tr>
+                                              <th></th>
+                                              <th>18:00</th>
+                                              <th>19:00</th>
+                                              <th>20:00</th>
+                                              <th>21:00</th>
+                                          </tr>
+                                          <tr>
+                                              <th>1号场地</th>
+                                              <td>25元</td>
+                                              <td>25元</td>
+                                              <td class="blue"></td>
+                                              <td>25元</td>
+                                          </tr>
+                                          <tr>
+                                              <th>2号场地</th>
+                                              <td class="blue"></td>
+                                              <td class="blue"></td>
+                                              <td class="blue"></td>
+                                              <td class="blue"></td>
+                                          </tr>
+                                          <tr>
+                                              <th>3号场地</th>
+                                              <td>25元</td>
+                                              <td class="blue"></td>
+                                              <td class="blue"></td>
+                                              <td>25元</td>
+                                          </tr>
+                                          <tr>
+                                              <th>4号场地</th>
+                                              <td>25元</td>
+                                              <td class="blue"></td>
+                                              <td class="blue"></td>
+                                              <td>25元</td>
+                                          </tr>
+                                          <tr>
+                                              <th>5号场地</th>
+                                              <td class="blue"></td>
+                                              <td class="blue"></td>
+                                              <td class="blue"></td>
+                                              <td class="blue"></td>
+                                          </tr>
+                                          <tr>
+                                              <th>6号场地</th>
+                                              <td class="blue"></td>
+                                              <td class="blue"></td>
+                                              <td class="blue"></td>
+                                              <td>25元</td>
+                                          </tr>
+                                      </table>
+                                  </div>
+                                  <div role="tabpanel" class="tab-pane" id="Wednesday">
+                                  </div>
+                                  <div role="tabpanel" class="tab-pane" id="Thursday">...</div>
+                                  <div role="tabpanel" class="tab-pane" id="Friday">...</div>
+                                  <div role="tabpanel" class="tab-pane" id="Saturday">...</div>
+                                  <div role="tabpanel" class="tab-pane" id="More">...</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-5">
+                          <div class="info">
+                              <p class="infoName">体育学院附属中学羽毛球馆</p>
+                              <div class="row">
+                                  <div class="col-md-4"><span>预定项目</span></div>
+                                  <div class="col-md-8">羽毛球</div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-4"><span>日期</span></div>
+                                  <div class="col-md-8">2015-09-01</div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-4"><span>场次</span></div>
+                                  <div class="col-md-8">
+                                      <p class="cir">您还未选择场次</p>
+                                      <p class="bl">当击左侧选择场次，再次单击取消</p>
+                                  </div>
+                              </div>
+                              <p><a href="#" role="button" class="btn btn-primary btn-lg submit">提交订单</a></p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <section class="pad30">
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-8">
+                      <div class="photo">
+                          <div class="sectionName"><img src="__IMG__/icon.png" alt=""><span>商家详情</span></div>
+                          <div class="pic">
+                              <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                  <ol class="carousel-indicators">
+                                      <li data-target="#carousel-example-generic" data-slide-to="0" class=""></li>
+                                      <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+                                      <li data-target="#carousel-example-generic" data-slide-to="2" class="active"></li>
+                                  </ol>
+                                  <div class="carousel-inner">
+                                      <div class="item">
+                                          <img src="__IMG__/containter.png" alt="First slide">
+                                      </div>
+                                      <div class="item active left">
+                                          <img src="__IMG__/containter.png" alt="Second slide">
+                                      </div>
+                                      <div class="item next left">
+                                          <img src="__IMG__/containter.png" alt="Third slide">
+                                      </div>
+                                  </div>
+                                  <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                      <span class="glyphicon glyphicon-chevron-left"></span>
+                                  </a>
+                                  <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                                      <span class="glyphicon glyphicon-chevron-right"></span>
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-4">
+                      <div class="ad">
+                          <img src="__IMG__/ad.png" alt="">
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <section class="pad30">
+      <div class="container">
+      <div class="row">
+      <div class="col-md-8">
+      <div class="comment">
+          <div class="sectionName"><img src="__IMG__/icon.png" alt=""><span>相关评论</span></div>
+          <p><textarea class="area" name="textarea" id="textarea" cols="45" rows="5"></textarea></p>
+          <p>
+					<span class="star">
+						我要打分：
+						<i class="glyphicon glyphicon-star-empty" aria-hidden="true"></i>
+						<i class="glyphicon glyphicon-star-empty" aria-hidden="true"></i>
+						<i class="glyphicon glyphicon-star-empty" aria-hidden="true"></i>
+						<i class="glyphicon glyphicon-star-empty" aria-hidden="true"></i>
+						<i class="glyphicon glyphicon-star-empty" aria-hidden="true"></i>
+					</span>
+              <input name="button" type="submit" class="btn btn-primary btn-lg right" id="button" value="发表评论" />
+          </p>
+      </div>
+      <div class="commentlist">
+      <section class="content box box-primary">
+          <div class="box-body">
+              <!-- row -->
+              <div class="row">
+                  <div class="col-md-12">
+                      <!-- The time line -->
+                      <ul class="timeline">
+                          <!-- timeline time label -->
+                          <li class="time-label">
+					                  <span class="bg-blue">
+					                    10 Feb. 2015
+					                  </span>
+                          </li>
+                          <!-- /.timeline-label -->
+                          <!-- timeline item -->
+                          <li>
+                              <img src="__IMG__/user3-128x128.jpg" alt="User Image">
+
+                              <div class="timeline-item">
+                                  <span class="time"><i class="glyphicon glyphicon-time"></i> 12:05</span>
+
+                                  <h3 class="timeline-header"><a href="#">三笨笨lzy</a></h3>
+
+                                  <div class="timeline-body">
+                                      第一次去场地不错
+                                  </div>
+                                  <div class="timeline-footer">
+					                  <span class="star">
+											<i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+											<i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+											<i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+											<i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+											<i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+									  </span>
+                                  </div>
+                              </div>
+                          </li>
+                          <!-- END timeline item -->
+                          <!-- timeline item -->
+                          <li>
+                              <img src="__IMG__/user3-128x128.jpg" alt="User Image">
+
+                              <div class="timeline-item">
+                                  <span class="time"><i class="glyphicon glyphicon-time"></i> 5 mins ago</span>
+
+                                  <h3 class="timeline-header"><a href="#">三笨笨lzy</a></h3>
+
+                                  <div class="timeline-body">
+                                      第一次去场地不错
+                                  </div>
+                                  <div class="timeline-footer">
+					                  <span class="star">
+											<i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+											<i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+											<i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+											<i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+											<i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+									  </span>
+                                  </div>
+                              </div>
+                          </li>
+                          <!-- END timeline item -->
+                          <!-- timeline item -->
+                          <li>
+                              <img src="image/user3-128x128.jpg" alt="User Image">
+
+                              <div class="timeline-item">
+                                  <span class="time"><i class="glyphicon glyphicon-time"></i> 27 mins ago</span>
+
+                                  <h3 class="timeline-header"><a href="#">三笨笨lzy</a></h3>
+
+                                  <div class="timeline-body">
+                                      第一次去场地不错
+                                  </div>
+                                  <div class="timeline-footer">
+					                  <span class="star">
+											<i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+											<i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+											<i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+											<i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+											<i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+									  </span>
+                                  </div>
+                              </div>
+                          </li>
+                          <!-- END timeline item -->
+                          <!-- timeline time label -->
+                          <li class="time-label">
+					                  <span class="bg-blue">
+					                    3 Jan. 2015
+					                  </span>
+                          </li>
+                          <!-- /.timeline-label -->
+                          <!-- timeline item -->
+                          <li>
+                              <img src="image/user3-128x128.jpg" alt="User Image">
+
+                              <div class="timeline-item">
+                                  <span class="time"><i class="glyphicon glyphicon-time"></i> 2 days ago</span>
+
+                                  <h3 class="timeline-header"><a href="#">三笨笨lzy</a></h3>
+
+                                  <div class="timeline-body">
+                                      第一次去场地不错
+                                  </div>
+                                  <div class="timeline-footer">
+					                  <span class="star">
+											<i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+											<i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+											<i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+											<i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+											<i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+									  </span>
+                                  </div>
+                              </div>
+                          </li>
+                          <!-- END timeline item -->
+                          <!-- timeline item -->
+                          <li>
+                              <img src="image/user3-128x128.jpg" alt="User Image">
+
+                              <div class="timeline-item">
+                                  <span class="time"><i class="glyphicon glyphicon-time"></i> 5 days ago</span>
+
+                                  <h3 class="timeline-header"><a href="#">三笨笨lzy</a></h3>
+
+                                  <div class="timeline-body">
+                                      第一次去场地不错
+                                  </div>
+                                  <div class="timeline-footer">
+					                  <span class="star">
+											<i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+											<i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+											<i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+											<i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+											<i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+									  </span>
+                                  </div>
+                              </div>
+                          </li>
+                          <!-- END timeline item -->
+                          <li>
+                              <i class="glyphicon glyphicon-time bg-gray"></i>
+                          </li>
+                      </ul>
+                  </div>
+                  <!-- /.col -->
+              </div>
+              <!-- /.row -->
+          </div>
+      </section>
+      </div>
+      </div>
+      </div>
+      </div>
+      </section>
+
+  </block>
+  <block name="foot">
+      <include file='Public/foot' />
+  </block>
+  <block name="foot_js">
+
+  </block>
+ </body>
+</html>

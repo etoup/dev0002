@@ -1,0 +1,185 @@
+<extend name="Public/baseweixin" />
+<block name="head"><include file='Public/headweixin' /></block>
+<block name="head_css">
+    <link href="__CSS__/dashboard.css" rel="stylesheet">
+</block>
+</head> 
+<body>
+<block name="header"><include file='Public/headerweixin' /></block>
+
+<block name="uctop"></block>
+
+<block name="main">
+    <div class="wewixinmain" style="margin: 50px 0;">
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="{:U('index',['mobile'=>'weixin'])}">我要提现</a></li>
+            <li role="presentation"><a href="{:U('log',['mobile'=>'weixin'])}">提现记录</a></li>
+            <li role="presentation"><a href="{:U('shrank',['mobile'=>'weixin'])}">出金记录</a></li>
+        </ul>
+        <div class="alert alert-danger alert-dismissible fade in mt30" id="tip" role="alert" style="display: none; margin-top: 30px;">
+            <strong></strong>
+        </div>
+        <div class="row" style="margin-top: 30px;">
+            <div class="col-md-12">
+                <form action="__SELF__" id="form" method="post" role="form">
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <td style="width:30%; vertical-align: middle; text-align: center;">持卡人</td>
+                            <td>{$realname}</td>
+                        </tr>
+                        <tr>
+                            <td style="width:30%; vertical-align: middle; text-align: center;">提现到银行卡</td>
+                            <td>
+                                <div class="row">
+                                    <foreach name="myCard" item="vo">
+                                        <div class="col-md-6">
+                                            <p class="bg-info" style="padding: 10px;"><input type="radio" name="cid" value="{$vo.id}" title="{$vo.card_number_format}">【{$vo.bank_name}】{$vo.card_number_format}</p>
+                                        </div>
+                                    </foreach>
+                                    <div class="col-md-6"><a href="{:U('Uc/Card/index')}"><p class="bg-warning" style="padding: 10px;">添加银行卡</p></a></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:30%; vertical-align: middle; text-align: center;">提现金额</td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input type="number" name="money" class="form-control" id="money" placeholder="填写提现金额">
+                                    </div>
+                                    <div class="col-md-4" style="line-height: 34px;">
+                                        <strong>可用余额：</strong>{:money($balance)}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:30%; vertical-align: middle; text-align: center;">支付密码</td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input type="password" name="paypwd" class="form-control" placeholder="填写支付密码">
+                                    </div>
+                                    <div class="col-md-4" style="line-height: 34px;">
+                                        <strong><a href="{:U('Uc/Password/paypwd')}">忘记密码</a></strong>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:30%; vertical-align: middle; text-align: center;">手续费</td>
+                            <td><span id="fee">￥0.00</span> <span style="color: red">提现手续费暂由平台承担</span></td>
+                        </tr>
+                        <tr>
+                            <td style="width:30%; vertical-align: middle; text-align: center;">实际到账金额</td>
+                            <td><span id="realMoney">￥0.00</span></td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="2" height="100">
+                                <div class="ml200">
+                                    <p class="text-danger">警告：禁止信用卡套现、虚假交易等行为，一经确认，将终止该账户的使用！</p>
+                                    <button type="submit" id="button" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">
+                                        提交提现
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</block>
+
+<block name="foot"><include file='Public/ufootweixin' /></block>
+<block name="foot_js">
+    <script type="text/javascript" src="__STATIC__/jquery.form.js"></script>
+    <script>
+        $(function(){
+            var m = $('#money').val()*1;
+            var u = 0.005;
+            $('#fee').text(fmoney(m*u));
+            $('#realMoney').text(fmoney(m));
+            $('#money').keyup(function(){
+                m = $(this).val()*1;
+                $('#fee').text(fmoney(m*u));
+                $('#realMoney').text(fmoney(m));
+            });
+        });
+
+        $('#button').on('click', function () {
+            var $btn = $(this).button('loading');
+            var options = {
+                url:   '__SELF__',
+                beforeSubmit :showRequest,
+                success: showResponse,
+                timeout: 3000
+            };
+            $('#form').ajaxForm(options);
+        });
+        function showRequest(formData, jqForm, options){
+            var queryString = $.param(formData);
+            var formElement = jqForm[0];
+            var cid = formElement.cid.value;
+            var money = formElement.money.value;
+            var paypwd = formElement.paypwd.value;
+            var balance = "{$balance}";
+            if(cid==''){
+                $('#tip').show().children().text('请选择银行卡');
+                $('#button').button('reset');
+                return false;
+            }
+            if(money==''){
+                $('#tip').show().children().text('提现金额不能为空');
+                $("input[name='money']").focus();
+                $('#button').button('reset');
+                return false;
+            }
+            if(paypwd==''){
+                $('#tip').show().children().text('支付密码不能为空');
+                $("input[name='paypwd']").focus();
+                $('#button').button('reset');
+                return false;
+            }
+            if(parseInt(Math.abs(money)) > parseInt(balance)){
+                $('#tip').show().children().text('余额不足');
+                $("input[name='money']").focus();
+                $('#button').button('reset');
+                return false;
+            }
+            return true;
+        };
+        function showResponse(data){
+            if(data.state === 'success') {
+                window.location.href = decodeURIComponent(data.referer);
+            }else{
+                $('#tip').show().children().text(data.message);
+                $('#button').button('reset');
+            }
+        };
+
+        function fmoney(s, n)
+        {
+            n = n > 0 && n <= 20 ? n : 2;
+            s = parseFloat((s + "").replace(/[^\d\.-]/g, "")).toFixed(n) + "";
+            var l = s.split(".")[0].split("").reverse(),
+                    r = s.split(".")[1];
+            t = "";
+            for(i = 0; i < l.length; i ++ )
+            {
+                t += l[i] + ((i + 1) % 3 == 0 && (i + 1) != l.length ? "," : "");
+            }
+            return '￥'+t.split("").reverse().join("") + "." + r;
+        }
+        function rmoney(s)
+        {
+            return parseFloat(s.replace(/[^\d\.-]/g, ""));
+        }
+    </script>
+</block>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link href="__CSS__/index.css?v={:v()}" rel="stylesheet" />
+    <link rel="stylesheet" href="__CSS__/jquery-ui.css?v={:v()}">
+</block>
+</head>
+<body>
+<div class="wrap">
+<block name="header"><include file='Public/header' /></block>
+<block name="main">
+
+</block>
+</div>
+<block name="foot">
+    <include file='Public/foot' />
+</block>
+<block name="foot_js">
+    <script type="text/javascript" src="__JS__/jquery.validate.js"></script>
+    <script>
+        $("#form").validate({
+            errorPlacement: function(error, element){
+                var error_td = element.parents('.col-sm-4');
+                error_td.addClass('has-error');
+                error_td.next('.col-sm-6').html(error);
+            },
+            success: function(label){
+                label.addClass('validate_right').text('OK!').parent().prev().removeClass('has-error');
+            },
+            onkeyup: false,
+            rules: {
+                own_funds: {
+                    required:true,
+                    number:true,
+                    range:[1,1000]
+                },
+                scale: {
+                    required:true,
+                    number:true,
+                    range:[1,5]
+                },
+                time_limit: {
+                    required:true,
+                    number:true,
+                    range:[1,12]
+                }
+            },
+            messages: {
+                own_funds: {
+                    required:'请填写自有资金',
+                    number:'自有资金只能为数值',
+                    range:'数值范围1-1000'
+                },
+                scale: {
+                    required:'请填写配资比例',
+                    number:'配资比例只能为数值',
+                    range:'数值范围1-5'
+                },
+                time_limit: {
+                    required:'请填写配资期限',
+                    number:'配资期限只能为数值',
+                    range:'数值范围1-12'
+                }
+
+
+            }
+        });
+    </script>
+</block>
+</body>
+</html>

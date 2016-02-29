@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    letter-spacing: 0.1em;
+}
+ul{
+	list-style: none;
+}
+.ml5{
+  margin-left: 5px;
+}
+.cf { zoom: 1; }
+ .cf:before,
+ .cf:after { content: ""; display: table; }
+ .cf:after { clear: both; }
+.pad10{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+body {
+    height: 100%;
+    background: #ebebeb;
+    font-family:"microsoft yahei",Helvetica, Arial, sans-serif; 
+}
+header{
+	width:100%;
+	padding-top:50px;
+}
+nav{
+	height:85px;
+	line-height: 85px;
+}
+nav .toptit{
+	font-size: 30px;
+	margin-left: 20px;
+}
+section{
+	margin-top: 30px;
+}
+#email,#photo{
+	padding:30px;
+}

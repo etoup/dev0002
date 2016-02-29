@@ -1,0 +1,60 @@
+<div class="alert alert-info" role="alert"><a href="{:U('Index/index')}" class="uchome"><span aria-hidden="true" class="glyphicon glyphicon-user"></span> 会员中心</a></div>
+<ul style="max-width: 300px;" class="nav nav-pills nav-stacked" id="dopt">
+    <li role="presentation"><a href="{:U('Index/Guzhi/heng')}"><span aria-hidden="true" class="glyphicon {$vo.tags}"></span> 恒生指数</a></li>
+
+    <if condition="$cont eq 'Doqihuo'">
+        <li class="active my-active" role="presentation"><a href="{:U('Doqihuo/index')}"><span aria-hidden="true" class="glyphicon {$vo.tags}"></span> 机构合作</a></li>
+        <else/>
+        <li role="presentation"><a href="{:U('Doqihuo/index')}"><span aria-hidden="true" class="glyphicon {$vo.tags}"></span> 机构合作</a></li>
+    </if>
+    <!--<li role="presentation"><a href="{:U('Index/Guzhi/index')}"><span aria-hidden="true" class="glyphicon {$vo.tags}"></span> 期货吧</a></li>-->
+    <if condition="$cont eq 'Dopeizi'">
+        <li class="active my-active" role="presentation"><a href="{:U('Dopeizi/index')}"><span aria-hidden="true" class="glyphicon {$vo.tags}"></span> 我要股票配资</a></li>
+        <else/>
+        <li role="presentation"><a href="{:U('Dopeizi/index')}"><span aria-hidden="true" class="glyphicon {$vo.tags}"></span> 我要股票配资</a></li>
+    </if>
+
+    <!--<if condition="$cont eq 'Doqihuo'">-->
+        <!--<li class="active my-active" role="presentation"><a href="{:U('Doqihuo/index')}"><span aria-hidden="true" class="glyphicon {$vo.tags}"></span> 我要期货配资</a></li>-->
+        <!--<else/>-->
+        <!--<li role="presentation"><a href="{:U('Doqihuo/index')}"><span aria-hidden="true" class="glyphicon {$vo.tags}"></span> 我要期货配资</a></li>-->
+    <!--</if>-->
+
+    <if condition="$cont eq 'Dotouzi'">
+        <li class="active my-active" role="presentation"><a href="{:U('Dotouzi/index')}"><span aria-hidden="true" class="glyphicon {$vo.tags}"></span> 我要投资</a></li>
+        <else/>
+        <li role="presentation"><a href="{:U('Dotouzi/index')}"><span aria-hidden="true" class="glyphicon {$vo.tags}"></span> 我要投资</a></li>
+    </if>
+    <if condition="$openT">
+        <if condition="$cont eq 'Spread'">
+            <li class="active my-active" role="presentation"><a href="{:U('Spread/index')}"><span aria-hidden="true" class="glyphicon {$vo.tags}"></span> 我要推广</a></li>
+            <else/>
+            <li role="presentation"><a href="{:U('Spread/index')}"><span aria-hidden="true" class="glyphicon {$vo.tags}"></span> 我要推广</a></li>
+        </if>
+    </if>
+    <if condition="$openM">
+        <if condition="$cont eq 'Customer'">
+            <li class="active my-active" role="presentation"><a href="{:U('Customer/index')}"><span aria-hidden="true" class="glyphicon {$vo.tags}"></span> 客户管理</a></li>
+            <else/>
+            <li role="presentation"><a href="{:U('Customer/index')}"><span aria-hidden="true" class="glyphicon {$vo.tags}"></span> 客户管理</a></li>
+        </if>
+    </if>
+</ul>
+<hr>
+<if condition="$navList">
+    <ul style="max-width: 300px;" class="nav nav-pills nav-stacked">
+        <foreach name="navList" item="vo">
+            <if condition="$link eq $vo['link']">
+                <li class="active my-active" role="presentation"><a href="{:U($vo['link'])}"><span aria-hidden="true" class="glyphicon {$vo.tags}"></span> {$vo.name}</a></li>
+                <else/>
+                <li role="presentation"><a href="{:U($vo['link'])}"><span aria-hidden="true" class="glyphicon {$vo.tags}"></span> {$vo.name}</a></li>
+            </if>
+
+        </foreach>
+    </ul>
+</if>
+
+<!--<ul class="nav nav-sidebar">-->
+    <!--<li class="active"><a href="#"><span aria-hidden="true" class="glyphicon glyphicon-user"></span> 我的配资</a></li>-->
+    <!--<li><a href="#"><span aria-hidden="true" class="glyphicon glyphicon-user"></span> 我的投资</a></li>-->
+<!--</ul>-->

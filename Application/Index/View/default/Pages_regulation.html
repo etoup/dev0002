@@ -1,0 +1,105 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link href="__CSS__/index.css?v={:v()}" rel="stylesheet" />
+    <link rel="stylesheet" href="__CSS__/jquery-ui.css?v={:v()}">
+</block>
+</head>
+<body>
+<div class="wrap">
+<block name="header">
+    <include file='Public/header' />
+    <div class="topmain">
+        <div class="container">
+            <div class="pull-left">
+                <a href="{:U('about')}">关于我们</a>
+                <a href="{:U('beacon')}">新手指引</a>
+                <a href="{:U('regulation')}" class="hover">政策法规</a>
+                <a href="{:U('links')}">友情链接</a>
+            </div>
+            <div class="pull-right">
+                <a href="{:ROOT}"><span aria-hidden="true" class="glyphicon glyphicon-share-alt"></span> 返回首页</a>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="main">
+    <div class="container mt30">
+        <ol class="breadcrumb mt10">
+
+            <li><a href="{:ROOT}">首页</a></li>
+
+            <li class="active">{$seo.title}</li>
+        </ol>
+
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="display: block;">
+                            1，关于资金借出方及资金借入方双方民间借贷的合法性
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+                        根据《中华人民共和国合同法》第一百九十六条规定"借款合同是借款人向贷款人借款，到期返还借款并支付利息的合同"，以及《最高人民法院关于人民法院审理借贷案件的若干意见》第一条规定“公民之间的借贷纠纷、公民与法人之间的借贷纠纷以及公民与其他组织之间的借贷纠纷，应作为借贷案件受理”。因此，我国法律允许自然人之间，自然人与法人或其他组织之间发生借贷关系，并允许资金借出方到期收回本金和符合法律规定的利息。
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTwo">
+                    <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="display: block;">
+                            2，关于六合资本平台提供居间撮合服务的合法性
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body">
+                        根据《中华人民共和国合同法》第四百二十四条规定“居间合同是居间人向委托人报告订立合同的机会或者提供订立合同的媒介服务，委托人支付报酬的合同。”第四百二十六条规定“居间人促成合同成立的，委托人应当按照约定支付报酬。”
+                        六合资本平台为民间借贷提供居间服务，为借贷双方提供联系、介绍服务，促成借贷双方形成借贷关系的行为有着明确的法律基础。
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingThree">
+                    <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="display: block;">
+                            3，关于资金借出方在六合资本平台获得收益的合法性
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body">
+                        根据最高人民法院《关于人民法院审理借贷案件的若干意见》第六条：“民间借贷的利率可以适当高于银行的利率，各地人民法院可以根据本地区的实际情况具体掌握，但最高不得超过银行同类贷款利率的四倍（包含利率本数）。超出此限度的，超出部分的利息不予保护。”
+                        六合资本平台上资金借出方向资金借入方出借资金并按照约定利率收取利息，该等利率未超过银行同类贷款利率的四倍，为合法利息收益，受到法律保护。
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingA">
+                    <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseA" aria-expanded="false" aria-controls="collapseA" style="display: block;">
+                            4，关于电子合同的有效性
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseA" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingA">
+                    <div class="panel-body">
+                        根据《中华人民共和国合同法》第十条的规定“当事人订立合同，有书面形式、口头形式和其他形式。”，第十一条的规定，当事人可以采用合同书、信件和数据电文（包括电报、电传、传真、电子数据交换和电子邮件）等形式订立合同。电子合同是法律认可的书面合同形式之一。
+                        六合资本平台采取用户在网上点击确认的方式签署电子合同。点击确认后的电子合同符合《中华人民共和国合同法》规定的合同成立、生效的要件，为合法有效合同。
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</block>
+</div>
+<block name="foot">
+    <include file='Public/foot' />
+</block>
+<block name="foot_js"></block>
+</body>
+</html>

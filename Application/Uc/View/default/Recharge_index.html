@@ -1,0 +1,129 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link href="__CSS__/index.css" rel="stylesheet" />
+    <link href="__CSS__/dashboard.css" rel="stylesheet">
+</block>
+</head> 
+<body>
+<block name="header"><include file='Public/header' /></block>
+<block name="nav"><include file='Public/nav' /></block>
+
+<block name="uctop">
+    <div class="alert alert-warning" role="alert">
+        <span class="glyphicon glyphicon-list" aria-hidden="true"></span> {$seo.title}
+
+    </div>
+</block>
+
+<block name="main">
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="{:U('index')}">在线充值</a></li>
+        <!--<li role="presentation"><a href="{:U('bank')}">银行转账</a></li>-->
+        <li role="presentation"><a href="{:U('log')}">充值记录</a></li>
+    </ul>
+    <div class="alert alert-danger alert-dismissible fade in mt30" id="tip" role="alert" >
+        <strong></strong>
+    </div>
+    <div class="row mt30">
+        <div class="col-md-12">
+            <form action="{:U('recharge')}" id="form" method="post" role="form" target="_blank">
+                <table class="table table-bordered">
+                    <tbody>
+                    <tr>
+                        <td style="width:200px; vertical-align: middle; text-align: center;">支付方式</td>
+                        <td>
+                            <div class="row">
+                                <foreach name="interfacevalarr" item="vo">
+                                    <div class="col-md-6">
+                                        <if condition="$key eq 0">
+                                            <p style="padding: 10px 10px 0;"><img src="__IMG__/{$vo}.jpg"></p>
+                                        </if>
+                                    </div>
+                                </foreach>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px; vertical-align: middle; text-align: center;">账户余额</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-md-3" style="line-height: 35px; font-family: Arial, 'Microsoft Yahei'; font-size: 18px;">
+                                    <strong>{:money($balance)}</strong>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px; vertical-align: middle; text-align: center;">充值金额</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <input type="text" name="amount" value="{$amount|default=''}" class="form-control" id="amount" placeholder="填写充值金额">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px; vertical-align: middle; text-align: center;">手续费</td>
+                        <td><span id="fee" style=" font-family: Arial, 'Microsoft Yahei';">￥0.00</span> <span style="color: red">充值手续费暂由平台承担</span></td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px; vertical-align: middle; text-align: center;">实际到账金额</td>
+                        <td><span id="realMoney" style=" font-family: Arial, 'Microsoft Yahei';">￥0.00</span></td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="2" height="100">
+                            <div class="ml200">
+                                <p class="text-danger">警告：禁止信用卡套现、虚假交易等行为，一经确认，将终止该账户的使用！</p>
+                                <button type="submit" id="button" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">
+                                    提交充值
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </form>
+        </div>
+    </div>
+</block>
+
+<block name="foot"><include file='Public/foot' /></block>
+<block name="foot_js">
+    <script>
+        $(function(){
+            var m = $('#amount').val()*1;
+            var u = 0.005;
+            $('#fee').text(fmoney(m*u));
+            $('#realMoney').text(fmoney(m));
+            $('#amount').keyup(function(){
+                m = $(this).val()*1;
+                $('#fee').text(fmoney(m*u));
+                $('#realMoney').text(fmoney(m));
+            });
+        });
+
+        function fmoney(s, n)
+        {
+            n = n > 0 && n <= 20 ? n : 2;
+            s = parseFloat((s + "").replace(/[^\d\.-]/g, "")).toFixed(n) + "";
+            var l = s.split(".")[0].split("").reverse(),
+                    r = s.split(".")[1];
+            t = "";
+            for(i = 0; i < l.length; i ++ )
+            {
+                t += l[i] + ((i + 1) % 3 == 0 && (i + 1) != l.length ? "," : "");
+            }
+            return '￥'+t.split("").reverse().join("") + "." + r;
+        }
+        function rmoney(s)
+        {
+            return parseFloat(s.replace(/[^\d\.-]/g, ""));
+        }
+    </script>
+</block>
+</body>
+</html>

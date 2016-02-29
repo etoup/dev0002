@@ -1,0 +1,139 @@
+<extend name="Public/ubase" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link rel="stylesheet" href="__STATIC__/AdminLTE/dist/css/AdminLTE.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="__STATIC__/AdminLTE/plugins/iCheck/square/blue.css">
+    <link href="__CSS__/login.css" rel="stylesheet" type="text/css">
+</block>
+</head> 
+<body class="hold-transition">
+<block name="main">
+    <div class="login-box">
+        <a href="index.html" class="login-logo"></a>
+        <!-- /.login-logo -->
+        <div class="login-box-body">
+            <p class="login-box-msg">账号登录</p>
+            <if condition="$new">
+                <div class="tip" id="tip" style="display: block;">
+                    <div class="alert alert-warning" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <b id="alertTxt">注册成功，请登录激活</b>
+                    </div>
+                </div>
+                <else/>
+                <div class="tip" id="tip" style="display: none;">
+                    <div class="alert alert-danger" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <b id="alertTxt">用户名和密码为必填项</b>
+                    </div>
+                </div>
+            </if>
+            <form action="__SELF__" method="post" role="form" id="form">
+                <div class="form-group has-feedback">
+                    <input type="text" name="username" value="{$username|default=''}" class="form-control" placeholder="用户名">
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input type="password" name="password" class="form-control" placeholder="密码">
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-8">
+                        <div class="checkbox icheck">
+                            <label>
+                                <if condition="$username">
+                                    <input type="checkbox" name="rememberme" checked=""> 记住用户名
+                                    <else/>
+                                    <input type="checkbox" name="rememberme"> 记住用户名
+                                </if>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-xs-4 pad10">
+                        <a href="{:U('forgotPwd')}">忘记密码？</a>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <button type="submit" id="button" data-loading-text="Loading..." class="btn btn-primary btn-block btn-flat" autocomplete="off">
+                    <span aria-hidden="true" class="glyphicon glyphicon-saved"></span> 提交登录
+                </button>
+            </form>
+
+            <div class="text-center otherCount">
+                <p>--- 用合作网站账号登录 --- </p>
+                <ul class="cf">
+                    <li id="weixin"></li>
+                </ul>
+            </div>
+            <!-- /.social-auth-links -->
+
+            <p>还没有账号？<a href="{:U('register')}" class="text-center">免费注册</a></p>
+
+        </div>
+        <!-- /.login-box-body -->
+    </div>
+</block>
+    <!-- /.login-box -->
+    <block name="foot"><include file='Public/ufoot' /></block>
+    <block name="foot_js">
+        <script type="text/javascript" src="__STATIC__/jquery.form.js"></script>
+        <!-- iCheck -->
+        <script src="__STATIC__/AdminLTE/plugins/iCheck/icheck.min.js"></script>
+        <script>
+            $(function () {
+                $('input').iCheck({
+                    checkboxClass: 'icheckbox_square-blue',
+                    radioClass: 'iradio_square-blue',
+                    increaseArea: '20%' // optional
+                });
+
+                $('#button').on('click', function () {
+                    var $btn = $(this).button('loading');
+                    var options = {
+                        url:   '__SELF__',
+                        beforeSubmit :showRequest,
+                        success: showResponse,
+                        timeout: 3000
+                    };
+                    $('#form').ajaxForm(options);
+                });
+
+                function showRequest(formData, jqForm, options){
+                    var queryString = $.param(formData);
+                    var formElement = jqForm[0];
+                    var username = formElement.username.value;
+                    var password = formElement.password.value;
+                    if(username==''){
+                        $('#tip').show().children().find('b').text('用户名不能为空');
+                        $("input[name='username']").focus();
+                        $('#button').button('reset');
+                        return false;
+                    }
+                    if(password==''){
+                        $('#tip').show().children().find('b').text('密码不能为空');
+                        $("input[name='password']").focus();
+                        $('#button').button('reset');
+                        return false;
+                    }
+                    return true;
+                }
+                function showResponse(data){
+                    if(data.state === 'success') {
+                        window.location.href = decodeURIComponent(data.referer);
+                    }else{
+                        $('#tip').show().children().find('b').text(data.message);
+                        $('#button').button('reset');
+                    }
+                }
+
+                $('#tips').popover({
+                    'placement':'bottom',
+                    'trigger':'hover'
+                });
+            });
+        </script>
+    </block>
+</body>
+</html>

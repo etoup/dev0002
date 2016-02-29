@@ -1,0 +1,167 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link href="__CSS__/index.css" rel="stylesheet" />
+    <link href="__CSS__/dashboard.css" rel="stylesheet">
+</block>
+</head> 
+<body>
+<block name="header"><include file='Public/header' /></block>
+<block name="nav"><include file='Public/nav' /></block>
+<block name="uctop">
+    <div class="alert alert-warning" role="alert">
+        <span class="glyphicon glyphicon-list" aria-hidden="true"></span> {$seo.title}
+
+    </div>
+</block>
+
+
+<block name="main">
+    <ol class="breadcrumb">
+        <li><a href="{$crumbs.url}">{$crumbs.title}</a></li>
+        <li class="active">{$seo.title}</li>
+    </ol>
+    <switch name="uc['pass_phone']">
+        <case value="0">
+            <div class="jumbotron">
+                <div class="tip" id="tip">
+                    <div class="alert alert-danger" role="alert">alert</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <form action="{:U('phoneVerify')}" method="post" class="form-horizontal" role="form" id="form">
+                            <div class="form-group">
+                                <label for="inputVerifyCode" class="col-sm-4 control-label">手机验证码</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="verifycode" class="form-control" id="inputVerifyCode" placeholder="手机验证码">
+                                </div>
+                                <div class="col-sm-2">
+                                    <button type="button" class="btn btn-default" id="btnSendCode" onclick="sendMessage()">获取验证码</button>
+                                    <!--<button type="button" class="btn btn-info" id="sendMobile" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">获取验证码</button>-->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-8">
+                                    <button type="submit" id="button" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">
+                                        提交验证
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </case>
+        <case value="1">
+            <div class="alert alert-info" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">提示:</span>
+                您已经成功绑定手机，可以通过下面操作修改手机绑定，如果手机号码丢失，请联系客服修改
+            </div>
+            <div class="jumbotron">
+                <div class="tip" id="tip">
+                    <div class="alert alert-danger" role="alert">alert</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <form action="{:U('phoneEdit')}" method="post" class="form-horizontal" role="form" id="form">
+                            <div class="form-group">
+                                <label for="inputVerifyCode" class="col-sm-4 control-label">手机号码：</label>
+                                <div class="col-sm-4">
+                                    <input type="text" value="{$mobile}" disabled class="form-control" placeholder="手机号码">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputVerifyCode" class="col-sm-4 control-label">手机验证码</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="verifycode" class="form-control" id="inputVerifyCode" placeholder="填写收到的短信验证码">
+                                </div>
+                                <div class="col-sm-2">
+                                    <button type="button" class="btn btn-default" id="btnSendCode" onclick="sendMessage()">获取验证码</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-8">
+                                    <button type="submit" id="button" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">
+                                        下一步
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </case>
+    </switch>
+</block>
+
+<block name="foot"><include file='Public/foot' /></block>
+<block name="foot_js">
+    <script type="text/javascript" src="__STATIC__/jquery.form.js"></script>
+    <script>
+        var InterValObj; //timer变量，控制时间
+        var count = 30; //间隔函数，1秒执行
+        var curCount;//当前剩余秒数
+
+        function sendMessage(){
+            curCount = count;//设置button效果，开始计时
+            $("#btnSendCode").attr("disabled", "true");
+            $("#btnSendCode").html("请在" + curCount + "秒内输入验证码");
+            InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+            // 向后台发送处理数据
+
+            $.post("{:U('sendMobileCode')}",function(data){
+                if(data.state === 'fail'){
+                    $('#tip').show().children().text(data.message);
+                }
+            }, "json");
+        }
+
+        //timer处理函数
+        function SetRemainTime() {
+            if (curCount == 0) {
+                window.clearInterval(InterValObj);//停止计时器
+                $("#btnSendCode").removeAttr("disabled");//启用按钮
+                $("#btnSendCode").html("重新获取验证码");
+            }
+            else {
+                curCount--;
+                $("#btnSendCode").html("请在" + curCount + "秒内输入验证码");
+            }
+        }
+
+        $('#button').on('click', function () {
+            var options = {
+                beforeSubmit :showRequest,
+                success: showResponse,
+                timeout: 3000
+            };
+            $('#form').ajaxForm(options);
+        });
+
+        function showRequest(formData, jqForm, options){
+            var queryString = $.param(formData);
+            var formElement = jqForm[0];
+            var verifycode = formElement.verifycode.value;
+
+            if(verifycode==''){
+                $('#tip').show().children().text('验证码不能为空');
+                $("input[name='verifycode']").focus();
+                $('#button').button('reset');
+                return false;
+            }
+            return true;
+        };
+
+        function showResponse(data){
+            if(data.state === 'success') {
+                window.location.href = decodeURIComponent(data.referer);
+            }else{
+                $('#tip').show().children().text(data.message);
+                $('#button').button('reset');
+            }
+        };
+    </script>
+</block>
+</body>
+</html>

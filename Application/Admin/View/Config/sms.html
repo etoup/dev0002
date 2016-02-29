@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap">
+    <div class="nav">
+        <ul class="cc">
+            <li class="current"><a href="__SELF__">短信设置</a></li>
+            <li><a href="{:U('sendSms')}">短信检测</a></li>
+        </ul>
+    </div>
+    <div class="h_a">功能说明</div>
+    <div class="mb10 prompt_text">
+        <ol>
+            <li>配置选择短信验证码或者语音验证码</li>
+            <li>语音验证码可在短信验证码被拦截或者提高用户体验时使用</li>
+        </ol>
+    </div>
+    <div class="h_a">短信设置</div>
+    <form class="J_ajaxForm" data-role="list" action="__SELF__" method="post">
+    <div class="table_full">
+        <table width="100%">
+            <col class="th" />
+            <col width="400" />
+            <col />
+            <tr>
+                <th>验证码类型</th>
+                <td>
+                    <ul class="single_list cc" id="J_register_type">
+                        <li><label><input type="radio" name="config[SMS_CAPTCHA_TYPE]" data-arr="reg2" value="1" {:is_checked(C('SMS_CAPTCHA_TYPE'),1)}><span>短信验证码</span></label></li>
+                        <li><label><input type="radio" name="config[SMS_CAPTCHA_TYPE]" data-arr="reg3,J_reg3_intro" value="2" {:is_checked(C('SMS_CAPTCHA_TYPE'),2)}><span>语音验证码</span></label></li>
+                    </ul>
+                </td>
+                <td><div class="fun_tips">请至少选定一种验证码类型。</div></td>
+            </tr>
+        </table>
+    </div>
+    <div class="h_a">基本设置</div>
+    <div class="table_full">
+        <table width="100%" class="J_radio_change_items" id="reg2" style="margin-bottom:0;">
+            <col class="th" />
+            <col width="400" />
+            <col />
+            <tbody>
+                <tr>
+                    <th>主帐号</th>
+                    <td>
+                        <input type="text" class="input length_5 mr5" name="config[SMS_SID]" value="{:C('SMS_SID')}">
+                    </td>
+                    <td><div class="fun_tips">主帐号,对应开官网发者主账号下的 ACCOUNT SID</div></td>
+                </tr>
+                <tr>
+                    <th>主帐号令牌</th>
+                    <td>
+                        <input type="text" class="input length_5 mr5" name="config[SMS_TOKEN]" value="{:C('SMS_TOKEN')}">
+                    </td>
+                    <td><div class="fun_tips">主帐号令牌,对应官网开发者主账号下的 AUTH TOKEN</div></td>
+                </tr>
+                <tr>
+                    <th>应用Id</th>
+                    <td>
+                        <input type="text" class="input length_5 mr5" name="config[SMS_APPID]" value="{:C('SMS_APPID')}">
+                    </td>
+                    <td><div class="fun_tips">应用Id，在官网应用列表中点击应用，对应应用详情中的APP ID</div>
+                            <div class="fun_tips">在开发调试的时候，可以使用官网自动为您分配的测试Demo的APP ID</div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>请求地址</th>
+                    <td>
+                        <input type="text" class="input length_5 mr5" name="config[SMS_IP]" value="{:C('SMS_IP')}">
+                    </td>
+                    <td><div class="fun_tips">沙盒环境（用于应用开发调试）：sandboxapp.cloopen.com</div>
+                            <div class="fun_tips">生产环境（用户应用上线使用）：app.cloopen.com</div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>请求端口</th>
+                    <td>
+                        <input type="text" class="input length_5 mr5" name="config[SMS_PORT]" value="{:C('SMS_PORT')}">
+                    </td>
+                    <td><div class="fun_tips">请求端口，生产环境和沙盒环境一致</div></td>
+                </tr>
+                <tr>
+                    <th>REST版本号</th>
+                    <td>
+                        <input type="text" class="input length_5 mr5" name="config[SMS_VERSION]" value="{:C('SMS_VERSION')}">
+                    </td>
+                    <td><div class="fun_tips">REST版本号，在官网文档REST介绍中获得</div></td>
+                </tr>
+                <tr>
+                    <th>短信验证码A模板ID</th>
+                    <td>
+                        <input type="text" class="input length_5 mr5" name="config[SMSTAMA]" value="{:C('SMSTAMA')}">
+                    </td>
+                    <td><div class="fun_tips">短信验证码A模板ID</div></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="btn_wrap">
+        <div class="btn_wrap_pd">
+            <button class="btn btn_submit J_ajax_submit_btn" type="submit">提交</button>
+        </div>
+    </div>
+    </form>
+</div>
+<include file='Public/foot' />
+</body>
+</html>

@@ -1,0 +1,151 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link href="__CSS__/index.css" rel="stylesheet" />
+    <link href="__CSS__/dashboard.css" rel="stylesheet">
+    <link href="__STATIC__/bootstrap/css/datepicker.css" rel="stylesheet" />
+</block>
+</head> 
+<body>
+<block name="header"><include file='Public/header' /></block>
+<block name="nav"><include file='Public/nav' /></block>
+<block name="uctop">
+    <div class="alert alert-warning" role="alert">
+        <span class="glyphicon glyphicon-list" aria-hidden="true"></span> {$seo.title}
+
+    </div>
+</block>
+
+<block name="main">
+    <ol class="breadcrumb">
+        <li><a href="{$crumbs.url}">{$crumbs.title}</a></li>
+        <li class="active">{$seo.title}</li>
+    </ol>
+    <div id="containerPeizi" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    <div id="containerTouzi" style="min-width: 310px; height: 400px; margin: 30px auto 0"></div>
+</block>
+
+<block name="foot"><include file='Public/foot' /></block>
+<block name="foot_js">
+    <script src="__STATIC__/Highcharts/js/highcharts.js"></script>
+    <script>
+        $(function () {
+            var colors = Highcharts.getOptions().colors;
+            $('#containerPeizi').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: '配资盈亏统计'
+                },
+                subtitle: {
+                    text: '数据来自六合资本风控部'
+                },
+                xAxis: {
+                    categories: [{$peiziDate}],
+                    title: {
+                        enabled: true,
+                        text: '日期（单位：天）'
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: '盈亏金额（单位：万元）'
+                    }
+                },
+//                    tooltip: {
+//                        pointFormat: '{series.name}: <b>{point.y:.2f}</b> 万元'
+//                    },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b style="margin-left: 5px;">{point.y:.2f} 万元</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: '总资产',
+                    data: [{$allMoney}]
+                }, {
+                    name: '配资资金',
+                    color:colors[7],
+                    data: [{$with_funds}]
+                }, {
+                    name: '自有资金',
+                    color:colors[9],
+                    data: [{$own_funds}]
+                }, {
+                    name: '账户出金',
+                    color:colors[5],
+                    data: [{$cash}]
+                }, {
+                    name: '补充保证金',
+                    color:colors[6],
+                    data: [{$supply_bond}]
+                }, {
+                    name: '盈亏金额',
+                    color:colors[3],
+                    data: [{$allLast}]
+                }]
+            });
+
+            $('#containerTouzi').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: '投资盈利统计'
+                },
+                subtitle: {
+                    text: '数据来自六合资本风控部'
+                },
+                xAxis: {
+                    categories: [{$touziDate}],
+                    title: {
+                        enabled: true,
+                        text: '月份（单位：月）'
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: '盈利金额（单位：万元）'
+                    }
+                },
+//                    legend: {
+//                        enabled: false
+//                    },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b style="margin-left: 5px;">{point.y:.2f} 万元</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        //pointWidth: 20,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: '投资金额',
+                    data: [{$touziMoney}]
+
+                }, {
+                    name: '投资盈利',
+                    color:colors[3],
+                    data: [{$touziProfit}]
+                }]
+            });
+        });
+    </script>
+</block>
+</body>
+</html>

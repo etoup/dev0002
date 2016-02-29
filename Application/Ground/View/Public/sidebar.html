@@ -1,0 +1,70 @@
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+            <div class="pull-left image">
+                <if condition="$icon">
+                    <img src="{$icon.path}" class="img-circle myimg" alt="User Image">
+                    <else/>
+                    <img src="__IMG__/avatar.jpg" class="img-circle myimg" alt="User Image">
+                </if>
+            </div>
+            <div class="pull-left info">
+                <p>{:NAME}</p>
+                <a href="#"><i class="fa fa-circle text-success"></i> 普通场馆</a>
+            </div>
+        </div>
+        <!-- search form -->
+        <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="搜索...">
+                      <span class="input-group-btn">
+                        <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+                      </span>
+            </div>
+        </form>
+        <!-- /.search form -->
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu">
+            <li class="header">导航列表</li>
+            <if condition="$active eq 'Index'"><li class="active"><else/><li></if>
+                <a href="{:U('Index/index')}">
+                    <i class="fa fa-dashboard"></i> <span>场馆首页</span>
+                </a>
+            </li>
+            <if condition="$active eq 'Orders'"><li class="active"><else/><li></if>
+                <a href="{:U('Orders/index')}">
+                    <i class="fa fa-reorder"></i>
+                    <span>订单管理</span>
+                    <span class="label label-primary pull-right">{$orders}</span>
+                </a>
+            </li>
+            <if condition="$active eq 'Statistics'"><li class="active"><else/><li></if>
+                <a href="{:U('Statistics/index')}">
+                    <i class="fa fa-pie-chart"></i>
+                    <span>统计管理</span>
+                    <span class="label label-success pull-right">{$settled}</span>
+                </a>
+            </li>
+            <if condition="$active eq 'Locks'"><li class="active"><else/><li></if>
+            <a href="{:U('Locks/index')}">
+                <i class="fa fa-lock" style="font-size: 18px;"></i>
+                <span>锁定管理</span>
+                <span class="label label-danger pull-right">{$locks}</span>
+            </a>
+            </li>
+            <li class="header">场馆设置</li>
+            <if condition="$active eq 'Setting_index'"><li class="active"><else/><li></if>
+                <a href="{:U('Setting/index')}"><i class="fa fa-circle-o text-red"></i> <span>基础设置</span></a>
+            </li>
+            <if condition="$active eq 'Setting_items'"><li class="active"><else/><li></if>
+                <a href="{:U('Setting/items')}"><i class="fa fa-circle-o text-yellow"></i> <span>项目设置</span></a>
+            </li>
+            <if condition="$active eq 'Setting_block'"><li class="active"><else/><li></if>
+                <a href="{:U('Setting/block')}"><i class="fa fa-circle-o text-aqua"></i> <span>场地设置</span></a>
+            </li>
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>

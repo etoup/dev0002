@@ -1,0 +1,132 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link href="__CSS__/index.css?v={:v()}" rel="stylesheet" />
+</block>
+</head>
+<body>
+<div class="wrap">
+<block name="header"><include file='Public/header' /></block>
+<block name="main">
+    <div class="container">
+        <div class="alert alert-danger mt30" role="alert" id="alert" style="display: none;">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            请选择手数
+        </div>
+        <div class="row mt30">
+            <div class="col-md-12">
+                <ul class="list-group" id="ul">
+                    <li class="list-group-item">
+                        <input type="radio" name="numInput" value="1" /> 1手，20,000.00本金
+                    </li>
+                    <li class="list-group-item">
+                        <input type="radio" name="numInput" value="2" /> 2手，40,000.00本金
+                    </li>
+                    <li class="list-group-item">
+                        <input type="radio" name="numInput" value="3" /> 3手，60,000.00本金
+                    </li>
+                    <li class="list-group-item">
+                        <input type="radio" name="numInput" value="4" /> 4手，80,000.00本金
+                    </li>
+                    <li class="list-group-item">
+                        <input type="radio" name="numInput" value="5" /> 5手，100,000.00本金
+                    </li>
+                    <li class="list-group-item">
+                        <input type="radio" name="numInput" value="6" /> 6手，120,000.00本金
+                    </li>
+                    <li class="list-group-item">
+                        <input type="radio" name="numInput" value="7" /> 7手，140,000.00本金
+                    </li>
+                    <li class="list-group-item">
+                        <input type="radio" name="numInput" value="8" /> 8手，160,000.00本金
+                    </li>
+                    <li class="list-group-item">
+                        <input type="radio" name="numInput" value="9" /> 9手，180,000.00本金
+                    </li>
+                    <li class="list-group-item">
+                        <input type="radio" name="numInput" value="10" /> 10手，200,000.00本金
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary" id="myModal" data-toggle="modal" data-target="#modal">确认提交</button>
+        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal fade" id="modal" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="{:U('pay')}" method="post" class="form-horizontal" role="form" id="form">
+                        <div class="modal-header">
+                            <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                            <h4 id="myModalLabel" class="modal-title">交付本金，提交需求</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <strong>需付本金</strong>：<span id="own_funds"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <strong>可用余额</strong>：<span id="balance"></span>
+                                </div>
+                                <div class="col-md-2" id="recharge">
+                                    <a class="btn btn-default" href="{:U('Recharge/index')}" role="button">充值</a>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <h5><strong>支付密码</strong></h5>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <input type="hidden" name="num" id="num">
+                                    <input type="password" name="paypwd" class="form-control" placeholder="填写支付密码">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                            <button class="btn btn-primary" type="submit">确认支付</button>
+                        </div>
+                    </form>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+    </div>
+</block>
+</div>
+<block name="foot">
+    <include file='Public/foot' />
+</block>
+<block name="foot_js">
+    <script type="text/javascript" src="__JS__/jquery.validate.js"></script>
+    <script>
+        $('#modal').on('show.bs.modal', function (e) {
+            var num = $('#ul input[name="numInput"]:checked ').val();
+            if(num){
+                $('#alert').hide();
+                $('#num').val(num);
+                $.post('{:U("openPay")}', { 'num': num },
+                        function(data){
+                            if(data.url){
+                                window.location.href = data.url;
+                                return false;
+                            }
+                            if(data.msg){
+                                $('#alert').show();
+                                return false;
+                            }
+                            $.each(data, function(key, val){
+                                $('#'+key).text(val);
+                            });
+                        }, "json");
+
+            }else{
+                $('#alert').show();
+                return false;
+            }
+        });
+
+    </script>
+</block>
+</body>
+</html>

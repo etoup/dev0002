@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body style="width:450px" class="body_none">
+    <form class="J_ajaxForm" action="__SELF__" method="post">
+    <div style="padding:0 0 15px 15px;">
+        <div class="pop_cont pop_table" style="height:auto;">
+            <dl class="seclist">
+                <dt>选择开放的支付接口</dt>            
+                <dd class="cc">
+                    <foreach name="interface" item="v">
+                    <if condition="strstr(C('PAYINTERFACEVAL'),$key)">
+                    <a href="#" class="i hover" id="{$key}" k="{$key}" onfocus="this.blur();">{$v}</a>
+                    <input type="hidden" name="{$key}" value="{$key}">
+                    <else/>
+                    <a href="#" class="i" id="{$key}" k="{$key}" onfocus="this.blur();">{$v}</a>
+                    <input type="hidden" name="{$key}">
+                    </if>
+                    </foreach>
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div class="pop_bottom">
+        <button class="btn fr" id="J_dialog_close" type="button">取消</button>
+        <button type="submit" class="btn btn_submit J_ajax_submit_btn fr mr10">提交</button>
+    </div>
+    </form>
+<include file='Public/foot_min' />
+<script>
+$(function(){
+     $('a.i').click(function(){
+            var k = $(this).attr('k');
+            if($(this).hasClass('hover')){
+                            $(this).removeClass('hover').next('input').val('');
+            }else{
+                            $(this).addClass('hover').next('input').val(k);
+            } 
+     });
+});
+</script>
+</body>
+</html>

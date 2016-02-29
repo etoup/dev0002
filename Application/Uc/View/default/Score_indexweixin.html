@@ -1,0 +1,47 @@
+<extend name="Public/baseweixin" />
+<block name="head"><include file='Public/headweixin' /></block>
+<block name="head_css">
+    <link href="__CSS__/indexweixin.css" rel="stylesheet" />
+    <link href="__CSS__/dashboard.css" rel="stylesheet">
+</block>
+</head> 
+<body>
+<block name="header"><include file='Public/headerweixin' /></block>
+<block name="uctop">
+
+</block>
+
+<block name="main">
+    <div class="wewixinmain" style="margin: 50px 0;">
+        <div class="alert alert-danger alert-dismissible fade in mt30" id="tip" role="alert" >
+            <button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <strong></strong>
+        </div>
+        <if condition="$_list">
+            <div style="margin-top: 20px;">
+                <foreach name="_list" item="v">
+                <ul class="list-group">
+                    <li class="list-group-item"><span>获取积分：</span><strong>{$v.getval}</strong></li>
+                    <li class="list-group-item"><span>我的积分：</span><strong>{$v.score}</strong></li>
+                    <li class="list-group-item"><span>记录时间：</span><strong>{$v['created_time']|time_format}</strong></li>
+                    <li class="list-group-item"><span>备注：</span><br>{$v.remark}</li>
+                </ul>
+                </foreach>
+            </div>
+            <div class="page">
+                {$_page}
+            </div>
+
+            <else/>
+            <div class="paizi nolist mt50">
+                <a href="">没有相关记录</a>
+            </div>
+        </if>
+    </div>
+</block>
+
+<block name="foot"><include file='Public/ufootweixin' /></block>
+<block name="foot_js">
+</block>
+</body>
+</html>

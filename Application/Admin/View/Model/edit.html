@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+<link href="__CSS__/model.css" rel="stylesheet" />
+</head>
+<body>
+<div class="wrap">
+
+
+<!--分类管理: 编辑分类  -->
+<div class="nav">
+    <div class="return"><a href="{:U('index')}">返回上一级</a></div>
+</div>
+<form class="J_ajaxForm" data-role="list" action="{:U('update')}" method="post">
+<div class="h_a">基础信息</div>
+<div class="table_full">
+    <table width="100%">
+        <colgroup><col class="th">
+        <col width="400">
+        <col>
+        </colgroup>
+        <tbody>
+            <tr>
+                <th>模型标识</th>
+                <td>
+                    <input type="text" value="{$info.name}" class="input length_5" name="name">
+                </td>
+                <td><div class="fun_tips">请输入文档模型标识</div></td>
+            </tr>
+            <tr>
+                <th>模型名称</th>
+                <td>
+                    <input type="text" value="{$info.title}" class="input length_5" name="title">
+                </td>
+                <td><div class="fun_tips">请输入模型的名称</div></td>
+            </tr>
+            <tr>
+                <th>模型类型</th>
+                <td>
+                    <select name="extend" class="length_2">
+						<option value="0" {:is_selected($info['extend'],0)}>独立模型</option>
+						<option value="1" {:is_selected($info['extend'],1)}>文档模型</option>
+					</select>
+                </td>
+                <td><div class="fun_tips">目前支持独立模型和文档模型</div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="h_a">设计信息</div>
+<div class="table_full">
+    <table width="100%">
+        <colgroup><col class="th">
+        <col width="500">
+        <col>
+        </colgroup>
+        <tbody>
+            <tr>
+                <th>字段管理</th>
+                <td>
+                    <div class="controls">
+                        <div class="form-item cf edit_sort edit_sort_l form_field_sort">
+                            <span>字段列表      [ <a href="{:U('Attribute/add?model_id='.$info['id'])}">新增</a>
+                            <a href="{:U('Attribute/index?model_id='.$info['id'])}">管理</a> ] </span>
+                            <ul class="dragsort">
+                                <foreach name="fields" item="field" key="k">
+                                        <li >
+                                            <em >{$field['title']} [{$field['name']}]</em>
+                                        </li>
+                                </foreach>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+                <td><div class="fun_tips">只有新增了字段，该表才会真正建立</div></td>
+            </tr>
+            <tr>
+                <th>表单显示分组</th>
+                <td>
+                    <input type="text" value="{$info.field_group}" class="input length_5" name="field_group">
+                </td>
+                <td><div class="fun_tips">用于表单显示的分组，以及设置该模型表单排序的显示</div></td>
+            </tr>
+            <tr>
+                <th>表单显示排序</th>
+                <td>
+                    <volist name=":parse_field_attr($info['field_group'])" id="vo">
+                        <div class="form-item cf edit_sort edit_sort_l form_field_sort">
+                            <span>{$vo}</span>
+                            <ul class="dragsort needdragsort" data-group="{$key}">
+                                <foreach name="fields" item="field" key="k">
+                                    <if condition="(($field['group'] eq $key) or($i eq 1 and !isset($field['group']))) and ($field['is_show'] eq 1)">
+                                        <li class="getSort">
+                                            <em data="{$field['id']}">{$field['title']} [{$field['name']}]</em>
+                                            <input type="hidden" name="field_sort[{$key}][]" value="{$field['id']}"/>
+                                        </li>
+                                    </if>
+                                </foreach>
+                            </ul>
+                        </div>
+                    </volist>
+                </td>
+                <td><div class="fun_tips">直接拖动进行排序</div></td>
+            </tr>
+            <tr>
+                <th>列表定义</th>
+                <td>
+                    <textarea class="length_5" name="list_grid">{$info.list_grid}</textarea>
+                </td>
+                <td><div class="fun_tips">默认列表模板的展示规则</div></td>
+            </tr>
+            <tr>
+                <th>默认搜索字段</th>
+                <td>
+                    <input type="text" value="{$info.search_key}" class="input length_5" name="search_key">
+                </td>
+                <td><div class="fun_tips">默认列表模板的默认搜索项</div></td>
+            </tr>
+            <tr>
+                <th>高级搜索字段</th>
+                <td>
+                    <input type="text" value="{$info.search_list}" class="input length_5" name="search_list">
+                </td>
+                <td><div class="fun_tips">默认列表模板的高级搜索项</div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="h_a">高级信息</div>
+<div class="table_full">
+    <table width="100%">
+        <colgroup><col class="th">
+        <col width="400">
+        <col>
+        </colgroup>
+        <tbody>
+            <tr>
+                <th>列表模板</th>
+                <td>
+					<input type="text" value="{$info.template_list}" class="input length_5" name="template_list">
+                </td>
+                <td><div class="fun_tips">自定义的列表模板，放在Application\Admin\View\Think下，不写则使用默认模板</div></td>
+            </tr>
+            <tr>
+                <th>新增模板</th>
+                <td>
+                    <input type="text" value="{$info.template_add}" class="input length_5" name="template_add">
+                </td>
+                <td><div class="fun_tips">自定义的新增模板，放在Application\Admin\View\Think下，不写则使用默认模板</div></td>
+            </tr>
+            <tr>
+                <th>编辑模板</th>
+                <td>
+                    <input type="text" value="{$info.template_edit}" class="input length_5" name="template_edit">
+                </td>
+                <td><div class="fun_tips">自定义的编辑模板，放在Application\Admin\View\Think下，不写则使用默认模板</div></td>
+            </tr>
+            <tr>
+                <th>列表数据大小</th>
+                <td>
+                    <input type="text" value="{$info.list_row}" class="input length_1" name="list_row">
+                </td>
+                <td><div class="fun_tips">默认列表模板的分页属性</div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="btn_wrap">
+    <div class="btn_wrap_pd">
+        <input type="hidden" name="id" value="{$info.id}" />
+        <button type="submit" class="btn btn_submit J_ajax_submit_btn">提交</button>
+    </div>
+</div>
+</form>
+
+</div>
+<include file='Public/foot' />
+<script type="text/javascript" src="__JS__/jquery.dragsort-0.5.1.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+//拖曳插件初始化
+$(function(){
+    $(".needdragsort").dragsort({
+         dragSelector:'li',
+         placeHolderTemplate: '<li class="draging-place">&nbsp;</li>',
+         dragBetween:true,  //允许拖动到任意地方
+         dragEnd:function(){
+             var self = $(this);
+             self.find('input').attr('name', 'field_sort[' + self.closest('ul').data('group') + '][]');
+         }
+     });
+})
+</script>
+</body>
+</html>

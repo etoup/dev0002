@@ -1,0 +1,137 @@
+<extend name="Public/ubaseweixin" />
+<block name="head"><include file='Public/headweixin' /></block>
+<block name="head_css">
+    <link href="__CSS__/uc.css?v={:v()}" rel="stylesheet" />
+</block>
+</head> 
+<body>
+    <block name="main">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div id="form_container">
+                        <h1><a href="{:U('Uc/Index/index',['mobile'=>'weixin'])}" id="tips" data-toggle="popover" data-trigger="focus" title="六合资本登录页面"
+                               data-content="点击返回我的账户"><img src="__IMG__/logo.png"></a></h1>
+                        <div id="form_main">
+                            <if condition="$new">
+                                <div class="tip" id="tip" style="display: block;">
+                                    <div class="alert alert-warning" role="alert">
+                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        <b id="alertTxt">注册成功，请登录激活</b>
+                                    </div>
+                                </div>
+                                <else/>
+                                <div class="tip" id="tip">
+                                    <div class="alert alert-danger" role="alert">
+                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        <b id="alertTxt">用户名和密码为必填项</b>
+                                    </div>
+                                </div>
+                            </if>
+                            <form action="__SELF__" method="post" role="form" id="form">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" name="username" value="{$username|default=''}" class="form-control" id="inputUsername" placeholder="填写用户名">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-default" type="button">账户类型</button>
+                                            <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
+                                                <span class="caret"></span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul role="menu" class="dropdown-menu dropdown-menu-right" id="menu">
+                                                <li><a href="#" type="1" title="用户名登录">用户名</a></li>
+                                                <li><a href="#" type="3" title="手机号码登录">手机号码</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" value="1" name="type" id="type" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="password" class="form-control" id="inputPassword" placeholder="密码">
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <if condition="$username">
+                                            <input type="checkbox" name="rememberme" checked=""> 记住用户名
+                                            <else/>
+                                            <input type="checkbox" name="rememberme"> 记住用户名
+                                        </if>
+                                        <a href="{:U('forgotPwd',['mobile'=>'weixin'])}" style="margin-left: 10px;">忘记密码?</a>
+                                    </label>
+                                </div>
+                                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                                    <div class="btn-group" role="group">
+                                        <button type="submit" id="button" data-loading-text="Loading..." class="btn btn-info" autocomplete="off">
+                                            <span aria-hidden="true" class="glyphicon glyphicon-saved"></span> 提交登录
+                                        </button>
+                                    </div>
+                                    <div class="btn-group" role="group">
+                                        <a href="{:U('register',['mobile'=>'weixin'])}" class="btn btn-warning" role="button"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span> 马上注册</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </block>
+    <block name="foot"><include file='Public/ufootweixin' /></block>
+    <block name="foot_js">
+    <script type="text/javascript" src="__STATIC__/jquery.form.js"></script>
+    <script>
+    $('.wrap').css({ "height": $(window).height()+'px'});
+    $('#button').on('click', function () {
+    	var $btn = $(this).button('loading');
+    	var options = {
+	    	url:   '__SELF__',
+	    	beforeSubmit :showRequest,
+	    	success: showResponse,
+	    	timeout: 3000
+	    };
+    	$('#form').ajaxForm(options); 
+    });
+    $('#menu > li > a').on('click', function () {
+        var type = $(this).attr('type');
+        var title = $(this).attr('title');
+        $('#type').val(type);
+        $('#inputUsername').val('').attr('placeholder',title);
+        $('.dropdown-toggle').dropdown('toggle');
+        return false;
+    });
+    function showRequest(formData, jqForm, options){
+	    var queryString = $.param(formData);
+	    var formElement = jqForm[0];
+	    var username = formElement.username.value;
+	    var password = formElement.password.value;
+	    if(username==''){
+		    $('#tip').show().children().find('b').text('用户名不能为空');
+		    $("input[name='username']").focus();
+		    $('#button').button('reset');
+		    return false;
+	    }
+	    if(password==''){
+		    $('#tip').show().children().find('b').text('密码不能为空');
+		    $("input[name='password']").focus();
+		    $('#button').button('reset');
+		    return false;
+	    }
+	    return true;
+    };
+    function showResponse(data){
+  	    if(data.state === 'success') {
+		    window.location.href = decodeURIComponent(data.referer);
+	    }else{
+		    $('#tip').show().children().find('b').text(data.message);
+		    $('#button').button('reset');
+	    }
+    };
+
+    $('#tips').popover({
+        'placement':'bottom',
+        'trigger':'hover'
+    });
+    </script>
+    </block>
+</body>
+</html>

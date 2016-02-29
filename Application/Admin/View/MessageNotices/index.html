@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap J_check_wrap">
+    <div class="nav">
+        <ul class="cc">
+            <li class="current"><a href="{:U('index')}">消息管理</a></li>
+        </ul>
+    </div>
+    <div class="h_a">提示信息</div>
+    <div class="mb10 prompt_text">
+        <ul>
+            <li>消息管理，查看相关后台提醒消息。</li>
+        </ul>
+    </div>
+    <div class="h_a">搜索</div>
+    <div class="search_type cc mb10">
+        <form action="__SELF__" method="post">
+            <input type="hidden" name="p" value="{$p|default=1}">
+            <input type="hidden" name="soso" value="1">
+            <div class="ul_wrap">
+                <ul class="cc">
+                    <li>
+                        <label>关键字：</label>
+                        <input name="keyword" type="text" class="input length_2 mr10" value="{$keyword|default=''}" placeholder="用户名或真实姓名">
+                    </li>
+                    <li>
+                        <label>记录时间：</label>
+                        <input type="text" name="time_start" value="{$time_start|default=''}" class="input length_2 mr5 J_date"><span class="mr5">至</span><input type="text" name="time_end" value="{$time_end|default=''}" class="input length_2 J_date">
+                    </li>
+                </ul>
+            </div>
+            <div class="btn_side">
+                <button class="btn  mr5" type="submit">搜索</button>
+                <notempty name="soso">
+                    <if condition="$soso">
+                        <button type="reset" class="btn btn_error" onclick="window.location.href='{:U('index')}'">撤销检索</button>
+                    </if>
+                </notempty>
+            </div>
+        </form>
+    </div>
+    <div id="top-alert" class="alert alert-error" style="display: none;">
+        <button class="close fixed" style="margin-top: 4px;">×</button>
+        <div class="alert-content">这是内容</div>
+    </div>
+    <notempty name="_list">
+    <form method="post" action="#" id="J_tag_form" class="J_ajaxForm">
+    <div class="table_list">
+        <table width="100%">
+            <colgroup>
+                <col width="65">
+                <col width="150">
+                <col width="80">
+                <col width="120">
+                <col width="80">
+            </colgroup>
+            <thead>
+                <tr>
+                    <td>
+                        <label>
+                            <input class="J_check_all" data-checklist="J_check_x" data-direction="x" type="checkbox">全选</label>
+                    </td>
+                    <td>来源用户</td>
+                    <td>真实姓名</td>
+                    <td>记录时间</td>
+                    <td>是否已阅</td>
+                    <td>备注</td>
+                </tr>
+            </thead>
+        <volist name="_list" id="vo">
+            <tr>
+                <td>
+                    <input class="J_check" name="id[]" value="{$vo['id']}" data-name="{$vo.nickname|op_t }" data-tid="{$vo['id']}" data-xid="J_check_x" data-yid="J_check_y" type="checkbox">
+                </td>
+                <td>{$vo.username|default='系统'}</td>
+                <td>{$vo.realname|default=''}</td>
+                <td>{$vo.created_time|time_format}</td>
+                <td>
+                    <if condition="$vo['is_ignore']">
+                        已阅
+                        <else/>
+                        <b class="red">待阅</b>
+                    </if>
+                </td>
+                <td>{$vo.admin_con|default=''}</td>
+            </tr>
+        </volist>
+        </table>
+    </div>
+    <div class="page">
+        {$_page}
+    </div>
+    <div class="btn_wrap">
+        <div class="btn_wrap_pd" id="J_sub_wrap">
+            <label class="mr10"><input class="J_check_all" data-checklist="J_check_y" data-direction="y" type="checkbox">全选</label>
+            <button class="btn J_ajax_submit_btn" data-subcheck="true" data-action="{:U('read')}" type="submit">一键阅读</button>
+        </div>
+    </div>
+    </form>
+    <else/>
+    <div class="not_content_mini"><i></i>啊哦，没有符合条件的信息！</div>
+    </notempty>  
+</div>
+<include file='Public/foot' />
+
+</body>
+</html>

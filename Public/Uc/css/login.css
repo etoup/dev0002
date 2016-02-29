@@ -1,0 +1,53 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    letter-spacing: 0.1em;
+}
+.cf { zoom: 1; }
+ .cf:before,
+ .cf:after { content: ""; display: table; }
+ .cf:after { clear: both; }
+.pad10{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+body {
+    height: 100%;
+    background: #344e6f url(../images/bg.png) no-repeat center;
+    background-size:100% 100%;
+    font-family:"microsoft yahei",Helvetica, Arial, sans-serif; 
+}
+.login-logo{
+    display: block;
+    width: 80px;
+    height: 100px;
+    background: url(../images/logo2.png) no-repeat center;
+    background-size: contain;
+    margin: 25px auto;
+}
+.login-box-body{
+  background: rgba(255,255,255,0.2);
+  padding: 20px;
+  border-top: 0;
+  color: #fff;
+}
+.otherCount{
+    margin: 10px 0;
+    padding-top: 10px;
+}
+.otherCount ul {
+    list-style: outside none none;
+    padding: 0;
+    margin: 10px 0;
+}
+.otherCount ul li {
+    cursor: pointer;
+    float: left;
+    height: 28px;
+    margin-right: 10px;
+    width: 28px;
+}
+.otherCount ul li#weixin {
+    background: rgba(0, 0, 0, 0) url("../images/wechat.png") repeat scroll 0 -28px;
+}

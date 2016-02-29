@@ -1,0 +1,156 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link href="__CSS__/icon/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="__CSS__/style.css" rel="stylesheet" type="text/css">
+    <link href="__CSS__/list.css" rel="stylesheet" type="text/css">
+</block>
+</head> 
+ <body>
+  <block name="header">
+      <include file='Public/header_list' />
+  </block>
+  <block name="main">
+
+  <section>
+      <div class="query">
+          <div class="container pad35">
+              <div class="list">
+                  <select class="form-control" name="items_id" style="width: 200px; height: 40px;">
+                      <option value="0">请选择项目</option>
+                      <foreach name="items" item="vo">
+                          <option value="{$vo.id}">{$vo.name}</option>
+                      </foreach>
+                  </select>
+              </div>
+              <div class="list">
+                  <select class="form-control" name="by_date" style="width: 200px; height: 40px;">
+                      <option value="0">请选择日期</option>
+                      <foreach name="date_week" item="vo">
+                          <option value="{$vo.week}">{$vo.date} {$vo.week}</option>
+                      </foreach>
+                  </select>
+              </div>
+              <div class="list">
+                  <select class="form-control" name="by_time" style="width: 200px; height: 40px;">
+                      <option value="0">请选择时间</option>
+                      <foreach name="times" item="vo">
+                          <option value="{$vo}">{$vo}</option>
+                      </foreach>
+                  </select>
+              </div>
+              <div class="list">
+                  <input class="form-control" name="venue_name" type="text" placeholder="场馆名称" style="width: 200px; height: 40px;">
+              </div>
+              <div class="list">
+                  <button type="button" class="btn btn-primary" style="width: 200px; height: 40px;">快速查询</button>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <section>
+      <div class="container">
+          <div class="select">
+              <div class="row">
+                  <div class="col-md-1">
+                      <span>区域：</span>
+                  </div>
+                  <div class="col-md-11">
+                      <ul>
+                          <li class="click">全部</li>
+                          <foreach name="districts" item="vo">
+                              <li>{$vo.name}</li>
+                          </foreach>
+                      </ul>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-1">
+                      <span>商圈：</span>
+                  </div>
+                  <div class="col-md-11">
+                      <ul>
+                          <li class="click">全部</li>
+                          <foreach name="circles" item="vo">
+                              <li>{$vo.name}</li>
+                          </foreach>
+                      </ul>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-1">
+                      <span>特色筛选：</span>
+                  </div>
+                  <div class="col-md-11">
+                      <ul>
+                          <li class="click">全部</li>
+                          <foreach name="all_services" item="vo">
+                              <li>{$vo}</li>
+                          </foreach>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <section>
+      <div class="container">
+          <div class="detailNav">
+              <span>共有10家场馆满足条件</span>
+              <ul>
+                  <li>价格降序<i class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></i></li>
+                  <li>价格升序<i class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></i></li>
+                  <li>默认排序</li>
+              </ul>
+          </div>
+          <div class="detailCon">
+              <foreach name="venues" item="vo">
+                  <div class="row">
+                      <div class="col-md-5">
+                          <div class="item">
+                              <i class="glyphicon glyphicon-chevron-right fl" aria-hidden="true"></i>
+                              <p>{$vo.name}</p>
+                              <span>{$vo.district}</span>
+                          </div>
+                      </div>
+                      <div class="col-md-4">
+                          <div class="item">
+                              <p class="evaluate">
+                                  <i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+                                  <i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+                                  <i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+                                  <i class="glyphicon glyphicon-star" aria-hidden="true"></i>
+                                  <i class="glyphicon glyphicon-star-empty" aria-hidden="true"></i>
+                              </p>
+                              <foreach name="vo['services']" item="v">
+                                  <span class="cir" style="margin-right: 5px;">{$v}</span>
+                              </foreach>
+
+                          </div>
+                      </div>
+                      <div class="col-md-3">
+                          <div class="item">
+                              <p>电话：{$vo.tel}</p>
+                              <p><a class="btn stroke order" href="{:U('details',['id'=>$vo['id']])}" role="button">在线预定</a></p>
+                          </div>
+                      </div>
+                  </div>
+              </foreach>
+
+              
+              <a class="btn btn-primary btn-lg load" href="#" role="button">加载更多</a>
+          </div>
+      </div>
+      </div>
+  </section>
+  </block>
+  <block name="foot">
+      <include file='Public/foot' />
+  </block>
+  <block name="foot_js">
+
+  </block>
+ </body>
+</html>

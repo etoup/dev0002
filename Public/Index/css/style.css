@@ -1,0 +1,139 @@
+*,nav{
+	padding:0;
+	margin: 0;
+}
+body{
+	background-color: #ebebeb;
+	height:100%;
+	font-family:"microsoft yahei",Helvetica, Arial, sans-serif; 
+}
+ .cf { zoom: 1; }
+ .cf:before,
+ .cf:after { content: ""; display: table; }
+ .cf:after { clear: both; }
+.left {
+    float: left !important;
+}
+
+.right {
+    float: right !important;
+}
+
+*:focus{
+    outline: none !important;
+}
+
+*:hover {
+    -webkit-transition: ease-in-out all 0.2s;
+    -o-transition: ease-in-out all 0.2s;
+    transition: ease-in-out all 0.2s;
+    text-decoration: none !important;
+}
+ul{
+	list-style: none;
+}
+
+a:hover,a:link,a:visited{
+    text-decoration: none;
+}
+.pad30{
+	padding:0 30px;
+}
+.pad60{
+	 padding-bottom:60px;
+}
+header{
+	width:100%;
+	padding-top:50px;
+}
+nav{
+	height:85px;
+	line-height: 85px;
+	text-align: center;
+}
+nav li{
+	float:left;
+	margin-left: 40px;
+}
+.dropdown-menu {
+	z-index: 9999;
+}
+.dropdown-menu > li > a {
+    color: #5f5f5f;
+    padding: 5px 18px;
+}
+.pull-right a:hover{
+	border-bottom: 2px solid #228ac6;
+	color:  #228ac6;
+
+}
+.pull-right .active{
+	color:#228ac6;
+	border-bottom: 2px solid #228ac6;
+
+}
+
+section {
+	position: relative;
+}
+
+/*.fill{
+	background-color: #228ac6;
+    border-color: #3c8dbc;
+}
+.fill:hover{
+	background-color: #3c8dbc;
+    color: #fff;
+}*/
+.stroke{
+    padding:0;
+	border:2px solid #228ac6;
+	color: #228ac6!important;
+}
+.stroke:hover,.fill:visited{
+	color: #fff!important;
+	background-color: #228ac6;
+	border:2px solid #3c8dbc;
+}
+
+
+
+footer{
+	padding: 40px 0 10px;
+	background: #f5f5f5;
+}
+footer .row{
+	margin-bottom: 20px;
+}
+footer .left p{
+	font-size: 16px;
+	color:#1a1a1a;
+	margin: 20px 0;
+}
+footer .left span{
+	font-weight: bold;
+	width:100px;
+	display: inline-block;
+}
+footer .mid a,.mid span{
+	display:block;
+	color:#228ac6;
+	text-align: center;
+}
+footer .mid i{
+	color:#1a1a1a;
+	font-size: 84px;
+}
+footer .right p{
+	margin: 20px 0;
+}
+footer .right i{
+	line-height: 50px;
+	margin-right: 20px;
+	font-size:35px;
+	display: inline-block;
+}
+.btn-size{
+	width:202px;
+    height:52px;
+}

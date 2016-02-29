@@ -1,0 +1,40 @@
+<div id="msg" class="bottom-right"></div>
+<script src="__STATIC__/dev/pages/admin/common/common.js"></script>
+<script type="text/javascript" src="__JS__/jquery.jgrowl.js"></script>
+<script type="text/javascript">
+    ;$(function() {
+        $('#msg').jGrowl('<a href="__ROOT__/admin.php/MessageNotices/index" class="J_tabframe_trigger" data-level="2" data-parent="Business" data-id="MessageNotices_index">待处理消息数量：<span id="msgNum">{$magNum}</span>，点击查看</a>', {
+            theme:  'manilla',
+            speed:  'slow',
+            sticky: true,
+            click: function(msg) {
+                var _SUBMENU_CONFIG = parent.window.SUBMENU_CONFIG;		//导航数据
+                parent.window.eachSubmenu(_SUBMENU_CONFIG, 'MessageNotices_index', 'Business', 2, '__ROOT__/admin.php/MessageNotices/index');
+            }
+        });
+
+//        setInterval(function(){
+//            $.post("{:U('Public/getMsgNum')}", function(data){
+//                if(data.state == 'success'){
+//                    $('#msgNum').text(data.message);
+//                }
+//            });
+//        }, 120000);
+    });
+</script>
+<if condition="$remind">
+    <script type="text/javascript">
+        ;$(function() {
+            $('#msg').jGrowl('<a href="__ROOT__/admin.php/Repayment/collectToday" class="J_tabframe_trigger" data-level="2" data-parent="Funds" data-id="Repayment_collectToday">今日还款数量：<span id="msgNum">{$remind}</span>笔，点击查看</a>', {
+                theme:  'manilla',
+                speed:  'slow',
+                sticky: true,
+                click: function(msg) {
+                    var _SUBMENU_CONFIG = parent.window.SUBMENU_CONFIG;		//导航数据
+                    parent.window.eachSubmenu(_SUBMENU_CONFIG, 'Repayment_index', 'Funds', 2, '__ROOT__/admin.php/Repayment/collectToday');
+                }
+            });
+        });
+    </script>
+</if>
+

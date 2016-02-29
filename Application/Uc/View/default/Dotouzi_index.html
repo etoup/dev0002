@@ -1,0 +1,187 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link href="__CSS__/index.css" rel="stylesheet" />
+    <link href="__CSS__/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="__CSS__/jquery-ui.css">
+</block>
+</head> 
+<body>
+<block name="header"><include file='Public/header' /></block>
+<block name="nav"><include file='Public/nav' /></block>
+<block name="uctop">
+    <div class="alert alert-warning" role="alert">
+        <span class="glyphicon glyphicon-list" aria-hidden="true"></span> {$seo.title}
+
+    </div>
+    <ol class="breadcrumb">
+        <li><a href="{$crumbs.url}">{$crumbs.title}</a></li>
+        <li class="active">{$seo.title}</li>
+    </ol>
+</block>
+<block name="main">
+    <div class="alert alert-danger alert-dismissible fade in mt30" id="tip" role="alert" >
+        <button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+        <strong></strong>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <form class="form-inline" role="form" action="__SELF__" method="post">
+                <input type="hidden" name="p" value="{$p|default=1}">
+                <input type="hidden" name="soso" value="1">
+                <div class="form-group">
+                    <input type="text" name="orders" value="{$orders|default=''}" class="form-control" id="exampleInputEmail2" placeholder="单号">
+                </div>
+                <button type="submit" class="btn btn-default">搜索</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <div class="btn-group">
+                <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button" aria-expanded="false">发布时间排序 <span class="caret"></span></button>
+                <ul role="menu" class="dropdown-menu">
+                    <li><a href="{:U('index',['sort'=>'created_time'])}">发布时间升序</a></li>
+                    <li class="divider"></li>
+                    <li><a href="{:U('index',['sort'=>'created_time','desc'=>1])}">发布时间降序</a></li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button" aria-expanded="false">借款期限排序 <span class="caret"></span></button>
+                <ul role="menu" class="dropdown-menu">
+                    <li><a href="{:U('index',['sort'=>'time_limit'])}">借款期限升序</a></li>
+                    <li class="divider"></li>
+                    <li><a href="{:U('index',['sort'=>'time_limit','desc'=>1])}">借款期限降序</a></li>
+                </ul>
+            </div>
+            <a href="{:U('index',['maycast'=>1])}" class="btn btn-default" role="button">只显示可投</a>
+            <if condition="$soso">
+                <a href="{:U('index')}" class="btn btn-default" role="button">撤销检索</a>
+            </if>
+        </div>
+    </div>
+    <if condition="$_list">
+        <foreach name="_list" item="v">
+            <div class="panel panel-default mt30">
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <strong>单号：{$v.orders}</strong>
+                        </div>
+                        <div class="col-md-4">
+                            <if condition="$v['status']">
+                                <strong>满标时间：{$v.update_time|time_format}</strong>
+                                <else/>
+                                <strong>创建时间：{$v.created_time|time_format}</strong>
+                            </if>
+                        </div>
+                        <div class="col-md-4">
+                            <strong>状态：{:bidsStatus($v['status'])}</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- List group -->
+                            <ul class="list-group">
+                                <li class="list-group-item"><strong>借款金额：{:money($v['with_funds'],'',10000)}</strong></li>
+                                <li class="list-group-item"><strong>保证金：{:money($v['own_funds'],'',10000)}</strong></li>
+                                <li class="list-group-item"><strong>年化收益：{$v['profit']}%</strong></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <!-- List group -->
+                            <ul class="list-group">
+                                <li class="list-group-item"><strong>借款期限：{$v.time_limit}个月</strong></li>
+                                <li class="list-group-item"><strong>投标人数：{:count($v['tenders'])}人</strong></li>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <strong>投标进度：</strong>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="progress" style="margin-bottom: 0">
+                                                <switch name="v.status">
+                                                    <case value="0">
+                                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{$v.speed}" aria-valuemin="0" aria-valuemax="100" style="width: {$v.speed}%">
+                                                            {$v.speed}%
+                                                        </div>
+                                                    </case>
+                                                    <case value="1">
+                                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                                            100%
+                                                        </div>
+                                                    </case>
+                                                    <default />
+                                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                                        0%
+                                                    </div>
+                                                </switch>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <switch name="v.status">
+                        <case value="0">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="yomibox" data="{:time_format($v['time_end'],'Y-m-d h:i:s')}"> </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="btn-group">
+                                        <a href="{:U('details',['id'=>$v['id']])}" type="button" class="btn btn-default">查看详情</a>
+                                        <button data-remote="{:U('calculator',['id'=>$v['id']])}" data-target="#calculator_{$v['id']}" data-toggle="modal" class="btn btn-default" type="button">投资计算器</button>
+                                        <button data-remote="{:U('invest',['id'=>$v['id']])}" data-target="#myModal_{$v['id']}" data-toggle="modal" class="btn btn-info" type="button">立即投资</button>
+                                    </div>
+                                    <div style="display: none;" id="calculator_{$v['id']}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div>
+                                    <div style="display: none;" id="myModal_{$v['id']}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div>
+                                </div>
+                            </div>
+                        </case>
+                        <case value="1">
+                            <div class="row">
+                                <div class="col-md-6">
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="btn-group">
+                                        <a href="{:U('details',['id'=>$v['id']])}" type="button" class="btn btn-default">查看详情</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </case>
+                        <default />
+
+                    </switch>
+                </div>
+            </div>
+        </foreach>
+        <div class="page">
+            {$_page}
+        </div>
+        <else/>
+        <div class="paizi nolist mt50">
+            <a href="">没有相关信息</a>
+        </div>
+    </if>
+</block>
+<block name="foot"><include file='Public/foot' /></block>
+<block name="foot_js">
+    <script src="__JS__/yomi.js"></script>
+</block>
+</body>
+</html>

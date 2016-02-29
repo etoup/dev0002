@@ -1,0 +1,405 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link href="__CSS__/index.css?v={:v()}" rel="stylesheet" />
+    <link href="__CSS__/guzhi.css?v={:v()}" rel="stylesheet" />
+</block>
+</head>
+<body>
+<div class="wrap">
+<block name="header"><include file='Public/header' /></block>
+<block name="main">
+    <div class="main-header">
+          <div class="message"></div>
+    </div>
+
+    <div class="container-fluid main-content">
+        <section id="stock">
+
+            <div class="stock-box container">
+
+            <!--stock main-->
+              <div class="row">
+                <div class="stock-main">
+                    <div class="alert alert-danger mt30" role="alert" id="alert" style="display: none;">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                        请选择配资保证金后面的操盘手数
+                    </div>
+                    <div class="row" style="height: 130px;">
+                        <div class="col-md-3">
+                        <h2>配资保证金</h2>
+                        </div>
+
+                        <div class="col-md-9 amount" id="amount">
+                            <a href="javascript:;" numdata="1" class="active">{:intval(C("GUZHIBOND")*1)}万</a>
+                            <a href="javascript:;" numdata="2">{:intval(C("GUZHIBOND")*2)}万</a>
+                            <a href="javascript:;" numdata="3">{:intval(C("GUZHIBOND")*3)}万</a>
+                            <a href="javascript:;" numdata="4">{:intval(C("GUZHIBOND")*4)}万</a>
+                            <a href="javascript:;" numdata="5">{:intval(C("GUZHIBOND")*5)}万</a>
+                            <a href="javascript:;" numdata="6">{:intval(C("GUZHIBOND")*6)}万</a>
+                            <a href="javascript:;" numdata="7">{:intval(C("GUZHIBOND")*7)}万</a>
+                            <a href="javascript:;" numdata="8">{:intval(C("GUZHIBOND")*8)}万</a>
+                            <a href="javascript:;" numdata="9">{:intval(C("GUZHIBOND")*9)}万</a>
+                            <a href="javascript:;" numdata="10">{:intval(C("GUZHIBOND")*10)}万</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h2>交易开始时间</h2>
+                        </div>
+                        <div class="col-md-9 stop-time">
+                        <span class="glyphicon glyphicon-time"></span>
+                         当前交易日
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h2>交易品种</h2>
+                        </div>
+                        <div class="col-md-9 amount-msg">
+                            <span class="or">天然橡胶主力合约（代码：ru）</span>
+                            <span class="or">沪镍主力合约（代码：ni）</span>
+                            <span class="or">白砂糖主力合约（代码：SR）</span><br/>
+                            <span class="or">聚乙烯主力合约（代码：L）</span>
+                            <span class="or">聚丙烯主力合约（代码：PP）</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h2>账户管理费及利息</h2>
+                        </div>
+                        <div class="col-md-9 amount-msg">
+                            免费
+                        </div>
+                    </div>
+                    <div class="hr"></div>
+                    <div class="row pay-freeze">
+                        <div class="col-md-3">
+                            <h2>操盘总资金</h2>
+                        </div>
+                        <div class="col-md-9 amount-msg">
+                            <span class="or" id="funds" style="font-size: 30px;">220,000</span>
+                            元
+                            =  <span class="or" id="ownfunds">20,000</span>
+                                元（本金）+
+                            <span class="or" id="withfunds">200,000</span>
+                                元（所获资金）
+
+                        </div>
+                    </div>
+                    <div class="row pay-freeze">
+                        <div class="col-md-3">
+                            <h2>平仓线</h2>
+                        </div>
+                        <div class="col-md-9 amount-msg">
+                            <span class="or" id="open" style="font-size: 30px;">206,000</span> 元
+                        </div>
+                    </div>
+                    <input type="hidden" id="nums" value="1" />
+                    <p id="prompt" style="width: 850px; margin: 30px auto 0;">
+                        <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign"></span>
+                        如您不清楚规则，或有其他疑问，请联系客服<strong>400-873-8666</strong> 在线客服<strong><a href="http://crm2.qq.com/page/portalpage/wpa.php?uin=4008738666&f=1&ty=1&aty=0&a=&from=6" target="_blank" rel="nofollow"><span aria-hidden="true" class="glyphicon glyphicon-headphones"></span></a></strong> <input type="checkbox" name="aggre" value="1" id="aggre" checked="checked"> 我已经阅读并同意<a href="{:U('Pages/pactguzhi')}" target="_blank">《借款协议》</a>
+                    </p>
+                    <div id="subm">
+                        <button type="button" id="submit" data-toggle="modal" data-target="#modal" class="btn btn-info btn-lg">
+                            提交
+                        </button>
+                    </div>
+                    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal fade" id="modal" style="display: none;">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form action="{:U('pay')}" method="post" class="form-horizontal" role="form" id="form">
+                                    <div class="modal-header">
+                                        <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                        <h4 id="myModalLabel" class="modal-title">交付本金，提交需求</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <strong>需付本金</strong>：<span id="own_funds"></span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <strong>可用余额</strong>：<span id="balance"></span>
+                                            </div>
+                                            <div class="col-md-2" id="recharge">
+                                                <a class="btn btn-default" href="{:U('Uc/Recharge/index')}" role="button">充值</a>
+                                            </div>
+                                        </div>
+
+                                        <hr>
+
+                                        <h5><strong>支付密码</strong></h5>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <input type="hidden" name="num" id="num">
+                                                <input type="password" name="paypwd" class="form-control" placeholder="填写支付密码">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                                        <button class="btn btn-primary" type="submit">确认支付</button>
+                                    </div>
+                                </form>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div>
+                </div>
+              </div>
+            <!--stock main-->
+
+            <!--caution-->
+            <div class="row">
+              <div class="caution">
+                 <h2>操盘警示：</h2>
+                 <p style="font-size: 14px">1，用户出现亏损时的赔付，结束时如无亏损全额退还，保证金越低，收益越大，风险也越大。</p>
+                 <p style="font-size: 14px">2，交易时间：集合竞价：8:55~8:59；撮合：8:59~9:00；上午：9:00~10:15 10:30~11:30（其中10:15~10:30这段时间休息15分钟）；下午13:30~15:00 。</p>
+                 <p style="font-size: 14px">3，对于接近涨跌停附近的交易，合约价格到达离涨跌停板的5%时，不得新开与持有反向单，对持有反向持仓的交易强平。</p>
+                 <p style="font-size: 14px">4，每手合约买入后，操盘时长截止至当日14:55，到14:55分系统按市价平仓，不可持仓过夜。</p>
+                  <p style="font-size: 14px">5，用户仅可购买与六合资本约定的交易合约，若经发现购买其他品种，则按照当时合约价格强制平仓。（交易品种会根据政策做出相应增减）。</p>
+                  <p style="font-size: 14px">6，账户内剩余自有保证金低于等于初始保证金*30%时，及时被平仓，我方有权解除合约，退还剩余本金。若需正常操作。可补齐至初始保证金额度。</p>
+               </div>
+             </div>
+            <!--caution-->
+            </div>
+        </section>
+        <section id="stock-footer" style="display: none">
+          <div class="stock-box container">
+            <div class="row stock-info">
+              <!-- Nav tabs -->
+              <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#info1" aria-controls="info1" role="tab" data-toggle="tab">操盘达人</a></li>
+                <li role="presentation"><a href="#info2" aria-controls="info2" role="tab" data-toggle="tab">操盘动态</a></li>
+              </ul>
+              <!-- Tab panes -->
+              <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="info1">
+                  <table class="table table-striped">
+                   <thead>
+                    <tr class="c">
+                      <td>用户名</td>
+                      <td>操盘金额</td>
+                      <td>投入本金</th>
+                      <td>获利百分比</td>
+                      <td>盈利金额</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>xz***</td>
+                      <td>30.00万</td>
+                      <td>2.50万</td>
+                      <td>1213.20%</td>
+                      <td>30.33万</td>
+                    </tr>
+                    <tr>
+                      <td>xz***</td>
+                      <td>30.00万</td>
+                      <td>2.50万</td>
+                      <td>1213.20%</td>
+                      <td>30.33万</td>
+                    </tr>
+                    <tr>
+                      <td>xz***</td>
+                      <td>30.00万</td>
+                      <td>2.50万</td>
+                      <td>1213.20%</td>
+                      <td>30.33万</td>
+                    </tr><tr>
+                      <td>xz***</td>
+                      <td>30.00万</td>
+                      <td>2.50万</td>
+                      <td>1213.20%</td>
+                      <td>30.33万</td>
+                    </tr><tr>
+                      <td>xz***</td>
+                      <td>30.00万</td>
+                      <td>2.50万</td>
+                      <td>1213.20%</td>
+                      <td>30.33万</td>
+                    </tr>
+                    <tr>
+                      <td>xz***</td>
+                      <td>30.00万</td>
+                      <td>2.50万</td>
+                      <td>1213.20%</td>
+                      <td>30.33万</td>
+                    </tr>
+                    <tr>
+                      <td>xz***</td>
+                      <td>30.00万</td>
+                      <td>2.50万</td>
+                      <td>1213.20%</td>
+                      <td>30.33万</td>
+                    </tr><tr>
+                      <td>xz***</td>
+                      <td>30.00万</td>
+                      <td>2.50万</td>
+                      <td>1213.20%</td>
+                      <td>30.33万</td>
+                    </tr><tr>
+                      <td>xz***</td>
+                      <td>30.00万</td>
+                      <td>2.50万</td>
+                      <td>1213.20%</td>
+                      <td>30.33万</td>
+                    </tr><tr>
+                      <td>xz***</td>
+                      <td>30.00万</td>
+                      <td>2.50万</td>
+                      <td>1213.20%</td>
+                      <td>30.33万</td>
+                    </tr>
+                  </tbody>
+                  </table>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="info2">
+                  <table class="table table-striped">
+                   <thead>
+                    <tr class="c">
+                      <td>用户名</td>
+                      <td>操盘金额</td>
+                      <td>投入本金</td>
+                      <td>申请时间</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>xz***</td>
+                      <td>30.00万</td>
+                      <td>2.50万</td>
+                      <td>2015-08-06 16:22</td>
+                    </tr>
+                    <tr>
+                      <td>RT*** </td>
+                      <td>13.00万</td>
+                      <td>1.13万</td>
+                      <td>2015-08-06 13:52</td>
+                    </tr>
+                    <tr>
+                      <td>iw***</td>
+                      <td>30.00万</td>
+                      <td>2.50万</td>
+                      <td>2015-08-06 10:27</td>
+                    </tr>
+                    <tr>
+                      <td>xz***</td>
+                      <td>13.55万</td>
+                      <td>7.50万</td>
+                      <td>2015-08-06 09:27</td>
+                    </tr>
+                    <tr>
+                      <td>iw***</td>
+                      <td>30.00万</td>
+                      <td>2.50万</td>
+                      <td>2015-08-06 10:27</td>
+                    </tr>
+                    <tr>
+                      <td>xz***</td>
+                      <td>13.55万</td>
+                      <td>7.50万</td>
+                      <td>2015-08-06 09:27</td>
+                    </tr>
+                  </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+         </div>
+        </section>
+        <section id="xz">
+           <div class="stock-box container">
+              <div class="row xz download">
+                  <div class="row">
+                      <div class="col-md-6">
+                          <dl>
+                              <dd><span class="pc_down" title="期货软件"></span></dd>
+                              <dd><a href="/Public/ShinnyEnterpriseClient_trunk.exe">众期金融资产管理平台(客户端)</a></dd>
+                          </dl>
+                      </div>
+                      <div class="col-md-6">
+                          <dl>
+                              <dd><span class="pc_down" title="期货软件"></span></dd>
+                              <dd><a href="/Public/ShinnyEnterpriseClient_trunk.exe">众期金融资产管理平台(客户端)</a></dd>
+                          </dl>
+                      </div>
+                  </div>
+                  <p class="label_p"></p>
+              </div>
+
+           </div>
+        </section>
+    </div>
+</block>
+</div>
+<block name="foot">
+    <include file='Public/foot' />
+</block>
+<block name="foot_js">
+    <script src="__JS__/jquery.animateNumber.min.js"></script>
+    <script>
+        $(function(){
+            info(1);
+            numa();
+        });
+        function numa(number,el){
+
+            var comma_separator_number_step=$.animateNumber.numberStepFactories.separator(',');
+            $('#'+el).animateNumber(
+                    {
+                        number: number,
+                        numberStep: comma_separator_number_step
+                    }
+            );
+        }
+        function info(num){
+            var guzhiscale = '{:C("GUZHISCALE")}';
+            var guzhibond = '{:C("GUZHIBOND")}';
+            var ownfunds = Math.abs(num*1)*Math.abs(guzhibond*1)*10000;
+            var withfunds = Math.abs(ownfunds*guzhiscale*1);
+            var open = ownfunds*30/100+withfunds;
+            var funds = ownfunds*1+withfunds*1;
+            $('#open').text(numa(open,'open'));
+            $('#funds').text(numa(funds,'funds'));
+            $('#ownfunds').text(numa(ownfunds,'ownfunds'));
+            $('#withfunds').text(numa(withfunds,'withfunds'));
+
+        }
+        $('#amount a').on('click',function(){
+            var numdata = $(this).attr('numdata');
+            $(this).addClass('active').siblings().removeClass('active');
+            $('#nums').val(numdata);
+            info(numdata);
+        });
+        $('#modal').on('show.bs.modal', function (e) {
+            var num = $('#nums').val();
+            if(num){
+                $('#alert').hide();
+                $('#num').val(num);
+                $.post('{:U("openPay")}', { 'num': num },
+                        function(data){
+                            if(data.url){
+                                window.location.href = data.url;
+                                return false;
+                            }
+                            if(data.msg){
+                                $('#alert').show();
+                                return false;
+                            }
+                            $.each(data, function(key, val){
+                                $('#'+key).text(val);
+                            });
+                        }, "json");
+
+            }else{
+                $('#alert').show();
+                return false;
+            }
+        });
+    </script>
+</block>
+</body>
+</html>

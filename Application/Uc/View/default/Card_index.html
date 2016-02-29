@@ -1,0 +1,242 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link href="__CSS__/index.css" rel="stylesheet" />
+    <link href="__CSS__/dashboard.css" rel="stylesheet">
+</block>
+</head> 
+<body>
+<block name="header"><include file='Public/header' /></block>
+<block name="nav"><include file='Public/nav' /></block>
+<block name="uctop">
+    <div class="alert alert-warning" role="alert">
+        <span class="glyphicon glyphicon-list" aria-hidden="true"></span> {$seo.title}
+
+    </div>
+</block>
+
+<block name="main">
+    <div class="row">
+        <foreach name="myCard" item="vo">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{$vo.bank_name|htmlspecialchars}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <h2>{$vo.card_number_format}</h2>
+                    </div>
+                    <div class="panel-footer">
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#delMyCard{$vo['id']}" data-remote="{:U('del',['id'=>$vo['id']])}">删除</button>
+                        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal fade" id="delMyCard{$vo['id']}" style="display: none;">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div>
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editMyCard{$vo['id']}" data-remote="{:U('edit',['id'=>$vo['id']])}">编辑</button>
+                        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal fade" id="editMyCard{$vo['id']}" style="display: none;">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </foreach>
+        <div class="col-md-6">
+            <div class="tip" id="tip">
+                <div class="alert alert-danger" role="alert">alert</div>
+            </div>
+            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal fade" id="banks" style="display: none;">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                            <h4 id="myModalLabel" class="modal-title">选择银行</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h5><strong>选择银行</strong></h5>
+                            <div class="row">
+                                <foreach name="banks['logoList']" item="vo">
+                                    <div class="col-md-2">
+                                        <div class="well"><input type="radio" name="bid_s" value="{$vo.id}" title="{$vo.name}"> {$vo.name}</div>
+                                    </div>
+                                </foreach>
+                            </div>
+                            <hr>
+
+                            <h5 id="up-down" style="cursor: pointer">
+                                <strong>选择其他银行</strong>
+                                <span class="glyphicon glyphicon-chevron-down" id="up-down-icon"></span>
+                            </h5>
+                            <div id="up-down-tab" style="display: none;">
+                                <div class="row">
+                                    <foreach name="banks['titleList']" item="vo">
+                                        <div class="col-md-3">
+                                            <input type="radio" name="bid_s" value="{$vo.id}" title="{$vo.name}"> {$vo.name}
+                                        </div>
+                                    </foreach>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <h5><strong>手动填写</strong></h5>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="bank_name_s" class="form-control" id="inputBanks" placeholder="填写银行名称">
+                                </div>
+                                <button type="button" class="btn btn-default">帮助完善银行数据</button>
+                                <label></label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                            <button class="btn btn-primary" type="button" id="submit-bank">确认选择</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
+            <form action="__SELF__" method="post" class="form-horizontal" role="form" id="form">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">添加银行卡</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="inputRealname" class="col-sm-4 control-label">持卡人</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="inputRealname" value="{$realname}" disabled placeholder="持卡人">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputNumber" class="col-sm-4 control-label">银行卡号</label>
+                            <div class="col-sm-8">
+                                <div class="parentCls">
+                                    <input type="text" name="card_number" class="form-control inputElem" id="inputNumber" autocomplete = "off" maxlength="24" placeholder="银行卡号">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputBank" class="col-sm-4 control-label">银行</label>
+                            <div class="col-sm-8">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <input type="hidden" name="bid">
+                                        <input type="text" name="bank_name" class="form-control" id="inputBank" placeholder="银行名称">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#banks">选择</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputBankFull" class="col-sm-4 control-label">支行全称</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="full_name" class="form-control" id="inputBankFull" placeholder="支行全称（省/市/支行）">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <button type="submit" id="button" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">
+                            提交
+                        </button>
+                        <button type="reset" class="btn btn-warning">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</block>
+
+<block name="foot"><include file='Public/foot' /></block>
+<block name="foot_js">
+    <script type="text/javascript" src="__JS__/zone.js"></script>
+    <script type="text/javascript" src="__STATIC__/jquery.form.js"></script>
+    <script type="application/javascript">
+        // 初始化
+        $(function(){
+            new TextMagnifier({
+                inputElem: '.inputElem',
+                align: 'top',
+                delimiter:' ',
+                splitType: [4,4,4,4,4]
+            });
+        });
+        $('#up-down').click(function (e) {
+            e.preventDefault();
+            if($("#up-down-tab").is(":hidden")){
+                $('#up-down-icon').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+                $('#up-down-tab').slideDown();  //如果元素为隐藏,则将它显现
+            }else{
+                $('#up-down-icon').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+                $('#up-down-tab').slideUp();    //如果元素为显现,则将其隐藏
+            }
+        })
+        $('#submit-bank').on('click', function () {
+            $('#banks').modal('hide');
+            var bid = $("input[name='bid_s']:checked").val();
+            var bidt = $("input[name='bid_s']:checked").attr('title');
+            var bank_name = $("input[name='bank_name_s']").val();
+            if(bank_name){
+                $("input[name='bank_name_s']").val('');
+                $("input[name='bid']").val('');
+                $("input[name='bank_name']").val(bank_name);
+            }else if(bid){
+                $("input[name='bid']").val(bid);
+                $("input[name='bank_name']").val(bidt);
+            }
+        });
+        $('#button').on('click', function () {
+            var $btn = $(this).button('loading');
+            var options = {
+                url:   '__SELF__',
+                beforeSubmit :showRequest,
+                success: showResponse,
+                timeout: 3000
+            };
+            $('#form').ajaxForm(options);
+        });
+        function showRequest(formData, jqForm, options){
+            var queryString = $.param(formData);
+            var formElement = jqForm[0];
+            var card_number = formElement.card_number.value;
+            var bank_name = formElement.bank_name.value;
+            var full_name = formElement.full_name.value;
+            if(card_number==''){
+                $('#tip').show().children().text('卡号不能为空');
+                $("input[name='card_number']").focus();
+                $('#button').button('reset');
+                return false;
+            }
+            if(bank_name==''){
+                $('#tip').show().children().text('银行名称不能为空');
+                $("input[name='bank_name']").focus();
+                $('#button').button('reset');
+                return false;
+            }
+            if(full_name==''){
+                $('#tip').show().children().text('支行全称不能为空');
+                $("input[name='full_name']").focus();
+                $('#button').button('reset');
+                return false;
+            }
+            return true;
+        };
+        function showResponse(data){
+            if(data.state === 'success') {
+                window.location.href = decodeURIComponent(data.referer);
+            }else{
+                $('#tip').show().children().text(data.message);
+                $('#button').button('reset');
+            }
+        };
+    </script>
+</block>
+</body>
+</html>

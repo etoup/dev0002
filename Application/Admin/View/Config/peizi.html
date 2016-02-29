@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap">
+    <div class="nav">
+        <ul class="cc">
+            <li class="current"><a href="__SELF__">配资设置</a></li>
+        </ul>
+    </div>
+    <div class="h_a">功能说明</div>
+    <div class="mb10 prompt_text">
+        <ul>
+            <li>配资相关参数设置</li>
+        </ul>
+    </div>
+    <form class="J_ajaxForm" data-role="list" action="__SELF__" method="post">
+
+    <div class="h_a">配资设置</div>
+    <div class="table_full">
+        <table width="100%" class="J_radio_change_items" id="reg2" style="margin-bottom:0;">
+            <col class="th" />
+            <col width="400" />
+            <col />
+            <tbody>
+                <tr>
+                    <th>最大配资比例</th>
+                    <td>
+                        <input type="text" class="input length_3 mr5" name="config[MAXSCALE]" value="{:C('MAXSCALE')}"> 倍
+                    </td>
+                    <td><div class="fun_tips">最大配资比例根据实际情况适当调整</div></td>
+                </tr>
+                <tr>
+                    <th>投标周期</th>
+                    <td>
+                        <input type="text" class="input length_3 mr5" name="config[DEADLINE]" value="{:C('DEADLINE')}"> 天
+                    </td>
+                    <td><div class="fun_tips">默认投标周期，过期标的将回收</div></td>
+                </tr>
+                <tr>
+                    <th>月利率</th>
+                    <td>
+                        <input type="text" class="input length_3 mr5" name="config[INTERSTRATE]" value="{:C('INTERSTRATE')}"> %
+                    </td>
+                    <td><div class="fun_tips">基础月利率，根据实际情况适当调整</div></td>
+                </tr>
+                <tr>
+                    <th>基准利率</th>
+                    <td>
+                        <input type="text" class="input length_3 mr5" name="config[BENCHMARK]" value="{:C('BENCHMARK')}"> %
+                    </td>
+                    <td><div class="fun_tips">基准利率设置，和业务提成有关，必须小于月利率</div></td>
+                </tr>
+                <tr>
+                    <th>年化收益</th>
+                    <td>
+                        <input type="text" class="input length_3 mr5" name="config[PROFIT]" value="{:C('PROFIT')}"> %
+                    </td>
+                    <td><div class="fun_tips">请填写大于1的数值，最多两位小数，该值和投资收益有关</div></td>
+                </tr>
+                <tr>
+                    <th>意向金比率</th>
+                    <td>
+                        <input type="text" class="input length_3 mr5" name="config[BOND]" value="{:C('BOND')}"> %
+                    </td>
+                    <td><div class="fun_tips">请根据实际情况调整，必须小于1的小数</div></td>
+                </tr>
+                <tr>
+                    <th>延期服务费率</th>
+                    <td>
+                        <input type="text" class="input length_3 mr5" name="config[DELAYFEE]" value="{:C('DELAYFEE')}"> %
+                    </td>
+                    <td><div class="fun_tips">请根据实际情况调整，必须小于1的小数</div></td>
+                </tr>
+                <tr>
+                    <th>预警线</th>
+                    <td>
+                        <input type="text" class="input length_3 mr5" name="config[WARNINGLINE]" value="{:C('WARNINGLINE')}"> %
+                    </td>
+                    <td><div class="fun_tips">设置预警线比例值，大于100</div></td>
+                </tr>
+                <tr>
+                    <th>平仓线</th>
+                    <td>
+                        <input type="text" class="input length_3 mr5" name="config[OPENLINE]" value="{:C('OPENLINE')}"> %
+                    </td>
+                    <td><div class="fun_tips">设置平仓线比例值，大于100</div></td>
+                </tr>
+                <tr>
+                    <th>配资方积分基数</th>
+                    <td>
+                        <input type="text" class="input length_3 mr5" name="config[SCOREPEIZI]" value="{:C('SCOREPEIZI')}"> %
+                    </td>
+                    <td><div class="fun_tips">配资方配资成功的积分计算基数，计算方式：配资金额*配资方基数/12*配资期限，填0或者不填将不做积分处理</div></td>
+                </tr>
+                <tr>
+                    <th>投资方积分基数</th>
+                    <td>
+                        <input type="text" class="input length_3 mr5" name="config[SCORETOUZI]" value="{:C('SCORETOUZI')}"> %
+                    </td>
+                    <td><div class="fun_tips">投资方投资成功的积分计算基数，计算方式：投资金额*投资方基数/12*投资期限，填0或者不填将不做积分处理</div></td>
+                </tr>
+                <tr>
+                    <th>推广收益率</th>
+                    <td>
+                        <input type="text" class="input length_3 mr5" name="config[SPREAD]" value="{:C('SPREAD')}"> %
+                    </td>
+                    <td><div class="fun_tips">根据配资、投资金额计算推广收益，计算方式：配资金额*投资收益率，填0或者不填将不做处理</div></td>
+                </tr>
+                <tr>
+                    <th>期货最大配资比例</th>
+                    <td>
+                        <input type="text" class="input length_3 mr5" name="config[QIHUOMAXSCALE]" value="{:C('QIHUOMAXSCALE')}"> 倍
+                    </td>
+                    <td><div class="fun_tips">期货最大配资比例根据实际情况适当调整</div></td>
+                </tr>
+                <tr>
+                    <th>期货月利率</th>
+                    <td>
+                        <input type="text" class="input length_3 mr5" name="config[QIHUOINTERSTRATE]" value="{:C('QIHUOINTERSTRATE')}"> %
+                    </td>
+                    <td><div class="fun_tips">基础月利率，根据实际情况适当调整</div></td>
+                </tr>
+                <tr>
+                    <th>期货预警线</th>
+                    <td>
+                        <input type="text" class="input length_3 mr5" name="config[QIHUOWARNINGLINE]" value="{:C('QIHUOWARNINGLINE')}"> %
+                    </td>
+                    <td><div class="fun_tips">设置预警线比例值，大于100</div></td>
+                </tr>
+                <tr>
+                    <th>期货平仓线</th>
+                    <td>
+                        <input type="text" class="input length_3 mr5" name="config[QIHUOOPENLINE]" value="{:C('QIHUOOPENLINE')}"> %
+                    </td>
+                    <td><div class="fun_tips">设置平仓线比例值，大于100</div></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="btn_wrap">
+        <div class="btn_wrap_pd">
+            <button class="btn btn_submit J_ajax_submit_btn" type="submit">提交</button>
+        </div>
+    </div>
+    </form>
+</div>
+<include file='Public/foot' />
+</body>
+</html>

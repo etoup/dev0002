@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap J_check_wrap">
+    <div class="nav">
+        <ul class="cc">
+            <li><a href="{:U('post')}">帖子管理</a></li>
+            <li class="current"><a href="{:U('checkPost')}">帖子审核</a></li>
+            <li><a href="{:U('recycle')}">帖子回收站</a></li>
+        </ul>
+    </div>
+    
+    <div class="h_a">功能说明</div>
+    <div class="prompt_text">
+        <ol>
+            <li>当版块功能设置中开启 "审核帖子" 功能时，只有管理员审核通过状态的帖子才会在前台正常显示</li>
+        </ol>
+    </div>
+    <div class="h_a">搜索</div>
+    <form method="post" action="__SELF__">
+    <input type="hidden" name="p" value="{$p|default=1}">
+    <input type="hidden" name="soso" value="1">
+    <div class="search_type cc mb10">
+        <label>作者：</label><input name="nickname" value="{$nickname|default=''}" type="text" class="input length_2 mr10">
+        <label>所属版块：</label>
+        <select name="forum_id" class="select_3 mr10">
+            <option value="0">所有版块</option>
+            <foreach name="flist" item="f">
+            <option value="{$f.id}" {:is_selected($f['id'],$forum_id)}>{$f.title}</option>
+                <foreach name="f['child']" item="c">
+                <option value="{$c.id}" {:is_selected($c['id'],$forum_id)}>  |- {$c.title}</option>
+                </foreach>
+            </foreach>
+        </select>
+        <label>发帖时间：</label><input name="time_start" value="{$time_start|default=''}" type="text" class="input length_2 mr5 J_date"><span class="mr5">至</span><input name="time_end" value="{$time_end|default=''}" type="text" class="input length_2 J_date mr10">
+        <button class="btn mr5">搜索</button>
+        <notempty name="soso">
+        <if condition="$soso">
+        <button type="reset" class="btn btn_error" onclick="window.location.href='{:U('checkPost')}'">撤销检索</button>
+        </if>
+        </notempty>
+    </div>
+    </form>
+    
+    <form class="J_ajaxForm" action="{:U('passPost')}" method="post">
+        <notempty name="list">
+        <div class="h_a"><!--label><input type="checkbox" class="J_check_all" data-direction="x" data-checklist="J_check_x">全选</label-->列表</div>
+        <div class="table_list">
+            <table width="100%">
+                <foreach name="list" item="value">
+                <tr>
+                    <td width="10"><input type="checkbox" name="id[]" value="{$value['id']}" class="J_check" data-yid="J_check_y" data-xid="J_check_x"></td>
+                    <td width="600">
+                        <div class="mb5">
+                            <a href="#" class="mr5" target="_blank">[{$value['name']}]</a><a href="{@url:bbs/read/run?tid=$value['tid']&fid=$value['fid']}" target="_blank">{$value['title']}</a>
+                        </div>
+                        <div class="mb5">
+                            作者：<a href="#" target="_blank" class="mr15">{$value['nickname']}</a>发帖时间：{$value['create_time']|time_format}
+                        </div>
+                        <div class="p10" style="line-height:1.5;border:1px solid #ccc;background:#fff;max-height:140px;_height:60px;overflow-y:auto;">{$value['content']}
+                        </div>
+                    </td>
+                    <td>
+                        <ul class="single_list cc">
+                            <li><a class="J_ajax_refresh mr5" href="{:U('passPost',array('id'=>$value['id']))}">[通过]</a></li>
+                            <li><a class="J_ajax_del" href="{:U('delPost',array('id'=>$value['id']))}">[删除]</a></li>
+                        </ul>
+                    </td>
+                </tr>
+                </foreach>
+            </table>     
+        </div>
+        <div class="page">
+        {$_page}
+        </div>
+        <div class="btn_wrap">
+            <div class="btn_wrap_pd">
+                <label class="mr20"><input type="checkbox" class="J_check_all" data-direction="y" data-checklist="J_check_y">全选</label>
+                <button class="btn btn_success J_ajax_submit_btn" type="submit" data-subcheck="true">通过</button>
+                <button class="btn J_ajax_submit_btn btn_error" data-subcheck="true" data-msg="确定要删除吗？" data-action="{:U('delPost')}" type="submit">删除</button>
+            </div>
+        </div>
+        <else/>
+        <div class="not_content_mini"><i></i>啊哦，没有符合条件的内容！</div>
+        </notempty>
+    </form>
+</div>
+<include file='Public/foot' />
+</body>
+</html>

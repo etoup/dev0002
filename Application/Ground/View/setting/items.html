@@ -1,0 +1,264 @@
+<extend name="Public/base" />
+<block name="head">
+    <include file='Public/head' />
+</block>
+<block name="head_css">
+    <link rel="stylesheet" href="__STATIC__/icon/iconfont.css" />
+    <link rel="stylesheet" href="__STATIC__/AdminLTE/plugins/timepicker/bootstrap-timepicker.min.css">
+    <link rel="stylesheet" href="__STATIC__/sweetalert-master/dist/sweetalert.css" />
+    <link rel="stylesheet" href="__CSS__/index.css">
+</block>
+<block name="main-header"><include file='Public/header' /></block>
+<block name="main-sidebar">
+    <include file='Public/sidebar' />
+</block>
+<block name="content-header"><include file='Public/top' /></block>
+<block name="content">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="box box-primary">
+                <form id="form" role="form" action="__SELF__" method="post">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">添加项目</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label>选择项目 </label>
+                            <div>
+                                <select class="form-control select2" name="items_id" id="items_id" style="width: 100%;">
+                                    <option selected="selected" value="">请选择</option>
+                                    <foreach name="items" item="vo" >
+                                        <option value="{$vo.id}">{$vo.name}</option>
+                                    </foreach>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="bootstrap-timepicker">
+                            <div class="form-group">
+                                <label>开始时间 </label>
+                                <div class="input-group">
+                                    <input type="text" name="start" value="06:00" id="start" class="form-control timepicker">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                </div><!-- /.input group -->
+                            </div><!-- /.form group -->
+                        </div>
+                        <div class="bootstrap-timepicker">
+                            <div class="form-group">
+                                <label>结束时间 </label>
+                                <div class="input-group">
+                                    <input type="text" name="end" value="21:00" id="end" class="form-control timepicker">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                </div><!-- /.input group -->
+                            </div><!-- /.form group -->
+                        </div>
+                        <div class="form-group">
+                            <label>运动时长 </label>
+                            <div class="input-group">
+                                <input type="text" name="duration" value="60" id="duration" class="form-control" placeholder="运动时长">
+                                <span class="input-group-addon">分</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>初始价格 </label>
+                            <div class="input-group">
+                                <input type="text" name="price" value="100" id="price" class="form-control" placeholder="初始价格">
+                                <span class="input-group-addon">元</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>初始场地数量 </label>
+                            <div class="input-group">
+                                <input type="text" name="num" value="5" id="num" class="form-control" placeholder="场地数量">
+                                <span class="input-group-addon">块</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="box-footer">
+                        <span id="summary" class="text-red"></span>
+                        <button type="submit" class="btn btn-primary pull-right" id="submit">提交设置</button>
+                    </div><!-- /.box-footer -->
+                    <style>
+                        #form label.error{
+                            color: #dd4b39;
+                        }
+                    </style>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <if condition="!$venue_items">
+                <div class="alert alert-warning alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-warning"></i>提示</h4>
+                    您没有添加项目，请在左边进行新增项目设置
+                </div>
+                <else/>
+                <div class="row">
+                    <foreach name="venue_items" item="vo">
+                        <div class="col-md-3">
+                            <!-- Profile Image -->
+                            <if condition="$vo['status'] eq -1"><div class="box box-danger" id="venueItems-box-{$vo.id}"><else/><div class="box box-primary" id="venueItems-box-{$vo.id}"></if>
+                                <div class="box-header">
+                                    <div class="box-tools pull-right">
+                                        <switch name="vo.status">
+                                            <case value="-1">
+                                                <button type="button" class="btn btn-box-tool ocAjax" data-toggle="tooltip" title="开启" data-id="{$vo.id}" data-status="1" data-url="{:U('Ajax/ocVenueItems')}" data-tag="#venueItems" id="venueItems-{$vo.id}"><i class="fa fa-check"></i></button>
+                                            </case>
+                                            <case value="1">
+                                                <button type="button" class="btn btn-box-tool ocAjax" data-toggle="tooltip" title="关闭" data-id="{$vo.id}" data-status="-1" data-url="{:U('Ajax/ocVenueItems')}" data-tag="#venueItems" id="venueItems-{$vo.id}"><i class="fa fa-times"></i></button>
+                                            </case>
+                                        </switch>
+                                    </div>
+                                </div>
+                                <div class="box-body box-profile">
+                                    <i class="icon iconfont" style="font-size: 50px; text-align: center; display: block;">{$vo['icon']}</i>
+
+                                    <h3 class="profile-username text-center">{$vo.name}</h3>
+
+                                    <p class="text-muted text-center">{$vo.created_time|time_format}</p>
+
+                                    <ul class="list-group list-group-unbordered">
+                                        <li class="list-group-item">
+                                            <b>开放时间</b> <a class="pull-right">{$vo.start}-{$vo.end}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>运动时长</b> <a class="pull-right">{$vo.duration}'</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>初始价格</b> <a class="pull-right">{$vo.price|money}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>初始场地</b> <a class="pull-right">{$vo.num}</a>
+                                        </li>
+                                    </ul>
+                                    <if condition="$vo['status'] eq -1">
+                                        <a href="{:U('block',['items_id'=>$vo['items_id']])}" class="btn btn-danger btn-block" id="venueItems-btn-{$vo.id}"><b>查看场地</b></a>
+                                        <else/>
+                                        <a href="{:U('block',['items_id'=>$vo['items_id']])}" class="btn btn-primary btn-block" id="venueItems-btn-{$vo.id}"><b>查看场地</b></a>
+                                    </if>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                            <!-- /.box -->
+                        </div>
+                    </foreach>
+                </div>
+            </if>
+        </div>
+    </div>
+</block>
+<block name="main-footer"><include file='Public/footer' /></block>
+<block name="foot">
+    <include file='Public/foot' />
+    <script src="__STATIC__/jquery.validate.min.js"></script>
+    <script src="__STATIC__/AdminLTE/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+    <script src="__STATIC__/sweetalert-master/dist/sweetalert.min.js"></script>
+    <script type="text/javascript">
+        $('#submit').on('click', function () {
+            var $btn = $(this).button('loading');
+
+            $("#form").validate({
+                errorPlacement:function(error,element) {
+                    error.appendTo(element.parent('div').prev('label'));
+                },
+                rules: {
+                    items_id: "required",
+                    start   : "required",
+                    end     : "required",
+                    duration: "required",
+                    price   : "required",
+                    num     : "required"
+                },
+                messages: {
+                    items_id: "请选择项目",
+                    start   : "请填写开始时间",
+                    end     : "请填写结束时间",
+                    duration: "请填写运动时长",
+                    price   : "请填写初始价格",
+                    num     : "请填写初始场地数量"
+                },
+                showErrors:function(errorMap,errorList) {
+                    $("#summary").html('<i class="fa fa-fw fa-info-circle"></i> '+this.numberOfInvalids()+'个选项没有填写完整');
+                    this.defaultShowErrors();
+                    if(this.numberOfInvalids() > 0){
+                        $btn.button('reset');
+                    }
+                }
+            });
+        });
+
+
+
+        $(".timepicker").timepicker({
+            showInputs: false,
+            showMeridian:false
+        });
+
+        $('.ocAjax').on('click',function() {
+            var id = $(this).attr("data-id"),status = $(this).attr("data-status"),url = $(this).attr("data-url"),tag = $(this).attr("data-tag");
+            ocData(id,status,url,tag);
+        });
+        function ocData(id,status,url,tag) {
+            var text = '';
+            switch (status){
+                case '-1':
+                    text='关闭后将无法预订，您确定要关闭吗？';
+                    break;
+                case '1':
+                    text='开启后将可以预订，您确定要开启吗？';
+                    break;
+            }
+            swal({
+                title: "提示",
+                text: text,
+                type: "warning",
+                //animation: "slide-from-top",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                confirmButtonText: "确定",
+                confirmButtonColor: "#ec6c62",
+                cancelButtonText:"取消"
+            }, function() {
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data:{id:id,status:status}
+                })
+                    .done(function(data) {
+                        if(data.status){
+                            swal({
+                                title: "提示",
+                                text:data.msg,
+                                type: "success"
+                            },
+                            function(){
+                                switch (status){
+                                    case '-1':
+                                        $(tag+'-'+id).attr('data-status','1').children('i').attr('class','fa fa-check');
+                                        $(tag+'-box-'+id).attr('class','box box-danger');
+                                        $(tag+'-btn-'+id).attr('class','btn btn-danger btn-block');
+                                        break;
+                                    case '1':
+                                        $(tag+'-'+id).attr('data-status','-1').children('i').attr('class','fa fa-times');
+                                        $(tag+'-box-'+id).attr('class','box box-primary');
+                                        $(tag+'-btn-'+id).attr('class','btn btn-primary btn-block');
+                                        break;
+                                }
+
+                            });
+                        }else{
+                            swal("提示", data.msg, "error");
+                        }
+                    })
+                    .error(function(data) {
+                        swal("错误", "服务器连接失败", "error");
+                    });
+            });
+        }
+    </script>
+</block>

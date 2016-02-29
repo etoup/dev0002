@@ -1,0 +1,117 @@
+<extend name="Public/ubase" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css"><link href="__CSS__/uc.css?v={:v()}" rel="stylesheet" /></block>
+</head> 
+<body>
+    <div class="wrap">
+        <block name="main">
+
+
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <div id="form_container">
+                                <h1><a href="{:ROOT}" id="tips" data-toggle="popover" data-trigger="focus" title="六合资本登录页面"
+                                       data-content="点击返回六合资本首页"><img src="__IMG__/logo.png" title="六合资本" alt="六合资本"/></a></h1>
+                                <div id="form_main">
+                                    <div class="tip" id="tip">
+                                        <div class="alert alert-danger" role="alert">
+                                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                            <if condition="$new">
+                                                <b id="alertTxt">注册成功，请登录激活</b>
+                                                <else/>
+                                                <b id="alertTxt">用户名和密码为必填项</b>
+                                            </if>
+
+                                        </div>
+                                    </div>
+                                    <form action="__SELF__" method="post" role="form" id="form">
+                                        <div class="form-group">
+                                            <label for="inputUsername">用户名</label>
+                                            <input type="text" name="username" value="{$username|default=''}" class="form-control" id="inputUsername" placeholder="用户名">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputPassword">密码</label>
+                                            <input type="password" name="password" class="form-control" id="inputPassword" placeholder="密码">
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <if condition="$username">
+                                                    <input type="checkbox" name="rememberme" checked=""> 记住用户名
+                                                    <else/>
+                                                    <input type="checkbox" name="rememberme"> 记住用户名
+                                                </if>
+                                            </label>
+                                        </div>
+                                        <div class="btn-group" role="group" aria-label="...">
+                                            <button type="submit" id="button" data-loading-text="Loading..." class="btn btn-info" autocomplete="off">
+                                                <span aria-hidden="true" class="glyphicon glyphicon-saved"></span> 提交登录
+                                            </button>
+                                            <a href="{:U('register')}" class="btn btn-warning" role="button"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span> 马上注册</a>
+                                        </div>
+                                        <a href="{:U('forgotPwd')}">忘记密码?</a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+
+        </block>
+    </div>
+    <block name="foot"><include file='Public/ufoot' /></block>
+    <block name="foot_js">
+    <script type="text/javascript" src="__STATIC__/jquery.form.js"></script>
+    <script>
+    $('#button').on('click', function () {
+    	var $btn = $(this).button('loading');
+    	var options = {
+	    	url:   '__SELF__',
+	    	beforeSubmit :showRequest,
+	    	success: showResponse,
+	    	timeout: 3000
+	    };
+    	$('#form').ajaxForm(options); 
+    });
+    function showRequest(formData, jqForm, options){
+	    var queryString = $.param(formData);
+	    var formElement = jqForm[0];
+	    var username = formElement.username.value;
+	    var password = formElement.password.value;
+	    if(username==''){
+		    $('#tip').show().children().find('b').text('用户名不能为空');
+		    $("input[name='username']").focus();
+		    $('#button').button('reset');
+		    return false;
+	    }
+	    if(password==''){
+		    $('#tip').show().children().find('b').text('密码不能为空');
+		    $("input[name='password']").focus();
+		    $('#button').button('reset');
+		    return false;
+	    }
+	    return true;
+    };
+    function showResponse(data){
+  	    if(data.state === 'success') {
+		    window.location.href = decodeURIComponent(data.referer);
+	    }else{
+		    $('#tip').show().children().find('b').text(data.message);
+		    $('#button').button('reset');
+	    }
+    };
+
+    $('#tips').popover({
+        'placement':'bottom',
+        'trigger':'hover'
+    });
+    </script>
+    </block>
+</body>
+</html>

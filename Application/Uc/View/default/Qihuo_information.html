@@ -1,0 +1,90 @@
+<form method="post" class="form-horizontal" role="form" id="myform">
+    <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+        <h4 id="myModalLabel" class="modal-title">股票账户信息</h4>
+    </div>
+    <div class="modal-body">
+        <ul class="list-group" style="margin-bottom: 0;">
+            <li class="list-group-item active">{$accounts.broker}</li>
+            <table class="table table-bordered">
+                <tbody>
+                <tr>
+                    <td style="width:200px; vertical-align: middle; text-align: center;"><a href="http://{$accounts.downurl}" target="_blank">软件下载</a></td>
+                    <td>
+                        <li class="list-group-item">账户：{$accounts.account}</li>
+                        <li class="list-group-item">账户密码：<span id="apwd">******</span></li>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </ul>
+        <hr>
+        <h5><strong>请在下面填写支付密码，通过验证后才能显示账户密码</strong></h5>
+        <div class="tip" id="mytip">
+            <div class="alert alert-danger" role="alert">alert</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <input type="hidden" name="id" value="{$info.id}">
+                <input type="hidden" name="orders" value="{$info.orders}">
+                <input type="password" name="paypwd" class="form-control" placeholder="填写支付密码">
+            </div>
+            <div class="col-md-4">
+                <button type="submit" id="button" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">
+                    提交验证
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+    </div>
+</form>
+<script type="text/javascript" src="__STATIC__/jquery.form.js"></script>
+<script>
+    $('#button').on('click', function () {
+        var $btn = $(this).button('loading');
+        var options = {
+            url:   '__SELF__',
+            beforeSubmit :showRequest,
+            success: showResponse,
+            timeout: 3000
+        };
+        $('#myform').ajaxForm(options);
+    });
+    function showRequest(formData, jqForm, options){
+        var queryString = $.param(formData);
+        var formElement = jqForm[0];
+        var id = formElement.id.value;
+        var orders = formElement.orders.value;
+        var paypwd = formElement.paypwd.value;
+        if(id==''){
+            $('#mytip').show().children().text('请选择操作项');
+            $('#button').button('reset');
+            return false;
+        }
+        if(orders==''){
+            $('#mytip').show().children().text('单号缺失');
+            $('#button').button('reset');
+            return false;
+        }
+        if(paypwd==''){
+            $('#mytip').show().children().text('填写支付密码');
+            $("input[name='paypwd']").focus();
+            $('#button').button('reset');
+            return false;
+        }
+        return true;
+    };
+    function showResponse(data){
+        if(data.state === 'success') {
+            $('#button').button('reset');
+            $('#apwd').text(data.message);
+        }else{
+            $('#button').button('reset');
+            $('#mytip').show().children().text(data.message);
+        }
+    };
+</script>
+

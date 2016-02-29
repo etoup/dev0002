@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body style="width:400px;" class="body_none">
+<!--添加用户-->
+    <form class="J_ajaxForm" data-role="list" action="__ACTION__" method="post" >
+    <input type='hidden' name='id' value="{$data['id']}">
+    <div class="pop_cont pop_table" style="height:auto;">
+        <table width="100%">
+            <col class="th" />
+            <col />
+            <tr>
+                <th>行为标识</th>
+                <td>
+                    <span class="must_red">*</span>
+                    <input name="name" type="text" value="{$data['name']}" class="input length_5">
+                    <div class="cc gray">输入行为标识 英文字母</div>
+                </td>
+            </tr>
+            <tr>
+                <th>行为名称</th>
+                <td>
+                    <span class="must_red">*</span>
+                    <input name="title" type="text" value="{$data['title']}" class="input length_5">
+                    <div class="cc gray">输入行为名称</div>
+                </td>
+            </tr>
+            <tr>
+                <th>行为类型</th>
+                <td>
+                    <span class="must_red">*</span>
+                    <select name="type">
+                        <volist name=":get_action_type(null,true)" id="vo">
+                            <if condition="$data['type'] eq $key">
+                            <option value="{$key}" selected="selected">{$vo}</option>
+                            <else/>
+                            <option value="{$key}">{$vo}</option>
+                            </if>
+                        </volist>
+                    </select>
+                    <div class="cc gray">选择行为类型</div>
+                </td>
+            </tr>
+            <tr>
+                <th>行为描述</th>
+                <td>
+                    <span class="must_red">*</span>
+                    <textarea class="length_5" name="remark" style="height:40px;">{$data['remark']}</textarea>
+                    <div class="cc gray">输入行为描述</div>
+                </td>
+            </tr>
+            <tr>
+                <th>行为规则</th>
+                <td>
+                    <span class="must_red">*</span>
+                    <textarea class="length_5" name="rule" style="height:40px;">{$data['rule']}</textarea>
+                    <div class="cc gray">输入行为规则，不写则只记录日志</div>
+                </td>
+            </tr>
+            <tr>
+                <th>日志规则</th>
+                <td>
+                    <textarea class="length_5" name="log" style="height:40px;">{$data['log']}</textarea>
+                    <div class="cc gray">记录日志备注时按此规则来生成，支持[变量|函数]。目前变量有：user,time,model,record,data</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="pop_bottom">
+        <button type="button" class="btn fr" id="J_dialog_close">取消</button>
+        <button type="submit" class="btn btn_submit mr10 fr J_ajax_submit_btn">提交</button>
+    </div>
+    
+</form>
+<include file='Public/foot_min' />
+</body>
+</html>

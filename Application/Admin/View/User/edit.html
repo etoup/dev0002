@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body class="J_scroll_fixed">
+<div class="wrap jj">
+    <div class="nav">
+        <div class="return"><a href="{:U('index')}">返回上一级</a></div>
+        <ul class="cc">
+            <li class="current"><a href="{:U('edit',array('uid'=>$info['uid']))}">用户信息</a></li>
+            <li><a href="{:U('editBalance',array('uid'=>$info['uid']))}">余额</a></li>
+            <li><a href="{:U('editScore',array('uid'=>$info['uid']))}">积分</a></li>
+            <li><a href="{:U('editGroup',array('uid'=>$info['uid']))}">用户组</a></li>
+        </ul>
+    </div>
+<!--====================用户编辑开始====================-->
+<form class="J_ajaxForm" action="{:U('edit',array('uid'=>$info['uid']))}" method="post">
+<input type="hidden" value="{$info['uid']}" name="uid"/>
+<div class="h_a">用户信息</div>
+<div class="table_full">
+    <table width="100%">
+        <col class="th" />
+        <col/>
+        <thead>
+        <tr>
+            <th>UID</th>
+            <td>{$info['uid']}</td>
+        </tr>
+        </thead>
+        <tr>
+            <th>用户名</th>
+            <td>{$info['username']}</td>
+        </tr>
+        <tr>
+            <th>真实姓名</th>
+            <td>{$info['realname']}</td>
+        </tr>
+        <tr>
+            <th>身份证号码</th>
+            <td>{$info['card_number']}</td>
+        </tr>
+        <tr>
+            <th>头像</th>
+            <td><div><img id="J_avatar_img" data-type="middle" src="{$info['path']}?t={:time()}"></div><!--<a id="J_set_def" href="">[恢复为系统头像]</a>--></td>
+        </tr>
+        <tr>
+            <th>新密码</th>
+            <td><input name="password" type="text" class="input length_5"></td>
+        </tr>
+        <tr>
+            <th>确认密码</th>
+            <td><input name="repassword" type="text" class="input length_5"></td>
+        </tr>
+        <tr>
+            <th>利息点位</th>
+            <td><input name="rate" type="text" value="{$info['rate']}" class="input length_5"></td>
+        </tr>
+        <tr>
+            <th>最大配资比例</th>
+            <td><input name="maxscale" type="text" value="{$info['maxscale']}" class="input length_5"></td>
+        </tr>
+        <tr>
+            <th>QQ号码</th>
+            <td><input name="qq" type="text" value="{$info['qq']}" class="input length_5"></td>
+        </tr>
+        <tr>
+            <th>手机号码</th>
+            <td><input name="mobile" type="text" value="{$info['mobile']}" class="input length_5"></td>
+        </tr>
+        <tr>
+            <th>邮箱地址</th>
+            <td><input name="email" type="text" value="{$info['email']}" class="input length_5"></td>
+        </tr>
+        <tr>
+            <th>注册时间</th>
+            <td>
+                <input name="reg_time" type="text" disabled="" class="input length_5 J_datetime date" value="{$info['reg_time']|time_format}">
+            </td>
+        </tr>
+        <tr>
+            <th>注册IP</th>
+            <td>
+                <input name="reg_ip" type="text" disabled="" class="input length_5" value="{$info['reg_ip']|long2ip}">
+            </td>
+        </tr>
+        <tr>
+            <th>最后登录时间</th>
+            <td>
+                <notempty name="info['last_login_time']">
+                {$info['last_login_time']|time_format}
+                <else/>
+                该用户还没有登录过！
+                </notempty>
+            </td>
+        </tr>
+        <tr>
+            <th>最后登录IP</th>
+            <td>
+                {$info['last_login_ip']|long2ip}
+            </td>
+        </tr>
+    </table>
+    </div>
+    <div class="btn_wrap">
+         <div class="btn_wrap_pd">
+                <button type="submit" class="btn btn_submit J_ajax_submit_btn">提交</button>
+         </div>
+    </div>
+</form>
+
+</div>
+<include file='Public/foot' />
+<script>
+Wind.use('region', function(){
+    $('a.J_region_change').region();
+
+    //恢复默认头像
+    $('#J_set_def').on('click', function(e){
+        e.preventDefault();
+        var $this = $(this);
+        $.post(this.href, function(data){
+            if(data.state == 'success') {
+                $('#J_face_img').attr('src', '{@G:url.images}/face/face_middle.jpg');
+                $this.hide();
+            }else{
+                //common.js
+                resultTip({
+                    error : true,
+                    msg : data.message[0]
+                });
+            }
+        }, 'json');
+    });
+});
+
+</script>
+</body>
+</html>

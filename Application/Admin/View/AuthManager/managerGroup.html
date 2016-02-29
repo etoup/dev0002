@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap">
+
+
+<!--角色管理: 编辑角色  -->
+<div class="nav">
+    <div class="return"><a href="{:U('index')}">返回上一级</a></div>
+</div>
+<form class="J_ajaxForm" data-role="list" action="{:U('AuthManager/writeGroup')}" enctype="application/x-www-form-urlencoded" method="post">
+<div class="h_a">编辑角色</div>
+<div class="table_full">
+    <table width="100%" class="J_check_wrap">
+        <col class="th" />
+        <col width="400" />
+        <col />
+        <tr>
+            <th>角色名称</th>
+            <td><span class="must_red">*</span>
+                <input name="group_name" value="{$group_name}" type="text" disabled="" class="input input_hd length_5">
+            </td>
+            <td><div class="fun_tips"></div></td>
+        </tr>
+        <volist name="node_list" id="node" >
+        <tr>
+            <th>
+                <label class="checkbox"><input class="auth_rules rules_all" type="checkbox" name="rules[]" value="<?php echo $main_rules[$node['url']] ?>"><span>{$node.title}</span></label>
+            </th>
+            <td class="td"> 
+                <volist name="node['child']" id="child" >
+                <dl class="tbl_dl rule_check">
+                    <dt>
+                        <label class="checkbox" <notempty name="child['tip']">title='{$child.tip}'</notempty>>
+                            <input class="auth_rules rules_row" type="checkbox" name="rules[]" value="<?php echo $auth_rules[$child['url']] ?>"/><span>{$child.title}</span>
+                        </label>
+                    </dt>
+                    <notempty name="child['operator']">
+                    <dd data-name="{$node['id']}" id="J_check_{$node['id']}" class="three_list cc J_ul_check">
+                        <volist name="child['operator']" id="op">
+                        <p>
+                            <label class="checkbox" <notempty name="op['tip']">title='{$op.tip}'</notempty>>
+                               <input class="auth_rules" type="checkbox" name="rules[]"
+                               value="<?php echo $auth_rules[$op['url']] ?>"/><span>{$op.title}</span>
+                            </label>
+                        </p>
+                        </volist>               
+                    </dd>
+                    </notempty>
+                </dl>
+                </volist>
+            </td>
+            <td><div class="fun_tips"></div></td>
+        </tr>
+        </volist>
+    </table>
+</div>
+<div class="btn_wrap">
+    <div class="btn_wrap_pd">
+        <input type="hidden" name="id" value="{$this_group.id}" />
+        <button type="submit" class="btn btn_submit J_ajax_submit_btn">提交</button>
+    </div>
+</div>
+</form>
+
+</div>
+<include file='Public/foot' />
+<script type="text/javascript" src="__STATIC__/qtip/jquery.qtip.min.js"></script>
+<link rel="stylesheet" type="text/css" href="__STATIC__/qtip/jquery.qtip.min.css" media="all">
+<script type="text/javascript" charset="utf-8">
+    +function($){
+        $('.rules_all:first').attr('checked',true);
+        $('.rules_row:first').attr('checked',true);
+        var rules = [{$this_group.rules}];
+        $('.auth_rules').each(function(){
+            if( $.inArray( parseInt(this.value,10),rules )>-1 ){
+                $(this).prop('checked',true);
+            }
+            if(this.value==''){
+                $(this).closest('span').remove();
+            }
+        });
+
+        //全选节点
+        $('.rules_all').on('change',function(){
+            $(this).closest('tr').find('dl').find('input').prop('checked',this.checked);
+        });
+        $('.rules_row').on('change',function(){
+            $(this).closest('dl').find('dd').find('input').prop('checked',this.checked);
+        });
+
+        $('.checkbox').each(function(){
+            $(this).qtip({
+                content: {
+                    text: $(this).attr('title'),
+                    title: $(this).text()
+                },
+                position: {
+                    my: 'bottom center',
+                    at: 'top center',
+                    target: $(this)
+                },
+                style: {
+                    classes: 'qtip-dark',
+                    tip: {
+                        corner: true,
+                        mimic: false,
+                        width: 10,
+                        height: 10
+                    }
+                }
+            });
+        });
+    }(jQuery);
+</script>
+</body>
+</html>

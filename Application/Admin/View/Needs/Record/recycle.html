@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap J_check_wrap">
+    <div class="nav">
+        <ul class="cc">
+            <li><a href="{:U('index')}">转账待审管理</a></li>
+            <li><a href="{:U('all')}">充值管理</a></li>
+            <li class="current"><a href="{:U('recycle')}">回收站</a></li>
+        </ul>
+    </div>
+    <div class="h_a">提示信息</div>
+    <div class="mb10 prompt_text">
+        <ul>
+            <li>显示的是所有银行转账待审信息，可以根据用户名、时间、金额进行搜索</li>
+        </ul>
+    </div>
+    <div class="h_a">搜索</div>
+    <div class="search_type cc mb10">
+        <form action="__SELF__" method="post">
+        <input type="hidden" name="p" value="{$p|default=1}">
+        <input type="hidden" name="soso" value="1">
+        <label>用户名包含：</label><input name="username" type="text" class="input length_2 mr10" value="{$username|default=''}">
+        <label>UID：</label><input name="uid" type="number" class="input length_1 mr10" value="{$uid|default=''}">
+        <label>时间：</label><input type="text" name="time_start" value="{$time_start|default=''}" class="input length_2 mr5 J_date"><span class="mr5">至</span><input type="text" name="time_end" value="{$time_end|default=''}" class="input length_2 mr10 J_date">
+        <label>金额：</label>
+        <input class="input length_1 mr10" type="number" name="minContent" value="{$minContent}">
+        <span class="mr10">至</span>
+        <input class="input length_1 mr10" type="number" name="maxContent" value="{$maxContent}">
+        <button type="submit" class="btn mr5">搜索</button>
+        <notempty name="soso">
+        <if condition="$soso">
+        <button type="reset" class="btn btn_error" onclick="window.location.href='{:U('recycle')}'">撤销检索</button>
+        </if>
+        </notempty>
+        </form>
+    </div>
+    <div id="top-alert" class="alert alert-error" style="display: none;">
+        <button class="close fixed" style="margin-top: 4px;">×</button>
+        <div class="alert-content">这是内容</div>
+    </div>
+    <notempty name="_list">
+    <form method="post" action="#" id="J_tag_form" class="J_ajaxForm">
+    <div class="table_list">
+        <table width="100%">
+            <colgroup>
+                <col width="65">
+                <col width="80">
+                <col width="100">
+                <col width="100">
+                <col width="200">
+                <col width="100">
+                <col width="80">
+                <col width="200">
+                <col width="120">
+            </colgroup>
+            <thead>
+                <tr>
+                    <td>
+                        <label>
+                            <input class="J_check_all" data-checklist="J_check_x" data-direction="x" type="checkbox">全选</label>
+                    </td>
+                    <td>UID</td>
+                    <td>用户名</td>
+                    <td>真实姓名</td>
+                    <td>单号</td>
+                    <td>金额</td>
+                    <td>支付方式</td>
+                    <td>备注</td>
+                    <td>申请时间</td>
+                    <td>状态</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+        <volist name="_list" id="vo">
+            <tr>
+                <td>
+                    <input class="J_check" name="id[]" value="{$vo['id']}" data-tid="{$vo['id']}" data-xid="J_check_x" data-yid="J_check_y" type="checkbox">
+                </td>
+                <td>{$vo.uid}</td>
+                <td>{$vo.username|op_t}</td>
+                <td>{$vo.realname|op_t}</td>
+                <td>{$vo.billno}</td>
+                <td><b>{$vo.amount}</b></td>
+                <td>{:methodsFoRecord($vo['methods'])}</td>
+                <td>{$vo.remark}</td>
+                <td>{$vo.created_time|time_format}</td>
+                <td>
+                    <switch name="vo.status">
+                        <case value="0"><b>待审</b></case>
+                        <case value="1">成功</case>
+                        <default />失败
+                    </switch>
+                </td>
+                <td>
+                    <if condition="$vo['status']">
+                        <span>--</span>
+                        <else/>
+                        <a href="{:U('examine?id='.$vo['id'])}" title="转账审核" class="mr10 J_dialog">审核</a>
+                    </if>
+                </td>
+            </tr>
+        </volist>
+        </table>
+    </div>
+    <div class="page">
+        {$_page}
+    </div>
+    <div class="btn_wrap">
+        <div class="btn_wrap_pd" id="J_sub_wrap">
+            <label class="mr10"><input class="J_check_all" data-checklist="J_check_y" data-direction="y" type="checkbox">全选</label>
+            <button class="btn J_ajax_submit_btn" data-subcheck="true" data-action="{:U('del')}" type="submit">删除到回收站</button>
+        </div>
+    </div>
+    </form>
+    <else/>
+    <div class="not_content_mini"><i></i>啊哦，没有符合条件的信息！</div>
+    </notempty>  
+</div>
+<include file='Public/foot' />
+</body>
+</html>

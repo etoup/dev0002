@@ -1,0 +1,364 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link href="__CSS__/index.css?v={:v()}" rel="stylesheet" />
+    <link rel="stylesheet" href="__CSS__/jquery-ui.css?v={:v()}">
+</block>
+</head>
+<body>
+<div class="wrap">
+    <block name="header">
+        <include file='Public/header' />
+        <div class="topmain">
+            <div class="container">
+                <div class="pull-left">
+                    <a href="{:U('index')}" class="hover">我要投资</a>
+                </div>
+                <div class="pull-right">
+                    <a href="{:ROOT}"><span aria-hidden="true" class="glyphicon glyphicon-share-alt"></span> 返回首页</a>
+                </div>
+            </div>
+        </div>
+    </block>
+    <block name="main">
+        <div class="container">
+            <ol class="breadcrumb mt30">
+                <li><a href="{$crumbs.url}">{$crumbs.title}</a></li>
+                <li><a href="{:U('index')}">投资列表</a></li>
+                <li class="active">{$seo.title}</li>
+            </ol>
+            <div class="alert alert-danger alert-dismissible fade in mt30" id="tip" role="alert" >
+                <button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <strong></strong>
+            </div>
+            <div class="panel panel-default mt30">
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <strong>单号：{$info.orders}</strong>
+                        </div>
+                        <div class="col-md-4">
+                            <if condition="$v['status']">
+                                <strong>满标时间：{$info.created_time|time_format}</strong>
+                                <else/>
+                                <strong>投标到期时间：{$info.time_end|time_format}</strong>
+                            </if>
+                        </div>
+                        <div class="col-md-4">
+                            <strong>状态：{:bidsStatus($info['status'])}</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- List group -->
+                            <ul class="list-group">
+                                <li class="list-group-item"><strong>借款金额：{:money($info['with_funds'],'',10000)}</strong></li>
+                                <li class="list-group-item"><strong>年化收益：{$info['profit']}%</strong></li>
+                                <li class="list-group-item"><strong>还款方式：按月付息，到期还本</strong></li>
+                                <li class="list-group-item"><strong>可投金额：{$may_throw}</strong></li>
+                                <!--<li class="list-group-item"><strong>投标人数：{:count($info['tenders'])}人</strong></li>-->
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <!-- List group -->
+                            <ul class="list-group">
+                                <li class="list-group-item"><strong>利息总和：{:money($info['interest_sum'])}</strong></li>
+                                <li class="list-group-item"><strong>借款期限：{$info.time_limit}个月</strong></li>
+                                <li class="list-group-item"><strong>投标周期：{$info['deadline']}天</strong></li>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <strong>投标进度：</strong>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="progress my-progress" style="margin-bottom: 0">
+                                                <switch name="info.status">
+                                                    <case value="0">
+                                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{$speed}" aria-valuemin="0" aria-valuemax="100" style="width: {$speed}%">
+                                                            <span class="sr-only">{$speed}%</span>
+                                                        </div>
+                                                    </case>
+                                                    <case value="1">
+                                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                                            <span class="sr-only">100%</span>
+                                                        </div>
+                                                    </case>
+                                                    <default />
+                                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                                        <span class="sr-only">0%</span>
+                                                    </div>
+                                                </switch>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <switch name="info.status">
+                                                <case value="0">
+                                                    {$speed}%
+                                                </case>
+                                                <case value="1">
+                                                    100%
+                                                </case>
+                                                <default />
+                                                0%
+                                            </switch>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <switch name="info.status">
+                        <case value="0">
+                            <div class="row">
+                                <div class="col-md-6"><div class="yomibox" data="{:time_format($info['time_end'],'Y-m-d h:i:s')}"> </div></div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <button data-remote="{:U('invest',['id'=>$info['id']])}" data-target="#myModal" data-toggle="modal" class="btn btn-info" type="button">我要投资</button>
+                                            <div style="display: none;" id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+
+                                                    </div><!-- /.modal-content -->
+                                                </div><!-- /.modal-dialog -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </case>
+                        <case value="1">
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-4">
+                                    投标完成，将为投资人赚取 <strong>{:money($info['interest_sum'])}</strong>
+                                </div>
+                                <div class="col-md-4">
+                                </div>
+                            </div>
+                        </case>
+                        <default />
+
+                    </switch>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>项目配资方案</strong>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <blockquote style="margin-bottom: 0">
+                                <p>{:money($info['with_funds']+$info['own_funds'],'%s<h6>元</h6>',10000)}</p>
+                                <footer>总 <cite title="Source Title">操盘资金</cite></footer>
+                            </blockquote>
+                        </div>
+                        <div class="col-md-1">
+                            <h1>=</h1>
+                        </div>
+                        <div class="col-md-3">
+                            <blockquote style="margin-bottom: 0">
+                                <p>{:money($info['with_funds'],'%s<h6>元</h6>',10000)}</p>
+                                <footer><cite title="Source Title">配资资金</cite></footer>
+                            </blockquote>
+                        </div>
+                        <div class="col-md-1">
+                            <h1>+</h1>
+                        </div>
+                        <div class="col-md-3">
+                            <blockquote style="margin-bottom: 0">
+                                <p>{:money($info['own_funds'],'%s<h6>元</h6>',10000)}</p>
+                                <footer><cite title="Source Title">保证金</cite></footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <if condition="$info['status']">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>操盘情况</strong>
+                    </div>
+                    <div class="panel-body">
+                        <dl>
+                            <dt><h4>总资产：<if condition="$prev_total_assets">{:money($prev_total_assets)}<else/>{:money($info['with_funds']+$info['own_funds'],'',10000)}</if></h4></dt>
+                            <dd>当日收盘股票市值：<strong><if condition="$prev_pre_value">{:money($prev_pre_value)}<else/>暂无记录</if></strong></dd>
+                            <dd>操盘资金：<strong>{:money($info['with_funds']+$info['own_funds'],'',10000)}</strong><small>（配资金额：{:money($info['with_funds'],'',10000)}；保证金：{:money($info['own_funds'],'',10000)}）</small></dd>
+                        </dl>
+                        <hr>
+                        <if condition="$node">
+                            <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                        </if>
+                    </div>
+                </div>
+            </if>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>借款人信息</strong>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <blockquote style="margin-bottom: 0">
+                                <p>姓名：**{:cut_str($userdata['realname'],1,-1)}</p>
+                                <footer>
+                                    已 <cite title="Source Title">实名认证</cite>
+                                    <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target=".bs-example-modal-sm">查看</button>
+                                    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-sm">
+                                            <div class="modal-content">
+                                                <if condition="$cover['path']">
+                                                    <img src="{$cover['path']}">
+                                                    <else/>
+                                                    <img src="/{$userdata['new_path_front']}">
+                                                </if>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </footer>
+                            </blockquote>
+                        </div>
+                        <div class="col-md-4">
+                            <blockquote style="margin-bottom: 0">
+                                <p>手机号码：{:substr_replace($user['mobile'],'*****',3,5)}</p>
+                                <footer>已 <cite title="Source Title">绑定手机</cite></footer>
+                            </blockquote>
+                        </div>
+                        <div class="col-md-4">
+                            <blockquote style="margin-bottom: 0">
+                                <p>注册时间：{$user.reg_time|date="Y-m-d",###}</p>
+                                <footer>成功借款<cite title="Source Title">{$userdata.borrowing}笔</cite></footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>投标记录</strong>
+                </div>
+                <div class="panel-body">
+                    <if condition="$tenders">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>投标会员名</th>
+                                <th>投资金额</th>
+                                <th>投资收益</th>
+                                <th>投资时间</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <foreach name="tenders" item="v">
+                                <tr>
+                                    <td>{$v.username}</td>
+                                    <td>{:money($v['money'])}</td>
+                                    <td>{:money($v['total_revenue'])}</td>
+                                    <td>{$v.created_time|time_format}</td>
+                                </tr>
+                            </foreach>
+                            </tbody>
+                        </table>
+                        <else/>
+                        <p class="text-center">没有投资人信息</p>
+                    </if>
+                </div>
+            </div>
+        </div>
+    </block>
+</div>
+<block name="foot">
+    <include file='Public/foot' />
+</block>
+<block name="foot_js">
+    <script src="__JS__/yomi.js"></script>
+    <if condition="$node">
+        <script src="__STATIC__/Highcharts/js/highcharts.js"></script>
+        <script>
+            $(function () {
+                $('#container').highcharts({
+                    chart: {
+                        type: 'line'  //line\column\scatter\spline\bar\area\areaspline
+                    },
+                    title: {
+                        text: '客户股票账户操盘情况',
+                        x: -20
+                    },
+                    subtitle: {
+                        text: '数据来源: 六合资本风控部',
+                        x: -20
+                    },
+                    xAxis: {
+                        gridLineWidth:1,
+                        categories: [{$node}]
+                    },
+                    yAxis: {
+                        title: {
+                            text: '操盘额度值 (万)'
+                        },
+
+                        gridLineDashStyle:'Dash',
+
+                        plotLines:[{
+                            name:'安全线',
+                            color:'red',            //线的颜色，定义为红色
+                            dashStyle:'solid',//标示线的样式，默认是solid（实线）longdashdot，这里定义为长虚线
+                            value:"{$safe}",        //定义在那个值上显示标示线，这里是在x轴上刻度为3的值处垂直化一条线
+                            width:0.5               //标示线的宽度，2px
+                        }],
+                        plotBands: [{ // Light breeze
+                            //from: "{$info['own_funds']}",
+                            from: 0,
+                            to: "{$info['all_funds']}",
+                            color: 'rgba(68, 170, 213, 0.2)',
+                            label: {
+                                text: '操盘资金',
+                                style: {
+                                    color: '#ff9900'
+                                }
+                            }
+                        }, { // Gentle breeze
+                            from: "{$info['open_line']}",
+                            to: "{$info['warning_line']}",
+                            color: 'rgba(216, 33, 13, 0.1)',
+                            label: {
+                                text: '平仓线',
+                                style: {
+                                    color: '#ff3300'
+                                }
+                            }
+                        }]
+                    },
+                    tooltip: {
+                        valueSuffix: '万'
+                    },
+                    series: [{
+                        name: '总资产',
+                        color:'#ff9900',
+                        lineWidth:1,
+                        marker: {
+                            radius: 3,  //曲线点半径，默认是4
+                            symbol: 'circle' //曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
+                        },
+                        data: [{$total_assets}]
+                    },{
+                        name: '持仓市值',
+                        lineWidth:1,
+                        marker: {
+                            radius: 3,  //曲线点半径，默认是4
+                            symbol: 'diamond' //曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
+                        },
+                        data: [{$pre_value}]
+                    }]
+                });
+            });
+        </script>
+    </if>
+</block>
+</body>
+</html>

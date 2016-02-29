@@ -1,0 +1,7 @@
+[ 2016-01-05T22:57:36+08:00 ] ::1 /ue.baidu.com/10/fa.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000042s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.016277s ]
+INFO: [ app_init ] --END-- [ RunTime:0.024396s ]
+ERR: 无法加载模块:Ue.baidu.com
+

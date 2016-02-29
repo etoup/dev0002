@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap J_check_wrap">
+    <div class="nav">
+        <ul class="cc">
+            <li class="current"><a href="{:U('index')}">场馆列表</a></li>
+            <li><a href="{:U('items')}">运动项目</a></li>
+        </ul>
+    </div>
+    <div class="h_a">提示信息</div>
+    <div class="mb10 prompt_text">
+        <ul>
+            <li>用户名和电子邮箱支持模糊搜索。用户名或电子邮箱输入“a” 则检索出所有以a开头的用户名或电子邮箱。</li>
+            <li>可以对场馆进行新增、编辑、关闭、删除等操作。</li>
+        </ul>
+    </div>
+    <div class="mb10"><a href="{:U('add')}" class="btn J_dialog" title="添加场馆" role="button"><span class="add"></span>添加场馆</a></div>
+    <div class="h_a">搜索</div>
+    <div class="search_type cc mb10">
+        <form action="__SELF__" method="post">
+        <input type="hidden" name="p" value="{$p|default=1}">
+        <input type="hidden" name="soso" value="1">
+        <label>关键字包含：</label><input name="username" type="text" class="input length_2 mr10" value="{$username|default=''}" placeholder="用户名或真实姓名">
+        <label>手机号码：</label><input name="mobile" type="text" class="input mr10" value="{$mobile|default=''}">
+        <label>电子邮箱：</label><input name="email" type="text" class="input mr10" value="{$email|default=''}">
+        <label>注册时间：</label><input type="text" name="time_start" value="{$time_start|default=''}" class="input length_2 mr5 J_date"><span class="mr5">至</span><input type="text" name="time_end" value="{$time_end|default=''}" class="input length_2 mr10 J_date">
+        <button type="submit" class="btn mr5">搜索</button>
+        <notempty name="soso">
+        <if condition="$soso">
+        <button type="reset" class="btn btn_error" onclick="window.location.href='{:U('index')}'">撤销检索</button>
+        </if>
+        </notempty>
+        </form>
+    </div>
+    <div id="top-alert" class="alert alert-error" style="display: none;">
+        <button class="close fixed" style="margin-top: 4px;">×</button>
+        <div class="alert-content">这是内容</div>
+    </div>
+    <notempty name="_list">
+    <form method="post" action="#" id="J_tag_form" class="J_ajaxForm">
+    <div class="table_list">
+        <table width="100%">
+            <colgroup>
+            <col width="65">
+            </colgroup>
+            <thead>
+                <tr>
+                    <td>
+                        <label>
+                            <input class="J_check_all" data-checklist="J_check_x" data-direction="x" type="checkbox">全选</label>
+                    </td>
+                    <td>UID</td>
+                    <td>用户名</td>
+                    <td>场馆名称</td>
+                    <td>手机号码</td>
+                    <td>电子邮箱</td>
+                    <td>注册时间</td>
+                    <td>状态</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+            <tbody id="J_tag_list">
+            <volist name="_list" id="vo">
+            <tr>
+                <td>
+                    <input class="J_check" name="id[]" value="{$vo['id']}" data-name="{$vo.username|op_t }" data-tid="{$vo['id']}" data-xid="J_check_x" data-yid="J_check_y" type="checkbox">
+                </td>
+                <td>{$vo.uid}</td>
+                <td><a href="{:U('Admin/User/edit',array('uid'=>$vo['id']))}" >{$vo.username|op_t}</a></td>
+                <td>{$vo.name|op_t}</td>
+                <td>{$vo.mobile}</td>
+                <td>{$vo.email}</td>
+                <td>{$vo.reg_time|time_format}</td>
+                <td>
+                    <if condition="$vo['status']">启用<else/>禁用</if>
+                </td>
+                <td>
+                    <a href="{:U('edit?id='.$vo['id'])}" class="mr10 J_dialog" title="编辑场馆信息">编辑</a>
+                    <a href="{:U('del',array('id'=>$vo['id']))}" class="mr10 J_ajax_del">删除</a>
+                </td>
+            </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+    <div class="page">
+        {$_page}
+    </div>
+    <div class="btn_wrap">
+        <div class="btn_wrap_pd" id="J_sub_wrap">
+            <label class="mr10"><input class="J_check_all" data-checklist="J_check_y" data-direction="y" type="checkbox">全选</label>
+            <button class="btn J_ajax_submit_btn" data-subcheck="true" data-action="{:U('enable')}" type="submit">启用</button>
+            <button class="btn J_ajax_submit_btn" data-subcheck="true" data-action="{:U('disable')}" type="submit">禁用</button>
+            <button class="btn J_ajax_submit_btn btn_error" data-subcheck="true" data-msg="确定要删除吗？" data-action="{:U('del')}" type="submit">删除</button>
+        </div>
+    </div>
+    </form>
+    <else/>
+    <div class="not_content_mini"><i></i>啊哦，没有符合条件的用户！</div>
+    </notempty>  
+</div>
+<include file='Public/foot' />
+<script>
+    Wind.use('dialog', 'ajaxForm', function(){
+        var URL_MERGE = "{:U('appoint')}", //合并
+                URL_MOVE = "{:U('move')}";       //移动
+
+        //点击合并
+        $('#J_merger_btn').on('click', function(e){
+            e.preventDefault();
+            tagManPop($(this), 'merger');
+
+        });
+
+        //点击移动
+        $('#J_move_btn').on('click', function(e){
+            e.preventDefault();
+            tagManPop($(this), 'move');
+        });
+
+        function tagManPop(btn, type) {
+            var url = (type == 'merger' ? URL_MERGE : URL_MOVE),
+                    title = (type == 'merger' ? '合并到关联话题' : '移动分类');
+            btn.parent().find('span').remove();
+            if(getCheckedTr()) {
+                Wind.dialog.open( url ,{
+                    onClose : function() {
+                        btn.focus();
+                    },
+                    title: title
+                });
+
+            }else{
+                $( '<span class="tips_error">请至少选择一项</span>' ).appendTo(btn.parent()).fadeIn( 'fast' );
+            }
+
+        }
+
+        //选择统计
+        function getCheckedTr(){
+            if($('#J_tag_list input.J_check:checked').length >= 1) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+    });
+</script>
+</body>
+</html>

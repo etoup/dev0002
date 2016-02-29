@@ -1,0 +1,14 @@
+<h3>最新公告</h3>
+<div class="notice">
+    <foreach name="notice" item="vo">
+        <div class="clearfix nlist">
+            <div class="pull-left">
+                <a href="{:U('Cms/detail',['id'=>$vo['id']])}" title="{$vo.title}">{$vo.title|msubstr=0,18}</a>
+            </div>
+            <div class="pull-right">
+                {$vo.create_time|time_format}
+            </div>
+        </div>
+    </foreach>
+</div>
+<p class="more"><a href="{:U('Cms/notice')}">查看更多</a></p>

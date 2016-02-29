@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+<style type="text/css">
+    .upload-img-box{height:30px; display: block;}
+    .upload-img-box img{height:30px;}
+</style>
+</head>
+<body style="width:450px" class="body_none">
+    <form class="J_ajaxForm" action="__SELF__" method="post">
+    <input type="hidden" name="id" value="{$info['id']|default=0}">
+    <div style="padding:0 0 15px 15px;">
+        <div class="pop_cont pop_table" style="height:auto;">
+            <table width="100%">
+                <tr>
+                    <th>银行名称</th>
+                    <td><span class="must_red">*</span><input type="text" name="name" value="{$info['name']|default=''}" class="input length_5 input_hd"></td>
+                </tr>
+                <tr>
+                    <th>银行标识</th>
+                    <td>
+                        <input type="file" id="upload_picture">
+                        <input type="hidden" name="icon" id="icon" value="{$info['icon']|default=''}"/>
+                        <div class="upload-img-box">
+                        <notempty name="info['icon']">
+                            <div class="upload-pre-item"><img src="{$info.icon|get_cover='path'}"/></div>
+                        </notempty>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>代号</th>
+                    <td>
+                        <input type="text" name="code" value="{$info['code']|default=''}" class="input length_5">
+                        <div class="fun_tips">银行代号</div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>排序</th>
+                    <td>
+                        <input type="text" name="sort" value="{$info['sort']|default=255}" class="input length_5">
+                        <div class="fun_tips">数值越小越靠前</div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="pop_bottom">
+        <button class="btn fr" id="J_dialog_close" type="button">取消</button>
+        <button type="submit" class="btn btn_submit J_ajax_submit_btn fr mr10">提交</button>
+    </div>
+    </form>
+    <include file='Public/foot_min' />
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript">
+//上传图片
+/* 初始化上传插件 */
+$("#upload_picture").uploadify({
+    "height"          : 30,
+    "swf"             : "__STATIC__/uploadify/uploadify.swf",
+    "fileObjName"     : "download",
+    "buttonText"      : "上传图片",
+    "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+    "width"           : 120,
+    'removeTimeout'   : 1,
+    'fileTypeExts'    : '*.jpg; *.png; *.gif;',
+    "onUploadSuccess" : uploadPicture,
+    'onFallback' : function() {
+        alert('未检测到兼容版本的Flash.');
+    }
+});
+function uploadPicture(file, data){
+    var data = $.parseJSON(data);
+    var src = '';
+    if(data.status){
+        $("#icon").val(data.id);
+        //src = data.url || '__ROOT__' + data.path;
+        src = data.url || data.path;
+        $("#icon").parent().find('.upload-img-box').show().html(
+            '<div class="upload-pre-item"><img src=".' + src + '"/></div>'
+        );
+    } else {
+        updateAlert(data.info);
+        setTimeout(function(){
+            $('#top-alert').find('button').click();
+            $(that).removeClass('disabled').prop('disabled',false);
+        },1500);
+    }
+}
+</script>
+</body>
+</html>

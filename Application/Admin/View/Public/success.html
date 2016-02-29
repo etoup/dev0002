@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+<if condition="$jumpUrl">
+<meta http-equiv="refresh" content="<?php echo($waitSecond); ?>; url={$jumpUrl}">
+</if>
+</head>
+<body>
+<div class="wrap">
+    <div id="error_tips">
+        <h2>信息提示</h2>
+        <div class="error_cont">
+            <ul>
+                <li><?php echo($message); ?></li>
+            </ul>
+            <if condition="$jumpUrl">
+            <div class="error_return"><a href="{$jumpUrl}" class="btn">返回</a></div>
+            <else/>
+            <div class="error_return"><a href="javascript:window.history.go(-1);" class="btn">返回</a></div>
+            </if>
+        </div>
+    </div>
+</div>
+<include file='Public/foot' />
+</body>
+</html>
+

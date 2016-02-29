@@ -1,0 +1,295 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css"></block>
+<block name="main-header">
+    <include file='Public/header' />
+    <link rel="stylesheet" href="__STATIC__/sweetalert-master/dist/sweetalert.css" />
+    <link rel="stylesheet" href="__STATIC__/Swiper/dist/css/swiper.min.css">
+    <link rel="stylesheet" href="__STATIC__/AdminLTE/plugins/daterangepicker/daterangepicker-bs3.css">
+    <link rel="stylesheet" href="__CSS__/index.css">
+</block>
+<block name="main-sidebar">
+    <include file='Public/sidebar' />
+</block>
+<block name="content-header"><include file='Public/top' /></block>
+<block name="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li><a href="{:U('index')}">订单管理</a></li>
+                    <li class="active"><a href="{:U('orders')}">订单列表</a></li>
+                    <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
+                </ul>
+                <div class="tab-content">
+                <div class="active tab-pane" id="activity">
+                    <div class="alert alert-warning alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h4><i class="icon fa fa-warning"></i> 提示!</h4>
+                        订单列表展示所有订单，并对订单进行搜索等相关操作
+                    </div>
+
+                    <div class="box box-default">
+                        <form action="__SELF__" method="post">
+                            <input type="hidden" name="p" value="{$p|default=1}">
+                            <input type="hidden" name="soso" value="1">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">搜索</h3>
+                                <div class="box-tools pull-right">
+                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                </div>
+                            </div><!-- /.box-header -->
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>单号</label>
+                                            <input type="text" name="keyword" value="{$keyword|default=''}" class="form-control" id="keyword" placeholder="单号关键字">
+                                        </div><!-- /.form-group -->
+
+                                    </div><!-- /.col -->
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>项目和场地</label>
+                                            <div class="row" id="element">
+                                                <div class="col-md-6">
+                                                    <select class="form-control select2 items" name="items" disabled="disabled" data-url="{:U('getItems')}" style="width: 100%;">
+                                                        <option selected="selected">请选择</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <select class="form-control select2 block" name="block" disabled="disabled" data-url="{:U('getBlocks')}" data-json-space="data" style="width: 100%;">
+                                                        <option selected="selected">请选择</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div><!-- /.form-group -->
+
+                                    </div><!-- /.col -->
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>类型</label>
+                                            <select class="form-control select2" name="typestxt" style="width: 100%;">
+                                                <option>请选择</option>
+                                                <foreach name="typestxtArr" item="vo">
+                                                    <if condition="$typestxt eq $key">
+                                                        <option value="{$key}" selected>{$vo.title}</option>
+                                                        <else/>
+                                                        <option value="{$key}">{$vo.title}</option>
+                                                    </if>
+
+                                                </foreach>
+                                            </select>
+                                        </div><!-- /.form-group -->
+                                    </div><!-- /.col -->
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>状态</label>
+                                            <select class="form-control select2" name="statustxt" style="width: 100%;">
+                                                <option>请选择</option>
+                                                <foreach name="statustxtArr" item="vo">
+                                                    <if condition="$statustxt eq $key">
+                                                        <option value="{$key}" selected>{$vo.title}</option>
+                                                        <else/>
+                                                        <option value="{$key}">{$vo.title}</option>
+                                                    </if>
+                                                </foreach>
+                                            </select>
+                                        </div><!-- /.form-group -->
+                                    </div><!-- /.col -->
+                                </div><!-- /.row -->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>订单时间:</label>
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="text" name="ordersdate" value="{$ordersdate|default=''}" class="form-control pull-right" readonly id="reservation">
+                                            </div>
+                                            <!-- /.input group -->
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div><!-- /.box-body -->
+                            <div class="box-footer">
+                                <button type="reset" class="btn btn-default">重置</button>
+
+                                <if condition="$soso">
+                                    <a class="btn btn-warning pull-right" href="{:U('orders')}" style="margin-left: 10px">撤销检索</a>
+                                </if>
+
+                                <button type="submit" class="btn btn-primary pull-right">搜索</button>
+                            </div>
+                        </form>
+
+                    </div><!-- /.box -->
+
+                    <if condition="$list">
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">列表</h3>
+                                <div class="box-tools pull-right">
+                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                </div>
+                            </div><!-- /.box-header -->
+                            <div class="box-body">
+                                <table class="table table-bordered table-striped table-hover">
+                                    <tr>
+                                        <th>单号</th>
+                                        <th>运动项目</th>
+                                        <th>场地</th>
+                                        <th>时间</th>
+                                        <th>价格</th>
+                                        <th>类型</th>
+                                        <th>下单时间</th>
+                                        <th>状态</th>
+                                        <th style="width: 100px">操作</th>
+                                    </tr>
+                                    <foreach name="list" item="vo">
+                                        <tr id="ordersdel-{$vo.id}" <if condition="$vo['status'] eq -1">class="text-red"</if>>
+                                            <td>{$vo.num}</td>
+                                            <td>{$vo.name}</td>
+                                            <td>{$vo.block_name}</td>
+                                            <td>{$vo.nodes} {$vo.start}-{$vo.end}</td>
+                                            <td>{$vo.price}</td>
+                                            <td>
+                                                <if condition="$vo['types']">
+                                                    现场预定
+                                                    <else/>
+                                                    线上预定
+                                                </if>
+                                            </td>
+                                            <td>{$vo.created_time|time_format}</td>
+                                            <td id="ordersdel-status-{$vo.id}">
+                                                <switch name="vo.status">
+                                                    <case value="-1">撤单</case>
+                                                    <case value="1">已付款</case>
+                                                    <case value="2">已使用</case>
+                                                    <case value="8">已结算</case>
+                                                    <default />未付款
+                                                </switch>
+                                            </td>
+
+                                            <td>
+                                                <a data-toggle="modal" href="{:U('ordersview',['id'=>$vo['id']])}" data-target="#modal_{$vo.id}"><span class="label label-success">查看</span></a>
+                                                <if condition="$vo['status'] eq 1">
+                                                    <a href="#" id="ordersdel-delbtn-{$vo.id}" class="delete" data-id="{$vo.id}" data-url="{:U('ordersdel')}" data-tag="#ordersdel"><span class="label label-warning">撤单</span></a>
+                                                </if>
+                                                <div class="modal fade" id="modal_{$vo.id}" tabindex="-1" role="dialog">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+
+                                                        </div><!-- /.modal-content -->
+                                                    </div><!-- /.modal-dialog -->
+                                                </div><!-- /.modal -->
+                                            </td>
+                                        </tr>
+                                    </foreach>
+                                </table>
+                            </div><!-- /.box-body -->
+                            <div class="box-footer">
+                                <div class="page pull-right">
+                                    {$_page}
+                                </div>
+                            </div>
+                        </div><!-- /.box -->
+                        <else/>
+                        <div class="callout callout-danger">
+                            <h4>哎呦</h4>
+                            <p>没有您要是数据，请重新检索</p>
+                        </div>
+                    </if>
+
+                </div><!-- /.tab-pane -->
+            </div>
+        </div>
+    </div>
+    </div>
+</block>
+<block name="main-footer">
+    <include file='Public/footer' />
+</block>
+<block name="foot">
+    <include file='Public/foot' />
+    <script src="__STATIC__/sweetalert-master/dist/sweetalert.min.js"></script>
+    <!-- date-range-picker -->
+    <script src="__STATIC__/AdminLTE/plugins/daterangepicker/moment.min.js"></script>
+    <script src="__STATIC__/AdminLTE/plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="__STATIC__/select/js/jquery.cxselect.min.js"></script>
+    <script>
+        //Date range picker
+        $('#reservation').daterangepicker({
+            format:'YYYY/MM/DD',
+            locale:{
+                applyLabel:'确定',
+                cancelLabel:'关闭',
+                fromLabel: '从',
+                toLabel: '至'
+            }
+        });
+
+        $('#element').cxSelect({
+            selects: ['items', 'block'],
+            jsonName: 'name',
+            jsonValue: 'value'
+        });
+
+        $('.delete').on('click',function() {
+            var id = $(this).attr("data-id"),url = $(this).attr("data-url"),tag = $(this).attr("data-tag");
+            $.ajax({
+                type: "POST",
+                url: "{:U('checkTimes')}",
+                data: {id:id},
+                success: function(data){
+                    if(data.msg){
+                        swal("错误", data.msg, "error");
+                    }else{
+                        deleteData(id,url,tag);
+                    }
+                }
+            });
+        });
+
+        function deleteData(id,url,tag) {
+            swal({
+                title: "提示",
+                text: "撤单后该订单无法进行结算，您确定要撤单吗？",
+                type: "warning",
+                //animation: "slide-from-top",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                confirmButtonText: "确定撤单",
+                confirmButtonColor: "#ec6c62",
+                cancelButtonText:"取消"
+            }, function() {
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data:{id:id}
+                })
+                    .done(function(data) {
+                        if(data.status){
+                            swal({
+                                title: "提示",
+                                text:data.msg,
+                                type: "success"
+                            },
+                            function(){
+                                $(tag+'-'+id).addClass('text-red');
+                                $(tag+'-status-'+id).text('撤单');
+                                $(tag+'-delbtn-'+id).remove();
+                            });
+                        }else{
+                            swal("提示", data.msg, "error");
+                        }
+                    })
+                    .error(function(data) {
+                        swal("错误", "服务器连接失败", "error");
+                    });
+            });
+        }
+    </script>
+</block>

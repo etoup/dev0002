@@ -1,0 +1,329 @@
+/*#
+===================
+@explain: 初始化/全局的公用控件
+@author: longwenid@gmail.com
+$Id: core.css 24871 2013-02-25 06:15:47Z hao.lin $
+===================
+#*/
+
+/*
+===================
+样式目录/已有控件
+>>初始化
+>>html5标签初始化
+>>清除浮动
+>>全局间距
+>>基础样式
+>>全局字体大小
+>>全局按钮
+>>表单样式
+>>输入框文本框长度
+>>选择select专属长度
+>>必填选项的星号
+>>loading加载
+>>全局操作提示
+>>全局弹窗
+>>重口味弹窗
+>>非操作型提示
+>>系统文本颜色
+>>语音验证按钮
+>>全局无内容界面提示
+>>积分变动提示
+>>全局小名片
+>>全局便捷选择（积分购买，购买方式）
+>>全局迷你表情
+>>单图幻灯片弹窗
+>>用户在线图标
+>>发消息弹窗宽度
+>>登录保护和弹出登录
+>>举报弹窗
+>>编辑、删除（小icon）
+>>全局倒三角（像素大小4，用于链接后面下拉小图标效果）
+>>全局下拉菜单
+>>全局颜色选择
+>>全局分页
+>>全局关注
+>>门户管理-模块管理按钮
+>>门户设计样式
+>>模块管理按钮-门户管理
+>>门户基础框架结构
+>>门户结构组合
+>>门户和模块的框架样式列表
+>>门户模块样式[包括所有后台已有的系统模块样式]
+>>门户-搜索模块
+>>返回顶部
+>>@选择菜单
+>>用户输入框型选择
+>>用户下拉选择
+>>弹窗选择好友
+>>帮Ta打卡弹窗
+>>全局数字数量提示效果
+>>钩子样式
+===================
+*/
+
+
+/*
+===================
+初始化【请勿修改】
+===================
+*/
+html,body,
+dl, dt, dd, ul, p, 
+h1, h2, h3, h4, h5, h6,
+pre, code, form,
+fieldset, legend{
+	margin: 0;
+	padding: 0;
+}
+cite,
+em,
+strong,
+th {
+	font-style: normal;
+}
+td,
+th,
+div {
+	word-break:break-all;
+	word-wrap:break-word;
+}
+/*解决ff下不换行问题*/
+pre{
+	white-space: pre-wrap;
+	white-space: -moz-pre-wrap;
+	white-space: -pre-wrap;
+	white-space: -o-pre-wrap;
+	word-wrap: break-word;
+}
+form{
+	display:inline;
+}
+table {
+	border-collapse: collapse;
+	border-spacing:0;
+}
+th {
+	text-align: left;
+	font-weight:100;
+}
+ol li {
+	list-style: decimal outside;
+}
+ol{
+	padding:0 0 0 18px;
+	margin:0;
+}
+li {
+	list-style:none;
+}
+img {
+	border: 0;
+}
+/*
+===================
+html5标签初始化
+===================
+*/
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
+  display: block;
+}
+
+/*
+===================
+清除浮动【请勿修改】
+>>	cc	作用于父模型
+>>	c	作用于浮动模型后，父模型区域里
+===================
+*/
+.cc{
+	zoom:1;
+}
+.cc:after{
+	content:'\20';
+	display:block;
+	height:0;
+	clear:both;
+	visibility: hidden;
+}
+.c{
+	clear:both;
+	height:0;
+	font:0/0 Arial;
+	overflow:hidden;
+	width:0;
+}
+
+/*
+===================
+ie6固定弹窗滚动hack
+===================
+*/
+html{
+	_background-image:url(../images/common/blank.gif);
+	background-attachment:fixed;
+	-webkit-text-size-adjust:none;
+	overflow-y:scroll;
+}
+
+/*
+===================
+全局间距【对模块或内容进行间距微调，强化为最高级别】
+===================
+*/
+.mb5{
+	margin-bottom:5px !important;
+}
+.mb10{
+	margin-bottom:10px !important;
+}
+.mb15{
+	margin-bottom:15px !important;
+}
+.mb20{
+	margin-bottom:20px !important;
+}
+.mr5{
+	margin-right:5px !important;
+}
+.mr10{
+	margin-right:10px !important;
+}
+.mr15{
+	margin-right:15px !important;
+}
+.mr20{
+	margin-right:20px !important;
+}
+.p5{
+	padding:5px;
+}
+.p10{
+	padding:10px;
+}
+.p15{
+	padding:15px;
+}
+.p20{
+	padding:20px;
+}
+
+/*
+===================
+基础样式
+>>	b			加粗
+>>	u			下划线
+>>	i			斜体
+>>	w			文本不换行
+>>	tal		文本靠左显示
+>>	tac		文本居中显示
+>>	tar		文本靠右显示
+>>	fl		左浮动
+>>	fr		右浮动
+>>	pr		相对定位
+>>	cp		鼠标点击手势
+>>	vt		表格内容靠上显示
+===================
+*/
+.b{
+	font-weight:700 !important;
+}
+.u{
+	text-decoration:underline !important;
+}
+.i{
+	font-style:italic !important;
+}
+.w{
+	white-space:nowrap;
+}
+.tal{
+	text-align:left !important;
+}
+.tac{
+	text-align:center !important;
+}
+.tar{
+	text-align:right !important;
+}
+.fl{
+	float:left !important;
+	display:inline;
+}
+.fr{
+	float:right !important;
+	display:inline;
+}
+.pr{
+	position:relative;
+}
+.cp{
+	cursor:pointer;
+}
+.vt{
+	vertical-align:top;
+}
+.dn{
+	display:none;
+}
+
+/*
+===================
+全局字体大小
+>>	f10		小字体
+>>	f12		正常字
+>>	f14		大字
+>>	f16		更大
+>>	f24		标题类
+>>	fn		文本去粗
+===================
+*/
+.f10{
+	font-size:10px;
+}
+.f12{
+	font-size:12px !important;
+}
+.f14{
+	font-size:14px;
+}
+.f16{
+	font-size:16px;
+}
+.f24{
+	font-size:24px;
+	font-family:Arial, "Microsoft Yahei", Simsun;
+}
+.fn{
+	font-weight:normal !important;
+}
+
+
+
+@page :pseudo-class {
+    size: A4 landscape;
+    margin:2cm;
+}
+
+@media print {
+    section {page-break-before: always;}
+    h1 {page-break-after: always;}
+    p {page-break-inside: avoid;}
+}
+
+@media print {
+    p {orphans:3; widows:2;}
+}
+
+
+
+

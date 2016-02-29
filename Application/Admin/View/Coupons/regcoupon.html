@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap J_check_wrap">
+    <div class="nav">
+        <ul class="cc">
+            <li><a href="{:U('index')}">优惠券列表</a></li>
+            <li class="current"><a href="{:U('regcoupon')}">注册优惠券管理</a></li>
+            <li><a href="{:U('items')}">优惠券发送</a></li>
+        </ul>
+    </div>
+    <div class="h_a">提示信息</div>
+    <div class="mb10 prompt_text">
+        <ul>
+            <li>对注册的优惠券进行相关操作，查看优惠券使用情况。</li>
+        </ul>
+    </div>
+    <div class="mb10"><a href="{:U('add')}" class="btn J_dialog" title="添加注册优惠券" role="button"><span class="add"></span>添加注册优惠券</a></div>
+    <div id="top-alert" class="alert alert-error" style="display: none;">
+        <button class="close fixed" style="margin-top: 4px;">×</button>
+        <div class="alert-content">这是内容</div>
+    </div>
+    <notempty name="_list">
+    <form method="post" action="#" id="J_tag_form" class="J_ajaxForm">
+    <div class="table_list">
+        <table width="100%">
+            <colgroup>
+                <col width="65">
+                <col width="100">
+                <col width="100">
+                <col width="100">
+                <col width="100">
+            </colgroup>
+            <thead>
+            <tr>
+                <td>
+                    <label>
+                        <input class="J_check_all" data-checklist="J_check_x" data-direction="x" type="checkbox">全选</label>
+                </td>
+                <td>项目</td>
+                <td>抵扣金额</td>
+                <td>限制张数</td>
+                <td>有效期</td>
+                <td>状态</td>
+                <td>操作</td>
+            </tr>
+            </thead>
+            <tbody id="J_tag_list">
+            <volist name="_list" id="vo">
+                <tr>
+                    <td>
+                        <input class="J_check" name="id[]" value="{$vo['id']}" data-name="{$vo.username|op_t }" data-tid="{$vo['id']}" data-xid="J_check_x" data-yid="J_check_y" type="checkbox">
+                    </td>
+                    <td>{$vo.items_name}</td>
+                    <td>{$vo.price|money}</td>
+                    <td>{$vo.num} 张</td>
+                    <td>{$vo.days} 天</td>
+                    <td>
+                        <switch name="vo.status">
+                            <case value="-1">删除</case>
+                            <case value="0">禁用</case>
+                            <case value="1">正常</case>
+                            <default />无效状态
+                        </switch>
+                    </td>
+                    <td>
+                        <a href="{:U('edit?id='.$vo['id'])}" class="mr10 J_dialog" title="编辑优惠券信息">编辑</a>
+                        <a href="{:U('del',array('id'=>$vo['id']))}" class="mr10 J_ajax_del">删除</a>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+    <div class="page">
+        {$_page}
+    </div>
+    <div class="btn_wrap">
+        <div class="btn_wrap_pd" id="J_sub_wrap">
+            <label class="mr10"><input class="J_check_all" data-checklist="J_check_y" data-direction="y" type="checkbox">全选</label>
+            <button class="btn J_ajax_submit_btn" data-subcheck="true" data-action="{:U('enable')}" type="submit">启用</button>
+            <button class="btn J_ajax_submit_btn" data-subcheck="true" data-action="{:U('disable')}" type="submit">禁用</button>
+            <button class="btn J_ajax_submit_btn btn_error" data-subcheck="true" data-msg="确定要删除吗？" data-action="{:U('del')}" type="submit">删除</button>
+        </div>
+    </div>
+    </form>
+    <else/>
+    <div class="not_content_mini"><i></i>啊哦，没有符合条件的数据！</div>
+    </notempty>  
+</div>
+<include file='Public/foot' />
+<script>
+    Wind.use('dialog', 'ajaxForm', function(){
+        var URL_MERGE = "{:U('appoint')}", //合并
+                URL_MOVE = "{:U('move')}";       //移动
+
+        //点击合并
+        $('#J_merger_btn').on('click', function(e){
+            e.preventDefault();
+            tagManPop($(this), 'merger');
+
+        });
+
+        //点击移动
+        $('#J_move_btn').on('click', function(e){
+            e.preventDefault();
+            tagManPop($(this), 'move');
+        });
+
+        function tagManPop(btn, type) {
+            var url = (type == 'merger' ? URL_MERGE : URL_MOVE),
+                    title = (type == 'merger' ? '合并到关联话题' : '移动分类');
+            btn.parent().find('span').remove();
+            if(getCheckedTr()) {
+                Wind.dialog.open( url ,{
+                    onClose : function() {
+                        btn.focus();
+                    },
+                    title: title
+                });
+
+            }else{
+                $( '<span class="tips_error">请至少选择一项</span>' ).appendTo(btn.parent()).fadeIn( 'fast' );
+            }
+
+        }
+
+        //选择统计
+        function getCheckedTr(){
+            if($('#J_tag_list input.J_check:checked').length >= 1) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+    });
+</script>
+</body>
+</html>

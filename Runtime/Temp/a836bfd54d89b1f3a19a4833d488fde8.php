@@ -1,0 +1,3 @@
+<?php
+//000000001800s:497:"[{"fillColor":"rgba(90,94,63, 1)","strokeColor":"rgba(90,94,63, 1)","pointColor":"rgba(90,94,63, 1)","pointStrokeColor":"rgba(90,94,63, 1)","pointHighlightFill":"#fff","pointHighlightStroke":"rgba(90,94,63, 1)","data":["0","0","0","0","0","0","0"]},{"fillColor":"rgba(230,0,72, 1)","strokeColor":"rgba(230,0,72, 1)","pointColor":"rgba(230,0,72, 1)","pointStrokeColor":"rgba(230,0,72, 1)","pointHighlightFill":"#fff","pointHighlightStroke":"rgba(230,0,72, 1)","data":["0","0","0","0","0","0","0"]}]";
+?>

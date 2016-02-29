@@ -1,0 +1,502 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link rel="stylesheet" href="__STATIC__/AdminLTE/plugins/daterangepicker/daterangepicker-bs3.css">
+    <link rel="stylesheet" href="__STATIC__/AdminLTE/plugins/timepicker/bootstrap-timepicker.min.css">
+    <link rel="stylesheet" href="__STATIC__/sweetalert-master/dist/sweetalert.css" />
+    <link rel="stylesheet" href="__STATIC__/Swiper/dist/css/swiper.min.css">
+    <link rel="stylesheet" href="__CSS__/index.css">
+</block>
+<block name="main-header">
+    <include file='Public/header' />
+</block>
+<block name="main-sidebar">
+    <include file='Public/sidebar' />
+</block>
+<block name="content-header"><include file='Public/top' /></block>
+<block name="content">
+    <div class="row">
+        <div class="col-md-3">
+            <include file='indexleft' />
+        </div>
+        <div class="col-md-9">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li><a href="{:U('index')}">订单管理</a></li>
+                    <li><a href="{:U('comment')}">评论管理</a></li>
+                    <li class="active"><a href="{:U('reserve')}">预订管理</a></li>
+                    <li><a href="{:U('lock')}">锁定管理</a></li>
+                    <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="reserve">
+                        <div class="alert alert-warning alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4><i class="icon fa fa-warning"></i> 提示</h4>
+                            批量预定可以根据运营需要，按照项目、场地、日期段、星期、时间段进行精确预定
+                        </div>
+                        <form action="__SELF__" method="post" id="form_reserve">
+                            <div class="box box-default">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">批量预定</h3>
+                                    <div class="box-tools pull-right">
+                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                    </div>
+                                </div><!-- /.box-header -->
+                                <div class="box-body">
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>项目和场地 </label>
+                                                <div class="row" id="element">
+                                                    <div class="col-md-6">
+                                                        <select class="form-control select2 items" name="items" id="items" disabled="disabled" data-url="{:U('getItems')}" style="width: 100%;">
+                                                            <option value="" selected>请选择</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <select class="form-control select2 block" name="block" disabled="disabled" data-url="{:U('getBlocks')}" data-json-space="data" style="width: 100%;">
+                                                            <option value="" selected>请选择</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div><!-- /.form-group -->
+                                        </div><!-- /.col -->
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>日期 </label>
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                                    <input type="text" name="ordersdate" value="{$ordersdate|default=''}" class="form-control pull-right" readonly id="reservation">
+                                                </div>
+                                            </div><!-- /.form-group -->
+                                        </div><!-- /.col -->
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>星期 </label>
+                                                <select class="form-control select2" name="weeks" style="width: 100%;">
+                                                    <option value="" selected>请选择</option>
+                                                    <foreach name="weeks" item="vo">
+                                                        <option value="{$key}">{$vo}</option>
+                                                    </foreach>
+                                                </select>
+                                            </div><!-- /.form-group -->
+                                        </div><!-- /.col -->
+                                        <div class="col-md-4">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="bootstrap-timepicker">
+                                                        <div class="form-group">
+                                                            <label>开始时间 </label>
+                                                            <div class="input-group">
+                                                                <input type="text" name="start" value="10:00" id="start" class="form-control timepicker">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa fa-clock-o"></i>
+                                                                </div>
+                                                            </div><!-- /.input group -->
+                                                        </div><!-- /.form group -->
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="bootstrap-timepicker">
+                                                        <div class="form-group">
+                                                            <label>结束时间 </label>
+                                                            <div class="input-group">
+                                                                <input type="text" name="end" value="15:00" id="end" class="form-control timepicker">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa fa-clock-o"></i>
+                                                                </div>
+                                                            </div><!-- /.input group -->
+                                                        </div><!-- /.form group -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>支付方式 </label>
+                                                <select class="form-control select2" name="paytypes" style="width: 100%;">
+                                                    <option value="" selected>请选择</option>
+                                                    <foreach name="paytypes" item="vo">
+                                                        <option value="{$key}">{$vo}</option>
+                                                    </foreach>
+                                                </select>
+                                            </div><!-- /.form-group -->
+                                        </div><!-- /.col -->
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>是否付款 </label>
+                                                <select class="form-control select2" name="paystatus" style="width: 100%;">
+                                                    <option value="" selected>请选择</option>
+                                                    <option value="1">已付款</option>
+                                                    <option value="0">未付款</option>
+                                                </select>
+                                            </div><!-- /.form-group -->
+                                        </div><!-- /.col -->
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>付款金额 </label>
+                                                <input type="text" name="money" class="form-control" id="money" placeholder="填写付款金额">
+                                            </div><!-- /.form-group -->
+                                        </div><!-- /.col -->
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>预定手机 </label>
+                                                <input type="text" name="mobile" class="form-control" id="mobile" placeholder="填写预定的手机号码">
+                                            </div><!-- /.form-group -->
+                                        </div><!-- /.col -->
+                                    </div>
+                                </div>
+                                <div class="box-footer">
+                                    <span id="summary_reserve" class="text-red"></span>
+                                    <button type="submit" class="btn btn-primary pull-right" id="submit_reserve">立即预定</button>
+                                    <style>
+                                        form label.error{
+                                            color: #dd4b39;
+                                            margin-bottom: 0;
+                                        }
+                                    </style>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <if condition="$list">
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">日志列表</h3>
+                                <div class="box-tools pull-right">
+                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                </div>
+                            </div><!-- /.box-header -->
+                            <div class="box-body">
+                                <table class="table table-bordered table-striped table-hover">
+                                    <tr>
+                                        <th>运动项目</th>
+                                        <th>场地</th>
+                                        <th>开始日期</th>
+                                        <th>结束日期</th>
+                                        <th>星期</th>
+                                        <th>开始时间</th>
+                                        <th>结束时间</th>
+                                        <th>支付方式</th>
+                                        <th>是否付款</th>
+                                        <th>付款金额</th>
+                                        <th>联系方式</th>
+                                    </tr>
+                                    <foreach name="list" item="vo">
+                                        <tr>
+                                            <td>{$vo.name}</td>
+                                            <td>{$vo.block_name}</td>
+                                            <td>{:date('Y-m-d',$vo['startdate'])}</td>
+                                            <td>{:date('Y-m-d',$vo['enddate'])}</td>
+                                            <td>{$vo.week}</td>
+                                            <td>{$vo.starttime}</td>
+                                            <td>{$vo.endtime}</td>
+                                            <td>
+                                                <foreach name="paytypes" item="v">
+                                                    <if condition="$key eq $vo['paytypes']">
+                                                        {$v}
+                                                    </if>
+                                                </foreach>
+                                            </td>
+                                            <td>
+                                                <switch name="vo.paystatus">
+                                                    <case value="1">已支付</case>
+                                                    <case value="0">未支付</case>
+                                                </switch>
+                                            </td>
+                                            <td>{$vo.money|money}</td>
+                                            <td>{$vo.mobile}</td>
+                                        </tr>
+                                    </foreach>
+                                </table>
+                            </div><!-- /.box-body -->
+                            <div class="box-footer">
+                                <div class="page pull-right">
+                                    {$_page}
+                                </div>
+                            </div>
+                        </div><!-- /.box -->
+                        <else/>
+                        <div class="callout callout-danger">
+                            <h4>哎呦</h4>
+                            <p>没有您要是数据，请重新检索</p>
+                        </div>
+                    </if>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+</block>
+<block name="main-footer">
+    <include file='Public/footer' />
+</block>
+<block name="foot">
+    <include file='Public/foot' />
+    <!-- Swiper JS -->
+    <script src="__STATIC__/Swiper/dist/js/swiper.min.js"></script>
+    <script src="__STATIC__/sweetalert-master/dist/sweetalert.min.js"></script>
+    <!-- date-range-picker -->
+    <script src="__STATIC__/AdminLTE/plugins/daterangepicker/moment.min.js"></script>
+    <script src="__STATIC__/AdminLTE/plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="__STATIC__/AdminLTE/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+    <script src="__STATIC__/select/js/jquery.cxselect.min.js"></script>
+    <script src="__STATIC__/jquery.validate.min.js"></script>
+
+    <script src="__JS__/win.js"></script>
+
+
+    <script>
+        //根据屏幕尺寸控制
+        var pageSize = getPageSize();
+        var p = 5;
+        $('.right_li_price').on('click',function() {
+            var hasD = $(this).hasClass('del');
+            var hasL = $(this).hasClass('lock');
+            var hasS = $(this).hasClass('suc');
+            var hasC = $(this).hasClass('check');
+
+            if(!hasS && !hasD && !hasL){
+                if(hasC){
+                    $(this).removeClass('check').next('input').removeAttr('checked');
+                }else{
+                    $(this).addClass('check').next('input').attr('checked','true');
+                }
+            }
+        });
+        $('.reserve').on('click',function() {
+            var vals = checkedValues();
+            if(vals.length==0){
+                swal({title: "错误",   text: "请选择要操作的项目", type: "error",  timer: 3000,   showConfirmButton: false });
+            }else{
+                var id = vals,url = "{:U('reserves')}",tag = "#price";
+                reserves(id,url,tag);
+            }
+        });
+
+        $('.ocAjax').on('click',function() {
+            var id = $(this).attr("data-id"),status = $(this).attr("data-status"),url = $(this).attr("data-url"),tag = $(this).attr("data-tag");
+            ocData(id,status,url,tag);
+        });
+
+        //Date range picker
+        $('#reservation').daterangepicker({
+            startDate: '{$startDate}',
+            endDate: '{$endDate}',
+            format:'YYYY/MM/DD',
+            locale:{
+                applyLabel:'确定',
+                cancelLabel:'关闭',
+                fromLabel: '从',
+                toLabel: '至'
+            }
+        });
+
+        $('#element').cxSelect({
+            selects: ['items', 'block'],
+            jsonName: 'name',
+            jsonValue: 'value'
+        });
+
+        $(".timepicker").timepicker({
+            showInputs: false,
+            showMeridian:false
+        });
+
+        $('#submit_reserve').on('click', function () {
+            var $btn = $(this).button('loading');
+
+            $("#form_reserve").validate({
+                errorPlacement:function(error,element) {
+                    error.appendTo(element.parents('.form-group').children('label'));
+                },
+                rules: {
+                    items: "required",
+                    block   : "required",
+                    ordersdate:"required",
+                    weeks     :"required",
+                    start     : "required",
+                    end     : "required",
+                    paytypes: "required",
+                    paystatus   : "required",
+                    mobile   : "required",
+                    money     : "required"
+                },
+                messages: {
+                    items   : "请选择项目",
+                    block   : "请选择场地",
+                    ordersdate:"请选择日期",
+                    weeks     :"请选择星期",
+                    start   : "请填写开始时间",
+                    end     : "请填写结束时间",
+                    paytypes: "请选择支付方式",
+                    paystatus   : "请选择支付状态",
+                    mobile   : "请填写预定的手机号码",
+                    money     : "请填写金额"
+                },
+                showErrors:function(errorMap,errorList) {
+                    if(this.numberOfInvalids() > 0){
+                        $("#summary_reserve").html('<i class="fa fa-fw fa-info-circle"></i> '+this.numberOfInvalids()+'个选项没有填写完整');
+                        this.defaultShowErrors();
+                        $btn.button('reset');
+                    }
+                }
+            });
+        });
+
+        function checkedValues(){
+            var chk_value =[];
+            $('input[name="check"]:checked').each(function(){
+                chk_value.push($(this).val());
+            });
+            return chk_value;
+        }
+
+        function reserves(id,url,tag) {
+            swal({
+                title: "提示",
+                text: "请填写预定人手机号码",
+                type: "input",
+                animation: "slide-from-top",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                inputPlaceholder: "填写手机号码",
+                confirmButtonText: "提交",
+                confirmButtonColor: "#ec6c62",
+                cancelButtonText:"取消"
+            }, function(inputValue) {
+                if (inputValue === false) return false;
+                if (inputValue === "") {
+                    swal.showInputError("请填写预定人手机号码");
+                    return false;
+                }
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data:{id:id,mobile:inputValue}
+                })
+                    .done(function(data) {
+                        if(data.status){
+                            swal({
+                                title: "提示",
+                                text:data.msg,
+                                type: "success"
+                            },
+                            function(){
+                                var ids = checkedValues();
+                                for(var i =0;i<ids.length;i++){
+                                    $(tag+'-'+ids[i]).addClass('suc');
+                                }
+                            });
+                        }else{
+                            swal("提示", data.msg, "error");
+                        }
+                    })
+                    .error(function(data) {
+                        swal("错误", "服务器连接失败", "error");
+                    });
+            });
+        }
+
+        function ocData(id,status,url,tag) {
+            var text = '';
+            switch (status){
+                case '-1':
+                    text='关闭后将无法预订，您确定要关闭吗？';
+                    break;
+                case '1':
+                    text='开启后将可以预订，您确定要开启吗？';
+                    break;
+            }
+            swal({
+                title: "提示",
+                text: text,
+                type: "warning",
+                //animation: "slide-from-top",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                confirmButtonText: "确定",
+                confirmButtonColor: "#ec6c62",
+                cancelButtonText:"取消"
+            }, function() {
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data:{id:id,status:status}
+                })
+                    .done(function(data) {
+                        if(data.status){
+                            swal({
+                                title: "提示",
+                                text:data.msg,
+                                type: "success"
+                            },
+                            function(){
+                                switch (status){
+                                    case '-1':
+                                        $(tag+'-'+id).attr('data-status','1').children('a').text('开启');
+                                        break;
+                                    case '1':
+                                        $(tag+'-'+id).attr('data-status','-1').children('a').text('关闭');
+                                        break;
+                                }
+
+                            });
+                        }else{
+                            swal("提示", data.msg, "error");
+                        }
+                    })
+                    .error(function(data) {
+                        swal("错误", "服务器连接失败", "error");
+                    });
+            });
+        }
+    </script>
+
+    <foreach name="list" item="vo">
+        <!-- Initialize Swiper -->
+        <script>
+            //alert(pageSize.windowWidth);
+            if(pageSize.windowWidth < 700){
+                $('.table_main').css({width: '525px'});
+                $('.table_body_right').css({width: '420px'});
+                p = 4;
+            }
+            else if(pageSize.windowWidth > 700 && pageSize.windowWidth<1024){
+                //alert(2);
+            }
+            else if(pageSize.windowWidth > 1024 && pageSize.windowWidth<1280){
+                //alert(2);
+            }
+            else if(pageSize.windowWidth > 1280 && pageSize.windowWidth<1440){
+                //alert(3);
+            }
+            else if(pageSize.windowWidth > 1440 && pageSize.windowWidth<1600){
+                //alert(4);
+            }
+            else if(pageSize.windowWidth > 1600 && pageSize.windowWidth<1920){
+                $('.table_main').css({width: '1155px'});
+                $('.table_body_right').css({width: '1050px'});
+                p = 10;
+            }
+            else if(pageSize.windowWidth > 1920){
+                $('.table_main').css({width: '1155px'});
+                $('.table_body_right').css({width: '1050px'});
+                p = 10;
+            }
+            var n = "{$vo['id']}";
+            var swiper = new Swiper('.swiper-container-'+n, {
+                pagination: '.swiper-pagination-'+n,
+                slidesPerView: p,
+                paginationClickable: true,
+                nextButton: '.swiper-button-next-'+n,
+                prevButton: '.swiper-button-prev-'+n
+            });
+        </script>
+    </foreach>
+</block>

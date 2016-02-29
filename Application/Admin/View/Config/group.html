@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap">
+
+
+<!--分类管理: 编辑分类  -->
+<div class="nav">
+    <ul class="cc">
+        <li><a href="{:U('index')}">配置项管理</a></li>
+        <volist name="Think.config.CONFIG_GROUP_LIST" id="group">
+        <lt name="key" value="5">
+        <li <eq name="id" value="$key">class="current"</eq>><a href="{:U('group',array('id'=>$key))}">{$group}配置</a></li>
+    	</lt>
+        </volist>
+    </ul>
+</div>
+<form class="J_ajaxForm" data-role="list" action="{:U('save')}" method="post">
+
+<div class="h_a">相关配置</div>
+<div class="table_full">
+    <table width="100%">
+        <colgroup><col class="th">
+        <col width="400">
+        <col>
+        </colgroup>
+        <tbody>
+            <volist name="list" id="config">
+            <tr>
+                <th>{$config.title}</th>
+                <td>
+                    	<switch name="config.type">
+			<case value="0">
+			<input type="text" class="input length_5" name="config[{$config.name}]" value="{$config.value}">
+			</case>
+			<case value="1">
+			<input type="text" class="input length_5" name="config[{$config.name}]" value="{$config.value}">
+			</case>
+			<case value="2">
+			<label class="text">
+				<textarea name="config[{$config.name}]" class="length_5">{$config.value}</textarea>
+			</label>
+			</case>
+			<case value="3">
+			<label class="text">
+				<textarea name="config[{$config.name}]" class="length_5">{$config.value}</textarea>
+			</label>
+			</case>
+			<case value="4">
+			<select name="config[{$config.name}]" class="length_3">
+				<volist name=":parse_config_attr($config['extra'])" id="vo">
+					<option value="{$key}" <eq name="config.value" value="$key">selected</eq>>{$vo}</option>
+				</volist>
+			</select>
+			</case>
+			<case value="5">
+			<div class="text">
+			<textarea name="config[{$config.name}]" class="length_5" readonly="">{$config.value}</textarea>
+			</div>
+			</case>
+			<case value="6">
+			<input type="password" class="input length_5" name="config[{$config.name}]" value="{$config.value}">
+			</case>
+			<case value="7"><!--增加富文本和非明文-->
+			<div class="textarea">
+			<textarea name="config[{$config.name}]" class="length_5">{$config.value}</textarea>
+	       	 	{:hook('adminArticleEdit', array('name'=>$field['names'],'value'=>$config.name,'id'=>$config.name))}
+			</div>
+			</case>
+		</switch>
+                </td>
+                <td><div class="fun_tips">{$config.remark}</div></td>
+            </tr>
+        	</volist>
+        </tbody>
+    </table>
+</div>
+
+<div class="btn_wrap">
+    <div class="btn_wrap_pd">
+        <input type="hidden" name="id" value="{$info.id}" />
+        <button type="submit" class="btn btn_submit J_ajax_submit_btn">提交</button>
+    </div>
+</div>
+</form>
+
+</div>
+<include file='Public/foot' />
+
+</body>
+</html>

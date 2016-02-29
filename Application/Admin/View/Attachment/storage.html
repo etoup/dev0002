@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap">
+    <include file='Public/navtab' /> 
+    <div class="h_a">功能说明</div>
+    <div class="prompt_text">
+        <ul>
+            <li>附件存储方案支持app扩展，可以到<a href="{}" class="J_linkframe_trigger">应用中心</a>下载更多的可用存储方案。</li>
+            <li>附件存储方式的更换可能会造成附件丢失，<span class="red">建议在深夜或者关闭站点后</span>再进行操作。并且更换附件存储方案需<span class="red">手动转移</span>附件文件(与存储方案本身提供的支持有关)，请谨慎选择！</li>
+        </ul>
+    </div>  
+    <div class="h_a">附件存储方式设置</div>
+    <form method="post" class="J_ajaxForm" action="__SELF__" data-role="list">
+    <div class="table_full">
+        <table width="100%">
+            <col class="th" />
+            <col width="400" />
+            <col />
+            <tr>
+                <th>附件存储</th>
+                <td>
+                    <ul class="single_list cc">
+                        <if condition="storageType">
+                        <volist name="storageType" id="vo">
+                        <li><span class="mr20"><label><input name="storage" value="{$key}" type="radio" {:is_checked($key,$storage)}><span>{$vo}</span></label></span> 
+                        </li>
+                        </volist>
+                        <else/>
+                        <li>暂无任何附件存储方案可选～</li>
+                        </if>
+                    </ul>
+                </td>
+                <td><div class="fun_tips">本地存储。附件、图片等将存储在本地磁盘上，存储位置在 conf/directory.php 中定义。默认定义位置为 /www/attachment, 全局可访问附件路径常量为 ATTACH</div></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="h_a">头像存储方式设置</div>
+    <div class="table_full">
+        <table width="100%">
+            <col class="th" />
+            <col width="400" />
+            <col />
+            <tr>
+                <th>头像存储路径</th>
+                <td>/Uploads/Avatar</td>
+                <td><div class="fun_tips">当修改头像存储方案后，提交本页面，自动更新</div></td>
+            </tr>
+        </table>
+    </div>
+    <div class="btn_wrap">
+        <div class="btn_wrap_pd">
+            <button class="btn btn_submit mr10 J_ajax_submit_btn" type="submit">提交</button>
+        </div>
+    </div>
+    </form>
+<!-- end -->  
+</div>
+<include file='Public/foot' />
+</body>
+</html>

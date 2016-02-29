@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body style="width:450px;" class="body_none">
+	<form class="J_ajaxForm" action="{:U('addToGroup')}" method="post">
+	<input type="hidden" name="gid" value="{$gid}">
+	<div class="pop_cont">
+		<div class="pop_table" style="height:120px;">
+			<table width="100%">
+				<tr>
+					<th>用户UID</th>
+					<td>
+					<span class="must_red">*</span><textarea name="uid" class="length_5"></textarea>
+					<div class="cc gray">可以批量添加,一行一个UID</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	
+	<div class="pop_bottom">
+		<button class="btn fr" id="J_dialog_close" type="button">取消</button>
+		<button type="submit" class="btn btn_submit J_ajax_submit_btn fr mr10">提交</button>
+	</div>
+	</form>
+    <include file='Public/foot_min' />
+<script>
+$(function(){
+	$('#J_type').on('change', function(){
+		var $this = $(this),
+		value = $this.val();
+		if (value == 3) {
+			$('#J_replace').show()
+			return true;
+		}
+		$('#J_replace').hide()
+	});
+});
+</script>
+</body>
+</html>

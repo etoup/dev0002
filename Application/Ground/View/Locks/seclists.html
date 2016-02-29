@@ -1,0 +1,170 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css"></block>
+<block name="main-header">
+    <include file='Public/header' />
+    <link rel="stylesheet" href="__STATIC__/sweetalert-master/dist/sweetalert.css" />
+    <link rel="stylesheet" href="__STATIC__/Swiper/dist/css/swiper.min.css">
+    <link rel="stylesheet" href="__STATIC__/AdminLTE/plugins/daterangepicker/daterangepicker-bs3.css">
+    <link rel="stylesheet" href="__CSS__/index.css">
+</block>
+<block name="main-sidebar">
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- Sidebar user panel -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="__IMG__/logo.jpg" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>{:NAME}</p>
+                    <a href="#"><i class="fa fa-circle text-success"></i> 普通场馆</a>
+                </div>
+            </div>
+            <!-- search form -->
+            <form action="#" method="get" class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="搜索...">
+                      <span class="input-group-btn">
+                        <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+                      </span>
+                </div>
+            </form>
+            <!-- /.search form -->
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="sidebar-menu">
+                <li class="header">导航列表</li>
+                <li>
+                    <a href="{:U('Index/index')}">
+                        <i class="fa fa-dashboard"></i> <span>场馆首页</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:U('Orders/index')}">
+                        <i class="fa fa-reorder"></i>
+                        <span>订单管理</span>
+                        <span class="label label-primary pull-right">{$orders}</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="{:U('Locks/index')}">
+                        <i class="fa fa-lock"></i>
+                        <span>锁定管理</span>
+                        <span class="label label-danger pull-right">{$locks}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:U('Statistics/index')}">
+                        <i class="fa fa-pie-chart"></i>
+                        <span>统计管理</span>
+                        <span class="label label-success pull-right">{$settled}</span>
+                    </a>
+                </li>
+                <li class="header">场馆设置</li>
+                <li><a href="{:U('Setting/index')}"><i class="fa fa-circle-o text-red"></i> <span>基础设置</span></a></li>
+                <li><a href="{:U('Setting/items')}"><i class="fa fa-circle-o text-yellow"></i> <span>项目设置</span></a></li>
+                <li><a href="{:U('Setting/block')}"><i class="fa fa-circle-o text-aqua"></i> <span>场地设置</span></a></li>
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+</block>
+<block name="content-header"><include file='Public/top' /></block>
+<block name="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="{:U('index')}">锁定列表</a></li>
+                    <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
+                </ul>
+                <div class="tab-content">
+                <div class="active tab-pane" id="activity">
+                    <div class="alert alert-warning alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h4><i class="icon fa fa-warning"></i> 提示!</h4>
+                        锁定列表展示所有被批量锁定项目
+                    </div>
+
+                    <if condition="$list">
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">列表</h3>
+                                <div class="box-tools pull-right">
+                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                </div>
+                            </div><!-- /.box-header -->
+                            <div class="box-body">
+                                <table class="table table-bordered table-striped table-hover">
+                                    <tr>
+                                        <th>运动项目</th>
+                                        <th>场地</th>
+                                        <th>时间</th>
+                                        <th>下单时间</th>
+                                        <th>状态</th>
+                                    </tr>
+                                    <foreach name="list" item="vo">
+                                        <tr>
+                                            <td>{$vo.name}</td>
+                                            <td>{$vo.block_name}</td>
+                                            <td>{$vo.nodes} {$vo.start}-{$vo.end}</td>
+                                            <td>{$vo.created_time|time_format}</td>
+                                            <td>
+                                                <switch name="vo.status">
+                                                    <case value="1">锁定</case>
+                                                    <case value="-1">解锁</case>
+                                                    <default />未知
+                                                </switch>
+                                            </td>
+                                        </tr>
+                                    </foreach>
+                                </table>
+                            </div><!-- /.box-body -->
+                            <div class="box-footer">
+                                <div class="page pull-right">
+                                    {$_page}
+                                </div>
+                            </div>
+                        </div><!-- /.box -->
+                        <else/>
+                        <div class="callout callout-danger">
+                            <h4>哎呦</h4>
+                            <p>没有您要是数据，请重新检索</p>
+                        </div>
+                    </if>
+
+                </div><!-- /.tab-pane -->
+            </div>
+        </div>
+    </div>
+    </div>
+</block>
+<block name="main-footer">
+    <include file='Public/footer' />
+</block>
+<block name="foot">
+    <include file='Public/foot' />
+    <!-- date-range-picker -->
+    <script src="__STATIC__/AdminLTE/plugins/daterangepicker/moment.min.js"></script>
+    <script src="__STATIC__/AdminLTE/plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="__STATIC__/select/js/jquery.cxselect.min.js"></script>
+    <script>
+        //Date range picker
+        $('#reservation').daterangepicker({
+            format:'YYYY/MM/DD',
+            locale:{
+                applyLabel:'确定',
+                cancelLabel:'关闭',
+                fromLabel: '从',
+                toLabel: '至'
+            }
+        });
+
+        $('#element').cxSelect({
+            selects: ['items', 'block'],
+            jsonName: 'name',
+            jsonValue: 'value'
+        });
+    </script>
+</block>

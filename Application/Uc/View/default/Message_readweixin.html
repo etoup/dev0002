@@ -1,0 +1,83 @@
+<extend name="Public/baseweixin" />
+<block name="head"><include file='Public/headweixin' /></block>
+<block name="head_css">
+    <link href="__CSS__/indexweixin.css" rel="stylesheet" />
+    <link href="__CSS__/dashboard.css" rel="stylesheet">
+</block>
+</head> 
+<body>
+<block name="header"><include file='Public/headerweixin' /></block>
+<block name="uctop">
+
+</block>
+
+<block name="main">
+    <div class="wewixinmain" style="margin: 50px 0;">
+        <ul class="nav nav-tabs">
+            <li role="presentation"><a href="{:U('index',['mobile'=>'weixin'])}">未读 <span class="badge">{$unread_num}</span></a></li>
+            <li role="presentation" class="active"><a href="{:U('read',['mobile'=>'weixin'])}">已读</a></li>
+            <if condition="$id">
+                <li role="presentation"><a href="{:U('view',['mobile'=>'weixin','id'=>$id])}">查看</a></li>
+            </if>
+        </ul>
+        <div class="alert alert-danger alert-dismissible fade in mt30" id="tip" role="alert" >
+            <button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <strong></strong>
+        </div>
+
+        <if condition="$_list">
+            <div style="margin-top: 20px;">
+                <foreach name="_list" item="v">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <span>消息类型：</span>
+                            <strong>
+                                <switch name="v.types">
+                                    <case value="0">
+                                        系统消息
+                                    </case>
+                                    <case value="1">
+                                        活动消息
+                                    </case>
+                                    <case value="2">
+                                        投标消息
+                                    </case>
+                                </switch>
+                            </strong>
+                        </li>
+                        <li class="list-group-item">
+                            <span>标题：</span>
+                            <strong>{$v['title']}</strong>
+                        </li>
+                        <li class="list-group-item">
+                            <span>时间：</span>
+                            <strong>{$v['created_time']|time_format}</strong>
+                        </li>
+                        <li class="list-group-item">
+                            <span>操作：</span>
+                            <strong><a href="{:U('view',['mobile'=>'weixin','id'=>$v['id']])}">查看</a></strong>
+                        </li>
+                    </ul>
+                </foreach>
+            </div>
+
+            <div class="page">
+                {$_page}
+            </div>
+            <else/>
+            <div class="paizi nolist mt50">
+                <a href="">没有相关记录</a>
+            </div>
+        </if>
+    </div>
+</block>
+
+<block name="foot"><include file='Public/foot' /></block>
+<block name="foot_js">
+    <script src="__STATIC__/bootstrap/js/bootstrap-datepicker.js"></script>
+    <script>
+        $('.datepicker').datepicker();
+    </script>
+</block>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap">
+    <div class="nav">
+        <ul class="cc">
+            <li class="current"><a href="{:U('index')}">角色管理</a></li>
+            <li><a href="{:U('nodeManage')}">权限节点</a></li>
+            <li><a href="{:U('manage')}">后台管理员</a></li>
+        </ul>
+    </div>
+    <div class="h_a">提示信息</div>
+    <div class="mb10 prompt_text">
+        <ul>
+            <li>用户角色进行管理</li>
+            <li>角色拥有一组操作权限</li>
+        </ul>
+    </div>
+    <div class="mb10"><a class="btn J_dialog" href="{:U('createGroup')}" title="添加角色" role="button"><span class="add"></span>添加角色</a></div>
+    <div class="h_a">搜索</div>
+    <div class="search_type cc mb10">
+        <form action="__ACTION__" method="post">
+        <label>关键字包含：</label><input name="keyword" type="text" class="input length_2 mr10" value="{$keyword}">
+        <button type="submit" class="btn">搜索</button>
+        <if condition="$soso">
+        <button type="reset" class="btn btn_error" onclick="window.location.href='{:U('index')}'">撤销检索</button>
+        </if>
+        </form>
+    </div>
+    <notempty name="_list">
+    <div class="table_list">
+        <table width="100%">
+            <thead>
+                <tr>
+                    <td width="30">ID</td>
+                    <td>角色</td>
+                    <td>描述</td>
+                    <td>授权</td>
+                    <td>状态</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+        <volist name="_list" id="vo">
+            <tr>
+                <td>{$vo.id}</td>
+                <td><a href="{:U('AuthManager/editGroup?id='.$vo['id'])}" title="编辑角色" class="J_dialog">{$vo.title}</a></td>
+                <td><span>{:mb_strimwidth($vo['description'],0,60,"...","utf-8")}</span></td>
+                <td>
+                	<a href="{:U('AuthManager/access?group_name='.$vo['title'].'&group_id='.$vo['id'])}" class="mr10">访问授权</a>
+                	<a href="{:U('AuthManager/user?group_name='.$vo['title'].'&group_id='.$vo['id'])}" class="mr10">成员授权</a>
+                </td>
+                <td>{$vo.status_text}</td>
+                <td>
+                            <a href="{:U('AuthManager/editGroup?id='.$vo['id'])}" title="编辑角色" class="mr10 J_dialog">编辑</a>
+                	<eq name="vo.status" value="1">
+					<a href="{:U('disableGroup',array('id'=>$vo['id']))}" class="J_set_def mr10">禁用</a>
+					<else/>
+					<a href="{:U('enableGroup',array('id'=>$vo['id']))}" class="J_set_def mr10">启用</a>
+					</eq>
+					<a href="{:U('AuthManager/deleteGroup',array('id'=>$vo['id']))}" class="mr10 J_ajax_del">删除</a>
+                </td>
+            </tr>
+        </volist>
+        </table>
+    </div>
+    <div class="page">
+        {$_page}
+    </div>
+    <else/>
+    <div class="not_content_mini"><i></i>啊哦，没有符合条件的内容！</div>
+    </notempty>
+    
+</div>
+<include file='Public/foot' />
+<script type="text/javascript">
+    Wind.use('global', function(){
+        var timer;
+        $('.J_set_def').on('click', function(e){
+            e.preventDefault();
+            var $this = $(this);
+            $.post(this.href, function(data){
+                if(data.status == 1) {
+                    resultTip({
+                        msg : data.info
+                    });
+                    clearTimeout(timer);
+                    timer = setTimeout(function(){
+                        reloadPage(window);
+                    }, 1000);
+                }else{
+                    resultTip({
+                        error : true,
+                        msg : data.info
+                    });
+                }
+            }, 'json');
+        });
+    });
+</script>
+</body>
+</html>

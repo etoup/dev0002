@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap">
+    <div class="nav">
+        <ul class="cc">
+            <li class="current"><a href="{:U('index')}">模型管理</a></li>
+        </ul>
+    </div>
+    <div class="h_a">提示信息</div>
+    <div class="mb10 prompt_text">
+        <ul>
+            <li>模型管理页面提示</li>
+        </ul>
+    </div>
+    <div class="mb10"><a class="btn J_dialog" href="{:U('add')}" title="新增模型" role="button"><span class="add"></span>新增模型</a></div>
+    <div id="top-alert" class="alert alert-error" style="display: none;">
+        <button class="close fixed" style="margin-top: 4px;">×</button>
+        <div class="alert-content">这是内容</div>
+    </div>
+    <notempty name="_list">
+    <div class="table_list">
+        <table width="100%">
+            <thead>
+                <tr>
+                    <td width="30">ID</td>
+                    <td>标识</td>
+                    <td>名称</td>
+                    <td>创建时间</td>
+                    <td>状态</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+        <volist name="_list" id="vo">
+            <tr>
+                <td>{$vo.id}</td>
+                <td>{$vo.name}</td>
+                <td><a data-id="{$vo.id}" href="{:U('Model/edit',array('id'=>$vo['id']))}">{$vo.title}</a></td>
+                <td><span>{$vo.create_time|time_format}</span></td>
+                <td>{$vo.status_text}</td>
+                <td>
+                    <a href="{:U('edit',array('id'=>$vo['id']))}" class="mr10">编辑</a>
+                    <a href="{:U('setstatus',array('ids'=>$vo['id'],'status'=>abs(1-$vo['status'])))}" class="mr10">{$vo.status|show_status_op}</a>
+                    <a href="{:U('del',array('ids'=>$vo['id']))}" class="mr10 J_ajax_del">删除</a>
+                    <a href="{:U('Attribute/index',array('model_id'=>$vo['id']))}" class="mr10">管理</a>
+                </td>
+            </tr>
+        </volist>
+        </table>
+    </div>
+    <div class="page">
+        {$_page}
+    </div>
+    <else/>
+    <div class="not_content_mini"><i></i>啊哦，没有符合条件的用户！</div>
+    </notempty>  
+</div>
+<include file='Public/foot' />
+
+</body>
+</html>

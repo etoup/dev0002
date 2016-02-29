@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap">
+    <div class="nav">
+        <ul class="cc">
+            <li class="current"><a href="__SELF__">电子邮件设置</a></li>
+            <li><a href="{:U('send')}">电子邮件检测</a></li>
+        </ul>
+    </div>
+    <div class="h_a">功能说明</div>
+    <div class="mb10 prompt_text">
+        <ul>
+            <li>目前提供SMTP和MAIL模式</li>
+            <li>如果您选择了采用服务器内置的 Mail 服务，您不需要填写下面的内容</li>
+        </ul>
+    </div>
+    <div class="h_a">邮箱设置</div>
+    <form class="J_ajaxForm" data-role="list" action="__SELF__" method="post">
+    <div class="table_full">
+        <table width="100%">
+            <col class="th" />
+            <col width="400" />
+            <col />
+            <tr>
+                <th>邮件类型</th>
+                <td>
+                    <ul class="single_list cc J_radio_change" id="J_register_type">
+                        <li><label><input type="radio" name="config[MAIL_TYPE]" data-arr="reg2" value="1" {:is_checked(C('MAIL_TYPE'),1)}><span>SMTP 模块发送</span></label></li>
+                        <li><label><input type="radio" name="config[MAIL_TYPE]" data-arr="reg3,J_reg3_intro" value="2" {:is_checked(C('MAIL_TYPE'),2)}><span>mail() 函数发送</span></label></li>
+                    </ul>
+                </td>
+                <td><div class="fun_tips">请至少选定一种邮箱类型。</div></td>
+            </tr>
+        </table>
+    </div>
+    <div class="h_a">基本设置</div>
+    <div class="table_full">
+        <table width="100%" class="J_radio_change_items" id="reg2" style="margin-bottom:0;">
+            <col class="th" />
+            <col width="400" />
+            <col />
+            <tbody>
+                <tr>
+                    <th>SMTP服务器</th>
+                    <td>
+                        <input type="text" class="input length_5 mr5" name="config[MAIL_SMTP_HOST]" value="{:C('MAIL_SMTP_HOST')}">
+                    </td>
+                    <td><div class="fun_tips">SMTP服务器地址</div></td>
+                </tr>
+                <tr>
+                    <th>SMTP服务器端口</th>
+                    <td>
+                        <input type="text" class="input length_5 mr5" name="config[MAIL_SMTP_PORT]" value="{:C('MAIL_SMTP_PORT')}">
+                    </td>
+                    <td><div class="fun_tips">默认25，ssl端口为465</div></td>
+                </tr>
+                <tr>
+                    <th>SMTP服务器用户名</th>
+                    <td>
+                        <input type="text" class="input length_5 mr5" name="config[MAIL_SMTP_USER]" value="{:C('MAIL_SMTP_USER')}">
+                    </td>
+                    <td><div class="fun_tips">填写完整用户名</div></td>
+                </tr>
+                <tr>
+                    <th>SMTP服务器密码</th>
+                    <td>
+                        <input type="password" class="input length_5 mr5" name="config[MAIL_SMTP_PASS]" value="{:C('MAIL_SMTP_PASS')}">
+                    </td>
+                    <td><div class="fun_tips">填写密码</div></td>
+                </tr>
+                <tr>
+                    <th>邮件发送测试</th>
+                    <td>
+                        <input type="text" class="input length_5 mr5" name="config[MAIL_SMTP_CE]" value="{:C('MAIL_SMTP_CE')}">
+                    </td>
+                    <td><div class="fun_tips">填写测试邮件地址</div></td>
+                </tr>
+            </tbody>
+        </table>
+        <table width="100%" class="J_radio_change_items" id="reg3" style="margin-bottom:0;">
+            <col class="th" />
+            <col width="400" />
+            <col />
+<!--关闭注册内容-->
+            <tbody>
+                <tr>
+                    <th>选择内置mail函数发送</th>
+                    <td colspan="2"><div class="fun_tips">不需要填写</div></td>
+                </tr>
+            </tbody>
+<!--结束-->
+        </table>
+    </div>
+    <div class="btn_wrap">
+        <div class="btn_wrap_pd">
+            <button class="btn btn_submit J_ajax_submit_btn" type="submit">提交</button>
+        </div>
+    </div>
+    </form>
+</div>
+<include file='Public/foot' />
+</body>
+</html>

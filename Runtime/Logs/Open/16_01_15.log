@@ -1,0 +1,893 @@
+[ 2016-01-15T16:05:50+08:00 ] 192.168.0.95 /open/home/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000106s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.026321s ]
+INFO: [ app_init ] --END-- [ RunTime:0.032778s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.005886s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.006451s ]
+SQL: SHOW COLUMNS FROM `pk_items` [ RunTime:0.0207s ]
+SQL: SELECT * FROM `pk_items` WHERE `status` = 1 ORDER BY sort LIMIT 7   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `pk_venue` [ RunTime:0.0257s ]
+SQL: SELECT * FROM `pk_venue` WHERE `status` = 1 ORDER BY id desc LIMIT 10   [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `pk_venue_items` [ RunTime:0.0178s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 411 AND `status` = 1 LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `pk_venue_album` [ RunTime:0.0164s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 411 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 410 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 410 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 409 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 409 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 408 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 408 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 407 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 407 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 406 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 406 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 405 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 405 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 404 AND `status` = 1 LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 404 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 403 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 403 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 402 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 402 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0008s ]
+
+[ 2016-01-15T16:06:03+08:00 ] 192.168.0.73 /open/home/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000098s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003663s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005073s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000868s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001553s ]
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+SQL: SHOW COLUMNS FROM `pk_items` [ RunTime:0.0115s ]
+SQL: SELECT * FROM `pk_items` WHERE `status` = 1 ORDER BY sort LIMIT 7   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `pk_venue` [ RunTime:0.0086s ]
+SQL: SELECT * FROM `pk_venue` WHERE `status` = 1 ORDER BY id desc LIMIT 10   [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `pk_venue_items` [ RunTime:0.0080s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 411 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `pk_venue_album` [ RunTime:0.0088s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 411 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 410 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 410 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 409 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 409 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 408 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 408 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 407 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 407 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 406 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 406 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 405 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 405 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 404 AND `status` = 1 LIMIT 1   [ RunTime:0.0009s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 404 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 403 AND `status` = 1 LIMIT 1   [ RunTime:0.0010s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 403 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 402 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 402 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+
+[ 2016-01-15T16:06:09+08:00 ] 192.168.0.73 /open/book/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000097s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003726s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005624s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000912s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001527s ]
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: lng C:\wamp\www\play\Application\Open\Controller\BookController.class.php 第 23 行.
+NOTIC: [8] Undefined index: lat C:\wamp\www\play\Application\Open\Controller\BookController.class.php 第 24 行.
+SQL: SHOW COLUMNS FROM `pk_items` [ RunTime:0.0103s ]
+SQL: SELECT * FROM `pk_items` WHERE `id` <> '5' AND `status` = 1 ORDER BY sort  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `pk_items` WHERE `id` = 5 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `pk_venue_items` [ RunTime:0.0097s ]
+SQL: SELECT `vid` FROM `pk_venue_items` WHERE `items_id` = 5  [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `pk_venue` [ RunTime:0.0110s ]
+SQL: SELECT * FROM `pk_venue` WHERE `id` IN ('1') AND `status` = 8 ORDER BY id desc LIMIT 10   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `pk_venue_album` [ RunTime:0.0109s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 1 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `pk_picture` [ RunTime:0.0264s ]
+SQL: SELECT * FROM `pk_picture` WHERE `status` = 1 AND `id` = 2010 LIMIT 1   [ RunTime:0.0007s ]
+
+[ 2016-01-15T16:06:10+08:00 ] 192.168.0.73 /open/book/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000096s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003894s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005269s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000900s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001407s ]
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+SQL: SHOW COLUMNS FROM `pk_items` [ RunTime:0.0109s ]
+SQL: SELECT * FROM `pk_items` WHERE `id` <> '5' AND `status` = 1 ORDER BY sort  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `pk_items` WHERE `id` = 5 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `pk_venue_items` [ RunTime:0.0082s ]
+SQL: SELECT `vid` FROM `pk_venue_items` WHERE `items_id` = 5  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `pk_venue` [ RunTime:0.0091s ]
+SQL: SELECT * FROM `pk_venue` WHERE `id` IN ('1') AND `status` = 8 ORDER BY id desc LIMIT 10   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `pk_venue_album` [ RunTime:0.0083s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 1 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `pk_picture` [ RunTime:0.0079s ]
+SQL: SELECT * FROM `pk_picture` WHERE `status` = 1 AND `id` = 2010 LIMIT 1   [ RunTime:0.0008s ]
+
+[ 2016-01-15T16:06:12+08:00 ] 192.168.0.73 /open/home/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000097s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003531s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004919s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000932s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001455s ]
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+SQL: SHOW COLUMNS FROM `pk_items` [ RunTime:0.0128s ]
+SQL: SELECT * FROM `pk_items` WHERE `status` = 1 ORDER BY sort LIMIT 7   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `pk_venue` [ RunTime:0.0082s ]
+SQL: SELECT * FROM `pk_venue` WHERE `status` = 1 ORDER BY id desc LIMIT 10   [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `pk_venue_items` [ RunTime:0.0081s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 411 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `pk_venue_album` [ RunTime:0.0083s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 411 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 410 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 410 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 409 AND `status` = 1 LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 409 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 408 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 408 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 407 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 407 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 406 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 406 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 405 AND `status` = 1 LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 405 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 404 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 404 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 403 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 403 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 402 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 402 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+
+[ 2016-01-15T16:06:15+08:00 ] 192.168.0.73 /open/booked/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000099s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003495s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004864s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000933s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001452s ]
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+
+[ 2016-01-15T16:06:15+08:00 ] 192.168.0.73 /open/booked/blocks
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000096s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003486s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004897s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000966s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001527s ]
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+SQL: SHOW COLUMNS FROM `pk_venue_items` [ RunTime:0.0099s ]
+SQL: SELECT * FROM `pk_venue_items` WHERE `vid` = 411 AND `status` = 1 LIMIT 1   [ RunTime:0.0008s ]
+
+[ 2016-01-15T16:06:36+08:00 ] 192.168.0.73 /open/home/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000098s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003942s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005346s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000906s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001446s ]
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+SQL: SHOW COLUMNS FROM `pk_items` [ RunTime:0.0106s ]
+SQL: SELECT * FROM `pk_items` WHERE `status` = 1 ORDER BY sort LIMIT 7   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `pk_venue` [ RunTime:0.0093s ]
+SQL: SELECT * FROM `pk_venue` WHERE `status` = 1 ORDER BY id desc LIMIT 10   [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `pk_venue_items` [ RunTime:0.0085s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 411 AND `status` = 1 LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `pk_venue_album` [ RunTime:0.0091s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 411 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 410 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 410 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 409 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 409 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 408 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 408 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 407 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 407 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0009s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 406 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 406 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 405 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 405 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 404 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 404 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 403 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 403 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 402 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 402 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+
+[ 2016-01-15T16:06:38+08:00 ] 192.168.0.73 /open/booked/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000097s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003506s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004876s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000930s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001448s ]
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+
+[ 2016-01-15T16:06:39+08:00 ] 192.168.0.73 /open/booked/blocks
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000098s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003604s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005019s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000876s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001400s ]
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+NOTIC: [8] Undefined index: HTTP_ACCEPT C:\wamp\www\play\ThinkPHP\Library\Think\Controller\RestController.class.php 第 117 行.
+SQL: SHOW COLUMNS FROM `pk_venue_items` [ RunTime:0.0135s ]
+SQL: SELECT * FROM `pk_venue_items` WHERE `vid` = 411 AND `status` = 1 LIMIT 1   [ RunTime:0.0009s ]
+
+[ 2016-01-15T16:10:09+08:00 ] 192.168.0.95 /open/book/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000096s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.004790s ]
+INFO: [ app_init ] --END-- [ RunTime:0.006473s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001505s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002080s ]
+NOTIC: [8] Undefined index: lng C:\wamp\www\play\Application\Open\Controller\BookController.class.php 第 23 行.
+NOTIC: [8] Undefined index: lat C:\wamp\www\play\Application\Open\Controller\BookController.class.php 第 24 行.
+SQL: SHOW COLUMNS FROM `pk_items` [ RunTime:0.0111s ]
+SQL: SELECT * FROM `pk_items` WHERE `id` <> '8' AND `status` = 1 ORDER BY sort  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `pk_items` WHERE `id` = 8 LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `pk_venue_items` [ RunTime:0.0080s ]
+SQL: SELECT `vid` FROM `pk_venue_items` WHERE `items_id` = 8  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `pk_venue` [ RunTime:0.0084s ]
+SQL: SELECT * FROM `pk_venue` WHERE `id` IN ('1') AND `status` = 8 ORDER BY id desc LIMIT 10   [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `pk_venue_album` [ RunTime:0.0135s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 1 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `pk_picture` [ RunTime:0.0098s ]
+SQL: SELECT * FROM `pk_picture` WHERE `status` = 1 AND `id` = 2010 LIMIT 1   [ RunTime:0.0008s ]
+
+[ 2016-01-15T16:10:10+08:00 ] 192.168.0.95 /open/book/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000098s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003530s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004907s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001054s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001640s ]
+SQL: SHOW COLUMNS FROM `pk_items` [ RunTime:0.0108s ]
+SQL: SELECT * FROM `pk_items` WHERE `id` <> '8' AND `status` = 1 ORDER BY sort  [ RunTime:0.0011s ]
+SQL: SELECT * FROM `pk_items` WHERE `id` = 8 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `pk_venue_items` [ RunTime:0.0083s ]
+SQL: SELECT `vid` FROM `pk_venue_items` WHERE `items_id` = 8  [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `pk_venue` [ RunTime:0.0095s ]
+SQL: SELECT * FROM `pk_venue` WHERE `id` IN ('1') AND `status` = 8 ORDER BY id desc LIMIT 10   [ RunTime:0.0015s ]
+SQL: SHOW COLUMNS FROM `pk_venue_album` [ RunTime:0.0115s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 1 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `pk_picture` [ RunTime:0.0084s ]
+SQL: SELECT * FROM `pk_picture` WHERE `status` = 1 AND `id` = 2010 LIMIT 1   [ RunTime:0.0009s ]
+
+[ 2016-01-15T16:20:38+08:00 ] 192.168.0.95 /open/home/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000096s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.004076s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005492s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001141s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002378s ]
+SQL: SHOW COLUMNS FROM `pk_items` [ RunTime:0.0115s ]
+SQL: SELECT * FROM `pk_items` WHERE `status` = 1 ORDER BY sort LIMIT 7   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `pk_venue` [ RunTime:0.0083s ]
+SQL: SELECT * FROM `pk_venue` WHERE `status` = 1 ORDER BY id desc LIMIT 10   [ RunTime:0.0018s ]
+SQL: SHOW COLUMNS FROM `pk_venue_items` [ RunTime:0.0093s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 411 AND `status` = 1 LIMIT 1   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `pk_venue_album` [ RunTime:0.0103s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 411 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0011s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 410 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 410 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 409 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 409 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 408 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 408 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 407 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 407 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 406 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 406 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 405 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 405 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 404 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 404 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 403 AND `status` = 1 LIMIT 1   [ RunTime:0.0010s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 403 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 402 AND `status` = 1 LIMIT 1   [ RunTime:0.0009s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 402 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+
+[ 2016-01-15T16:20:52+08:00 ] 192.168.0.95 /open/booked/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000114s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003471s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004861s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001014s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001561s ]
+
+[ 2016-01-15T16:20:53+08:00 ] 192.168.0.95 /open/booked/blocks
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000098s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003481s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004909s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000942s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001476s ]
+SQL: SHOW COLUMNS FROM `pk_venue_items` [ RunTime:0.0119s ]
+SQL: SELECT * FROM `pk_venue_items` WHERE `vid` = 411 AND `status` = 1 LIMIT 1   [ RunTime:0.0012s ]
+
+[ 2016-01-15T16:22:25+08:00 ] 192.168.0.95 /open/home/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000099s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003887s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005461s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000917s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001443s ]
+SQL: SHOW COLUMNS FROM `pk_items` [ RunTime:0.0123s ]
+SQL: SELECT * FROM `pk_items` WHERE `status` = 1 ORDER BY sort LIMIT 7   [ RunTime:0.0014s ]
+SQL: SHOW COLUMNS FROM `pk_venue` [ RunTime:0.0112s ]
+SQL: SELECT * FROM `pk_venue` WHERE `status` = 1 ORDER BY id desc LIMIT 10   [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `pk_venue_items` [ RunTime:0.0093s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 411 AND `status` = 1 LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `pk_venue_album` [ RunTime:0.0152s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 411 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0010s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 410 AND `status` = 1 LIMIT 1   [ RunTime:0.0013s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 410 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0023s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 409 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 409 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 408 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 408 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 407 AND `status` = 1 LIMIT 1   [ RunTime:0.0017s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 407 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 406 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 406 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 405 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 405 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 404 AND `status` = 1 LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 404 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 403 AND `status` = 1 LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 403 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 402 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 402 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0008s ]
+
+[ 2016-01-15T16:22:34+08:00 ] 192.168.0.95 /open/booked/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000098s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003603s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004974s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000972s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001494s ]
+
+[ 2016-01-15T16:22:34+08:00 ] 192.168.0.95 /open/booked/blocks
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000098s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.004189s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005610s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000969s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001484s ]
+SQL: SHOW COLUMNS FROM `pk_venue_items` [ RunTime:0.0116s ]
+SQL: SELECT * FROM `pk_venue_items` WHERE `vid` = 411 AND `status` = 1 LIMIT 1   [ RunTime:0.0009s ]
+
+[ 2016-01-15T16:25:30+08:00 ] 192.168.0.95 /open/home/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000100s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.004271s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005831s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000997s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001524s ]
+SQL: SHOW COLUMNS FROM `pk_items` [ RunTime:0.0129s ]
+SQL: SELECT * FROM `pk_items` WHERE `status` = 1 ORDER BY sort LIMIT 7   [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `pk_venue` [ RunTime:0.0092s ]
+SQL: SELECT * FROM `pk_venue` WHERE `status` = 1 ORDER BY id desc LIMIT 10   [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `pk_venue_items` [ RunTime:0.0083s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 411 AND `status` = 1 LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `pk_venue_album` [ RunTime:0.0092s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 411 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 410 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 410 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 409 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 409 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 408 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 408 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 407 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 407 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 406 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 406 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 405 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 405 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 404 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 404 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 403 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 403 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 402 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 402 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+
+[ 2016-01-15T16:25:35+08:00 ] 192.168.0.95 /open/booked/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000098s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003509s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004882s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001230s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001797s ]
+
+[ 2016-01-15T16:25:36+08:00 ] 192.168.0.95 /open/booked/blocks
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000106s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003089s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004446s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000868s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001422s ]
+SQL: SHOW COLUMNS FROM `pk_venue_items` [ RunTime:0.0124s ]
+SQL: SELECT * FROM `pk_venue_items` WHERE `vid` = 411 AND `status` = 1 LIMIT 1   [ RunTime:0.0009s ]
+
+[ 2016-01-15T16:29:24+08:00 ] 192.168.0.95 /open/home/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000100s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.004029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005539s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000981s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001499s ]
+SQL: SHOW COLUMNS FROM `pk_items` [ RunTime:0.0112s ]
+SQL: SELECT * FROM `pk_items` WHERE `status` = 1 ORDER BY sort LIMIT 7   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `pk_venue` [ RunTime:0.0084s ]
+SQL: SELECT * FROM `pk_venue` WHERE `status` = 1 ORDER BY id desc LIMIT 10   [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `pk_venue_items` [ RunTime:0.0087s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 411 AND `status` = 1 LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `pk_venue_album` [ RunTime:0.0094s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 411 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 410 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 410 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 409 AND `status` = 1 LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 409 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 408 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 408 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 407 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 407 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 406 AND `status` = 1 LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 406 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 405 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 405 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0010s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 404 AND `status` = 1 LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 404 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 403 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 403 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT `items_id` FROM `pk_venue_items` WHERE `vid` = 402 AND `status` = 1 LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 402 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+
+[ 2016-01-15T16:29:27+08:00 ] 192.168.0.95 /open/booked/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000095s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003590s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004958s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001078s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001599s ]
+
+[ 2016-01-15T16:29:28+08:00 ] 192.168.0.95 /open/booked/blocks
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000097s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003467s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005272s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000934s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001452s ]
+SQL: SHOW COLUMNS FROM `pk_venue_items` [ RunTime:0.0113s ]
+SQL: SELECT * FROM `pk_venue_items` WHERE `vid` = 411 AND `status` = 1 LIMIT 1   [ RunTime:0.0008s ]
+
+[ 2016-01-15T16:29:38+08:00 ] 192.168.0.95 /open/booked/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000098s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003495s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004850s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000975s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001525s ]
+
+[ 2016-01-15T16:29:38+08:00 ] 192.168.0.95 /open/booked/blocks
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000099s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003513s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004955s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001312s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001866s ]
+SQL: SHOW COLUMNS FROM `pk_venue_items` [ RunTime:0.0117s ]
+SQL: SELECT * FROM `pk_venue_items` WHERE `vid` = 410 AND `status` = 1 LIMIT 1   [ RunTime:0.0009s ]
+
+[ 2016-01-15T16:29:46+08:00 ] 192.168.0.95 /open/booked/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000098s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003803s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005147s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001051s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001573s ]
+
+[ 2016-01-15T16:29:47+08:00 ] 192.168.0.95 /open/booked/blocks
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000098s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.004841s ]
+INFO: [ app_init ] --END-- [ RunTime:0.006783s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001051s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001606s ]
+SQL: SHOW COLUMNS FROM `pk_venue_items` [ RunTime:0.0115s ]
+SQL: SELECT * FROM `pk_venue_items` WHERE `vid` = 409 AND `status` = 1 LIMIT 1   [ RunTime:0.0008s ]
+
+[ 2016-01-15T16:33:24+08:00 ] 192.168.0.95 /open/booked/blocks
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000099s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.004003s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005470s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001055s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001587s ]
+SQL: SHOW COLUMNS FROM `pk_venue_items` [ RunTime:0.0109s ]
+SQL: SELECT * FROM `pk_venue_items` WHERE `vid` = 409 AND `status` = 1 LIMIT 1   [ RunTime:0.0009s ]
+
+[ 2016-01-15T16:33:27+08:00 ] 192.168.0.95 /open/booked/blocks
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000099s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.004035s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005481s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000938s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001476s ]
+SQL: SHOW COLUMNS FROM `pk_venue_items` [ RunTime:0.0120s ]
+SQL: SELECT * FROM `pk_venue_items` WHERE `vid` = 409 AND `status` = 1 LIMIT 1   [ RunTime:0.0009s ]
+
+[ 2016-01-15T16:33:29+08:00 ] 192.168.0.95 /open/booked/blocks
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000197s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003625s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005189s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000901s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001421s ]
+SQL: SHOW COLUMNS FROM `pk_venue_items` [ RunTime:0.0105s ]
+SQL: SELECT * FROM `pk_venue_items` WHERE `vid` = 409 AND `status` = 1 LIMIT 1   [ RunTime:0.0008s ]
+
+[ 2016-01-15T16:33:32+08:00 ] 192.168.0.95 /open/booked/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000107s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.004118s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005834s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000884s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001409s ]
+
+[ 2016-01-15T16:33:32+08:00 ] 192.168.0.95 /open/booked/blocks
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000107s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003539s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004933s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000898s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001427s ]
+SQL: SHOW COLUMNS FROM `pk_venue_items` [ RunTime:0.0100s ]
+SQL: SELECT * FROM `pk_venue_items` WHERE `vid` = 410 AND `status` = 1 LIMIT 1   [ RunTime:0.0009s ]
+
+[ 2016-01-15T16:35:40+08:00 ] 192.168.0.95 /open/booked/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000098s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003459s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005292s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000956s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001469s ]
+
+[ 2016-01-15T16:35:40+08:00 ] 192.168.0.95 /open/booked/blocks
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000098s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003241s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004528s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000955s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001595s ]
+SQL: SHOW COLUMNS FROM `pk_venue_items` [ RunTime:0.0128s ]
+SQL: SELECT * FROM `pk_venue_items` WHERE `vid` = 411 AND `status` = 1 LIMIT 1   [ RunTime:0.0011s ]
+
+[ 2016-01-15T16:36:10+08:00 ] 192.168.0.95 /open/book/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000096s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002993s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004214s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001320s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002034s ]
+NOTIC: [8] Undefined index: lng C:\wamp\www\play\Application\Open\Controller\BookController.class.php 第 23 行.
+NOTIC: [8] Undefined index: lat C:\wamp\www\play\Application\Open\Controller\BookController.class.php 第 24 行.
+SQL: SHOW COLUMNS FROM `pk_items` [ RunTime:0.0115s ]
+SQL: SELECT * FROM `pk_items` WHERE `id` <> '5' AND `status` = 1 ORDER BY sort  [ RunTime:0.0016s ]
+SQL: SELECT * FROM `pk_items` WHERE `id` = 5 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `pk_venue_items` [ RunTime:0.0077s ]
+SQL: SELECT `vid` FROM `pk_venue_items` WHERE `items_id` = 5  [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `pk_venue` [ RunTime:0.0101s ]
+SQL: SELECT * FROM `pk_venue` WHERE `id` IN ('1') AND `status` = 8 ORDER BY id desc LIMIT 10   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `pk_venue_album` [ RunTime:0.0088s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 1 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `pk_picture` [ RunTime:0.0107s ]
+SQL: SELECT * FROM `pk_picture` WHERE `status` = 1 AND `id` = 2010 LIMIT 1   [ RunTime:0.0007s ]
+
+[ 2016-01-15T16:36:11+08:00 ] 192.168.0.95 /open/book/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000096s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003497s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004718s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000944s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001490s ]
+SQL: SHOW COLUMNS FROM `pk_items` [ RunTime:0.0343s ]
+SQL: SELECT * FROM `pk_items` WHERE `id` <> '5' AND `status` = 1 ORDER BY sort  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `pk_items` WHERE `id` = 5 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `pk_venue_items` [ RunTime:0.0102s ]
+SQL: SELECT `vid` FROM `pk_venue_items` WHERE `items_id` = 5  [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `pk_venue` [ RunTime:0.0102s ]
+SQL: SELECT * FROM `pk_venue` WHERE `id` IN ('1') AND `status` = 8 ORDER BY id desc LIMIT 10   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `pk_venue_album` [ RunTime:0.0088s ]
+SQL: SELECT * FROM `pk_venue_album` WHERE `vid` = 1 AND `types` = 1 AND `status` = 1 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `pk_picture` [ RunTime:0.0092s ]
+SQL: SELECT * FROM `pk_picture` WHERE `status` = 1 AND `id` = 2010 LIMIT 1   [ RunTime:0.0007s ]
+
+[ 2016-01-15T16:36:13+08:00 ] 192.168.0.95 /open/booked/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000095s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003316s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004526s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000734s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001232s ]
+
+[ 2016-01-15T16:36:13+08:00 ] 192.168.0.95 /open/booked/blocks
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000120s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.004378s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005775s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001131s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001652s ]
+SQL: SHOW COLUMNS FROM `pk_venue_items` [ RunTime:0.0115s ]
+SQL: SELECT * FROM `pk_venue_items` WHERE `vid` = 1 AND `items_id` = 5 AND `status` = 1 LIMIT 1   [ RunTime:0.0007s ]
+

@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body class="body_none" style="width:408px;">
+
+<!--==============================编辑链接================================-->
+	<form id="J_link_add_form" class="J_ajaxForm" data-role="list" action="__SELF__" method="post">
+	<input name="lid" type="hidden" value="{$link['lid']}">
+	<div class="pop_cont pop_table" style="height:auto;">
+		<table width="100%">
+			<tr>
+				<th>站点名称</th>
+				<td><span class="must_red">*</span><input name="name" type="text" class="input length_5" value="{$link['name']}"><p class="gray">最多不超过15个字</p></td>
+			</tr>
+			<tr>
+				<th>站点地址</th>
+				<td><span class="must_red">*</span><input name="url" type="text" class="input length_5" value="{$link['url']}"></td>
+			</tr>
+            <tr>
+                <th>上传LOGO</th>
+                <td>
+                    <input type="file" id="upload_picture">
+                    <input type="hidden" name="icon" id="icon" value="{$info['icon']|default=''}"/>
+                    <div class="upload-img-box">
+                        <notempty name="info['icon']">
+                            <div class="upload-pre-item"><img src="__ROOT__{$info.icon|get_cover='path'}"/></div>
+                        </notempty>
+                    </div>
+                </td>
+            </tr>
+			<tr>
+				<th>站点LOGO</th>
+				<td><input name="logo" type="text" class="input length_5" value="{$link['logo']}"><p class="gray">请输入LOGO的图片地址，设置后自动为图片链接</p></td>
+			</tr>
+			<tr>
+				<th>显示顺序</th>
+				<td><input name="vieworder" type="number" class="input length_5" value="{$link['vieworder']}"></td>
+			</tr>
+			<tr>
+				<th>联系方式</th>
+				<td><input name="contact" type="text" class="input length_5" value="{$link['contact']}"></td>
+			</tr>
+			<tr>
+				<th>链接分类</th>
+				<td>
+					<span class="must_red">*</span>
+					<ul class="three_list cc">
+					<foreach name="typesList" item="v">
+					    <if condition="in_array($v['typeid'],$types)">
+						<li><label><input type="checkbox" name="typeids[]" value="{$v['typeid']}" checked="">{$v['typename']}</label></li>
+						<else/>
+						<li><label><input type="checkbox" name="typeids[]" value="{$v['typeid']}">{$v['typename']}</label></li>
+						</if>
+					</foreach>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<input name="ifcheck" type="hidden" value="1">
+	<div class="pop_bottom">
+		<button class="btn fr" id="J_dialog_close" type="button">取消</button>
+		<button type="submit" class="btn btn_submit J_ajax_submit_btn fr mr10">提交</button>
+	</div>
+	</form>
+<include file='Public/foot_min' />
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript">
+    //上传图片
+    /* 初始化上传插件 */
+    $("#upload_picture").uploadify({
+        "height"          : 30,
+        "swf"             : "__STATIC__/uploadify/uploadify.swf",
+        "fileObjName"     : "download",
+        "buttonText"      : "上传图片",
+        "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+        "width"           : 120,
+        'removeTimeout'   : 1,
+        'fileTypeExts'    : '*.jpg; *.png; *.gif;',
+        "onUploadSuccess" : uploadPicture,
+        'onFallback' : function() {
+            alert('未检测到兼容版本的Flash.');
+        }
+    });
+    function uploadPicture(file, data){
+        var data = $.parseJSON(data);
+        var src = '';
+        if(data.status){
+            $("#icon").val(data.id);
+            //src = data.url || '__ROOT__' + data.path;
+            src = data.url || data.path;
+            $("#icon").parent().find('.upload-img-box').html(
+                    '<div class="upload-pre-item"><img src="' + src + '"/></div>'
+            );
+        } else {
+            updateAlert(data.info);
+            setTimeout(function(){
+                $('#top-alert').find('button').click();
+                $(that).removeClass('disabled').prop('disabled',false);
+            },1500);
+        }
+    }
+</script>
+</body>
+</html>

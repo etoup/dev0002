@@ -1,0 +1,94 @@
+<extend name="Public/baseweixin" />
+<block name="head"><include file='Public/headweixin' /></block>
+<block name="head_css">
+    <link href="__CSS__/indexweixin.css" rel="stylesheet" />
+    <link href="__CSS__/dashboard.css" rel="stylesheet">
+</block>
+</head> 
+<body>
+<block name="header"><include file='Public/headerweixin' /></block>
+<block name="uctop">
+</block>
+
+<block name="main">
+    <div class="wewixinmain" style="margin: 50px 0;">
+        <ul class="nav nav-tabs mb30">
+            <li role="presentation"><a href="{:U('index',['mobile'=>'weixin'])}">我的收还款</a></li>
+            <li role="presentation"><a href="{:U('collections',['mobile'=>'weixin'])}">收款记录</a></li>
+            <li role="presentation" class="active"><a href="{:U('repayment',['mobile'=>'weixin'])}">还款记录</a></li>
+        </ul>
+        <div class="alert alert-danger alert-dismissible fade in mt30" id="tip" role="alert" >
+            <button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <strong></strong>
+        </div>
+        <if condition="$_list">
+            <div class="row" style="margin-top: 30px">
+                <div class="col-md-12">
+                    <foreach name="_list" item="v">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <span>单号：</span>
+                                <strong>{$v.orders}</strong>
+                            </li>
+                            <li class="list-group-item">
+                                <span>截止时间：</span>
+                                <strong>
+                                    <if condition="$v['time_do_repaymen'] eq $v['created_time']">
+                                        {:time_format($v['time_repayment'],'Y-m-d')}
+                                        <else/>
+                                        {:prevDate($v['time_repayment'],'Y-m-d')}
+                                    </if>
+                                </strong>
+                            </li>
+                            <li class="list-group-item">
+                                <span>金额：</span>
+                                <strong>{:money($v['money'])}</strong>
+                            </li>
+                            <li class="list-group-item">
+                                <span>状态：</span>
+                                <strong>
+                                    <switch name="v['status']">
+                                        <case value="0">待付</case>
+                                        <case value="1">已付</case>
+                                        <case value="-1">撤回</case>
+                                    </switch>
+                                </strong>
+                            </li>
+                            <li class="list-group-item">
+                                <span>操作：</span>
+                                <strong>
+                                    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal fade" id="modalPay{$v['id']}" style="display: none;">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div>
+                                    <if condition="$v['status']">
+                                        --
+                                        <else/>
+                                        <a href="#" data-toggle="modal" data-target="#modalPay{$v['id']}" data-remote="{:U('pay',['id'=>$v['id'],'orders'=>$v['orders']])}">立即支付</a>
+                                    </if>
+                                </strong>
+                            </li>
+                        </ul>
+                    </foreach>
+                    <div class="page">
+                        {$_page}
+                    </div>
+                </div>
+            </div>
+
+            <else/>
+            <div class="paizi nolist mt50">
+                <a href="">没有相关记录</a>
+            </div>
+        </if>
+    </div>
+</block>
+
+<block name="foot"><include file='Public/ufootweixin' /></block>
+<block name="foot_js">
+</block>
+</body>
+</html>

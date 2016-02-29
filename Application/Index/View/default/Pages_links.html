@@ -1,0 +1,48 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link href="__CSS__/index.css?v={:v()}" rel="stylesheet" />
+    <link rel="stylesheet" href="__CSS__/jquery-ui.css?v={:v()}">
+</block>
+</head>
+<body>
+<div class="wrap">
+<block name="header">
+    <include file='Public/header' />
+    <div class="topmain">
+        <div class="container">
+            <div class="pull-left">
+                <a href="{:U('about')}">关于我们</a>
+                <a href="{:U('beacon')}">新手指引</a>
+                <a href="{:U('regulation')}">政策法规</a>
+                <a href="{:U('links')}" class="hover">友情链接</a>
+            </div>
+            <div class="pull-right">
+                <a href="{:ROOT}"><span aria-hidden="true" class="glyphicon glyphicon-share-alt"></span> 返回首页</a>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="main">
+    <div class="container mt30">
+        <ol class="breadcrumb mt10">
+
+            <li><a href="{:ROOT}">首页</a></li>
+
+            <li class="active">{$seo.title}</li>
+        </ol>
+
+        <div class="links" style="margin: 50px 0;">
+            {:W('Index/Link',array(4))}
+        </div>
+
+
+    </div>
+</block>
+</div>
+<block name="foot">
+    <include file='Public/foot' />
+</block>
+<block name="foot_js"></block>
+</body>
+</html>

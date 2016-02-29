@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap">
+    <div class="nav">
+        <ul class="cc">
+            <li class="current"><a href="__SELF__">文章待审</a></li>
+            <li><a href="{:U('category')}">栏目管理</a></li>
+        </ul>
+    </div>
+    <div class="h_a">提示信息</div>
+    <div class="mb10 prompt_text">
+        <ul>
+            <li>文章待审列表：处理待审文章相关事项</li>
+        </ul>
+    </div>
+    <div class="mb10">
+        <volist name="model" id="vo">
+        <a class="btn mr10" href="{:U('add',array('cate_id'=>$cate_id,'model_id'=>$vo,'pid'=>I('pid',0)))}" title="发布{$vo|get_document_model='title'}" role="button"><span class="add"></span>发布{$vo|get_document_model='title'}</a>
+        </volist>
+    </div>
+    <div class="h_a">搜索</div>
+    <div class="search_type cc mb10">
+        <form action="__SELF__" method="post">
+            <input type="hidden" name="page" value="{$page}">
+            <label>关键字：</label><input name="title" type="text" class="input length_2 mr10" value="{:I('title')}">
+            <button type="submit" class="btn">搜索</button>
+        </form>
+    </div>
+    <div id="top-alert" class="alert alert-error" style="display: none;">
+        <button class="close fixed" style="margin-top: 4px;">×</button>
+        <div class="alert-content">这是内容</div>
+    </div>
+    <notempty name="list">
+    <div class="table_list">
+        <table width="100%">
+            <colgroup>
+                <col width="30">
+                <col>
+            </colgroup>
+            <thead>
+                <tr>
+                    <td><label><input type="checkbox" class="J_check_all" data-direction="x" data-checklist="J_check_x">全选</label></td>
+                    <td>ID</td>
+                    <td>标题</td>
+                    <td>创建者</td>
+                    <td>类型</td>
+                    <td>分类</td>
+                    <td>发布时间</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+            <tbody>
+                <volist name="list" id="vo">
+                <tr>
+                    <td><input type="checkbox" class="J_check" data-yid="J_check_y" data-xid="J_check_x" name="tids[]" value="{$v['tid']}"></td>
+                    <td>{$vo.id}</td>
+                    <td><a href="{:U('Article/edit?cate_id='.$vo['category_id'].'&id='.$vo['id'])}">{$vo.title}</a></td>
+                    <td>{$vo.username} </td>
+                    <td><span>{:get_document_type($vo['type'])}</span></td>
+                    <td><span>{:get_cate($vo['category_id'])}</span></td>
+                    <td><span>{$vo.create_time|time_format}</span></td>
+                    <td>
+                        <a href="{:U('edit',array('id'=>$vo['id']))}" class="mr10">编辑</a>
+                        <a href="{:U('pass',array('id'=>$vo['id']))}" data-msg="确定通过审核？" class="mr10 J_ajax_del">审核</a>
+                        <a href="{:U('del',array('ids'=>$vo['id']))}" class="mr10 J_ajax_del">删除</a>
+                    </td>
+                </tr>
+                </volist>
+            </tbody>
+        </table>
+    </div>
+    <div class="page">
+        {$_page}
+    </div>
+    <else/>
+    <div class="not_content_mini"><i></i>啊哦，没有符合条件的内容！</div>
+    </notempty>
+    
+</div>
+<include file='Public/foot' />
+<script type="text/javascript">
+    Wind.use('global', function(){
+        var timer;
+        $('.J_set_def').on('click', function(e){
+            e.preventDefault();
+            var $this = $(this);
+            $.post(this.href, function(data){
+                if(data.status == 1) {
+                    resultTip({
+                        msg : data.info
+                    });
+                    clearTimeout(timer);
+                    timer = setTimeout(function(){
+                        reloadPage(window);
+                    }, 1000);
+                }else{
+                    resultTip({
+                        error : true,
+                        msg : data.info
+                    });
+                }
+            }, 'json');
+        });
+        /*Wind.Util.hoverToggle({
+            elem : $('#J_hovertoggle_me'),
+            list : $('#J_hovertoggle_list'),
+            delay : 300
+        });*/
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<if condition="$txt">
+    <div class="row">
+
+        <div class="col-md-12" style="text-align: center; margin-bottom: 10px;">
+            <foreach name="link['type']" item="vo">
+            <a href="{$vo.url}" target="_blank" style="margin: 0 5px; font-size: 12px;color: #ffffff;">{$vo.name}</a>
+            </foreach>
+        </div>
+
+    </div>
+    <else/>
+    <div class="row">
+        <foreach name="link['type']" item="vo">
+            <div class="col-md-2"><a href="{$vo.url}" target="_blank" rel="nofollow"><img src="{$vo.pid|get_cover='path'}" title="六合资本" alt="六合资本" /></a></div>
+        </foreach>
+    </div>
+</if>

@@ -1,0 +1,33 @@
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">查看订单</h4>
+    </div>
+
+    <div class="modal-body">
+        <blockquote>
+            <p>{$info.num}</p>
+            <small>订单时间： <cite title="Source Title">{:time_format($info['created_time'])}</cite></small>
+            <hr>
+            <p>用户： {$info.username}</p>
+            <p>电话： {$info.mobile}</p>
+            <p>项目： {$info.name}</p>
+            <p>场地： {$info.block_name}</p>
+            <p>价格： {$info.price}元</p>
+            <p>时间： {$info.nodes} {$info.start}-{$info.end}</p>
+            <p>
+                状态：
+                <switch name="info.status">
+                    <case value="-1">撤单</case>
+                    <case value="1">已付款</case>
+                    <case value="2">已使用</case>
+                    <case value="8">已结算</case>
+                    <default />未付款
+                </switch>
+            </p>
+        </blockquote>
+    </div>
+    <div class="modal-footer">
+        <input type="hidden" name="id" value="{$info.id}" />
+        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">关闭</button>
+    </div>

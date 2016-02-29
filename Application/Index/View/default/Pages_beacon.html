@@ -1,0 +1,160 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link href="__CSS__/index.css?v={:v()}" rel="stylesheet" />
+    <link rel="stylesheet" href="__CSS__/jquery-ui.css?v={:v()}">
+</block>
+</head>
+<body>
+<div class="wrap">
+<block name="header">
+    <include file='Public/header' />
+    <div class="topmain">
+        <div class="container">
+            <div class="pull-left">
+                <a href="{:U('about')}">关于我们</a>
+                <a href="{:U('beacon')}" class="hover">新手指引</a>
+                <a href="{:U('regulation')}">政策法规</a>
+                <a href="{:U('links')}">友情链接</a>
+            </div>
+            <div class="pull-right">
+                <a href="{:ROOT}"><span aria-hidden="true" class="glyphicon glyphicon-share-alt"></span> 返回首页</a>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="main">
+    <div class="container mt30">
+        <ol class="breadcrumb mt10">
+
+            <li><a href="{:ROOT}">首页</a></li>
+
+            <li class="active">{$seo.title}</li>
+        </ol>
+
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="display: block;">
+                            1，什么是股票配资
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+                        股票配资是一种创新的资金融资工具，通过少量的自有资金当保证金,使用5倍杠杆，配资5倍的资金，赚取的利润都归您！简单来说，假如您有10万的本金，可配资50万，那么就有60万资金由您操盘，60万的资金一个涨停板，赚60000元。相比10万一个涨停板，就多了50000元！
+                        配资资金最短使用1个月，最长12个月。每月需支付配资金额的2%，作为当月的利息费用。
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTwo">
+                    <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="display: block;">
+                            2，关于本金
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body">
+                        您投入的股票配资的保证金最低是10000元人民币，数额必须是10000的整数倍。我方可最多配给您的本金5倍的资金。
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingThree">
+                    <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="display: block;">
+                            3，关于利息
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body">
+                        利息按月计算，每月先支付利息后使用资金，如：8月9日配资，则 8月9日支付第一个月利息，9月8日就支付第二个月利息，以此类推。其中利息不包含印花税，过户费和佣金。印花税，过户费和佣金直接由券商和交易所收取。
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingA">
+                    <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseA" aria-expanded="false" aria-controls="collapseA" style="display: block;">
+                            4，开始交易时间
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseA" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingA">
+                    <div class="panel-body">
+                        我方提供股票账户的时间为合同正式开始时间，延期、结束都会以此时间为基准。
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingB">
+                    <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseB" aria-expanded="false" aria-controls="collapseB" style="display: block;">
+                            5，配资到期时间
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseB" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingB">
+                    <div class="panel-body">
+                        配资到期时，需在到期当日14:45前把账户内所有股票平仓，且不能再做挂单，如需要续期，需提前在会员中心提交延期申请。
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingC">
+                    <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseC" aria-expanded="false" aria-controls="collapseC" style="display: block;">
+                            6，预警线
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseC" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingC">
+                    <div class="panel-body">
+                        当总操盘资金低于警戒线（配资资金的115%）时，只能减仓不能建仓，需要尽快补充风险保证金，以免低于平仓线被平仓。
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingD">
+                    <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseD" aria-expanded="false" aria-controls="collapseD" style="display: block;">
+                            7，平仓线
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseD" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingD">
+                    <div class="panel-body">
+                        当总操盘资金低于平仓线配资资金的110%）时，我们有权把您的股票进行强制平仓。为避免平仓发生，请及时关注风险保证金是否充足。
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingE">
+                    <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseE" aria-expanded="false" aria-controls="collapseE" style="display: block;">
+                            8，购买股票的相关限制
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseE" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingE">
+                    <div class="panel-body">
+                        1.不得投资于权证、ST类或持有证监会发布的退市公告、风险揭示提示及被查的相关股票；
+                        2.购买创业板不能超过账户总资产的30%，购买主板单只股票不得超过账户总资产的70%；
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</block>
+</div>
+<block name="foot">
+    <include file='Public/foot' />
+</block>
+<block name="foot_js"></block>
+</body>
+</html>

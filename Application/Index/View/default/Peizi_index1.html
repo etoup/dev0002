@@ -1,0 +1,571 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link href="__CSS__/index.css?v={:v()}" rel="stylesheet" />
+</block>
+</head>
+<body>
+<div class="wrap">
+<block name="header"><include file='Public/header' /></block>
+<block name="main">
+    <div class="container">
+        <div class="flowq">
+            <div class="row">
+                <div class="col-md-3">
+
+                </div>
+                <div class="col-md-3">
+
+                </div>
+                <div class="col-md-3">
+
+                </div>
+                <div class="col-md-3">
+
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!--wapper s-->
+        <div class="container">
+            <div class="form">
+                <form id="form" action="{:U('Peizi/needs')}" method="post" role="form" class="form-horizontal">
+                    <input type="hidden" name="caches" id="caches">
+                    <input type="hidden" name="from" value="index">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h3>填写自有资金 <small>范围在1-100内</small></h3>
+                            <div class="input-group input-group-lg mt30">
+                                <input type="text" name="own_funds" id="own_funds" placeholder="自有金额" class="form-control">
+                              <span class="input-group-btn">
+                                <button type="button" class="btn btn-default">万</button>
+                              </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h3>配资比例 <small>范围在1-5内</small></h3>
+                            <div class="input-group input-group-lg mt30">
+                                <input type="text" name="scale" id="scale" placeholder="配资比例" aria-label="Text input with segmented button dropdown" class="form-control">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="button">倍</button>
+                                    <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="#" data="1">1倍</a></li>
+                                        <li><a href="#" data="2">2倍</a></li>
+                                        <li><a href="#" data="3">3倍</a></li>
+                                        <li><a href="#" data="4">4倍</a></li>
+                                        <li><a href="#" data="5">5倍</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h3>配资期限 <small>范围1-12内</small></h3>
+                            <div class="input-group input-group-lg mt30">
+                                <input type="text" name="time_limit" id="time_limit" placeholder="配资期限" aria-label="Text input with segmented button dropdown" class="form-control">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="button">个月</button>
+                                    <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="#" data="1">1个月</a></li>
+                                        <li><a href="#" data="2">2个月</a></li>
+                                        <li><a href="#" data="3">3个月</a></li>
+                                        <li><a href="#" data="4">4个月</a></li>
+                                        <li><a href="#" data="5">5个月</a></li>
+                                        <li><a href="#" data="6">6个月</a></li>
+                                        <li><a href="#" data="7">7个月</a></li>
+                                        <li><a href="#" data="8">8个月</a></li>
+                                        <li><a href="#" data="9">9个月</a></li>
+                                        <li><a href="#" data="10">10个月</a></li>
+                                        <li><a href="#" data="11">11个月</a></li>
+                                        <li><a href="#" data="12">12个月</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p id="prompt">
+                        <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign"></span>
+                        如您不清楚规则，或有其他疑问，请联系客服<strong>400-873-8666</strong> <input type="checkbox" name="aggre" id="aggre" checked="checked"> 我已经阅读并同意<a href="#">《借款协议》</a>
+                    </p>
+
+                    <div id="subm">
+                        <button type="submit" id="submit" data-loading-text="Loading..." class="btn btn-info btn-lg" autocomplete="off">
+                            提交配资
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--wapper e-->
+
+
+
+
+
+
+
+
+
+        <div class="row mt30">
+            <div class="col-md-5">
+                <div class="panel panel-default">
+                    <div class="panel-heading">数据信息</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <dl class="mydl">
+                                    <dt>自有资金</dt>
+                                    <dd><span class="own_funds">{$needs.own_funds|default='-'}</span>万</dd>
+                                </dl>
+                            </div>
+
+                            <div class="col-md-4">
+                                <dl class="mydl">
+                                    <dt>配资比例</dt>
+                                    <dd><span class="scale">{$needs.scale|default=1}</span>倍</dd>
+                                </dl>
+                            </div>
+
+                            <div class="col-md-4">
+                                <dl class="mydl">
+                                    <dt>配资资金</dt>
+                                    <dd><span class="with_funds">{$needs.with_funds|default='-'}</span>万</dd>
+                                </dl>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <dl class="mydl">
+                                    <dt>总操盘资金</dt>
+                                    <dd><span class="all_funds">{$needs.all_funds|default='-'}</span>万</dd>
+                                </dl>
+                            </div>
+
+                            <div class="col-md-4">
+                                <dl class="mydl">
+                                    <dt>预警线</dt>
+                                    <dd><span class="warning_funds">{$needs.warning_funds|default='-'}</span>万</dd>
+                                </dl>
+                            </div>
+
+                            <div class="col-md-4">
+                                <dl class="mydl">
+                                    <dt>平仓线</dt>
+                                    <dd><span class="open_funds">{$needs.open_funds|default='-'}</span>万</dd>
+                                </dl>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <dl class="mydl">
+                                    <dt>配资期限</dt>
+                                    <dd><span class="time_limit">{$needs.time_limit|default=1}</span>个月</dd>
+                                </dl>
+                            </div>
+
+                            <div class="col-md-4">
+                                <dl class="mydl">
+                                    <dt>月利率</dt>
+                                    <dd><span class="interest_rate">{$needs.interest_rate|default='2.00'}</span>%</dd>
+                                </dl>
+                            </div>
+
+                            <div class="col-md-4">
+                                <dl class="mydl">
+                                    <dt>月利息</dt>
+                                    <dd><span class="interest_funds">{$needs.interest_funds|default='-'}</span>万</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">相关说明</div>
+                    <div class="panel-body my-p">
+                        <h4>购买股票的相关限制：</h4>
+                        <p>1.不得投资于权证、ST类或持有证监会发布的退市公告、风险揭示提示及被查的相关股票；</p>
+                        <p>2.购买创业板不能超过账户总资产的30%，购买主板单只股票不得超过账户总资产的70%；</p>
+                        <h4>停牌，摘牌的股票：</h4>
+                        <p>在超出合同约定时间的情况下，操盘人可协商延长借款时间，并另行支付一倍保证金;或归还借款资金及占用账户费用，获得停牌，摘牌的股票所有权。</p>
+                        <h4>系统性风险提示：</h4>
+                        <p>鉴于计算机软硬件环境的差异性和复杂性，及协议过程中不能预见，不能避免，不能克服的不可抗力影响，丙方基于网络平台所提供的服务可能因网络原因、市场波动、乙方或第三方业务系统故障等非丙方原因出现停顿、延误或中断，乙方对此给予充分的谅解，不对此追究丙方之法律和经济责任。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <form id="form" action="{:U('Peizi/needs')}" method="post" role="form" class="form-horizontal">
+                    <input type="hidden" name="caches" value="{$needs.caches|default=0}">
+                    <input type="hidden" name="from" value="peizi">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">我要配资</div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="own_funds" class="col-sm-2 control-label">自有资金</label>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <input type="text" name="own_funds" value="{$needs.own_funds|default=''}" class="form-control" id="own_funds" aria-describedby="inputGroupSuccess1Status">
+                                        <span class="input-group-addon">万</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6"><span class="lh30">请填写自有资金，范围1-1000</span></div>
+                            </div>
+                            <hr>
+                            <div class="form-group">
+                                <label for="scale" class="col-sm-2 control-label">配资比例</label>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <input type="text" name="scale" value="{$needs.scale|default=''}" class="form-control" id="scale" placeholder="配资比例" aria-describedby="inputGroupSuccess1Status">
+                                        <span class="input-group-addon">倍</span>
+                                    </div>
+                                    <div id="slider-range-scale" class="mt20"></div>
+                                </div>
+                                <div class="col-sm-6"><span class="lh30">请填写或者选择配资比例，范围1-5</span></div>
+                            </div>
+                            <hr>
+                            <div class="form-group">
+                                <label for="with_funds" class="col-sm-2 control-label">配资资金</label>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <input type="text" name="with_funds" value="{$needs.with_funds|default=''}" class="form-control" id="with_funds" readonly aria-describedby="inputGroupSuccess1Status">
+                                        <span class="input-group-addon">万</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6"><span class="lh30">根据配资比例显示配资金额</span></div>
+                            </div>
+                            <hr>
+                            <div class="form-group">
+                                <label for="time_limit" class="col-sm-2 control-label">配资期限</label>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <input type="text" name="time_limit" value="{$needs.time_limit|default=''}" class="form-control" id="time_limit" placeholder="配资期限" aria-describedby="inputGroupSuccess1Status">
+                                        <span class="input-group-addon">月</span>
+                                    </div>
+                                    <div id="slider-range-time" class="mt20"></div>
+                                </div>
+                                <div class="col-sm-6"><span class="lh30">请填写或者选择配资期限，范围1-12</span></div>
+                            </div>
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="list-group">
+                                        <a class="list-group-item">
+                                            <div class="input-group">
+                                                <if condition="$needs['pay_type']">
+                                                    <span class="input-group-addon">
+                                                        <input type="radio" value="0" name="pay_type" aria-label="...">
+                                                    </span>
+                                                    <else/>
+                                                    <span class="input-group-addon">
+                                                        <input type="radio" value="0" checked name="pay_type" aria-label="...">
+                                                    </span>
+                                                </if>
+                                                <input type="text" class="form-control" value="支付本息" disabled aria-label="...">
+                                            </div>
+                                        </a>
+                                        <a class="list-group-item">
+                                            本息总和：<span class="bxall">{$needs.all_funds_format}</span>
+                                        </a>
+                                        <a class="list-group-item">
+                                            本金：<span class="benjin">{$needs.own_funds_format}</span>
+                                        </a>
+                                        <a class="list-group-item">
+                                            首月利息：<span class="lixi">{$needs.interest_format}</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="list-group">
+                                        <a class="list-group-item">
+                                            <div class="input-group">
+                                                <if condition="$needs['pay_type']">
+                                            <span class="input-group-addon">
+                                                <input type="radio" value="1" checked name="pay_type" aria-label="...">
+                                            </span>
+                                                    <else/>
+                                            <span class="input-group-addon">
+                                                <input type="radio" value="1" name="pay_type" aria-label="...">
+                                            </span>
+                                                </if>
+                                                <input type="text" class="form-control" value="支付意向金" disabled aria-label="...">
+                                            </div>
+                                        </a>
+                                        <a class="list-group-item">
+                                            付款总和：<span class="payall">{$needs.intention_format_all}</span>
+                                        </a>
+                                        <a class="list-group-item">
+                                            意向金：<span class="yixiang">{$needs.intention_format}</span>
+                                        </a>
+                                        <a class="list-group-item">
+                                            本息总和：<span class="bxall">{$needs.all_funds_format}</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div role="alert" class="alert alert-danger alert-dismissible fade in">
+                                <button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                <strong>客户原因导致配资不成功，意向金不予退还</strong> 推荐使用支付本息方式
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <div class="col-sm-offset-6 col-sm-10">
+                                    <button type="submit" id="submit" data-loading-text="Loading..." class="btn btn-info" autocomplete="off">
+                                        确定配资
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</block>
+</div>
+<block name="foot">
+    <include file='Public/foot' />
+</block>
+<block name="foot_js">
+    <script type="text/javascript" src="__JS__/jquery.validate.js"></script>
+    <script>
+        $("#form").validate({
+            errorPlacement: function(error, element){
+                var error_td = element.parents('.col-sm-4');
+                error_td.addClass('has-error');
+                error_td.next('.col-sm-6').html(error);
+            },
+            success: function(label){
+                label.addClass('validate_right').text('OK!').parent().prev().removeClass('has-error');
+            },
+            onkeyup: false,
+            rules: {
+                own_funds: {
+                    required:true,
+                    digits:true,
+                    range:[1,1000]
+                },
+                scale: {
+                    required:true,
+                    digits:true,
+                    range:[1,5]
+                },
+                time_limit: {
+                    required:true,
+                    digits:true,
+                    range:[1,12]
+                }
+            },
+            messages: {
+                own_funds: {
+                    required:'请填写自有资金',
+                    digits:'自有资金只能为正整数值',
+                    range:'数值范围1-1000'
+                },
+                scale: {
+                    required:'请填写配资比例',
+                    digits:'配资比例只能为正整数值',
+                    range:'数值范围1-5'
+                },
+                time_limit: {
+                    required:'请填写配资期限',
+                    digits:'配资期限只能为正整数值',
+                    range:'数值范围1-12'
+                }
+
+
+            }
+        });
+
+        function checkCookieEnable(){
+            if(window.navigator.cookieEnabled)
+                return true;
+            else{
+                return false;
+            }
+        }
+
+        if(!checkCookieEnable())
+        {
+            $('#caches').val(1);
+        }
+
+        function CheckINT(input)
+        {
+            var reg1 = /^\d+$/;
+            return reg1.test(input);
+        }
+
+        function getVal(of,sv){
+
+            var warning_val = "{$needs['warning_val']}";
+            var open_val = "{$needs['open_val']}";
+            var interest_rate = "{$needs['interest_rate']}";
+            var bond = "{$needs['bond']}";
+
+            if(!warning_val){
+                warning_val = 112;
+            }
+            if(!open_val){
+                open_val = 108;
+            }
+            if(!interest_rate){
+                interest_rate = 2.00;
+            }
+            if(!bond){
+                bond = 0.1;
+            }
+
+            $('.all_funds').text(Math.abs(of*1)*Math.abs(sv*1)+Math.abs(of*1));
+            $('.warning_funds').text(Math.abs(of*1)*Math.abs(sv*1)*Math.abs(warning_val*1)/100);
+            $('.open_funds').text(Math.abs(of*1)*Math.abs(sv*1)*Math.abs(open_val*1)/100);
+            $('.interest_funds').text(Math.abs(of*1)*Math.abs(sv*1)*Math.abs(interest_rate*1)/100);
+            var bxall = (Math.abs(of*1))+(Math.abs(of*1)*Math.abs(sv*1)*Math.abs(interest_rate*1)/100);
+            $('.bxall').text(fmoney(bxall*10000));
+            $('.benjin').text(fmoney(Math.abs(of*1)*10000));
+            $('.lixi').text(fmoney((Math.abs(of*1)*Math.abs(sv*1)*Math.abs(interest_rate*1)/100)*10000));
+            var yixiangjin = (Math.abs(of*1)*Math.abs(sv*1))*(Math.abs(bond*1))/100*10000;
+            if((yixiangjin*1) < 50){
+                yixiangjin = 50;
+            }
+            $('.yixiang').text(fmoney(yixiangjin));
+            $('.payall').text(fmoney(Math.abs(yixiangjin*1)+Math.abs(bxall*1)*10000));
+        }
+
+        $( "#own_funds").change(function(){
+            var of = $(this).val();
+            var sv = $('#scale').val();
+
+            if(sv){
+                if(CheckINT(of) && CheckINT(sv)){
+                    $('#with_funds').val(Math.abs(of*1)*Math.abs(sv*1));
+
+                    $('.own_funds').text(Math.abs(of*1));
+                    $('.with_funds').text(Math.abs(of*1)*Math.abs(sv*1));
+
+
+                    getVal(of,sv);
+                }
+            }
+        });
+
+        $( "#own_funds").change(function(){
+            var of = $(this).val();
+            var sv = $('#scale').val();
+
+            if(sv){
+                if(CheckINT(of) && CheckINT(sv)){
+                    $('#with_funds').val(Math.abs(of*1)*Math.abs(sv*1));
+
+                    $('.own_funds').text(Math.abs(of*1));
+                    $('.with_funds').text(Math.abs(of*1)*Math.abs(sv*1));
+
+
+                    getVal(of,sv);
+                }
+            }
+        });
+
+        $( "#slider-range-scale" ).slider({
+            range: "max",
+            min: 1,
+            max: 5,
+            value: "{$needs.scale|default=1}",
+            slide: function( event, ui ) {
+                var of = $('#own_funds').val();
+
+                var sv = ui.value;
+
+                if(CheckINT(of) && CheckINT(sv)){
+                    $('#with_funds').val(Math.abs(of*1)*Math.abs(ui.value*1));
+                    $('#scale').val(ui.value);
+
+                    $('.with_funds').text(Math.abs(of*1)*Math.abs(ui.value*1));
+                    $('.scale').text(ui.value);
+                    getVal(of,sv);
+                }
+            }
+        });
+        $( "#scale" ).val( $( "#slider-range-scale" ).slider( "value" ) );
+        $( "#scale").change(function(){
+            var of = $('#own_funds').val();
+            var sv = $(this).val();
+            if(sv < 6 ){
+                if(CheckINT(of) && CheckINT(sv)){
+                    $('#with_funds').val(Math.abs(of*1)*Math.abs(sv*1));
+                    $('#slider-range-scale').slider('value',sv);
+                    $('.scale').text(Math.abs(sv*1));
+                    $('.with_funds').text(Math.abs(of*1)*Math.abs(sv*1));
+                    getVal(of,sv);
+                }
+            }
+        });
+
+        $( "#slider-range-time" ).slider({
+            range: "max",
+            min: 1,
+            max: 12,
+            value: "{$needs.time_limit|default=1}",
+            slide: function( event, ui ) {
+                $( "#time_limit" ).val( ui.value );
+
+                $( ".time_limit" ).text( ui.value );
+            }
+        });
+
+        $( "#time_limit" ).val( $( "#slider-range-time" ).slider( "value" ) );
+        $( "#time_limit").change(function(){
+            var sv = $(this).val();
+            var of = $('#own_funds').val();
+            if(sv < 12 ){
+                if(CheckINT(of)){
+                    $( "#slider-range-time" ).slider('value',sv);
+                    $('.time_limit').text(Math.abs(sv*1));
+                }
+            }
+        });
+
+        var of = $('#own_funds').val();
+        var sv = $('#scale').val();
+
+        if(of && sv){
+
+
+            if(CheckINT(of) && CheckINT(sv)){
+                $('#with_funds').val(Math.abs(of*1)*Math.abs(sv*1));
+
+                $('.own_funds').text(Math.abs(of*1));
+                $('.with_funds').text(Math.abs(of*1)*Math.abs(sv*1));
+                getVal(of,sv);
+            }
+        }
+
+        function fmoney(s, n)
+        {
+            n = n > 0 && n <= 20 ? n : 2;
+            s = parseFloat((s + "").replace(/[^\d\.-]/g, "")).toFixed(n) + "";
+            var l = s.split(".")[0].split("").reverse(),
+                    r = s.split(".")[1];
+            t = "";
+            for(i = 0; i < l.length; i ++ )
+            {
+                t += l[i] + ((i + 1) % 3 == 0 && (i + 1) != l.length ? "," : "");
+            }
+            return "￥" + t.split("").reverse().join("") + "." + r;
+        }
+    </script>
+</block>
+</body>
+</html>

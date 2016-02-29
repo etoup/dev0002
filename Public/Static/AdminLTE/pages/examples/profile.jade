@@ -1,0 +1,1080 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    |     
+    title AdminLTE 2 | User Profile
+    // Tell the browser to be responsive to screen width
+    meta(content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no', name='viewport')
+    // Bootstrap 3.3.5
+    link(rel='stylesheet', href='../../bootstrap/css/bootstrap.min.css')
+    // Font Awesome
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css')
+    // Ionicons
+    link(rel='stylesheet', href='https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')
+    // Theme style
+    link(rel='stylesheet', href='../../dist/css/AdminLTE.min.css')
+    //
+      AdminLTE Skins. Choose a skin from the css/skins
+      folder instead of downloading all of them to reduce the load.
+    link(rel='stylesheet', href='../../dist/css/skins/_all-skins.min.css')
+    // HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+    // WARNING: Respond.js doesn't work if you view the page via file://
+    //if lt IE 9
+      script(src='https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js')
+      |         
+      script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
+  |   
+  body.hold-transition.skin-blue.sidebar-mini
+    .wrapper
+      header.main-header
+        // Logo
+        a.logo(href='../../index2.html')
+          // mini logo for sidebar mini 50x50 pixels
+          span.logo-mini
+            b A
+            | LT
+          // logo for regular state and mobile devices
+          span.logo-lg
+            b Admin
+            | LTE
+        // Header Navbar: style can be found in header.less
+        nav.navbar.navbar-static-top(role='navigation')
+          // Sidebar toggle button
+          a.sidebar-toggle(href='#', data-toggle='offcanvas', role='button')
+            span.sr-only Toggle navigation
+            |             
+            span.icon-bar
+            |             
+            span.icon-bar
+            |             
+            span.icon-bar
+          |           
+          .navbar-custom-menu
+            ul.nav.navbar-nav
+              // Messages: style can be found in dropdown.less
+              li.dropdown.messages-menu
+                a.dropdown-toggle(href='#', data-toggle='dropdown')
+                  i.fa.fa-envelope-o
+                  |                   
+                  span.label.label-success 4
+                |                 
+                ul.dropdown-menu
+                  li.header You have 4 messages
+                  |                   
+                  li
+                    // inner menu: contains the actual data
+                    ul.menu
+                      li
+                        // start message
+                        a(href='#')
+                          .pull-left
+                            img.img-circle(src='../../dist/img/user2-160x160.jpg', alt='User Image')
+                          |                           
+                          h4
+                            | Support Team
+                            small
+                              i.fa.fa-clock-o
+                              |  5 mins
+                          |                           
+                          p Why not buy a new awesome theme?
+                      // end message
+                      li
+                        a(href='#')
+                          .pull-left
+                            img.img-circle(src='../../dist/img/user3-128x128.jpg', alt='User Image')
+                          |                           
+                          h4
+                            | AdminLTE Design Team
+                            small
+                              i.fa.fa-clock-o
+                              |  2 hours
+                          |                           
+                          p Why not buy a new awesome theme?
+                      |                       
+                      li
+                        a(href='#')
+                          .pull-left
+                            img.img-circle(src='../../dist/img/user4-128x128.jpg', alt='User Image')
+                          |                           
+                          h4
+                            | Developers
+                            small
+                              i.fa.fa-clock-o
+                              |  Today
+                          |                           
+                          p Why not buy a new awesome theme?
+                      |                       
+                      li
+                        a(href='#')
+                          .pull-left
+                            img.img-circle(src='../../dist/img/user3-128x128.jpg', alt='User Image')
+                          |                           
+                          h4
+                            | Sales Department
+                            small
+                              i.fa.fa-clock-o
+                              |  Yesterday
+                          |                           
+                          p Why not buy a new awesome theme?
+                      |                       
+                      li
+                        a(href='#')
+                          .pull-left
+                            img.img-circle(src='../../dist/img/user4-128x128.jpg', alt='User Image')
+                          |                           
+                          h4
+                            | Reviewers
+                            small
+                              i.fa.fa-clock-o
+                              |  2 days
+                          |                           
+                          p Why not buy a new awesome theme?
+                  |                   
+                  li.footer
+                    a(href='#') See All Messages
+              // Notifications: style can be found in dropdown.less
+              li.dropdown.notifications-menu
+                a.dropdown-toggle(href='#', data-toggle='dropdown')
+                  i.fa.fa-bell-o
+                  |                   
+                  span.label.label-warning 10
+                |                 
+                ul.dropdown-menu
+                  li.header You have 10 notifications
+                  |                   
+                  li
+                    // inner menu: contains the actual data
+                    ul.menu
+                      li
+                        a(href='#')
+                          i.fa.fa-users.text-aqua
+                          |  5 new members joined today
+                      |                       
+                      li
+                        a(href='#')
+                          i.fa.fa-warning.text-yellow
+                          |  Very long description here that may not fit into the page and may cause design problems
+                      |                       
+                      li
+                        a(href='#')
+                          i.fa.fa-users.text-red
+                          |  5 new members joined
+                      |                       
+                      li
+                        a(href='#')
+                          i.fa.fa-shopping-cart.text-green
+                          |  25 sales made
+                      |                       
+                      li
+                        a(href='#')
+                          i.fa.fa-user.text-red
+                          |  You changed your username
+                  |                   
+                  li.footer
+                    a(href='#') View all
+              // Tasks: style can be found in dropdown.less
+              li.dropdown.tasks-menu
+                a.dropdown-toggle(href='#', data-toggle='dropdown')
+                  i.fa.fa-flag-o
+                  |                   
+                  span.label.label-danger 9
+                |                 
+                ul.dropdown-menu
+                  li.header You have 9 tasks
+                  |                   
+                  li
+                    // inner menu: contains the actual data
+                    ul.menu
+                      li
+                        // Task item
+                        a(href='#')
+                          h3
+                            | Design some buttons
+                            small.pull-right 20%
+                          |                           
+                          .progress.xs
+                            .progress-bar.progress-bar-aqua(style='width: 20%', role='progressbar', aria-valuenow='20', aria-valuemin='0', aria-valuemax='100')
+                              span.sr-only 20% Complete
+                      // end task item
+                      li
+                        // Task item
+                        a(href='#')
+                          h3
+                            | Create a nice theme
+                            small.pull-right 40%
+                          |                           
+                          .progress.xs
+                            .progress-bar.progress-bar-green(style='width: 40%', role='progressbar', aria-valuenow='20', aria-valuemin='0', aria-valuemax='100')
+                              span.sr-only 40% Complete
+                      // end task item
+                      li
+                        // Task item
+                        a(href='#')
+                          h3
+                            | Some task I need to do
+                            small.pull-right 60%
+                          |                           
+                          .progress.xs
+                            .progress-bar.progress-bar-red(style='width: 60%', role='progressbar', aria-valuenow='20', aria-valuemin='0', aria-valuemax='100')
+                              span.sr-only 60% Complete
+                      // end task item
+                      li
+                        // Task item
+                        a(href='#')
+                          h3
+                            | Make beautiful transitions
+                            small.pull-right 80%
+                          |                           
+                          .progress.xs
+                            .progress-bar.progress-bar-yellow(style='width: 80%', role='progressbar', aria-valuenow='20', aria-valuemin='0', aria-valuemax='100')
+                              span.sr-only 80% Complete
+                      // end task item
+                  |                   
+                  li.footer
+                    a(href='#') View all tasks
+              // User Account: style can be found in dropdown.less
+              li.dropdown.user.user-menu
+                a.dropdown-toggle(href='#', data-toggle='dropdown')
+                  img.user-image(src='../../dist/img/user2-160x160.jpg', alt='User Image')
+                  |                   
+                  span.hidden-xs Alexander Pierce
+                |                 
+                ul.dropdown-menu
+                  // User image
+                  li.user-header
+                    img.img-circle(src='../../dist/img/user2-160x160.jpg', alt='User Image')
+                    |                     
+                    p
+                      | Alexander Pierce - Web Developer
+                      small Member since Nov. 2012
+                  // Menu Body
+                  li.user-body
+                    .col-xs-4.text-center
+                      a(href='#') Followers
+                    |                     
+                    .col-xs-4.text-center
+                      a(href='#') Sales
+                    |                     
+                    .col-xs-4.text-center
+                      a(href='#') Friends
+                  // Menu Footer
+                  li.user-footer
+                    .pull-left
+                      a.btn.btn-default.btn-flat(href='#') Profile
+                    |                     
+                    .pull-right
+                      a.btn.btn-default.btn-flat(href='#') Sign out
+              // Control Sidebar Toggle Button
+              li
+                a(href='#', data-toggle='control-sidebar')
+                  i.fa.fa-gears
+      // Left side column. contains the logo and sidebar
+      aside.main-sidebar
+        // sidebar: style can be found in sidebar.less
+        section.sidebar
+          // Sidebar user panel
+          .user-panel
+            .pull-left.image
+              img.img-circle(src='../../dist/img/user2-160x160.jpg', alt='User Image')
+            |             
+            .pull-left.info
+              p Alexander Pierce
+              |               
+              a(href='#')
+                i.fa.fa-circle.text-success
+                |  Online
+          // search form
+          form.sidebar-form(action='#', method='get')
+            .input-group
+              input.form-control(type='text', name='q', placeholder='Search...')
+              |               
+              span.input-group-btn
+                button#search-btn.btn.btn-flat(type='submit', name='search')
+                  i.fa.fa-search
+          // /.search form
+          // sidebar menu: : style can be found in sidebar.less
+          ul.sidebar-menu
+            li.header MAIN NAVIGATION
+            |             
+            li.treeview
+              a(href='#')
+                i.fa.fa-dashboard
+                |  
+                span Dashboard
+                |  
+                i.fa.fa-angle-left.pull-right
+              |               
+              ul.treeview-menu
+                li
+                  a(href='../../index.html')
+                    i.fa.fa-circle-o
+                    |  Dashboard v1
+                |                 
+                li
+                  a(href='../../index2.html')
+                    i.fa.fa-circle-o
+                    |  Dashboard v2
+            |             
+            li.treeview
+              a(href='#')
+                i.fa.fa-files-o
+                |                 
+                span Layout Options
+                |                 
+                span.label.label-primary.pull-right 4
+              |               
+              ul.treeview-menu
+                li
+                  a(href='../layout/top-nav.html')
+                    i.fa.fa-circle-o
+                    |  Top Navigation
+                |                 
+                li
+                  a(href='../layout/boxed.html')
+                    i.fa.fa-circle-o
+                    |  Boxed
+                |                 
+                li
+                  a(href='../layout/fixed.html')
+                    i.fa.fa-circle-o
+                    |  Fixed
+            |             
+            li
+              a(href='../widgets.html')
+                i.fa.fa-th
+                |  
+                span Widgets
+                |  
+                small.label.pull-right.bg-green new
+            |             
+            li.treeview
+              a(href='#')
+                i.fa.fa-pie-chart
+                |                 
+                span Charts
+                |                 
+                i.fa.fa-angle-left.pull-right
+              |               
+              ul.treeview-menu
+                li
+                  a(href='../charts/chartjs.html')
+                    i.fa.fa-circle-o
+                    |  ChartJS
+                |                 
+                li
+                  a(href='../charts/morris.html')
+                    i.fa.fa-circle-o
+                    |  Morris
+                |                 
+                li
+                  a(href='../charts/flot.html')
+                    i.fa.fa-circle-o
+                    |  Flot
+                |                 
+                li
+                  a(href='../charts/inline.html')
+                    i.fa.fa-circle-o
+                    |  Inline charts
+                |                 
+                li
+                  a(href='../layout/collapsed-sidebar.html')
+                    i.fa.fa-circle-o
+                    |  Collapsed Sidebar
+            |             
+            li.treeview
+              a(href='#')
+                i.fa.fa-laptop
+                |                 
+                span UI Elements
+                |                 
+                i.fa.fa-angle-left.pull-right
+              |               
+              ul.treeview-menu
+                li
+                  a(href='../UI/general.html')
+                    i.fa.fa-circle-o
+                    |  General
+                |                 
+                li
+                  a(href='../UI/icons.html')
+                    i.fa.fa-circle-o
+                    |  Icons
+                |                 
+                li
+                  a(href='../UI/buttons.html')
+                    i.fa.fa-circle-o
+                    |  Buttons
+                |                 
+                li
+                  a(href='../UI/sliders.html')
+                    i.fa.fa-circle-o
+                    |  Sliders
+                |                 
+                li
+                  a(href='../UI/timeline.html')
+                    i.fa.fa-circle-o
+                    |  Timeline
+                |                 
+                li
+                  a(href='../UI/modals.html')
+                    i.fa.fa-circle-o
+                    |  Modals
+            |             
+            li.treeview
+              a(href='#')
+                i.fa.fa-edit
+                |  
+                span Forms
+                |                 
+                i.fa.fa-angle-left.pull-right
+              |               
+              ul.treeview-menu
+                li
+                  a(href='../forms/general.html')
+                    i.fa.fa-circle-o
+                    |  General Elements
+                |                 
+                li
+                  a(href='../forms/advanced.html')
+                    i.fa.fa-circle-o
+                    |  Advanced Elements
+                |                 
+                li
+                  a(href='../forms/editors.html')
+                    i.fa.fa-circle-o
+                    |  Editors
+            |             
+            li.treeview
+              a(href='#')
+                i.fa.fa-table
+                |  
+                span Tables
+                |                 
+                i.fa.fa-angle-left.pull-right
+              |               
+              ul.treeview-menu
+                li
+                  a(href='../tables/simple.html')
+                    i.fa.fa-circle-o
+                    |  Simple tables
+                |                 
+                li
+                  a(href='../tables/data.html')
+                    i.fa.fa-circle-o
+                    |  Data tables
+            |             
+            li
+              a(href='../calendar.html')
+                i.fa.fa-calendar
+                |  
+                span Calendar
+                |                 
+                small.label.pull-right.bg-red 3
+            |             
+            li
+              a(href='../mailbox/mailbox.html')
+                i.fa.fa-envelope
+                |  
+                span Mailbox
+                |                 
+                small.label.pull-right.bg-yellow 12
+            |             
+            li.treeview.active
+              a(href='#')
+                i.fa.fa-folder
+                |  
+                span Examples
+                |                 
+                i.fa.fa-angle-left.pull-right
+              |               
+              ul.treeview-menu
+                li
+                  a(href='invoice.html')
+                    i.fa.fa-circle-o
+                    |  Invoice
+                |                 
+                li.active
+                  a(href='profile.html')
+                    i.fa.fa-circle-o
+                    |  Profile
+                |                 
+                li
+                  a(href='login.html')
+                    i.fa.fa-circle-o
+                    |  Login
+                |                 
+                li
+                  a(href='register.html')
+                    i.fa.fa-circle-o
+                    |  Register
+                |                 
+                li
+                  a(href='lockscreen.html')
+                    i.fa.fa-circle-o
+                    |  Lockscreen
+                |                 
+                li
+                  a(href='404.html')
+                    i.fa.fa-circle-o
+                    |  404 Error
+                |                 
+                li
+                  a(href='500.html')
+                    i.fa.fa-circle-o
+                    |  500 Error
+                |                 
+                li
+                  a(href='blank.html')
+                    i.fa.fa-circle-o
+                    |  Blank Page
+            |             
+            li.treeview
+              a(href='#')
+                i.fa.fa-share
+                |  
+                span Multilevel
+                |                 
+                i.fa.fa-angle-left.pull-right
+              |               
+              ul.treeview-menu
+                li
+                  a(href='#')
+                    i.fa.fa-circle-o
+                    |  Level One
+                |                 
+                li
+                  a(href='#')
+                    i.fa.fa-circle-o
+                    |  Level One 
+                    i.fa.fa-angle-left.pull-right
+                  |                   
+                  ul.treeview-menu
+                    li
+                      a(href='#')
+                        i.fa.fa-circle-o
+                        |  Level Two
+                    |                     
+                    li
+                      a(href='#')
+                        i.fa.fa-circle-o
+                        |  Level Two 
+                        i.fa.fa-angle-left.pull-right
+                      |                       
+                      ul.treeview-menu
+                        li
+                          a(href='#')
+                            i.fa.fa-circle-o
+                            |  Level Three
+                        |                         
+                        li
+                          a(href='#')
+                            i.fa.fa-circle-o
+                            |  Level Three
+                |                 
+                li
+                  a(href='#')
+                    i.fa.fa-circle-o
+                    |  Level One
+            |             
+            li
+              a(href='../../documentation/index.html')
+                i.fa.fa-book
+                |  
+                span Documentation
+            |             
+            li.header LABELS
+            |             
+            li
+              a(href='#')
+                i.fa.fa-circle-o.text-red
+                |  
+                span Important
+            |             
+            li
+              a(href='#')
+                i.fa.fa-circle-o.text-yellow
+                |  
+                span Warning
+            |             
+            li
+              a(href='#')
+                i.fa.fa-circle-o.text-aqua
+                |  
+                span Information
+        // /.sidebar
+      // Content Wrapper. Contains page content
+      .content-wrapper
+        // Content Header (Page header)
+        section.content-header
+          h1
+            | User Profile
+          |           
+          ol.breadcrumb
+            li
+              a(href='#')
+                i.fa.fa-dashboard
+                |  Home
+            |             
+            li
+              a(href='#') Examples
+            |             
+            li.active User profile
+        // Main content
+        section.content
+          .row
+            .col-md-3
+              // Profile Image
+              .box.box-primary
+                .box-body.box-profile
+                  img.profile-user-img.img-responsive.img-circle(src='../../dist/img/user4-128x128.jpg', alt='User profile picture')                  
+                  h3.profile-username.text-center Nina Mcintire             
+                  p.text-muted.text-center Software Engineer         
+                  ul.list-group.list-group-unbordered
+                    li.list-group-item
+                      b Followers
+                      a.pull-right 1,322            
+                    li.list-group-item
+                      b Following
+                      a.pull-right 543         
+                    li.list-group-item
+                      b Friends
+                      a.pull-right 13,287           
+                  a.btn.btn-primary.btn-block(href='#')
+                    b Follow
+                // /.box-body
+              // /.box
+              // About Me Box
+              .box.box-primary
+                .box-header.with-border
+                  h3.box-title About Me
+                // /.box-header
+                .box-body
+                  strong
+                    i.fa.fa-book.margin-r-5
+                    |   Education                   
+                  p.text-muted
+                    | B.S. in Computer Science from the University of Tennessee at Knoxville                
+                  hr             
+                  strong
+                    i.fa.fa-map-marker.margin-r-5
+                    |  Location                
+                  p.text-muted Malibu, California               
+                  hr         
+                  strong
+                    i.fa.fa-pencil.margin-r-5
+                    |  Skills             
+                  p
+                    span.label.label-danger UI Design               
+                    span.label.label-success Coding              
+                    span.label.label-info Javascript                  
+                    span.label.label-warning PHP          
+                    span.label.label-primary Node.js              
+                  hr            
+                  strong
+                    i.fa.fa-file-text-o.margin-r-5
+                    |  Notes           
+                  p
+                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.
+                // /.box-body
+              // /.box
+            // /.col
+            .col-md-9
+              .nav-tabs-custom
+                ul.nav.nav-tabs
+                  li.active
+                    a(href='#activity', data-toggle='tab') Activity               
+                  li
+                    a(href='#timeline', data-toggle='tab') Timeline                
+                  li
+                    a(href='#settings', data-toggle='tab') Settings          
+                .tab-content
+                  #activity.active.tab-pane
+                    // Post
+                    .post
+                      .user-block
+                        img.img-circle.img-bordered-sm(src='../../dist/img/user1-128x128.jpg', alt='user image')                   
+                        span.username
+                          a(href='#') Jonathan Burke Jr.                  
+                          a.pull-right.btn-box-tool(href='#')
+                            i.fa.fa-times                
+                        span.description Shared publicly - 7:30 PM today
+                      // /.user-block
+                      p
+                        | Lorem ipsum represents a long-held tradition for designers,
+                        | typographers and the like. Some people hate it and argue for
+                        | its demise, but others ignore the hate as they create awesome
+                        | tools to help create filler text for everyone from bacon lovers
+                        | to Charlie Sheen fans.     
+                      ul.list-inline
+                        li
+                          a.link-black.text-sm(href='#')
+                            i.fa.fa-share.margin-r-5
+                            |  Share                     
+                        li
+                          a.link-black.text-sm(href='#')
+                            i.fa.fa-thumbs-o-up.margin-r-5
+                            |  Like              
+                        li.pull-right
+                          a.link-black.text-sm(href='#')
+                            i.fa.fa-comments-o.margin-r-5
+                            |  Comments (5)           
+                      input.form-control.input-sm(type='text', placeholder='Type a comment')
+                    // /.post
+                    // Post
+                    .post.clearfix
+                      .user-block
+                        img.img-circle.img-bordered-sm(src='../../dist/img/user7-128x128.jpg', alt='user image')                     
+                        span.username
+                          a(href='#') Sarah Ross                    
+                          a.pull-right.btn-box-tool(href='#')
+                            i.fa.fa-times              
+                        span.description Sent you a message - 3 days ago
+                      // /.user-block
+                      p
+                        | Lorem ipsum represents a long-held tradition for designers,
+                        | typographers and the like. Some people hate it and argue for
+                        | its demise, but others ignore the hate as they create awesome
+                        | tools to help create filler text for everyone from bacon lovers
+                        | to Charlie Sheen fans.               
+                      form.form-horizontal
+                        .form-group.margin-bottom-none
+                          .col-sm-9
+                            input.form-control.input-sm(placeholder='Response')                        
+                          .col-sm-3
+                            button.btn.btn-danger.pull-right.btn-block.btn-sm Send
+                    // /.post
+                    // Post
+                    .post
+                      .user-block
+                        img.img-circle.img-bordered-sm(src='../../dist/img/user6-128x128.jpg', alt='user image')                     
+                        span.username
+                          a(href='#') Adam Jones                    
+                          a.pull-right.btn-box-tool(href='#')
+                            i.fa.fa-times                
+                        span.description Posted 5 photos - 5 days ago
+                      // /.user-block
+                      .row.margin-bottom
+                        .col-sm-6
+                          img.img-responsive(src='../../dist/img/photo1.png', alt='Photo')
+                        // /.col
+                        .col-sm-6
+                          .row
+                            .col-sm-6
+                              img.img-responsive(src='../../dist/img/photo2.png', alt='Photo')                          
+                              br                           
+                              img.img-responsive(src='../../dist/img/photo3.jpg', alt='Photo')
+                            // /.col
+                            .col-sm-6
+                              img.img-responsive(src='../../dist/img/photo4.jpg', alt='Photo')                           
+                              br                         
+                              img.img-responsive(src='../../dist/img/photo1.png', alt='Photo')
+                            // /.col
+                          // /.row
+                        // /.col
+                      // /.row
+                      ul.list-inline
+                        li
+                          a.link-black.text-sm(href='#')
+                            i.fa.fa-share.margin-r-5
+                            |  Share                  
+                        li
+                          a.link-black.text-sm(href='#')
+                            i.fa.fa-thumbs-o-up.margin-r-5
+                            |  Like                
+                        li.pull-right
+                          a.link-black.text-sm(href='#')
+                            i.fa.fa-comments-o.margin-r-5
+                            |  Comments (5)               
+                      input.form-control.input-sm(type='text', placeholder='Type a comment')
+                    // /.post
+                  // /.tab-pane
+                  #timeline.tab-pane
+                    // The timeline
+                    ul.timeline.timeline-inverse
+                      // timeline time label
+                      li.time-label
+                        span.bg-red
+                          | 10 Feb. 2014
+                      // /.timeline-label
+                      // timeline item
+                      li
+                        i.fa.fa-envelope.bg-blue                    
+                        .timeline-item
+                          span.time
+                            i.fa.fa-clock-o
+                            |  12:05                     
+                          h3.timeline-header
+                            a(href='#') Support Team
+                            |  sent you an email                    
+                          .timeline-body
+                            | Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
+                            | weebly ning heekya handango imeem plugg dopplr jibjab, movity
+                            | jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
+                            | quora plaxo ideeli hulu weebly balihoo...                  
+                          .timeline-footer
+                            a.btn.btn-primary.btn-xs Read more                       
+                            a.btn.btn-danger.btn-xs Delete
+                      // END timeline item
+                      // timeline item
+                      li
+                        i.fa.fa-user.bg-aqua                      
+                        .timeline-item
+                          span.time
+                            i.fa.fa-clock-o
+                            |  5 mins ago                    
+                          h3.timeline-header.no-border
+                            a(href='#') Sarah Young
+                            |  accepted your friend request
+                      // END timeline item
+                      // timeline item
+                      li
+                        i.fa.fa-comments.bg-yellow              
+                        .timeline-item
+                          span.time
+                            i.fa.fa-clock-o
+                            |  27 mins ago                    
+                          h3.timeline-header
+                            a(href='#') Jay White
+                            |  commented on your post               
+                          .timeline-body
+                            | Take me to your leader!
+                            | Switzerland is small and neutral!
+                            | We are more like Germany, ambitious and misunderstood!                    
+                          .timeline-footer
+                            a.btn.btn-warning.btn-flat.btn-xs View comment
+                      // END timeline item
+                      // timeline time label
+                      li.time-label
+                        span.bg-green
+                          | 3 Jan. 2014
+                      // /.timeline-label
+                      // timeline item
+                      li
+                        i.fa.fa-camera.bg-purple                     
+                        .timeline-item
+                          span.time
+                            i.fa.fa-clock-o
+                            |  2 days ago                     
+                          h3.timeline-header
+                            a(href='#') Mina Lee
+                            |  uploaded new photos                       
+                          .timeline-body
+                            img.margin(src='http://placehold.it/150x100', alt='...')                      
+                            img.margin(src='http://placehold.it/150x100', alt='...')                        
+                            img.margin(src='http://placehold.it/150x100', alt='...')                        
+                            img.margin(src='http://placehold.it/150x100', alt='...')
+                      // END timeline item
+                      li
+                        i.fa.fa-clock-o.bg-gray
+                  // /.tab-pane
+                  #settings.tab-pane
+                    form.form-horizontal
+                      .form-group
+                        label.col-sm-2.control-label(for='inputName') Name               
+                        .col-sm-10
+                          input#inputName.form-control(type='email', placeholder='Name')                    
+                      .form-group
+                        label.col-sm-2.control-label(for='inputEmail') Email                 
+                        .col-sm-10
+                          input#inputEmail.form-control(type='email', placeholder='Email')                 
+                      .form-group
+                        label.col-sm-2.control-label(for='inputName') Name                    
+                        .col-sm-10
+                          input#inputName.form-control(type='text', placeholder='Name')                 
+                      .form-group
+                        label.col-sm-2.control-label(for='inputExperience') Experience            
+                        .col-sm-10
+                          textarea#inputExperience.form-control(placeholder='Experience')              
+                      .form-group
+                        label.col-sm-2.control-label(for='inputSkills') Skills                    
+                        .col-sm-10
+                          input#inputSkills.form-control(type='text', placeholder='Skills')               
+                      .form-group
+                        .col-sm-offset-2.col-sm-10
+                          .checkbox
+                            label
+                              input(type='checkbox')
+                              |  I agree to the 
+                              a(href='#') terms and conditions      
+                      .form-group
+                        .col-sm-offset-2.col-sm-10
+                          button.btn.btn-danger(type='submit') Submit
+                  // /.tab-pane
+                // /.tab-content
+              // /.nav-tabs-custom
+            // /.col
+          // /.row
+        // /.content
+      // /.content-wrapper
+      footer.main-footer
+        .pull-right.hidden-xs
+          b Version
+          |  2.3.0
+        |         
+        strong
+          | Copyright &copy; 2014-2015 
+          a(href='http://almsaeedstudio.com') Almsaeed Studio
+          | .
+        |  All rights reserved.
+      // Control Sidebar
+      aside.control-sidebar.control-sidebar-dark
+        // Create the tabs
+        ul.nav.nav-tabs.nav-justified.control-sidebar-tabs
+          li
+            a(href='#control-sidebar-home-tab', data-toggle='tab')
+              i.fa.fa-home
+          |           
+          li
+            a(href='#control-sidebar-settings-tab', data-toggle='tab')
+              i.fa.fa-gears
+        // Tab panes
+        .tab-content
+          // Home tab content
+          #control-sidebar-home-tab.tab-pane
+            h3.control-sidebar-heading Recent Activity
+            |             
+            ul.control-sidebar-menu
+              li
+                a(href='javascript::;')
+                  i.menu-icon.fa.fa-birthday-cake.bg-red
+                  |                   
+                  .menu-info
+                    h4.control-sidebar-subheading Langdon&apos;s Birthday
+                    |                     
+                    p Will be 23 on April 24th
+              |               
+              li
+                a(href='javascript::;')
+                  i.menu-icon.fa.fa-user.bg-yellow
+                  |                   
+                  .menu-info
+                    h4.control-sidebar-subheading Frodo Updated His Profile
+                    |                     
+                    p New phone +1(800)555-1234
+              |               
+              li
+                a(href='javascript::;')
+                  i.menu-icon.fa.fa-envelope-o.bg-light-blue
+                  |                   
+                  .menu-info
+                    h4.control-sidebar-subheading Nora Joined Mailing List
+                    |                     
+                    p nora@example.com
+              |               
+              li
+                a(href='javascript::;')
+                  i.menu-icon.fa.fa-file-code-o.bg-green
+                  |                   
+                  .menu-info
+                    h4.control-sidebar-subheading Cron Job 254 Executed
+                    |                     
+                    p Execution time 5 seconds
+            // /.control-sidebar-menu
+            h3.control-sidebar-heading Tasks Progress
+            |             
+            ul.control-sidebar-menu
+              li
+                a(href='javascript::;')
+                  h4.control-sidebar-subheading
+                    | Custom Template Design
+                    span.label.label-danger.pull-right 70%
+                  |                   
+                  .progress.progress-xxs
+                    .progress-bar.progress-bar-danger(style='width: 70%')
+              |               
+              li
+                a(href='javascript::;')
+                  h4.control-sidebar-subheading
+                    | Update Resume
+                    span.label.label-success.pull-right 95%
+                  |                   
+                  .progress.progress-xxs
+                    .progress-bar.progress-bar-success(style='width: 95%')
+              |               
+              li
+                a(href='javascript::;')
+                  h4.control-sidebar-subheading
+                    | Laravel Integration
+                    span.label.label-warning.pull-right 50%
+                  |                   
+                  .progress.progress-xxs
+                    .progress-bar.progress-bar-warning(style='width: 50%')
+              |               
+              li
+                a(href='javascript::;')
+                  h4.control-sidebar-subheading
+                    | Back End Framework
+                    span.label.label-primary.pull-right 68%
+                  |                   
+                  .progress.progress-xxs
+                    .progress-bar.progress-bar-primary(style='width: 68%')
+            // /.control-sidebar-menu
+          // /.tab-pane
+          // Stats tab content
+          #control-sidebar-stats-tab.tab-pane Stats Tab Content
+          // /.tab-pane
+          // Settings tab content
+          #control-sidebar-settings-tab.tab-pane
+            form(method='post')
+              h3.control-sidebar-heading General Settings
+              |               
+              .form-group
+                label.control-sidebar-subheading
+                  | Report panel usage
+                  input.pull-right(type='checkbox', checked='')
+                |                 
+                p
+                  | Some information about this general settings option
+              // /.form-group
+              .form-group
+                label.control-sidebar-subheading
+                  | Allow mail redirect
+                  input.pull-right(type='checkbox', checked='')
+                |                 
+                p
+                  | Other sets of options are available
+              // /.form-group
+              .form-group
+                label.control-sidebar-subheading
+                  | Expose author name in posts
+                  input.pull-right(type='checkbox', checked='')
+                |                 
+                p
+                  | Allow the user to show his name in blog posts
+              // /.form-group
+              h3.control-sidebar-heading Chat Settings
+              |               
+              .form-group
+                label.control-sidebar-subheading
+                  | Show me as online
+                  input.pull-right(type='checkbox', checked='')
+              // /.form-group
+              .form-group
+                label.control-sidebar-subheading
+                  | Turn off notifications
+                  input.pull-right(type='checkbox')
+              // /.form-group
+              .form-group
+                label.control-sidebar-subheading
+                  | Delete chat history
+                  a.text-red.pull-right(href='javascript::;')
+                    i.fa.fa-trash-o
+              // /.form-group
+          // /.tab-pane
+      // /.control-sidebar
+      //
+        Add the sidebar's background. This div must be placed
+        immediately after the control sidebar
+      .control-sidebar-bg
+    // ./wrapper
+    // jQuery 2.1.4
+    script(src='../../plugins/jQuery/jQuery-2.1.4.min.js')
+    // Bootstrap 3.3.5
+    script(src='../../bootstrap/js/bootstrap.min.js')
+    // FastClick
+    script(src='../../plugins/fastclick/fastclick.min.js')
+    // AdminLTE App
+    script(src='../../dist/js/app.min.js')
+    // AdminLTE for demo purposes
+    script(src='../../dist/js/demo.js')

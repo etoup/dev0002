@@ -1,0 +1,92 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link href="__CSS__/index.css" rel="stylesheet" />
+    <link href="__CSS__/dashboard.css" rel="stylesheet">
+</block>
+</head> 
+<body>
+<block name="header"><include file='Public/header' /></block>
+<block name="nav"><include file='Public/nav' /></block>
+<block name="uctop">
+    <div class="alert alert-warning" role="alert">
+        <span class="glyphicon glyphicon-list" aria-hidden="true"></span> {$seo.title}
+
+    </div>
+</block>
+
+<block name="main">
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="{:U('index')}">我要提现</a></li>
+        <li role="presentation" class="active"><a href="{:U('log')}">提现记录</a></li>
+        <li role="presentation"><a href="{:U('shrank')}">出金记录</a></li>
+    </ul>
+    <div class="alert alert-danger alert-dismissible fade in mt30" id="tip" role="alert" >
+        <button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+        <strong></strong>
+    </div>
+    <if condition="$_list">
+        <div class="row mt30">
+            <div class="col-md-12">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>银行</th>
+                        <th>卡号</th>
+                        <th>提现金额</th>
+                        <th>申请时间</th>
+                        <th>类型</th>
+                        <th>状态</th>
+                        <th>备注</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <foreach name="_list" item="v">
+                        <tr>
+                            <td>{$v.bank_name}</td>
+                            <td>{$v.card_number_format}</td>
+                            <td>{$v.amount}</td>
+                            <td>{$v.created_time|time_format}</td>
+                            <td>
+                                <if condition="$v['types']">
+                                    <if condition="$v['do_types']">
+                                        账户出金直接提现
+                                        <else/>
+                                        提现
+                                    </if>
+                                    <else/>
+                                    账户出金
+                                </if>
+                            </td>
+                            <td>{:status($v['status'])}</td>
+                            <td>
+                                <switch name="v.status">
+                                    <case value="-1">
+                                        {$v.reason}
+                                    </case>
+                                    <default />
+                                    {$v.remark}
+                                </switch>
+                            </td>
+                        </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+                <div class="page">
+                    {$_page}
+                </div>
+            </div>
+        </div>
+        <else/>
+        <div class="paizi nolist mt50">
+            <a href="">我要提现</a>
+        </div>
+    </if>
+</block>
+
+<block name="foot"><include file='Public/foot' /></block>
+<block name="foot_js">
+
+</block>
+</body>
+</html>

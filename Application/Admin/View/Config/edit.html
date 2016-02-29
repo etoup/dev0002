@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+<include file='Public/head' />
+</head>
+<body>
+<div class="wrap">
+
+
+<!--分类管理: 编辑分类  -->
+<div class="nav">
+    <div class="return"><a href="{:U('index')}">返回上一级</a></div>
+</div>
+<form class="J_ajaxForm" data-role="list" action="__SELF__" enctype="application/x-www-form-urlencoded" method="post">
+<div class="h_a">基础信息</div>
+<div class="table_full">
+    <table width="100%">
+        <colgroup><col class="th">
+        <col width="400">
+        <col>
+        </colgroup>
+        <tbody>            
+            <tr>
+                <th>配置标识</th>
+                <td>
+                    <input type="text" class="input length_5" name="name" value="{$info.name|default=''}">
+                </td>
+                <td><div class="fun_tips">用于C函数调用，只能使用英文且不能重复</div></td>
+            </tr>
+            <tr>
+                <th>配置标题</th>
+                <td>
+                    <input type="text" class="input length_5" name="title" value="{$info.title|default=''}">
+                </td>
+                <td><div class="fun_tips">用于后台显示的配置标题</div></td>
+            </tr>
+            <tr>
+                <th>配置类型</th>
+                <td>
+                    <select name="type" class="length_2">
+						<volist name="Think.config.CONFIG_TYPE_LIST" id="type">
+							<option value="{$key}" {:is_selected(intval($key),intval($info['type']))}>{$type}</option>
+						</volist>
+					</select>
+                </td>
+                <td><div class="fun_tips">系统会根据不同类型解析配置值</div></td>
+            </tr>
+            <tr>
+                <th>配置分组</th>
+                <td>
+                    <select name="group" class="length_2">
+						<option value="0">不分组</option>
+						<volist name="Think.config.CONFIG_GROUP_LIST" id="group">
+							<option value="{$key}" {:is_selected(intval($key),intval($info['group']))}>{$group}</option>
+						</volist>
+					</select>
+                </td>
+                <td><div class="fun_tips">配置分组 用于批量设置 不分组则不会显示在系统设置中</div></td>
+            </tr>
+            <tr>
+                <th>配置值</th>
+                <td>
+                    <if condition="$info['type'] eq 5">
+                    <textarea name="value" class="length_5" readonly="">{$info.value|default=''}</textarea>
+                    <else/>
+                    <textarea name="value" class="length_5">{$info.value|default=''}</textarea>
+                    </if>
+                </td>
+                <td><div class="fun_tips">配置值  序列类型请不要随便修改</div></td>
+            </tr>
+            <tr>
+                <th>配置项</th>
+                <td>
+                    <textarea name="extra" class="length_5">{$info.extra|default=''}</textarea>
+                </td>
+                <td><div class="fun_tips">如果是枚举型 需要配置该项</div></td>
+            </tr>
+            <tr>
+                <th>说明</th>
+                <td>
+                    <textarea name="remark" class="length_5">{$info.remark|default=''}</textarea>
+                </td>
+                <td><div class="fun_tips">配置详细说明</div></td>
+            </tr>
+            <tr>
+                <th>排序</th>
+                <td>
+                    <input type="text" class="input length_5" name="sort" value="{$info.sort|default=0}">
+                </td>
+                <td><div class="fun_tips">用于分组显示的顺序</div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="btn_wrap">
+    <div class="btn_wrap_pd">
+        <input type="hidden" name="id" value="{$info.id}" />
+        <button type="submit" class="btn btn_submit J_ajax_submit_btn">提交</button>
+    </div>
+</div>
+</form>
+
+</div>
+<include file='Public/foot' />
+
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript">
+//上传图片
+/* 初始化上传插件 */
+$("#upload_picture").uploadify({
+    "height"          : 30,
+    "swf"             : "__STATIC__/uploadify/uploadify.swf",
+    "fileObjName"     : "download",
+    "buttonText"      : "上传图片",
+    "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+    "width"           : 120,
+    'removeTimeout'   : 1,
+    'fileTypeExts'    : '*.jpg; *.png; *.gif;',
+    "onUploadSuccess" : uploadPicture,
+    'onFallback' : function() {
+        alert('未检测到兼容版本的Flash.');
+    }
+});
+function uploadPicture(file, data){
+    var data = $.parseJSON(data);
+    var src = '';
+    if(data.status){
+        $("#icon").val(data.id);
+        //src = data.url || '__ROOT__' + data.path;
+        src = data.url || data.path;
+        $("#icon").parent().find('.upload-img-box').html(
+            '<div class="upload-pre-item"><img src="' + src + '"/></div>'
+        );
+    } else {
+        updateAlert(data.info);
+        setTimeout(function(){
+            $('#top-alert').find('button').click();
+            $(that).removeClass('disabled').prop('disabled',false);
+        },1500);
+    }
+}
+</script>
+</body>
+</html>

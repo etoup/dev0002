@@ -1,0 +1,66 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link href="__CSS__/index.css?v={:v()}" rel="stylesheet" />
+    <link rel="stylesheet" href="__CSS__/jquery-ui.css?v={:v()}">
+</block>
+</head>
+<body>
+<div class="wrap">
+<block name="header">
+    <include file='Public/header' />
+    <div class="topmain">
+        <div class="container">
+            <div class="pull-left">
+                <a href="{:U('about')}" class="hover">关于我们</a>
+                <a href="{:U('beacon')}">新手指引</a>
+                <a href="{:U('regulation')}">政策法规</a>
+                <a href="{:U('links')}">友情链接</a>
+            </div>
+            <div class="pull-right">
+                <a href="{:ROOT}"><span aria-hidden="true" class="glyphicon glyphicon-share-alt"></span> 返回首页</a>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="main">
+    <div class="container mt30">
+        <ol class="breadcrumb mt10">
+
+            <li><a href="{:ROOT}">首页</a></li>
+
+            <li class="active">{$seo.title}</li>
+        </ol>
+
+        <div class="about-a">
+            <h3>公司介绍</h3>
+            <p>武汉六合资本资产管理股份有限公司（六合资本）于2012年2月8日成立，注册资本1000万人民币，位于武汉市武昌区汉街万达总部国际A座。作为一家专业的第三方互联网金融平台。在国家互联网服务创新政策的扶持下，六合资本成为本国内独家首创集互联配资和P2P网贷完美结合的综合理财服务平台。公司面向全国，致力为大、中、小型理财爱好者提供互联网一站式配资服务，通过安全、透明、快捷的网上办理流程，为全国理财投资者提配资资金、资产管理、风险控制等投资管理服务。 六合资本汇聚了一批国内顶尖配资风控专家和国际上市公司高端管理人才，经过多年的酝酿筹备，建立起互联网金融投资领域内规范、完善的管理体系和具备核心竞争力的互联网金融操控平台，从而与许多业界人士（包括券商、投行、阳光私募、银行等）建立起宝贵的信任感和长期的合作关系！</p>
+        </div>
+        <div class="about-b">
+            <h3>经营理念</h3>
+            <p>
+                公开 平台对出资方和借贷方资金流向及收益全程公开透明 <br>
+                公平 平台以出资方和借贷方核心利益为优先，正当行使平台的权利和义务 <br>
+                公正 平台兼顾出资方和借贷方核心利益，依托平台最专业 的风控团队，坚持操作形式正义和操作流程正义，做到中正和无私。 <br>
+            </p>
+        </div>
+        <div class="about-c">
+            <h3>企业使命</h3>
+            <p>
+                提供中小理财者最安全、最便捷、最实惠的投资渠道，构建广大融资者最稳固、最快捷、最高效的融资平台 <br>
+                企业价值观 <em>|</em> 激情创新 <em>|</em> 专注服务 <em>|</em> 中合共赢 <em>|</em> 立存久远
+            </p>
+        </div>
+        <div class="about-d">
+            <h3>企业目标</h3>
+            <p>打造国内独家首创的中小理财者的寻梦园和市场资源配置的新航母！</p>
+        </div>
+    </div>
+</block>
+</div>
+<block name="foot">
+    <include file='Public/foot' />
+</block>
+<block name="foot_js"></block>
+</body>
+</html>

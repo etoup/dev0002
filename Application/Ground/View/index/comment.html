@@ -1,0 +1,165 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link rel="stylesheet" href="__STATIC__/sweetalert-master/dist/sweetalert.css" />
+    <link rel="stylesheet" href="__CSS__/index.css">
+</block>
+<block name="main-header">
+    <include file='Public/header' />
+</block>
+<block name="main-sidebar">
+    <include file='Public/sidebar' />
+</block>
+<block name="content-header"><include file='Public/top' /></block>
+<block name="content">
+    <div class="row">
+        <div class="col-md-3">
+            <include file='indexleft' />
+        </div>
+        <div class="col-md-9">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li><a href="{:U('index')}">订单管理</a></li>
+                    <li class="active"><a href="{:U('comment')}">评论管理</a></li>
+                    <li><a href="{:U('reserve')}">预订管理</a></li>
+                    <li><a href="{:U('lock')}">锁定管理</a></li>
+                    <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="timeline">
+                        <if condition="$_list">
+                            <foreach name="_list" item="vo">
+                                <!-- Post -->
+                                <div class="post clearfix">
+                                    <div class="user-block">
+                                        <img class="img-circle img-bordered-sm" src="__IMG__/logo.jpg" alt="user image">
+                                        <span class="username">
+                                          <a href="#">{$vo.username}</a>
+                                          <a href="#" class="pull-right btn-box-tool text-yellow">
+                                              <for start="0" end="$vo['stars']">
+                                                  <i class="fa fa-fw fa-star"></i>
+                                              </for>
+                                          </a>
+                                        </span>
+                                        <span class="description">{$vo.created_time|time_format}</span>
+                                    </div>
+                                    <!-- /.user-block -->
+                                    <p>
+                                        {$vo.cont}
+                                    </p>
+
+                                    <if condition="$vo['reply']">
+                                        <p class="pull-right text-success">
+                                            {$vo.reply}
+                                        </p>
+                                        <else/>
+                                        <form class="form-horizontal" action="__SELF__" method="post">
+                                            <div class="form-group margin-bottom-none">
+                                                <div class="col-sm-10">
+                                                    <input class="form-control input-sm" name="reply" placeholder="填写回复内容">
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <input name="id" type="hidden" value="{$vo.id}" />
+                                                    <button type="submit" class="btn btn-danger pull-right btn-block btn-sm">回复</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </if>
+
+                                </div>
+                                <!-- /.post -->
+                            </foreach>
+                            <div class="box-footer">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <p>场馆得分：<strong class="text-yellow">{$score}</strong></p>
+                                        <div class="progress progress-xs">
+                                            <div class="progress-bar progress-bar-danger" style="width: {$score}%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="page pull-right">
+                                            {$_page}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <else/>
+                            <div class="callout callout-danger">
+                                <h4>哎呦</h4>
+                                <p>没有您要是数据，请重新检索</p>
+                            </div>
+                        </if>
+                    </div><!-- /.tab-pane -->
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</block>
+<block name="main-footer">
+    <include file='Public/footer' />
+</block>
+<block name="foot">
+    <include file='Public/foot' />
+    <script src="__STATIC__/sweetalert-master/dist/sweetalert.min.js"></script>
+    <script>
+        $('.ocAjax').on('click',function() {
+            var id = $(this).attr("data-id"),status = $(this).attr("data-status"),url = $(this).attr("data-url"),tag = $(this).attr("data-tag");
+            ocData(id,status,url,tag);
+        });
+        function ocData(id,status,url,tag) {
+            var text = '';
+            switch (status){
+                case '-1':
+                    text='关闭后将无法预订，您确定要关闭吗？';
+                    break;
+                case '1':
+                    text='开启后将可以预订，您确定要开启吗？';
+                    break;
+            }
+            swal({
+                title: "提示",
+                text: text,
+                type: "warning",
+                //animation: "slide-from-top",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                confirmButtonText: "确定",
+                confirmButtonColor: "#ec6c62",
+                cancelButtonText:"取消"
+            }, function() {
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data:{id:id,status:status}
+                })
+                        .done(function(data) {
+                            if(data.status){
+                                swal({
+                                            title: "提示",
+                                            text:data.msg,
+                                            type: "success"
+                                        },
+                                        function(){
+                                            switch (status){
+                                                case '-1':
+                                                    $(tag+'-'+id).attr('data-status','1').children('a').text('开启');
+                                                    break;
+                                                case '1':
+                                                    $(tag+'-'+id).attr('data-status','-1').children('a').text('关闭');
+                                                    break;
+                                            }
+
+                                        });
+                            }else{
+                                swal("提示", data.msg, "error");
+                            }
+                        })
+                        .error(function(data) {
+                            swal("错误", "服务器连接失败", "error");
+                        });
+            });
+        }
+    </script>
+</block>

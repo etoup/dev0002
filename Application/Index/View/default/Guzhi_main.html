@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="六合资本,股票配资,期货配资,配资公司,配资平台,配资炒股,配资网,P2P理财" />
+    <meta name="description" content="六合资本(www.6hezb.com)专业正规的网上股票配资，网上投资理财P2P平台，专注为广大股票投资者和理财投资者提供线上一站式股票配资服务和投资理财解决方案，打造首家、独家、创新型、综合型的全新互联网金融经营模式。" />
+    <link rel="icon" href="/favicon.ico">
+
+    <title>{$seo.title} - {:C('WEB_SITE_TITLE')}</title>
+    <!-- Bootstrap core CSS -->
+    <link href="__STATIC__/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="__JS__/html5shiv.min.js"></script>
+    <script src="__JS__/respond.min.js"></script>
+    <![endif]-->
+    <link href="__CSS__/guzhimain.css" rel="stylesheet" />
+</head>
+
+<body>
+<div id="header">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{:U('Index/Index/index')}"><img src="__IMG__/logo.png" title="六合资本" alt="六合资本"/></a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav" id="nav">
+                    <foreach name="tnav" item="vo">
+                        <switch name="vo.tags">
+                            <case value="glyphicon-fire">
+                                <if condition="$vo['hover']">
+                                    <li role="presentation" class="active hot"><a href="{$vo.url}">{$vo.name}</a><span class="glyphicon glyphicon-fire" aria-hidden="true"></span></li>
+                                    <else/>
+                                    <li role="presentation" class="hot"><a href="{$vo.url}">{$vo.name}</a><span class="glyphicon glyphicon-fire" aria-hidden="true"></span></li>
+                                </if>
+                            </case>
+                            <default />
+                            <if condition="$vo['hover']">
+                                <li role="presentation" class="active"><a href="{$vo.url}">{$vo.name}</a></li>
+                                <else/>
+                                <li role="presentation"><a href="{$vo.url}">{$vo.name}</a></li>
+                            </if>
+                        </switch>
+
+                    </foreach>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right mt10">
+                    <if condition="is_login()">
+                        <li><a href="{:U('Uc/Index/index')}"><i class="glyphicon glyphicon-user"></i> {:USERNAME}</a></li>
+                        <else/>
+                        <li><a href="{:U('Uc/Index/index')}"><i class="glyphicon glyphicon-briefcase"></i> 我的账户</a></li>
+                    </if>
+                </ul>
+
+
+            </div>
+        </div>
+    </nav>
+</div>
+<div id="pageContain">
+    <div class="page page1 current">
+        <div class="contain">
+        </div>
+    </div>
+
+    <div class="page page2">
+        <div class="contain">
+
+        </div>
+    </div>
+
+    <div class="page page3">
+        <div class="contain">
+
+        </div>
+    </div>
+
+    <div class="page page4">
+        <div class="contain">
+
+        </div>
+    </div>
+
+</div>
+<div id="btm"><a href="{:U('index')}">点击参与活动</a></div>
+<ul id="navBar">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+</ul>
+
+<script src="__JS__/fullPage.min.js"></script>
+<script>
+    var runPage;
+    runPage = new FullPage({
+        id: 'pageContain',
+        slideTime: 800,
+        effect: {
+            transform: {
+                translate: 'Y',
+                scale: [0, 1],
+                rotate: [0, 0]
+            },
+            opacity: [0, 1]
+        },
+        mode: 'wheel, touch, nav:navBar',
+        easing: 'ease'
+    });
+</script>
+
+</body>
+</html>

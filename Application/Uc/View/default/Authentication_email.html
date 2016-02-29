@@ -1,0 +1,210 @@
+<extend name="Public/base" />
+<block name="head"><include file='Public/head' /></block>
+<block name="head_css">
+    <link href="__CSS__/index.css" rel="stylesheet" />
+    <link href="__CSS__/dashboard.css" rel="stylesheet">
+</block>
+</head>
+<body>
+<block name="header"><include file='Public/header' /></block><block name="nav"><include file='Public/nav' /></block>
+<block name="uctop">
+    <div class="alert alert-warning" role="alert">
+        <span class="glyphicon glyphicon-list" aria-hidden="true"></span> {$seo.title}
+
+    </div>
+</block>
+
+<block name="main">
+    <ol class="breadcrumb">
+        <li><a href="{$crumbs.url}">{$crumbs.title}</a></li>
+        <li class="active">{$seo.title}</li>
+    </ol>
+    
+    <switch name="uc['pass_email']">
+        <case value="0">
+            <div class="jumbotron">
+                <div class="tip" id="tip">
+                    <div class="alert alert-danger" role="alert">alert</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <form action="{:U('emailVerify')}" method="post" class="form-horizontal" role="form" id="form">
+                            <if condition="$email">
+                                <div class="form-group">
+                                    <label for="inputEmail" class="col-sm-4 control-label">邮箱地址</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="email" class="form-control" id="inputEmail" value="{$email}" disabled placeholder="邮箱地址">
+                                    </div>
+                                </div>
+                                <else/>
+                                <div class="form-group">
+                                    <label for="email" class="col-sm-4 control-label">邮箱地址</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="email" class="form-control" id="email" placeholder="邮箱地址">
+                                    </div>
+                                </div>
+                            </if>
+                            <div class="form-group">
+                                <label for="inputVerifyCode" class="col-sm-4 control-label">邮箱验证码</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="verifycode" class="form-control" id="inputVerifyCode" placeholder="邮箱验证码">
+                                </div>
+                                <div class="col-sm-2">
+                                    <button type="button" class="btn btn-default" id="btnSendCode" onclick="sendEmailMessage('email')">获取验证码</button>
+                                    <!--<button type="button" class="btn btn-info" id="sendEmail" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">-->
+                                        <!--获取验证码-->
+                                    <!--</button>-->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-8">
+                                    <button type="submit" id="button" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">
+                                        提交验证
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </case>
+        <case value="1">
+            <div class="alert alert-info" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">提示:</span>
+                您已经通过邮箱验证，可以通过下面操作修改邮箱地址
+            </div>
+            <div class="jumbotron">
+                <div class="tip" id="tip">
+                    <div class="alert alert-danger" role="alert">alert</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <form action="{:U('emailEdit')}" method="post" class="form-horizontal" role="form" id="form">
+                            <div class="form-group">
+                                <label for="inputVerifyCode" class="col-sm-4 control-label">手机验证码</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="verifycode" class="form-control" id="inputVerifyCode" placeholder="手机验证码">
+                                </div>
+                                <div class="col-sm-2">
+                                    <button type="button" class="btn btn-default" id="btnSendCode" onclick="sendMessage('mobile')">获取验证码</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-8">
+                                    <button type="submit" id="button" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">
+                                        下一步
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </case>
+    </switch>
+</block>
+
+<block name="foot"><include file='Public/foot' /></block>
+<block name="foot_js">
+<script type="text/javascript" src="__STATIC__/jquery.form.js"></script>
+<script type="application/javascript">
+    var InterValObj; //timer变量，控制时间
+    var count = 30; //间隔函数，1秒执行
+    var curCount;//当前剩余秒数
+
+    function sendMessage(type){
+        curCount = count;//设置button效果，开始计时
+        $("#btnSendCode").attr("disabled", "true");
+        $("#btnSendCode").html("请在" + curCount + "秒内输入验证码");
+        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+        // 向后台发送处理数据
+
+        if(type == 'email'){
+            //异步发送邮件
+            $.post("{:U('sendEmailCode')}",function(data){
+                if(data.state === 'success') {
+                    var html = data.message + ' <a href="'+data.data+'" target="_blank">查看邮件</a>';
+                    $('#tip').show().children().html(html);
+                }else if(data.state === 'fail'){
+                    $('#tip').show().children().text(data.message);
+                }
+            }, "json");
+        }
+        if(type == 'mobile'){
+            //异步发送短信
+            $.post("{:U('sendMobileCode')}",function(data){
+                if(data.state === 'fail'){
+                    $('#tip').show().children().text(data.message);
+                }
+            }, "json");
+        }
+    }
+
+    function sendEmailMessage(type){
+        curCount = count;//设置button效果，开始计时
+        $("#btnSendCode").attr("disabled", "true");
+        $("#btnSendCode").html("请在" + curCount + "秒内输入验证码");
+        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+        // 向后台发送处理数据
+        if(type == 'email'){
+            var email = $('#email').val();
+            //异步发送邮件
+            $.post("{:U('sendEmailCode')}",{'email':email},function(data){
+                if(data.state === 'success') {
+                    var html = data.message + ' <a href="'+data.data+'" target="_blank">查看邮件</a>';
+                    $('#tip').show().children().html(html);
+                }else if(data.state === 'fail'){
+                    $('#tip').show().children().text(data.message);
+                }
+            }, "json");
+        }
+    }
+
+    //timer处理函数
+    function SetRemainTime() {
+        if (curCount == 0) {
+            window.clearInterval(InterValObj);//停止计时器
+            $("#btnSendCode").removeAttr("disabled");//启用按钮
+            $("#btnSendCode").html("重新获取验证码");
+        }
+        else {
+            curCount--;
+            $("#btnSendCode").html("请在" + curCount + "秒内输入验证码");
+        }
+    }
+
+    $('#button').on('click', function () {
+        var options = {
+            beforeSubmit :showRequest,
+            success: showResponse,
+            timeout: 3000
+        };
+        $('#form').ajaxForm(options);
+    });
+
+    function showRequest(formData, jqForm, options){
+        var queryString = $.param(formData);
+        var formElement = jqForm[0];
+        var verifycode = formElement.verifycode.value;
+
+        if(verifycode==''){
+            $('#tip').show().children().text('邮箱验证码不能为空');
+            $("input[name='verifycode']").focus();
+            $('#button').button('reset');
+            return false;
+        }
+        return true;
+    };
+    function showResponse(data){
+        if(data.state === 'success') {
+            window.location.href = decodeURIComponent(data.referer);
+        }else{
+            $('#tip').show().children().text(data.message);
+            $('#button').button('reset');
+        }
+    };
+</script>
+</block>
+</body>
+</html>
